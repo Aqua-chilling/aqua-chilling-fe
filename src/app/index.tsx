@@ -5,8 +5,6 @@ import { store } from './store';
 import { QueryClientProvider } from 'react-query';
 import { ToastContainer } from 'react-toastify';
 import { ThirdwebProvider } from '@thirdweb-dev/react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { QueryClient } from 'react-query';
 import { CredentialProvider } from '@/providers/credential.provider';
 import { RouterProvider } from '@/providers/router.provider';
@@ -17,9 +15,9 @@ import { WalletContextProvider } from '@/contexts/wallet.context';
 import { FixedGlobalStyle } from '@/providers/theme.provider';
 import { CustomCurSor } from '@/components/custom-cursor/custom-cursor';
 import { Header } from '@/components/header/header';
+import { ScrollProvider } from '@/providers/scroll.provider';
 
 const queryClient = new QueryClient();
-gsap.registerPlugin(ScrollTrigger);
 const persistor = persistStore(store);
 
 export const App = () => {
@@ -38,6 +36,7 @@ export const App = () => {
               <CredentialProvider>
                 <FixedGlobalStyle />
                 <CustomCurSor />
+                <ScrollProvider />
                 <RouterProvider>
                   <Header />
                   <LoadingProvider />

@@ -16,6 +16,7 @@ export const Wrapper = styled.div`
     .logo {
       max-width: 706px;
       max-height: 412px;
+      position: relative;
     }
     .btns {
       display: flex;
