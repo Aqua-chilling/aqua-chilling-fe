@@ -5,6 +5,13 @@ export const GlobalTheme = ({ children }: { children: ReactNode }) => {
   return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
 };
 export const FixedGlobalStyle = createGlobalStyle`
+    html.has-scroll-smooth {
+        bottom: 0;
+        left: 0;
+        position: fixed;
+        right: 0;
+        top: 0;
+    }
     html{position: relative; height: 100%; }
     html,
     body {

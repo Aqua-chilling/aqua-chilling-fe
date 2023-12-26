@@ -10,7 +10,15 @@ export const ScrollProvider = () => {
     const scrollElement = document.querySelector('[data-scroll-container]') as HTMLElement;
     const loco: any = new LocomotiveScroll({
       el: scrollElement,
-      smooth: true
+      smooth: true,
+      getDirection: true,
+      smartphone: {
+        smooth: true
+      },
+      tablet: {
+        smooth: true,
+        breakpoint: 1
+      }
     });
     loco.on('scroll', ScrollTrigger.update);
     ScrollTrigger.defaults({
@@ -42,10 +50,12 @@ export const ScrollProvider = () => {
     };
     ScrollTrigger.addEventListener('refresh', update);
     ScrollTrigger.refresh();
+    const timer = setTimeout(() => loco.update(), 3000);
     return () => {
       loco.destroy();
       ScrollTrigger.removeEventListener('refresh', update);
+      clearTimeout(timer);
     };
-  }, []);
+  });
   return <></>;
 };

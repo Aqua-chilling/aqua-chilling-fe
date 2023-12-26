@@ -8,7 +8,8 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  .content {
+  position: relative;
+  .section1 {
     margin-top: 165px;
     display: flex;
     align-items: center;

@@ -9,16 +9,21 @@ import { QueryClient } from 'react-query';
 import { CredentialProvider } from '@/providers/credential.provider';
 import { RouterProvider } from '@/providers/router.provider';
 import { ENVS } from '@/config';
-import { LoadingProvider } from '@/providers/loading.provider';
+// import { LoadingProvider } from '@/providers/loading.provider';
 import { SUPPORTED_NETWORKS } from '@/config/network.config';
 import { WalletContextProvider } from '@/contexts/wallet.context';
 import { FixedGlobalStyle } from '@/providers/theme.provider';
 import { CustomCurSor } from '@/components/custom-cursor/custom-cursor';
 import { Header } from '@/components/header/header';
 import { ScrollProvider } from '@/providers/scroll.provider';
+import '@/constants/style/locomotive-scroll.css';
+
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 
 const queryClient = new QueryClient();
-const persistor = persistStore(store);
+let persistor = persistStore(store);
 
 export const App = () => {
   return (
@@ -36,10 +41,10 @@ export const App = () => {
               <CredentialProvider>
                 <FixedGlobalStyle />
                 <CustomCurSor />
-                <ScrollProvider />
+                {/* <ScrollProvider /> */}
                 <RouterProvider>
                   <Header />
-                  <LoadingProvider />
+                  {/* <LoadingProvider /> */}
                 </RouterProvider>
                 <ToastContainer
                   position='bottom-right'
