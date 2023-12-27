@@ -22,7 +22,7 @@ export const Section2 = () => {
       scrollTrigger: {
         trigger: ref.current,
         start: 'top-=300 center',
-        end: 'top+=900 center',
+        end: 'top+=300 center',
         scrub: 1
       },
       stagger: 0.5,
