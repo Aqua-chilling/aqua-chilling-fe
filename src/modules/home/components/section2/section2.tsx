@@ -5,7 +5,7 @@ import card3 from '@/assets/home/section1/card3.png';
 import grass from '@/assets/home/grass.png';
 import pyramid from '@/assets/home/pyramid.png';
 import shrine from '@/assets/home/shrine.png';
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { Description, Title } from '@/components/text/text.styled';
 import { WrapperContent } from '@/components/wrapper-content/wrapper-content.styled';
