@@ -9,8 +9,8 @@ import { Section4 } from './components/section4/section4';
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Footer } from '@/components';
 export const Home = () => {
-  console.log('fdsfsf');
   useLocoScroll();
   const app = useRef<any>(null);
   useGSAP(() => {
@@ -39,6 +39,7 @@ export const Home = () => {
       </div>
       <Section5 />
       <Section6 />
+      <Footer />
     </Wrapper>
   );
 };

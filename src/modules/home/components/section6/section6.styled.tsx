@@ -23,7 +23,7 @@ export const Wrapper = styled.div`
       padding: 32px 16px;
     }
     gap: 120px;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 900px) {
       flex-direction: column;
       gap: 32px;
     }
@@ -36,6 +36,7 @@ export const Wrapper = styled.div`
         width: 100%;
       }
       img {
+        width: 100%;
         @media screen and (max-width: 768px) {
           width: 328px;
           height: 262.4px;

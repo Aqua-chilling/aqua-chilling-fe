@@ -57,6 +57,9 @@ export const Wrapper = styled.div`
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
       overflow-x: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
       @media screen and (max-width: 768px) {
         grid-template-columns: 1fr 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
