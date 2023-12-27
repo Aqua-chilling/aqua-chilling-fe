@@ -1,0 +1,34 @@
+name: CI_DEVELOP
+on:
+  push:
+    branches: [develop]
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build_develop:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-20.04
+    env:
+      IMAGE_NAME: aqua-dev
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+      - run: cp .env.staging .env
+      - run: corepack enable
+      - run: npm install
+      - run: CI=false npm run build
+      - name: Publish
+        uses: cloudflare/wrangler-action@2.0.0
+        with:
+          apiToken: ${{ secrets.CF_API_TOKEN }}
+          accountId: ${{ secrets.CF_ACCOUNT_ID }}
+          command: pages publish --branch=main --project-name=aquachilling-site-test dist
