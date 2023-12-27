@@ -1,79 +1,68 @@
-import styled, { keyframes } from 'styled-components';
-import bg from '@/assets/home/section3/bg.png';
-import tank from '@/assets/home/section3/tank.png';
-export const anim = keyframes`
-0%{
-}
-100%{
-  transform: translateX(-100%);
-}
-`;
-export const animReverse = keyframes`
-0%{
-}
-100%{
-  transform: translateX(100%);
-}
-`;
+import styled from 'styled-components';
+import bgwrapper from '@/assets/home/section3-2/bg-wrapper.png';
+import bg from '@/assets/home/section3-2/bg.png';
 export const Wrapper = styled.div`
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: #143464;
-  padding: 80px 0px;
-  gap: 80px;
   position: relative;
-  .fishs {
+  background-image: url(${bgwrapper});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-size: 100% 100%;
+  .water {
+    position: absolute;
+    top: -5%;
     width: 100%;
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    padding: 66px 0px;
-    background-image: url(${bg});
-    background-size: 100% 100%;
-    margin-bottom: 99px;
-    gap: 27px;
-    .row {
-      display: flex;
-      align-items: center;
-      gap: 100px;
-      animation: ${animReverse} 10s infinite;
-      &.above {
-        animation: ${anim} 10s infinite;
-      }
-      img {
-        width: 144px;
-        height: 66px;
-      }
+    img {
+      width: 100%;
     }
   }
-  .section3 {
+  .section3-wrapper {
     display: flex;
     align-items: center;
-    flex-direction: column;
+    justify-content: center;
+    padding: 80px;
     width: 100%;
-    gap: 80px;
-    .features {
+    .section3 {
       display: flex;
       align-items: center;
-      gap: 80px;
-      .feature {
+      flex-direction: column;
+      gap: 16px;
+      background: url(${bg});
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      padding: 96px 120px;
+      margin-top: 80px;
+      .feat {
         display: flex;
         align-items: center;
-        justify-content: center;
-        background-image: url(${tank});
-        width: 420px;
-        height: 240px;
-
-        color: rgba(255, 255, 255, 0.8);
-        text-align: center;
-        font-family: Quicksand;
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        letter-spacing: -0.48px;
+        gap: 54px;
+        .left {
+          width: 55%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          img {
+            width: 100%;
+            height: 100%;
+            max-width: 640px;
+            max-height: 600px;
+          }
+        }
+        .right {
+          flex: 1;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 8px;
+          img {
+            max-width: 111px;
+            max-height: 108px;
+          }
+        }
       }
     }
   }

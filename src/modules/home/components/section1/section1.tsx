@@ -20,7 +20,7 @@ export const Section1 = () => {
     // });
   }, []);
   return (
-    <Wrapper data-scroll-section>
+    <Wrapper>
       <WrapperContent>
         <div className='section1'>
           <img src={txt} alt='' ref={ref} className='logo' />

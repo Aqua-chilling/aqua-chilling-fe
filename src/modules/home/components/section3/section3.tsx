@@ -1,64 +1,61 @@
 import { Wrapper } from './section3.styled';
-import React, { useRef } from 'react';
-// import gsap from 'gsap';
+import { Description, Title } from '@/components/text/text.styled';
 import { WrapperContent } from '@/components/wrapper-content/wrapper-content.styled';
-import fish1 from '@/assets/home/section3/fish1.png';
-import fish2 from '@/assets/home/section3/fish2.png';
-import fish3 from '@/assets/home/section3/fish3.png';
-import fish4 from '@/assets/home/section3/fish4.png';
-import fish5 from '@/assets/home/section3/fish5.png';
-import fish6 from '@/assets/home/section3/fish6.png';
-import fish7 from '@/assets/home/section3/fish7.png';
-import fish8 from '@/assets/home/section3/fish8.png';
-import fish9 from '@/assets/home/section3/fish9.png';
-import fish10 from '@/assets/home/section3/fish10.png';
-import fish11 from '@/assets/home/section3/fish11.png';
-import fish12 from '@/assets/home/section3/fish12.png';
-import fish13 from '@/assets/home/section3/fish13.png';
-import fish14 from '@/assets/home/section3/fish13.png';
-import { Title } from '@/components/text/text.styled';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
+import feat1 from '@/assets/home/section3-2/feat1.png';
+import feat2 from '@/assets/home/section3-2/feat2.png';
+import feat3 from '@/assets/home/section3-2/feat3.png';
+import ic1 from '@/assets/home/section3-2/ic1.png';
+import ic2 from '@/assets/home/section3-2/ic2.png';
+import ic3 from '@/assets/home/section3-2/ic3.png';
+import water from '@/assets/home/water.png';
 export const Section3 = () => {
-  const ref = useRef<any>(null);
-  React.useEffect(() => {
-    ScrollTrigger.create({
-      trigger: ref.current,
-      start: 'top+=500 top',
-      pin: true,
-      pinSpacing: false
-    });
-    // }, []);
-    // return () => ctx.revert();
-  }, []);
   return (
-    <Wrapper data-scroll-section ref={ref}>
-      <div className='fishs'>
-        <div className='row above'>
-          <img src={fish1} alt='' />
-          <img src={fish2} alt='' />
-          <img src={fish3} alt='' />
-          <img src={fish4} alt='' />
-          <img src={fish5} alt='' />
-          <img src={fish6} alt='' />
-          <img src={fish7} alt='' />
-        </div>
-        <div className='row'>
-          <img src={fish8} alt='' />
-          <img src={fish9} alt='' />
-          <img src={fish10} alt='' />
-          <img src={fish11} alt='' />
-          <img src={fish12} alt='' />
-          <img src={fish13} alt='' />
-          <img src={fish14} alt='' />
-        </div>
+    <Wrapper>
+      <div className='water'>
+        <img src={water} alt='' />
       </div>
       <WrapperContent>
-        <div className='section3'>
-          <Title>Upcoming features</Title>
-          <div className='features'>
-            <div className='feature'>Ocean Gatling: The Fish Hunter</div>
-            <div className='feature'>Fishing Clash</div>
+        <div className='section3-wrapper'>
+          <div className='section3'>
+            <div className='feat'>
+              <div className='left'>
+                <img src={feat1} alt='' />
+              </div>
+              <div className='right'>
+                <img src={ic1} alt='' />
+                <Title>Play & Explore </Title>
+                <Description style={{ textAlign: 'left' }}>
+                  Embark on a captivating underwater odyssey in AQUACHILLING, where you play and explore, building your
+                  own majestic aquatic kingdom, feeding and caring for your fish, and uncovering endless aquatic
+                  adventures!
+                </Description>
+              </div>
+            </div>
+            <div className='feat'>
+              <div className='right'>
+                <img src={ic2} alt='' />
+                <Title>Play & Earn </Title>
+                <Description style={{ textAlign: 'left' }}>
+                  Cultivate your fish to adulthood and reap the rewards by selling them in a dynamic market, or choose
+                  to keep them and enjoy a steady stream of daily income.
+                </Description>
+              </div>
+              <div className='left'>
+                <img src={feat2} alt='' />
+              </div>
+            </div>
+            <div className='feat'>
+              <div className='left'>
+                <img src={feat3} alt='' />
+              </div>
+              <div className='right'>
+                <img src={ic3} alt='' />
+                <Title>Build your own underwater kingdom </Title>
+                <Description style={{ textAlign: 'left' }}>
+                  Collect majestic fish species to create and reign over your own magnificent marine realm!
+                </Description>
+              </div>
+            </div>
           </div>
         </div>
       </WrapperContent>

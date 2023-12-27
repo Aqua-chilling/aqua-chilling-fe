@@ -15,12 +15,7 @@ import { WalletContextProvider } from '@/contexts/wallet.context';
 import { FixedGlobalStyle } from '@/providers/theme.provider';
 import { CustomCurSor } from '@/components/custom-cursor/custom-cursor';
 import { Header } from '@/components/header/header';
-import { ScrollProvider } from '@/providers/scroll.provider';
 import '@/constants/style/locomotive-scroll.css';
-
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger);
 
 const queryClient = new QueryClient();
 let persistor = persistStore(store);
@@ -41,7 +36,6 @@ export const App = () => {
               <CredentialProvider>
                 <FixedGlobalStyle />
                 <CustomCurSor />
-                {/* <ScrollProvider /> */}
                 <RouterProvider>
                   <Header />
                   {/* <LoadingProvider /> */}

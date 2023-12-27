@@ -1,9 +1,10 @@
-import { useLayoutEffect } from 'react';
 import LocomotiveScroll from 'locomotive-scroll';
 import ScrollTrigger from 'gsap/ScrollTrigger';
-
-const useLocoScroll = (start: boolean) => {
-  useLayoutEffect(() => {
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
+gsap.registerPlugin(ScrollTrigger);
+const useLocoScroll = () => {
+  useGSAP(() => {
     const scrollEl = document.querySelector('#home') as HTMLElement;
     let locoScroll: any = new LocomotiveScroll({
       el: scrollEl,
@@ -46,7 +47,7 @@ const useLocoScroll = (start: boolean) => {
       }
     };
     ScrollTrigger.defaults({
-      scroller: scrollEl
+      scroller: '#home'
     });
 
     ScrollTrigger.addEventListener('refresh', lsUpdate);
@@ -56,7 +57,7 @@ const useLocoScroll = (start: boolean) => {
       locoScroll.destroy();
       ScrollTrigger.removeEventListener('refresh', lsUpdate);
     };
-  }, [start]);
+  });
 };
 
 export default useLocoScroll;

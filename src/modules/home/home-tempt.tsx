@@ -1,9 +1,9 @@
 import useLocoScroll from '@/hooks/use-locomotive';
 import { Section1 } from './components/section1/section1';
 import { Section2 } from './components/section2/section2';
-import { Section3 } from './components/section3/section3';
-import { Section4 } from './components/section4/section4';
-import { Section5 } from './components/section5/section5';
+import { Section3 } from './components/section4/section4.tsx';
+import { Section4 } from './components/section5/section5.tsx';
+import { Section5 } from './components/section6/section6';
 import { WrapperContent } from '@/components/wrapper-content/wrapper-content.styled';
 import { PrimaryButton, SecondaryButton } from '@/components/button/button.styled';
 import txt from '@/assets/home/section1/txt.png';

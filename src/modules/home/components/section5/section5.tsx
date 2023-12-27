@@ -2,9 +2,10 @@ import { Wrapper } from './section5.styled';
 import React from 'react';
 // import gsap from 'gsap';
 import { WrapperContent } from '@/components/wrapper-content/wrapper-content.styled';
-import grass2 from '@/assets/home/grass.png';
-import token from '@/assets/home/section5/token.png';
-import { Description, Title } from '@/components/text/text.styled';
+import sand from '@/assets/home/section4/sand.png';
+import { Title } from '@/components/text/text.styled';
+import { PrimaryButton } from '@/components/button/button.styled';
+import { CARDS, ICard } from './section5.hard';
 
 export const Section5 = () => {
   React.useEffect(() => {
@@ -26,52 +27,30 @@ export const Section5 = () => {
     // return () => ctx.revert();
   }, []);
   return (
-    <Wrapper data-scroll-section>
+    <Wrapper>
+      <div className='sand'>
+        <img src={sand} alt='' />
+      </div>
+      {/* <div className='sand2'>
+        <img src={sand2} alt='' />
+      </div> */}
       <WrapperContent>
         <div className='section5'>
-          <div className='section4-left'>
-            <Title style={{ textAlign: 'center' }}>Aquachilling Token</Title>
-            <img src={token} alt='' />
+          <div className='section5-txt'>
+            <Title>Encyclopedia of Aquachilling</Title>
+            <PrimaryButton w={220}>Explore our Wikipedia</PrimaryButton>
           </div>
-          <div className='section5-right'>
-            <div className='stats'>
-              <div className='stat'>
-                <div className='label'>Token name</div>
-                <div className='value'>Aquachilling token</div>
-              </div>
-              <div className='stat'>
-                <div className='label'>Token symbol</div>
-                <div className='value'>AQAT</div>
-              </div>
-              <div className='stat'>
-                <div className='label'>Chain</div>
-                <div className='value'>Binance Smart chain</div>
-              </div>
-              <div className='stat'>
-                <div className='label'>Total Supply</div>
-                <div className='value'>200,000,000</div>
-              </div>
-              <div className='stat'>
-                <div className='label'>Initial circulating supply</div>
-                <div className='value'>15,000</div>
-              </div>
-              <div className='stat'>
-                <div className='label'>Whitelist</div>
-                <div className='value'>Yes</div>
-              </div>
-            </div>
-            <Description style={{ textAlign: 'left' }}>
-              Native token of Bitcoin Cats Gaming Ecosystem. It is originally inscribed on Bitcoin and part of it is
-              bridged / wrapped to Ethereum to benefit from the well developed DeFi and GameFi infrastructure. $1CAT is
-              the Utility token with the BitcoinCats gaming ecosystem, which can be used to buy & upgrade in-game assets
-              including the avatars, pets, equipments, farmlands and so forth
-            </Description>
+          <div className='cards'>
+            {CARDS.map((item: ICard, key) => {
+              return (
+                <div className='card' key={key}>
+                  <img src={new URL(`/src/assets/home/section4/${item.img}.png`, import.meta.url).href} alt='' />
+                </div>
+              );
+            })}
           </div>
         </div>
       </WrapperContent>
-      <div className='sand'>
-        <img src={grass2} alt='' />
-      </div>
     </Wrapper>
   );
 };

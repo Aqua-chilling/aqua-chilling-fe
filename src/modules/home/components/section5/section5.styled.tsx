@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import frame from '@/assets/home/section5/frame.png';
+import sand2 from '@/assets/home/section4/sand2.png';
 export const Wrapper = styled.div`
   width: 100%;
   display: flex;
@@ -7,6 +7,11 @@ export const Wrapper = styled.div`
   align-items: center;
   background-color: #422433;
   position: relative;
+  background-image: url(${sand2});
+  background-size: 100% 40%;
+  background-position: left bottom;
+  padding-bottom: 3%;
+  background-repeat: no-repeat;
   .sand {
     width: 100%;
     min-height: 200px;
@@ -15,56 +20,37 @@ export const Wrapper = styled.div`
       height: 100%;
     }
   }
+  .sand2 {
+    position: absolute;
+    bottom: 2%;
+    width: 100%;
+    z-index: -1;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
   .section5 {
     display: flex;
     align-items: center;
+    flex-direction: column;
     width: 100%;
-    padding: 80px 120px;
-    gap: 120px;
-    &-left {
-      width: 60%;
+    padding: 80px;
+    gap: 80px;
+    &-txt {
+      width: 100%;
       display: flex;
       align-items: center;
-      flex-direction: column;
+      justify-content: space-between;
     }
-    &-right {
-      width: 40%;
-      display: flex;
-      align-items: flex-start;
-      flex-direction: column;
-      gap: 40px;
-      .stats {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        background-image: url(${frame});
-        background-size: 100% 100%;
-        background-repeat: no-repeat;
-        padding: 27px 32px 53px 27px;
-        gap: 8px;
-        .stat {
+    .cards {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      gap: 16px;
+      .card {
+        img {
           width: 100%;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          .label {
-            color: rgba(255, 255, 255, 0.6);
-            font-family: Quicksand;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 400;
-            line-height: 150%; /* 24px */
-          }
-          .value {
-            color: #fff;
-            text-align: right;
-            font-family: Quicksand;
-            font-size: 16px;
-            font-style: normal;
-            font-weight: 700;
-            line-height: normal;
-            letter-spacing: -0.32px;
-          }
         }
       }
     }
