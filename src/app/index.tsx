@@ -14,7 +14,6 @@ import { SUPPORTED_NETWORKS } from '@/config/network.config';
 import { WalletContextProvider } from '@/contexts/wallet.context';
 import { FixedGlobalStyle } from '@/providers/theme.provider';
 import { CustomCurSor } from '@/components/custom-cursor/custom-cursor';
-import { Header } from '@/components/header/header';
 import '@/constants/style/locomotive-scroll.css';
 
 const queryClient = new QueryClient();
@@ -36,10 +35,7 @@ export const App = () => {
               <CredentialProvider>
                 <FixedGlobalStyle />
                 <CustomCurSor />
-                <RouterProvider>
-                  <Header />
-                  {/* <LoadingProvider /> */}
-                </RouterProvider>
+                <RouterProvider>{/* <LoadingProvider /> */}</RouterProvider>
                 <ToastContainer
                   position='bottom-right'
                   autoClose={5000}
