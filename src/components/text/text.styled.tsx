@@ -7,6 +7,7 @@ export const Title = styled.div`
   font-weight: 700;
   line-height: normal;
   letter-spacing: -0.96px;
+  text-align: center;
 `;
 export const Description = styled.div`
   color: #f1c8dd;

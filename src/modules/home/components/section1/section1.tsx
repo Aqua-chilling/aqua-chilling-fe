@@ -7,23 +7,13 @@ import { WrapperContent } from '@/components/wrapper-content/wrapper-content.sty
 
 export const Section1 = () => {
   const ref = useRef<any>(null);
-  React.useLayoutEffect(() => {
-    // gsap.from(ref.current, {
-    //   scrollTrigger: {
-    //     trigger: ref.current,
-    //     start: 'top-=100px top',
-    //     end: 'top top',
-    //     scrub: true
-    //   },
-    //   x: -100,
-    //   duration: 4
-    // });
-  }, []);
   return (
     <Wrapper>
       <WrapperContent>
         <div className='section1'>
-          <img src={txt} alt='' ref={ref} className='logo' />
+          <div className='logo'>
+            <img src={txt} alt='' ref={ref} />
+          </div>
           <div className='btns'>
             <SecondaryButton w={220}>Documentation</SecondaryButton>
             <PrimaryButton w={220}>Dive to the deep now!</PrimaryButton>

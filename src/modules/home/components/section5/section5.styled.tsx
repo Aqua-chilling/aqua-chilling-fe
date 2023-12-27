@@ -9,12 +9,14 @@ export const Wrapper = styled.div`
   position: relative;
   background-image: url(${sand2});
   background-size: 100% 40%;
+  @media screen and (max-width: 768px) {
+    background-position: left 120%;
+  }
   background-position: left bottom;
   padding-bottom: 3%;
   background-repeat: no-repeat;
   .sand {
     width: 100%;
-    min-height: 200px;
     img {
       width: 100%;
       height: 100%;
@@ -37,20 +39,37 @@ export const Wrapper = styled.div`
     width: 100%;
     padding: 80px;
     gap: 80px;
+    @media screen and (max-width: 1024px) {
+      padding: 24px;
+    }
     &-txt {
       width: 100%;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      @media screen and (max-width: 1024px) {
+        flex-direction: column;
+        gap: 32px;
+      }
     }
     .cards {
       width: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+      overflow-x: scroll;
+      @media screen and (max-width: 768px) {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+      }
       gap: 16px;
       .cardd {
         width: 240px;
         height: 240px;
+        @media screen and (max-width: 768px) {
+          width: 128px;
+          height: 128px;
+        }
+
         img {
           width: 100%;
         }

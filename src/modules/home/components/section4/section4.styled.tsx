@@ -24,6 +24,9 @@ export const Wrapper = styled.div`
   padding: 80px 0px;
   gap: 80px;
   position: relative;
+  @media screen and (max-width: 1024px) {
+    gap: 32px;
+  }
   .fishs {
     width: 100%;
     display: flex;
@@ -33,6 +36,9 @@ export const Wrapper = styled.div`
     background-image: url(${bg});
     background-size: 100% 100%;
     margin-bottom: 99px;
+    @media screen and (max-width: 1024px) {
+      margin-bottom: 32px;
+    }
     gap: 27px;
     .row {
       display: flex;
@@ -54,17 +60,33 @@ export const Wrapper = styled.div`
     flex-direction: column;
     width: 100%;
     gap: 80px;
+    @media screen and (max-width: 1024px) {
+      gap: 32px;
+    }
     .features {
       display: flex;
       align-items: center;
       gap: 80px;
+      @media screen and (max-width: 1024px) {
+        gap: 24px;
+      }
+
+      @media screen and (max-width: 1024px) {
+        flex-direction: column;
+      }
       .feature {
         display: flex;
         align-items: center;
         justify-content: center;
         background-image: url(${tank});
+        background-size: 100% 100%;
         width: 420px;
         height: 240px;
+        @media screen and (max-width: 768px) {
+          width: 280px;
+          height: 160px;
+          font-size: 13.333px;
+        }
 
         color: rgba(255, 255, 255, 0.8);
         text-align: center;

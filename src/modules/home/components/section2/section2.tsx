@@ -17,6 +17,9 @@ export const Section2 = () => {
   const refTxt = useRef<any>(null);
   const ref = useRef<any>(null);
   useEffect(() => {
+    // if (window.innerWidth < 768) {
+    //   return;
+    // }
     const cards = gsap.utils.toArray('.card');
     gsap.from(cards, {
       scrollTrigger: {

@@ -9,7 +9,6 @@ export const Wrapper = styled.div`
   position: relative;
   .sand {
     width: 100%;
-    min-height: 200px;
     img {
       width: 100%;
       height: 100%;
@@ -20,15 +19,34 @@ export const Wrapper = styled.div`
     align-items: center;
     width: 100%;
     padding: 80px 120px;
+    @media screen and (max-width: 768px) {
+      padding: 32px 16px;
+    }
     gap: 120px;
+    @media screen and (max-width: 768px) {
+      flex-direction: column;
+      gap: 32px;
+    }
     &-left {
       width: 60%;
       display: flex;
       align-items: center;
       flex-direction: column;
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
+      img {
+        @media screen and (max-width: 768px) {
+          width: 328px;
+          height: 262.4px;
+        }
+      }
     }
     &-right {
       width: 40%;
+      @media screen and (max-width: 768px) {
+        width: 100%;
+      }
       display: flex;
       align-items: flex-start;
       flex-direction: column;

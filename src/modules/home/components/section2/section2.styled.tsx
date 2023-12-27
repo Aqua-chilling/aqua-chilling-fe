@@ -24,11 +24,35 @@ export const Wrapper = styled.div`
       display: flex;
       gap: 24px;
       margin-top: 12px;
+      @media screen and (max-width: 500px) {
+        gap: 6px;
+      }
       .card {
         position: relative;
+        @media screen and (max-width: 1240px) {
+          width: 300px;
+          height: 234px;
+        }
+        @media screen and (max-width: 500px) {
+          width: 200px;
+          height: 134px;
+        }
+      }
+      .card1 {
+        @media screen and (max-width: 500px) {
+          transform: rotate(-10deg);
+        }
       }
       .card2 {
         transform: translateY(-48px);
+        @media screen and (max-width: 500px) {
+          transform: none;
+        }
+      }
+      .card3 {
+        @media screen and (max-width: 500px) {
+          transform: rotate(7deg);
+        }
       }
     }
   }
@@ -47,6 +71,15 @@ export const Wrapper = styled.div`
       top: -60%;
       max-width: 373px;
       z-index: 1;
+      @media screen and (max-width: 960px) {
+        width: 200px;
+        top: -50%;
+      }
+      @media screen and (max-width: 500px) {
+        width: 124.442px;
+        height: 95.357px;
+        top: -70%;
+      }
     }
     .shrine {
       position: absolute;
@@ -54,6 +87,15 @@ export const Wrapper = styled.div`
       top: -90%;
       max-width: 373px;
       z-index: 1;
+      @media screen and (max-width: 960px) {
+        width: 200px;
+        top: -80%;
+      }
+      @media screen and (max-width: 500px) {
+        width: 105.619px;
+        height: 106.009px;
+        top: -90%;
+      }
     }
   }
 `;

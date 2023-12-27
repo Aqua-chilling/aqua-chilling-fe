@@ -2,7 +2,7 @@ import { Wrapper } from './section6.styled';
 import React from 'react';
 // import gsap from 'gsap';
 import { WrapperContent } from '@/components/wrapper-content/wrapper-content.styled';
-import grass2 from '@/assets/home/grass.png';
+import grass2 from '@/assets/home/grass2.png';
 import token from '@/assets/home/section5/token.png';
 import { Description, Title } from '@/components/text/text.styled';
 
