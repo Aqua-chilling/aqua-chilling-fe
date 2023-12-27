@@ -22,7 +22,7 @@ export const Home = () => {
     });
     ScrollTrigger.create({
       trigger: '.section4',
-      start: 'top top',
+      start: 'top+=100px top',
       pin: true,
       pinSpacing: false
     });

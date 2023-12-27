@@ -20,6 +20,7 @@ export const FixedGlobalStyle = createGlobalStyle`
         padding: 0;
         box-sizing: border-box;
         font-family: 'Quicksand', sans-serif;
+        background: #143464;
         >iframe{
           z-index: -1 !important;
         }

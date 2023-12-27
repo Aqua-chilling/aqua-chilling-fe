@@ -12,6 +12,7 @@ export const Wrapper = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-size: 100% 100%;
+  top: -10px;
   .water {
     position: absolute;
     top: -5%;

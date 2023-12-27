@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
   align-items: center;
   background-color: #422433;
   position: relative;
+  top: -30px;
   .sand {
     width: 100%;
     img {

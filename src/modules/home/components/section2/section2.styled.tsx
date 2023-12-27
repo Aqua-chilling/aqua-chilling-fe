@@ -6,6 +6,7 @@ export const Wrapper = styled.div`
   align-items: center;
   background: #422433;
   position: relative;
+  top: -10px;
   padding: 80px 0px;
   .section2 {
     display: flex;
