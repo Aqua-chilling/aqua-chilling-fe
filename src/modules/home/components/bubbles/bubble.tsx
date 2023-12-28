@@ -2,7 +2,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import React, { useEffect, useRef } from 'react';
 import './bubble.css';
-export const Bubble = () => {
+export const Bubble = ({ style }: { style?: string }) => {
   const randomX = () => {
     return Math.random() * 205 - 100;
   };
@@ -12,6 +12,15 @@ export const Bubble = () => {
   const randomScale = () => {
     return Math.random() * 3 - 1;
   };
+  const randomXHover = () => {
+    return Math.random() * 100 - 50;
+  };
+  const randomYHover = () => {
+    return Math.random() * 100 + 100;
+  };
+  const randomScaleHover = () => {
+    return Math.random() * 2 - 0.5;
+  };
 
   const ref = useRef(null);
   useEffect(() => {
@@ -19,7 +28,26 @@ export const Bubble = () => {
       const bubbles = gsap.utils.toArray('.bubble');
       const anim = () =>
         bubbles.forEach((b: any, i: any) => {
-          gsap.fromTo(
+          if (style === 'onHover') {
+            return gsap.fromTo(
+              b,
+              {
+                x: 0,
+                y: 0,
+                opacity: 1,
+                scale: 0.4
+              },
+              {
+                x: randomXHover(),
+                y: -randomYHover(),
+                scale: randomScaleHover(),
+                opacity: 0,
+                duration: 0.5,
+                delay: i - 0.5
+              }
+            );
+          }
+          return gsap.fromTo(
             b,
             {
               x: randomX(),
@@ -37,9 +65,12 @@ export const Bubble = () => {
             }
           );
         });
-      var timer = setInterval(() => {
-        anim();
-      }, 3000);
+      var timer = setInterval(
+        () => {
+          anim();
+        },
+        style === 'onHover' ? 400 : 3000
+      );
       anim();
       return () => {
         clearInterval(timer);
@@ -50,7 +81,7 @@ export const Bubble = () => {
     };
   }, []);
   return (
-    <div className='bubbles' ref={ref}>
+    <div className={style === 'onHover' ? 'bubbles onHover' : 'bubbles'} ref={ref}>
       <div className='bubble 1'>
         <svg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56' fill='none'>
           <path

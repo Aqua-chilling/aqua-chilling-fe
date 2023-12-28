@@ -45,6 +45,11 @@ export const Wrapper = styled.div`
       display: flex;
       gap: 16px;
       align-items: center;
+      &:hover {
+        #magnifier {
+          display: block;
+        }
+      }
     }
   }
 `;

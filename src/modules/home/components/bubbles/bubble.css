@@ -3,6 +3,11 @@
   height: 398px;
   position: relative;
 }
+.bubbles.onHover {
+  width: 20px;
+  height: 20px;
+  position: relative;
+}
 .bubbles .bubble {
   position: absolute;
   bottom: 0;

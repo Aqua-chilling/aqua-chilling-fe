@@ -10,6 +10,7 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Footer } from '@/components';
+import { Magnifier } from './components/section1/components/magnifier';
 export const Home = () => {
   useLocoScroll();
   const app = useRef<any>(null);

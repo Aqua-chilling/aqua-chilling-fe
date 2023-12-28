@@ -5,9 +5,11 @@ import React, { useRef } from 'react';
 // import gsap from 'gsap';
 import { WrapperContent } from '@/components/wrapper-content/wrapper-content.styled';
 import { Bubble } from '../bubbles/bubble';
+import { Magnifier } from './components/magnifier';
 
 export const Section1 = () => {
   const ref = useRef<any>(null);
+
   return (
     <Wrapper>
       <div className='bubbles-section1 left'>
@@ -18,10 +20,11 @@ export const Section1 = () => {
       </div>
       <WrapperContent>
         <div className='section1'>
-          <div className='logo'>
+          <div className='logo' id='logo-section1'>
             <img src={txt} alt='' ref={ref} />
           </div>
           <div className='btns'>
+            <Magnifier />
             <SecondaryButton w={220}>Documentation</SecondaryButton>
             <PrimaryButton w={220}>Dive to the deep now!</PrimaryButton>
           </div>
