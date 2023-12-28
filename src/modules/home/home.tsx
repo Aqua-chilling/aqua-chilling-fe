@@ -16,7 +16,7 @@ export const Home = () => {
   useGSAP(() => {
     ScrollTrigger.create({
       trigger: '.section2',
-      start: 'top top',
+      start: 'top+=150px top',
       pin: true,
       pinSpacing: false
     });

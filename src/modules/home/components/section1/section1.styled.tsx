@@ -8,12 +8,24 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
+  .bubbles-section1 {
+    position: absolute;
+    z-index: 2;
+    &.left {
+      bottom: -20%;
+      left: 10%;
+    }
+    &.right {
+      bottom: -20%;
+      right: 10%;
+    }
+  }
   .section1 {
     margin-top: 165px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    min-height: 960px;
+    min-height: 634px;
     @media screen and (max-width: 768px) {
       min-height: 640px;
     }

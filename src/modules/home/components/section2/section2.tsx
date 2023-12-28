@@ -9,6 +9,7 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { Description, Title } from '@/components/text/text.styled';
 import { WrapperContent } from '@/components/wrapper-content/wrapper-content.styled';
+import sand from '@/assets/home/section2/sand.png';
 
 export const Section2 = () => {
   const refPyramid = useRef<any>(null);
@@ -98,6 +99,9 @@ export const Section2 = () => {
   }, []);
   return (
     <Wrapper ref={ref}>
+      <div className='sand'>
+        <img src={sand} alt='' />
+      </div>
       <WrapperContent>
         <div className='section2'>
           <div className='cards'>
