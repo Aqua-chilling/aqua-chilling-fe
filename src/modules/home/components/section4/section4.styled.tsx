@@ -5,14 +5,14 @@ export const anim = keyframes`
 0%{
 }
 100%{
-  transform: translateX(-100%);
+  transform: translate(calc(-50% - 2rem));
 }
 `;
 export const animReverse = keyframes`
 0%{
 }
 100%{
-  transform: translateX(100%);
+  transform: translate(calc(50% + 2rem));
 }
 `;
 export const Wrapper = styled.div`
@@ -43,10 +43,12 @@ export const Wrapper = styled.div`
     .row {
       display: flex;
       align-items: center;
-      gap: 100px;
-      animation: ${animReverse} 10s infinite;
-      &.above {
-        animation: ${anim} 10s infinite;
+      gap: 4rem;
+      animation: ${anim} 10s infinite linear;
+      position: relative;
+      &.below {
+        animation: ${animReverse} 10s infinite linear;
+        left: -100%;
       }
       img {
         width: 144px;

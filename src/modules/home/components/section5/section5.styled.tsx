@@ -18,10 +18,24 @@ export const Wrapper = styled.div`
   background-repeat: no-repeat;
   .sand {
     width: 100%;
+    position: relative;
+    transform: translateY(-10%);
     img {
       width: 100%;
       height: 100%;
     }
+    .adult{
+      position: absolute;
+      top: -28%;
+      max-width: 132px;
+      max-height: 132px;
+      &.left{
+        left: 10%;
+      }
+      &.right{
+        right: 10%;
+      }
+    
   }
   .sand2 {
     position: absolute;

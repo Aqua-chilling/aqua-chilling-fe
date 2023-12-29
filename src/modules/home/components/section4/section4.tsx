@@ -15,7 +15,7 @@ import fish10 from '@/assets/home/section3/fish10.png';
 import fish11 from '@/assets/home/section3/fish11.png';
 import fish12 from '@/assets/home/section3/fish12.png';
 import fish13 from '@/assets/home/section3/fish13.png';
-import fish14 from '@/assets/home/section3/fish13.png';
+import fish14 from '@/assets/home/section3/fish14.png';
 import { Title } from '@/components/text/text.styled';
 // import { useGSAP } from '@gsap/react';
 // import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -26,7 +26,15 @@ export const Section4 = () => {
   return (
     <Wrapper ref={ref}>
       <div className='fishs'>
-        <div className='row above'>
+        <div className='row'>
+          <img src={fish1} alt='' />
+          <img src={fish2} alt='' />
+          <img src={fish3} alt='' />
+          <img src={fish4} alt='' />
+          <img src={fish5} alt='' />
+          <img src={fish6} alt='' />
+          <img src={fish7} alt='' />
+
           <img src={fish1} alt='' />
           <img src={fish2} alt='' />
           <img src={fish3} alt='' />
@@ -35,7 +43,15 @@ export const Section4 = () => {
           <img src={fish6} alt='' />
           <img src={fish7} alt='' />
         </div>
-        <div className='row'>
+        <div className='row below'>
+          <img src={fish8} alt='' />
+          <img src={fish9} alt='' />
+          <img src={fish10} alt='' />
+          <img src={fish11} alt='' />
+          <img src={fish12} alt='' />
+          <img src={fish13} alt='' />
+          <img src={fish14} alt='' />
+
           <img src={fish8} alt='' />
           <img src={fish9} alt='' />
           <img src={fish10} alt='' />
