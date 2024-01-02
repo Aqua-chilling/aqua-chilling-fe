@@ -8,13 +8,6 @@ export const anim = keyframes`
   transform: translate(calc(-50% - 2rem));
 }
 `;
-export const animReverse = keyframes`
-0%{
-}
-100%{
-  transform: translate(calc(50% + 2rem));
-}
-`;
 export const Wrapper = styled.div`
   width: 100%;
   display: flex;
@@ -44,11 +37,11 @@ export const Wrapper = styled.div`
       display: flex;
       align-items: center;
       gap: 4rem;
-      animation: ${anim} 10s infinite linear;
+      animation: ${anim} 35s forwards infinite linear;
       position: relative;
+      width: fit-content;
       &.below {
-        animation: ${animReverse} 10s infinite linear;
-        left: -100%;
+        animation: ${anim} 35s reverse infinite linear;
       }
       img {
         width: 144px;

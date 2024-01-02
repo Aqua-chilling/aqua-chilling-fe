@@ -24,18 +24,18 @@ export const Wrapper = styled.div`
       width: 100%;
       height: 100%;
     }
-    .adult{
+    .adult {
       position: absolute;
       top: -28%;
       max-width: 132px;
       max-height: 132px;
-      &.left{
+      &.left {
         left: 10%;
       }
-      &.right{
+      &.right {
         right: 10%;
       }
-    
+    }
   }
   .sand2 {
     position: absolute;
