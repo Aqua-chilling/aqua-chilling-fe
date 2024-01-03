@@ -37,7 +37,7 @@ export const Section2 = () => {
     const tlStart = gsap.timeline({
       scrollTrigger: {
         trigger: ref.current,
-        start: 'top+=200 center',
+        start: 'top+=100 center',
         end: 'top+=500 center',
         scrub: true
       }
