@@ -37,22 +37,22 @@ export const Section2 = () => {
     const tlStart = gsap.timeline({
       scrollTrigger: {
         trigger: ref.current,
-        start: 'top+=100 center',
-        end: 'top+=500 center',
+        start: 'top+=100 top',
+        end: 'top+=400 top',
         scrub: true
       }
     });
     tlStart
       .from(refGrass.current, {
-        y: 200
+        y: 300
       })
       .from(refPyramid.current, {
-        y: 200
+        y: 300
       })
       .from(
         refShrine.current,
         {
-          y: 200
+          y: 300
         },
         '<'
       );
@@ -60,32 +60,12 @@ export const Section2 = () => {
     const tlEnd = gsap.timeline({
       scrollTrigger: {
         trigger: ref.current,
-        start: 'top+=160 top',
-        end: 'top+=500 top',
+        start: 'top+=560 top',
+        end: 'top+=700 top',
         scrub: true
       }
     });
     tlEnd
-      .to(refPyramid.current, {
-        y: 200,
-        opacity: 0
-      })
-      .to(
-        refShrine.current,
-        {
-          y: 200,
-          opacity: 0
-        },
-        '<'
-      )
-      .to(
-        refGrass.current,
-        {
-          y: 200,
-          opacity: 0
-        },
-        '<'
-      )
       .to(refTxt.current, {
         scale: 0,
         y: 100,

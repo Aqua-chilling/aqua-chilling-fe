@@ -23,7 +23,7 @@ export const Home = () => {
     });
     ScrollTrigger.create({
       trigger: '.section4',
-      start: 'top+=100px top',
+      start: 'top+=200px top',
       pin: true,
       pinSpacing: false
     });

@@ -26,7 +26,7 @@ export const Wrapper = styled.div`
     }
     .adult {
       position: absolute;
-      top: -28%;
+      top: -50px;
       max-width: 132px;
       max-height: 132px;
       &.left {

@@ -77,7 +77,7 @@ export const Wrapper = styled.div`
     .pyramid {
       position: absolute;
       left: 2%;
-      top: -60%;
+      top: -30%;
       max-width: 373px;
       z-index: 1;
       @media screen and (max-width: 960px) {
@@ -93,7 +93,7 @@ export const Wrapper = styled.div`
     .shrine {
       position: absolute;
       right: 2%;
-      top: -90%;
+      top: -50%;
       max-width: 373px;
       z-index: 1;
       @media screen and (max-width: 960px) {
