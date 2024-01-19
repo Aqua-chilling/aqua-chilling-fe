@@ -14,6 +14,7 @@ import gsap from 'gsap';
 export const Section5 = () => {
   const adultLeftRef = useRef(null);
   const adultRightRef = useRef(null);
+  const refImg = useRef(null);
   useGSAP(() => {
     const tlLeft = gsap.timeline({
       repeat: -1
@@ -48,6 +49,45 @@ export const Section5 = () => {
         duration: 10
       });
   });
+  const CARDSLIST = [...CARDS];
+  const [randomImages, setRandomImages] = React.useState<number[]>(Array.from({ length: 9 }, (_, i) => i + 1));
+  function shuffle(array: number[]) {
+    let currentIndex = array.length,
+      randomIndex;
+
+    // While there remain elements to shuffle.
+    while (currentIndex > 0) {
+      // Pick a remaining element.
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      // And swap it with the current element.
+      [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+  }
+  const gennerateListRandomImg = () => {
+    const arr = [...randomImages];
+    shuffle(arr);
+    setRandomImages(arr);
+  };
+  console.log(randomImages);
+  React.useEffect(() => {
+    const timer = setInterval(() => {
+      gennerateListRandomImg();
+      gsap.fromTo(
+        '.fishcard',
+        {
+          opacity: 0.8
+        },
+        {
+          opacity: 1
+        }
+      );
+    }, 700);
+    return () => clearInterval(timer);
+  }, []);
   return (
     <Wrapper>
       <div className='sand'>
@@ -63,10 +103,14 @@ export const Section5 = () => {
             <PrimaryButton w={220}>Explore our Wikipedia</PrimaryButton>
           </div>
           <div className='cards'>
-            {CARDS.map((item: ICard, key) => {
+            {randomImages?.map((item, key) => {
               return (
                 <div className='cardd' key={key}>
-                  <img src={new URL(`/src/assets/home/section4/${item.img}.png`, import.meta.url).href} alt='' />
+                  <img
+                    className='fishcard'
+                    src={new URL(`/src/assets/home/section4/card${item}.png`, import.meta.url).href}
+                    alt=''
+                  />
                 </div>
               );
             })}

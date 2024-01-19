@@ -57,25 +57,25 @@ export const Section2 = () => {
         '<'
       );
 
-    const tlEnd = gsap.timeline({
-      scrollTrigger: {
-        trigger: ref.current,
-        start: 'top+=560 top',
-        end: 'top+=700 top',
-        scrub: true
-      }
-    });
-    tlEnd
-      .to(refTxt.current, {
-        scale: 0,
-        y: 100,
-        opacity: 0
-      })
-      .to(cards, {
-        scale: 0,
-        y: 100,
-        opacity: 0
-      });
+    // const tlEnd = gsap.timeline({
+    //   scrollTrigger: {
+    //     trigger: ref.current,
+    //     start: 'top+=560 top',
+    //     end: 'top+=700 top',
+    //     scrub: true
+    //   }
+    // });
+    // tlEnd
+    //   .to(refTxt.current, {
+    //     scale: 0,
+    //     y: 100,
+    //     opacity: 0
+    //   })
+    //   .to(cards, {
+    //     scale: 0,
+    //     y: 100,
+    //     opacity: 0
+    //   });
   }, []);
   return (
     <Wrapper ref={ref}>
@@ -90,7 +90,7 @@ export const Section2 = () => {
             <img src={card2} alt='' className='card card1' />
           </div>
           <div className='section2-txt' ref={refTxt}>
-            <Title>Introduction</Title>
+            <Title>Play for fun & dive deep in the ocean of ZKsync rewards</Title>
             <Description>
               Unveil the Magic Underwater in SOLANA's GameFi Universe. Immerse yourself in a soothing idle adventure
               where you curate and nurture a vibrant array of fish, each thriving in real-time within your bespoke

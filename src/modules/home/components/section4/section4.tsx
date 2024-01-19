@@ -79,7 +79,7 @@ export const Section4 = () => {
       </div>
       <WrapperContent>
         <div className='section4'>
-          <Title>Upcoming features</Title>
+          <Title>Our Partners</Title>
           <div className='features'>
             <div className='feature'>Ocean Gatling: The Fish Hunter</div>
             <div className='feature'>Fishing Clash</div>

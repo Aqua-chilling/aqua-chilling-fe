@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import sand2 from '@/assets/home/section4/sand2.png';
+import frame from '@/assets/home/section4/frame.png';
 export const Wrapper = styled.div`
   width: 100%;
   display: flex;
@@ -83,13 +84,13 @@ export const Wrapper = styled.div`
       .cardd {
         width: 240px;
         height: 240px;
+        background-image: url(${frame});
         @media screen and (max-width: 768px) {
           width: 128px;
           height: 128px;
         }
 
         img {
-          width: 100%;
         }
       }
     }
