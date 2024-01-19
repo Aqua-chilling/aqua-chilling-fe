@@ -45,7 +45,6 @@ export const Wrapper = styled.div`
     z-index: 2;
     &.left {
       bottom: -20%;
-      left: 10%;
     }
     &.right {
       bottom: -20%;
