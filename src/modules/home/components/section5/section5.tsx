@@ -7,7 +7,6 @@ import adultLeft from '@/assets/home/section4/adult-left.png';
 import adultRight from '@/assets/home/section4/adult-right.png';
 import { Title } from '@/components/text/text.styled';
 import { PrimaryButton } from '@/components/button/button.styled';
-import { CARDS, ICard } from './section5.hard';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 
@@ -49,8 +48,7 @@ export const Section5 = () => {
         duration: 10
       });
   });
-  const CARDSLIST = [...CARDS];
-  const [randomImages, setRandomImages] = React.useState<number[]>(Array.from({ length: 9 }, (_, i) => i + 1));
+  const [randomImages, setRandomImages] = React.useState<number[]>(Array.from({ length: 10 }, (_, i) => i + 1));
   function shuffle(array: number[]) {
     let currentIndex = array.length,
       randomIndex;

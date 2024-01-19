@@ -26,7 +26,7 @@ const HeaderComponent = ({}: IHeaderProps) => {
           >
             <img src={LogoImage} alt='Logo' />
           </div>
-          <PrimaryButton w={160}>Connect wallet</PrimaryButton>
+          {/* <PrimaryButton w={160}>Connect wallet</PrimaryButton> */}
         </div>
       </WrapperContent>
     </Wrapper>

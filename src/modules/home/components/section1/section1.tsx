@@ -31,7 +31,7 @@ export const Section1 = () => {
       tl.to(fish1Ref.current, {
         x: Math.random() * 1000 + 200,
         y: Math.random() * 500 - 250,
-        duration: 5
+        duration: 15
       })
         .to(fish1Ref.current, {
           rotateY: 180,
@@ -40,7 +40,7 @@ export const Section1 = () => {
         .to(fish1Ref.current, {
           x: -Math.random() * 500,
           y: Math.random() * 500 - 250,
-          duration: 7
+          duration: 17
         })
         .to(fish1Ref.current, {
           rotateY: 0,
@@ -50,13 +50,13 @@ export const Section1 = () => {
     animFish1();
     const timer1 = setInterval(() => {
       animFish1();
-    }, 12600);
+    }, 32600);
     const animFish2 = () => {
       const tl = gsap.timeline({ delay: 0 });
       tl.to(fish2Ref.current, {
         x: Math.random() * 700 + 400,
         y: Math.random() * 500 - 250,
-        duration: 12
+        duration: 18
       })
         .to(fish2Ref.current, {
           rotateY: 180,
@@ -65,7 +65,7 @@ export const Section1 = () => {
         .to(fish2Ref.current, {
           x: -Math.random() * 500,
           y: Math.random() * 500 - 250,
-          duration: 6
+          duration: 10
         })
         .to(fish2Ref.current, {
           rotateY: 0,
@@ -75,7 +75,7 @@ export const Section1 = () => {
     animFish2();
     const timer2 = setInterval(() => {
       animFish2();
-    }, 18600);
+    }, 28600);
     const animFish3 = () => {
       const tl = gsap.timeline({ delay: 0 });
       tl.to(fish3Ref.current, {
@@ -106,7 +106,7 @@ export const Section1 = () => {
       tl.to(fish4Ref.current, {
         x: Math.random() * 500 + 100,
         y: Math.random() * 100 - 50,
-        duration: 11
+        duration: 17
       })
         .to(fish4Ref.current, {
           rotateY: 180,
@@ -115,7 +115,7 @@ export const Section1 = () => {
         .to(fish4Ref.current, {
           x: -Math.random() * 400,
           y: Math.random() * 500 - 250,
-          duration: 10
+          duration: 16
         })
         .to(fish4Ref.current, {
           rotateY: 0,
@@ -125,13 +125,13 @@ export const Section1 = () => {
     animFish4();
     const timer4 = setInterval(() => {
       animFish4();
-    }, 21600);
+    }, 33600);
     const animFish5 = () => {
       const tl = gsap.timeline({ delay: 0 });
       tl.to(fish5Ref.current, {
-        x: Math.random() * 100 - 50,
-        y: Math.random() * 700 - 250,
-        duration: 25
+        x: Math.random() * 100 - 250,
+        y: Math.random() * 300 - 450,
+        duration: 13
       })
         .to(fish5Ref.current, {
           rotateY: 180,
@@ -150,13 +150,13 @@ export const Section1 = () => {
     animFish5();
     const timer5 = setInterval(() => {
       animFish5();
-    }, 46600);
+    }, 36600);
     const animFish6 = () => {
       const tl = gsap.timeline({ delay: 0 });
       tl.to(fish6Ref.current, {
         x: Math.random() - 500,
-        y: Math.random() * 100 - 50,
-        duration: 9
+        y: Math.random() * 100 - 300,
+        duration: 14
       })
         .to(fish6Ref.current, {
           rotateY: 180,
@@ -165,7 +165,7 @@ export const Section1 = () => {
         .to(fish6Ref.current, {
           x: Math.random() * 500,
           y: Math.random() * 1200 - 250,
-          duration: 7
+          duration: 24
         })
         .to(fish6Ref.current, {
           rotateY: 0,
@@ -175,7 +175,7 @@ export const Section1 = () => {
     animFish6();
     const timer6 = setInterval(() => {
       animFish6();
-    }, 16600);
+    }, 36600);
     const animFish7 = () => {
       const tl = gsap.timeline({ delay: 0 });
       tl.to(fish7Ref.current, {

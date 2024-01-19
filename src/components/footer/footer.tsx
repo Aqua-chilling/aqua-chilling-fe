@@ -12,7 +12,7 @@ export const Footer = () => {
           <img src={x} alt='' />
           <img src={discord} alt='' />
         </div>
-        <span>Made by Tevel team. All right reserved</span>
+        {/* <span>Made by Tevel team. All right reserved</span> */}
       </div>
     </Wrapper>
   );

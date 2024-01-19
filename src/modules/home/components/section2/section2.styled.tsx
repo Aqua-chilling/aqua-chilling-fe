@@ -38,6 +38,9 @@ export const Wrapper = styled.div`
       }
       .card {
         position: relative;
+        &:hover {
+          transform: scale(2);
+        }
         @media screen and (max-width: 1240px) {
           width: 300px;
           height: 234px;

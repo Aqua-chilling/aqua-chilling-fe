@@ -11,9 +11,13 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Footer } from '@/components';
 import { Magnifier } from './components/section1/components/magnifier';
+import React from 'react';
+import { PopupViewImage } from './components/section2/components/popup-view-image';
 export const Home = () => {
   useLocoScroll();
   const app = useRef<any>(null);
+  const [isShowDetailImage, setIsShowDetailImage] = React.useState(false);
+  const [currentImg, setCurrentImg] = React.useState(0);
   useGSAP(() => {
     ScrollTrigger.create({
       trigger: '.section2',
@@ -29,18 +33,21 @@ export const Home = () => {
     });
   });
   return (
-    <Wrapper id='home' ref={app}>
-      <Section1 />
-      <div className='section2'>
-        <Section2 />
-      </div>
-      <Section3 />
-      <div className='section4'>
-        <Section4 />
-      </div>
-      <Section5 />
-      <Section6 />
-      <Footer />
-    </Wrapper>
+    <>
+      {isShowDetailImage && <PopupViewImage imgIndex={currentImg} setVisibility={setIsShowDetailImage} />}
+      <Wrapper id='home' ref={app}>
+        <Section1 />
+        <div className='section2'>
+          <Section2 setCurrentImg={setCurrentImg} setIsShowDetailImage={setIsShowDetailImage} />
+        </div>
+        <Section3 />
+        <div className='section4'>
+          <Section4 />
+        </div>
+        <Section5 />
+        <Section6 />
+        <Footer />
+      </Wrapper>
+    </>
   );
 };

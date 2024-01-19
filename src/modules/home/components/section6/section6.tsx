@@ -3,9 +3,9 @@ import React from 'react';
 // import gsap from 'gsap';
 import { WrapperContent } from '@/components/wrapper-content/wrapper-content.styled';
 import grass2 from '@/assets/home/grass2.png';
-import token from '@/assets/home/section5/token.png';
+import token from '@/constants/style/token.json';
 import { Description, Title } from '@/components/text/text.styled';
-
+import { Player, Controls } from '@lottiefiles/react-lottie-player';
 export const Section6 = () => {
   React.useEffect(() => {}, []);
   return (
@@ -14,7 +14,10 @@ export const Section6 = () => {
         <div className='section6'>
           <div className='section6-left'>
             <Title style={{ textAlign: 'center' }}>Aquachilling Token</Title>
-            <img src={token} alt='' />
+            {/* <img src={token} alt='' /> */}
+            <Player autoplay loop src={token} style={{ height: '300px', width: '300px' }}>
+              <Controls visible={false} buttons={['play', 'repeat', 'frame', 'debug']} />
+            </Player>
           </div>
           <div className='section6-right'>
             <div className='stats'>

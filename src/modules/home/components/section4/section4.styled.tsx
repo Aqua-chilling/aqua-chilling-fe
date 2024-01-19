@@ -1,6 +1,5 @@
 import styled, { keyframes } from 'styled-components';
 import bg from '@/assets/home/section3/bg.png';
-import tank from '@/assets/home/section3/tank.png';
 export const anim = keyframes`
 0%{
 }
@@ -58,39 +57,15 @@ export const Wrapper = styled.div`
     @media screen and (max-width: 1024px) {
       gap: 32px;
     }
-    .features {
+    .partners {
       display: flex;
       align-items: center;
-      gap: 80px;
       @media screen and (max-width: 1024px) {
         gap: 24px;
       }
 
       @media screen and (max-width: 1024px) {
         flex-direction: column;
-      }
-      .feature {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-image: url(${tank});
-        background-size: 100% 100%;
-        width: 420px;
-        height: 240px;
-        @media screen and (max-width: 768px) {
-          width: 280px;
-          height: 160px;
-          font-size: 13.333px;
-        }
-
-        color: rgba(255, 255, 255, 0.8);
-        text-align: center;
-        font-family: Quicksand;
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        letter-spacing: -0.48px;
       }
     }
   }

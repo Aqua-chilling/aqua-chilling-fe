@@ -13,7 +13,7 @@ export const Wrapper = styled.div`
     z-index: 1;
     &.a {
       top: 300px;
-      left: 60px;
+      right: 60px;
     }
     &.b {
       top: 500px;
@@ -21,7 +21,7 @@ export const Wrapper = styled.div`
     }
     &.c {
       top: 158px;
-      left: 356px;
+      right: 356px;
     }
     &.d {
       bottom: 0px;
@@ -33,11 +33,11 @@ export const Wrapper = styled.div`
     }
     &.f {
       top: 150px;
-      right: 256px;
+      left: 256px;
     }
     &.g {
       bottom: 10px;
-      right: 156px;
+      right: left;
     }
   }
   .bubbles-section1 {
