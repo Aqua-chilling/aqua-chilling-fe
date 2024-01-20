@@ -2,9 +2,10 @@ import styled, { keyframes } from 'styled-components';
 import bg from '@/assets/home/section3/bg.png';
 export const anim = keyframes`
 0%{
+  transform: translate(0,0);
 }
 100%{
-  transform: translate(calc(-50% - 2rem));
+  transform: translate(-50%,0);
 }
 `;
 export const Wrapper = styled.div`
@@ -33,18 +34,18 @@ export const Wrapper = styled.div`
     }
     gap: 27px;
     .row {
-      display: flex;
-      align-items: center;
-      gap: 4rem;
-      animation: ${anim} 35s forwards infinite linear;
-      position: relative;
-      width: fit-content;
-      &.below {
-        animation: ${anim} 35s reverse infinite linear;
-      }
+      animation: ${anim} 20s forwards infinite linear;
+      top: 0px;
+      left: 0px;
+      overflow: hidden;
+      white-space: nowrap;
       img {
         width: 144px;
         height: 66px;
+        margin: 0 0.5em;
+      }
+      &.below {
+        animation: ${anim} 20s reverse infinite linear;
       }
     }
   }

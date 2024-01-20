@@ -54,8 +54,24 @@ export const Section4 = () => {
           <img src={fish5} alt='' />
           <img src={fish6} alt='' />
           <img src={fish7} alt='' />
+
+          <img src={fish1} alt='' />
+          <img src={fish2} alt='' />
+          <img src={fish3} alt='' />
+          <img src={fish4} alt='' />
+          <img src={fish5} alt='' />
+          <img src={fish6} alt='' />
+          <img src={fish7} alt='' />
         </div>
         <div className='row below'>
+          <img src={fish8} alt='' />
+          <img src={fish9} alt='' />
+          <img src={fish10} alt='' />
+          <img src={fish11} alt='' />
+          <img src={fish12} alt='' />
+          <img src={fish13} alt='' />
+          <img src={fish14} alt='' />
+
           <img src={fish8} alt='' />
           <img src={fish9} alt='' />
           <img src={fish10} alt='' />
