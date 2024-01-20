@@ -6,6 +6,7 @@ import grass2 from '@/assets/home/grass2.png';
 import token from '@/constants/style/token.json';
 import { Description, Title } from '@/components/text/text.styled';
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
+import { Bubble } from '../bubbles/bubble';
 export const Section6 = () => {
   React.useEffect(() => {}, []);
   return (
@@ -17,6 +18,9 @@ export const Section6 = () => {
             {/* <img src={token} alt='' /> */}
             <Player autoplay loop src={token} style={{ height: '300px', width: '300px' }}>
               <Controls visible={false} buttons={['play', 'repeat', 'frame', 'debug']} />
+              <div className='bubbles-token'>
+                <Bubble y={500} x={400} style='quick' />
+              </div>
             </Player>
           </div>
           <div className='section6-right'>

@@ -32,8 +32,8 @@ export const Wrapper = styled.div`
       right: 356px;
     }
     &.f {
-      top: 150px;
-      left: 256px;
+      top: 350px;
+      left: 556px;
     }
     &.g {
       bottom: 10px;

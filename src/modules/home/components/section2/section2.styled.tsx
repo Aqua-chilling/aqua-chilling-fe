@@ -36,11 +36,13 @@ export const Wrapper = styled.div`
       @media screen and (max-width: 500px) {
         gap: 6px;
       }
+      transition: all 0.3s;
+      &:hover {
+        transform: scale(1.1) !important;
+      }
+
       .card {
         position: relative;
-        &:hover {
-          transform: scale(2);
-        }
         @media screen and (max-width: 1240px) {
           width: 300px;
           height: 234px;

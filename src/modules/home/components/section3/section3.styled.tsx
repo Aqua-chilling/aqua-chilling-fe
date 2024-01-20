@@ -15,7 +15,7 @@ export const Wrapper = styled.div`
   top: -10px;
   .water {
     position: absolute;
-    top: -3%;
+    top: -4%;
     @media screen and (max-width: 1440px) {
       top: -5%;
     }

@@ -36,11 +36,21 @@ export const Wrapper = styled.div`
       @media screen and (max-width: 768px) {
         width: 100%;
       }
-      img {
-        width: 100%;
+      .lf-player-container {
+        position: relative;
         @media screen and (max-width: 768px) {
           width: 328px;
           height: 262.4px;
+        }
+        .bubbles-token {
+          width: 100%;
+          height: 100%;
+          .bubbles {
+            width: 100%;
+            height: 100%;
+          }
+          position: absolute;
+          bottom: -10%;
         }
       }
     }

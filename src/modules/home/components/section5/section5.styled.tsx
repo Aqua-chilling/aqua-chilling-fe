@@ -11,6 +11,7 @@ export const Wrapper = styled.div`
   background-image: url(${sand2});
   background-size: 100% 40%;
   top: -20px;
+  margin-top: 154px;
   @media screen and (max-width: 768px) {
     background-position: left 120%;
   }

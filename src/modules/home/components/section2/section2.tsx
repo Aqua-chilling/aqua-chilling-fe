@@ -38,8 +38,8 @@ export const Section2 = ({ setCurrentImg, setIsShowDetailImage }: any) => {
     const tlStart = gsap.timeline({
       scrollTrigger: {
         trigger: ref.current,
-        start: 'top+=100 top',
-        end: 'top+=400 top',
+        start: 'top+=50 top',
+        end: 'top+=300 top',
         scrub: true
       }
     });

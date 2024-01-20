@@ -150,7 +150,7 @@ export const Section1 = () => {
     animFish5();
     const timer5 = setInterval(() => {
       animFish5();
-    }, 36600);
+    }, 28600);
     const animFish6 = () => {
       const tl = gsap.timeline({ delay: 0 });
       tl.to(fish6Ref.current, {
