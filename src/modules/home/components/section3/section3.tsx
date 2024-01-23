@@ -33,7 +33,7 @@ export const Section3 = () => {
             <div className='feat middle'>
               <div className='right'>
                 <img src={ic2} alt='' />
-                <Title className='title-mobile'>Play & Earn </Title>
+                <Title className='title-mobile'>Trade & Earn </Title>
                 <Description style={{ textAlign: 'left' }}>
                   Cultivate your fish to adulthood and reap the rewards by selling them in a dynamic market, or choose
                   to keep them and enjoy a steady stream of daily income.

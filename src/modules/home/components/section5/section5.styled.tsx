@@ -78,7 +78,7 @@ export const Wrapper = styled.div`
         display: none;
       }
       @media screen and (max-width: 768px) {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
       }
       gap: 16px;
@@ -86,12 +86,15 @@ export const Wrapper = styled.div`
         width: 240px;
         height: 240px;
         background-image: url(${frame});
+        background-size: 100% 100%;
         @media screen and (max-width: 768px) {
           width: 128px;
           height: 128px;
         }
 
         img {
+          width: 100%;
+          height: 100%;
         }
       }
     }

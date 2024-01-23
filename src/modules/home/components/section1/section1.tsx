@@ -15,6 +15,7 @@ import fish6 from '@/assets/home/fish6.png';
 import fish7 from '@/assets/home/fish7.png';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { Description, Title } from '@/components/text/text.styled';
 
 export const Section1 = () => {
   const ref = useRef<any>(null);
@@ -232,10 +233,17 @@ export const Section1 = () => {
           <div className='logo' id='logo-section1'>
             <img src={txt} alt='' ref={ref} />
           </div>
+          <Description
+            style={{
+              marginBottom: '22px',
+              fontSize: '22px'
+            }}
+          >
+            Claim up to $100 for every quest conquerer
+          </Description>
           <div className='btns'>
             {/* <Magnifier /> */}
-            <SecondaryButton w={220}>Documentation</SecondaryButton>
-            <PrimaryButton w={220}>Dive to the deep now!</PrimaryButton>
+            <PrimaryButton w={220}>Join Quest</PrimaryButton>
           </div>
         </div>
       </WrapperContent>

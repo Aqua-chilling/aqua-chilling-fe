@@ -66,15 +66,15 @@ export const Wrapper = styled.div`
       padding: 96px 120px;
       margin-top: 80px;
       @media screen and (max-width: 900px) {
-        padding: 32px;
+        padding: 12px;
         margin-top: 32px;
       }
       @media screen and (max-width: 768px) {
         background: none;
         gap: 32px;
+        padding: 0px;
       }
       @media screen and (max-width: 500px) {
-        padding: 8px;
       }
 
       .feat {
@@ -97,6 +97,9 @@ export const Wrapper = styled.div`
           display: flex;
           align-items: center;
           justify-content: center;
+          @media screen and (max-width: 768px) {
+            width: 100%;
+          }
           img {
             width: 100%;
             height: 100%;

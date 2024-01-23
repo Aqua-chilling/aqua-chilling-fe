@@ -31,30 +31,20 @@ export const Section6 = () => {
               </div>
               <div className='stat'>
                 <div className='label'>Token symbol</div>
-                <div className='value'>AQAT</div>
+                <div className='value'>AQUA</div>
               </div>
               <div className='stat'>
                 <div className='label'>Chain</div>
-                <div className='value'>Binance Smart chain</div>
+                <div className='value'>BLAST</div>
               </div>
               <div className='stat'>
                 <div className='label'>Total Supply</div>
-                <div className='value'>200,000,000</div>
-              </div>
-              <div className='stat'>
-                <div className='label'>Initial circulating supply</div>
-                <div className='value'>15,000</div>
-              </div>
-              <div className='stat'>
-                <div className='label'>Whitelist</div>
-                <div className='value'>Yes</div>
+                <div className='value'>100,000,000</div>
               </div>
             </div>
             <Description style={{ textAlign: 'left' }}>
-              Native token of Bitcoin Cats Gaming Ecosystem. It is originally inscribed on Bitcoin and part of it is
-              bridged / wrapped to Ethereum to benefit from the well developed DeFi and GameFi infrastructure. $1CAT is
-              the Utility token with the BitcoinCats gaming ecosystem, which can be used to buy & upgrade in-game assets
-              including the avatars, pets, equipments, farmlands and so forth
+              $AQUA is a native token of AquaChilling Gaming Ecosystem. $AQUA is also the main Utility token which can
+              be used to buy & upgrade in-game assets including fishes, items, decorations, equipments, and so forth.
             </Description>
           </div>
         </div>
