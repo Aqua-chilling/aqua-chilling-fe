@@ -73,7 +73,6 @@ export const Wrapper = styled.div`
       width: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-      overflow-x: scroll;
       &::-webkit-scrollbar {
         display: none;
       }
@@ -83,13 +82,12 @@ export const Wrapper = styled.div`
       }
       gap: 16px;
       .cardd {
-        width: 240px;
-        height: 240px;
         background-image: url(${frame});
         background-size: 100% 100%;
         @media screen and (max-width: 768px) {
-          width: 128px;
-          height: 128px;
+          &.end {
+            display: none;
+          }
         }
 
         img {

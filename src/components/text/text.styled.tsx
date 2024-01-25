@@ -8,6 +8,9 @@ export const Title = styled.div`
   line-height: normal;
   letter-spacing: -0.96px;
   text-align: center;
+  @media screen and (max-width: 768px) {
+    font-size: 28px;
+  }
 `;
 export const Description = styled.div`
   color: #f1c8dd;

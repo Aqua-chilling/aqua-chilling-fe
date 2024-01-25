@@ -15,6 +15,12 @@ export const Wrapper = styled.div`
     .logos {
       display: flex;
       gap: 24px;
+      img {
+        &:hover {
+          transform: scale(1.2);
+          transition: all 0.3s;
+        }
+      }
     }
     span {
       color: rgba(255, 255, 255, 0.7);

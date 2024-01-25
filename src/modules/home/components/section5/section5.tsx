@@ -103,7 +103,7 @@ export const Section5 = () => {
           <div className='cards'>
             {randomImages?.map((item, key) => {
               return (
-                <div className='cardd' key={key}>
+                <div className={key === randomImages.length - 1 ? 'cardd end' : 'cardd'} key={key}>
                   <img
                     className='fishcard'
                     src={new URL(`/src/assets/home/section4/card${item}.png`, import.meta.url).href}

@@ -33,10 +33,18 @@ export const Wrapper = styled.div`
     .view-img {
       display: flex;
       align-items: center;
+      justify-content: center;
       gap: 12px;
+      .btn-left,
+      .btn-right {
+        width: 64px;
+        @media screen and (max-width: 768px) {
+          width: 32px;
+        }
+      }
       .main-view {
-        width: 960px;
-        height: 538px;
+        max-width: 80%;
+        max-height: 538px;
         animation: ${animImg} 0.5s forwards;
         overflow: hidden;
         display: flex;

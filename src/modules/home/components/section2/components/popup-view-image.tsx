@@ -14,7 +14,7 @@ export const PopupViewImage = ({ imgIndex, setVisibility }: { imgIndex: number; 
     <Wrapper>
       <div className='view-wrapper'>
         <div className='view-img'>
-          {currentImg > 0 && (
+          {currentImg > 0 ? (
             <img
               src={btnLeft}
               alt=''
@@ -41,6 +41,8 @@ export const PopupViewImage = ({ imgIndex, setVisibility }: { imgIndex: number; 
                 setCurrentImg(currentImg - 1);
               }}
             />
+          ) : (
+            <img src='' alt='' className='btn-left' />
           )}
           <div className='main-view'>
             {currentImg - 1 >= 0 ? (
@@ -70,7 +72,7 @@ export const PopupViewImage = ({ imgIndex, setVisibility }: { imgIndex: number; 
               <img ref={refNextImg} src='' alt='' className='next' />
             )}
           </div>
-          {currentImg < 2 && (
+          {currentImg < 2 ? (
             <img
               src={btnRight}
               alt=''
@@ -97,6 +99,8 @@ export const PopupViewImage = ({ imgIndex, setVisibility }: { imgIndex: number; 
                 setCurrentImg(currentImg + 1);
               }}
             />
+          ) : (
+            <img src='' alt='' className='btn-right' />
           )}
         </div>
         <div
