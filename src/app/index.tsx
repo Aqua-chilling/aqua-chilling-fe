@@ -34,7 +34,7 @@ export const App = () => {
             <WalletContextProvider>
               <CredentialProvider>
                 <FixedGlobalStyle />
-                <CustomCurSor />
+                {window.innerWidth > 780 && <CustomCurSor />}
                 <RouterProvider>{/* <LoadingProvider /> */}</RouterProvider>
                 <ToastContainer
                   position='bottom-right'

@@ -31,6 +31,11 @@ export const Wrapper = styled.div`
       top: -50px;
       width: 132px;
       height: 132px;
+      @media screen and (max-width: 500px) {
+        width: 64px;
+        height: 64px;
+        top: -30px;
+      }
       &.left {
         left: 10%;
       }
