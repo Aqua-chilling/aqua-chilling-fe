@@ -12,6 +12,7 @@
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "@gsap/react": "^2.0.2",
+    "@lottiefiles/react-lottie-player": "^3.5.3",
     "@reduxjs/toolkit": "^1.9.7",
     "@thirdweb-dev/react": "^4.1.2",
     "@types/lodash": "^4.14.201",

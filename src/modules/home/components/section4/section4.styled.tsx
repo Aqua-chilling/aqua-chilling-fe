@@ -1,18 +1,11 @@
 import styled, { keyframes } from 'styled-components';
 import bg from '@/assets/home/section3/bg.png';
-import tank from '@/assets/home/section3/tank.png';
 export const anim = keyframes`
 0%{
+  transform: translate(0,0);
 }
 100%{
-  transform: translateX(-100%);
-}
-`;
-export const animReverse = keyframes`
-0%{
-}
-100%{
-  transform: translateX(100%);
+  transform: translate(-50%,0);
 }
 `;
 export const Wrapper = styled.div`
@@ -22,8 +15,8 @@ export const Wrapper = styled.div`
   align-items: center;
   background-color: #143464;
   padding: 80px 0px;
-  gap: 80px;
   position: relative;
+  top: -20px;
   @media screen and (max-width: 1024px) {
     gap: 32px;
   }
@@ -35,22 +28,24 @@ export const Wrapper = styled.div`
     padding: 66px 0px;
     background-image: url(${bg});
     background-size: 100% 100%;
-    margin-bottom: 99px;
+    margin-bottom: 59px;
     @media screen and (max-width: 1024px) {
       margin-bottom: 32px;
     }
     gap: 27px;
     .row {
-      display: flex;
-      align-items: center;
-      gap: 100px;
-      animation: ${animReverse} 10s infinite;
-      &.above {
-        animation: ${anim} 10s infinite;
-      }
+      animation: ${anim} 20s forwards infinite linear;
+      top: 0px;
+      left: 0px;
+      overflow: hidden;
+      white-space: nowrap;
       img {
         width: 144px;
         height: 66px;
+        margin: 0 0.5em;
+      }
+      &.below {
+        animation: ${anim} 20s reverse infinite linear;
       }
     }
   }
@@ -63,39 +58,15 @@ export const Wrapper = styled.div`
     @media screen and (max-width: 1024px) {
       gap: 32px;
     }
-    .features {
+    .partners {
       display: flex;
       align-items: center;
-      gap: 80px;
       @media screen and (max-width: 1024px) {
         gap: 24px;
       }
 
       @media screen and (max-width: 1024px) {
         flex-direction: column;
-      }
-      .feature {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background-image: url(${tank});
-        background-size: 100% 100%;
-        width: 420px;
-        height: 240px;
-        @media screen and (max-width: 768px) {
-          width: 280px;
-          height: 160px;
-          font-size: 13.333px;
-        }
-
-        color: rgba(255, 255, 255, 0.8);
-        text-align: center;
-        font-family: Quicksand;
-        font-size: 24px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        letter-spacing: -0.48px;
       }
     }
   }

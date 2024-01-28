@@ -6,7 +6,15 @@ export const Wrapper = styled.div`
   align-items: center;
   background: #422433;
   position: relative;
-  padding: 80px 0px;
+  top: -10px;
+  padding-bottom: 80px;
+  .sand {
+    width: 100%;
+    img {
+      width: 100%;
+      height: 100%;
+    }
+  }
   .section2 {
     display: flex;
     align-items: center;
@@ -23,10 +31,16 @@ export const Wrapper = styled.div`
     .cards {
       display: flex;
       gap: 24px;
-      margin-top: 12px;
+      position: relative;
+      transform: translateY(-10%);
       @media screen and (max-width: 500px) {
         gap: 6px;
       }
+      transition: all 0.3s;
+      &:hover {
+        transform: scale(1.1) !important;
+      }
+
       .card {
         position: relative;
         @media screen and (max-width: 1240px) {
@@ -68,7 +82,7 @@ export const Wrapper = styled.div`
     .pyramid {
       position: absolute;
       left: 2%;
-      top: -60%;
+      top: -30%;
       max-width: 373px;
       z-index: 1;
       @media screen and (max-width: 960px) {
@@ -84,7 +98,7 @@ export const Wrapper = styled.div`
     .shrine {
       position: absolute;
       right: 2%;
-      top: -90%;
+      top: -50%;
       max-width: 373px;
       z-index: 1;
       @media screen and (max-width: 960px) {

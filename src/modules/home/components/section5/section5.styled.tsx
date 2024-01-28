@@ -1,5 +1,6 @@
 import styled, { keyframes } from 'styled-components';
 import sand2 from '@/assets/home/section4/sand2.png';
+import frame from '@/assets/home/section4/frame.png';
 export const Wrapper = styled.div`
   width: 100%;
   display: flex;
@@ -9,6 +10,8 @@ export const Wrapper = styled.div`
   position: relative;
   background-image: url(${sand2});
   background-size: 100% 40%;
+  top: -20px;
+  margin-top: 154px;
   @media screen and (max-width: 768px) {
     background-position: left 120%;
   }
@@ -17,9 +20,23 @@ export const Wrapper = styled.div`
   background-repeat: no-repeat;
   .sand {
     width: 100%;
+    position: relative;
+    transform: translateY(-10%);
     img {
       width: 100%;
       height: 100%;
+    }
+    .adult {
+      position: absolute;
+      top: -50px;
+      max-width: 132px;
+      max-height: 132px;
+      &.left {
+        left: 10%;
+      }
+      &.right {
+        right: 10%;
+      }
     }
   }
   .sand2 {
@@ -56,25 +73,26 @@ export const Wrapper = styled.div`
       width: 100%;
       display: grid;
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-      overflow-x: scroll;
       &::-webkit-scrollbar {
         display: none;
       }
       @media screen and (max-width: 768px) {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr 1fr;
         grid-template-rows: 1fr 1fr 1fr;
       }
       gap: 16px;
       .cardd {
-        width: 240px;
-        height: 240px;
+        background-image: url(${frame});
+        background-size: 100% 100%;
         @media screen and (max-width: 768px) {
-          width: 128px;
-          height: 128px;
+          &.end {
+            display: none;
+          }
         }
 
         img {
           width: 100%;
+          height: 100%;
         }
       }
     }

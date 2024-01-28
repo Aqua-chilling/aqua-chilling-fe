@@ -9,10 +9,10 @@ export const Footer = () => {
     <Wrapper id='footerere'>
       <div className='footer'>
         <div className='logos'>
-          <img src={x} alt='' />
-          <img src={discord} alt='' />
+          <img src={x} alt='' onClick={() => window.open('https://twitter.com/aquachilling')} />
+          <img src={discord} alt='' onClick={() => window.open('https://discord.gg/S2JY3JQz')} />
         </div>
-        <span>Made by Tevel team. All right reserved</span>
+        {/* <span>Made by Tevel team. All right reserved</span> */}
       </div>
     </Wrapper>
   );

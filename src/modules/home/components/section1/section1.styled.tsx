@@ -8,12 +8,58 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   position: relative;
+  .fish {
+    position: absolute;
+    z-index: 1;
+    &.a {
+      top: 300px;
+      right: 60px;
+    }
+    &.b {
+      top: 500px;
+      left: 200px;
+    }
+    &.c {
+      top: 158px;
+      right: 356px;
+    }
+    &.d {
+      bottom: 0px;
+      left: 456px;
+    }
+    &.e {
+      bottom: 10px;
+      right: 356px;
+    }
+    &.f {
+      top: 350px;
+      left: 556px;
+    }
+    &.g {
+      bottom: 10px;
+      right: left;
+    }
+  }
+  .bubbles-section1 {
+    position: absolute;
+    z-index: 2;
+    &.left {
+      left: 10%;
+      bottom: -20%;
+    }
+    &.right {
+      bottom: -20%;
+      right: 10%;
+    }
+  }
   .section1 {
     margin-top: 165px;
     display: flex;
     align-items: center;
     flex-direction: column;
-    min-height: 960px;
+    min-height: 634px;
+    z-index: 2;
+    position: relative;
     @media screen and (max-width: 768px) {
       min-height: 640px;
     }
@@ -33,6 +79,11 @@ export const Wrapper = styled.div`
       display: flex;
       gap: 16px;
       align-items: center;
+      &:hover {
+        #magnifier {
+          display: block;
+        }
+      }
     }
   }
 `;

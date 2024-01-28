@@ -15,7 +15,11 @@ import fish10 from '@/assets/home/section3/fish10.png';
 import fish11 from '@/assets/home/section3/fish11.png';
 import fish12 from '@/assets/home/section3/fish12.png';
 import fish13 from '@/assets/home/section3/fish13.png';
-import fish14 from '@/assets/home/section3/fish13.png';
+import fish14 from '@/assets/home/section3/fish14.png';
+import blast from '@/assets/home/section3/blast.png';
+import orbiter from '@/assets/home/section3/orbiter.png';
+import chainlink from '@/assets/home/section3/chainlink.png';
+import galxe from '@/assets/home/section3/galxe.png';
 import { Title } from '@/components/text/text.styled';
 // import { useGSAP } from '@gsap/react';
 // import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -26,7 +30,31 @@ export const Section4 = () => {
   return (
     <Wrapper ref={ref}>
       <div className='fishs'>
-        <div className='row above'>
+        <div className='row'>
+          <img src={fish1} alt='' />
+          <img src={fish2} alt='' />
+          <img src={fish3} alt='' />
+          <img src={fish4} alt='' />
+          <img src={fish5} alt='' />
+          <img src={fish6} alt='' />
+          <img src={fish7} alt='' />
+
+          <img src={fish1} alt='' />
+          <img src={fish2} alt='' />
+          <img src={fish3} alt='' />
+          <img src={fish4} alt='' />
+          <img src={fish5} alt='' />
+          <img src={fish6} alt='' />
+          <img src={fish7} alt='' />
+
+          <img src={fish1} alt='' />
+          <img src={fish2} alt='' />
+          <img src={fish3} alt='' />
+          <img src={fish4} alt='' />
+          <img src={fish5} alt='' />
+          <img src={fish6} alt='' />
+          <img src={fish7} alt='' />
+
           <img src={fish1} alt='' />
           <img src={fish2} alt='' />
           <img src={fish3} alt='' />
@@ -35,7 +63,31 @@ export const Section4 = () => {
           <img src={fish6} alt='' />
           <img src={fish7} alt='' />
         </div>
-        <div className='row'>
+        <div className='row below'>
+          <img src={fish8} alt='' />
+          <img src={fish9} alt='' />
+          <img src={fish10} alt='' />
+          <img src={fish11} alt='' />
+          <img src={fish12} alt='' />
+          <img src={fish13} alt='' />
+          <img src={fish14} alt='' />
+
+          <img src={fish8} alt='' />
+          <img src={fish9} alt='' />
+          <img src={fish10} alt='' />
+          <img src={fish11} alt='' />
+          <img src={fish12} alt='' />
+          <img src={fish13} alt='' />
+          <img src={fish14} alt='' />
+
+          <img src={fish8} alt='' />
+          <img src={fish9} alt='' />
+          <img src={fish10} alt='' />
+          <img src={fish11} alt='' />
+          <img src={fish12} alt='' />
+          <img src={fish13} alt='' />
+          <img src={fish14} alt='' />
+
           <img src={fish8} alt='' />
           <img src={fish9} alt='' />
           <img src={fish10} alt='' />
@@ -47,10 +99,12 @@ export const Section4 = () => {
       </div>
       <WrapperContent>
         <div className='section4'>
-          <Title>Upcoming features</Title>
-          <div className='features'>
-            <div className='feature'>Ocean Gatling: The Fish Hunter</div>
-            <div className='feature'>Fishing Clash</div>
+          <Title>Our Partners</Title>
+          <div className='partners'>
+            <img src={blast} alt='' />
+            <img src={orbiter} alt='' />
+            <img src={chainlink} alt='' />
+            <img src={galxe} alt='' />
           </div>
         </div>
       </WrapperContent>

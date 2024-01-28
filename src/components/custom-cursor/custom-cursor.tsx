@@ -17,7 +17,7 @@ export const CustomCurSor = () => {
           left: `${e.clientX}px`,
           top: `${e.clientY}px`
         },
-        { duration: 300, fill: 'forwards' }
+        { duration: 0, fill: 'forwards' }
       );
     };
     window.addEventListener('mousemove', handler);

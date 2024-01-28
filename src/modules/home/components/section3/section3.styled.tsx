@@ -12,9 +12,13 @@ export const Wrapper = styled.div`
   background-repeat: no-repeat;
   background-size: cover;
   background-size: 100% 100%;
+  top: -10px;
   .water {
     position: absolute;
-    top: -5%;
+    top: -4%;
+    @media screen and (max-width: 1440px) {
+      top: -5%;
+    }
     width: 100%;
     background-color: #143464;
     @media screen and (max-width: 960px) {
@@ -62,15 +66,15 @@ export const Wrapper = styled.div`
       padding: 96px 120px;
       margin-top: 80px;
       @media screen and (max-width: 900px) {
-        padding: 32px;
+        padding: 12px;
         margin-top: 32px;
       }
       @media screen and (max-width: 768px) {
         background: none;
         gap: 32px;
+        padding: 0px;
       }
       @media screen and (max-width: 500px) {
-        padding: 8px;
       }
 
       .feat {
@@ -93,6 +97,9 @@ export const Wrapper = styled.div`
           display: flex;
           align-items: center;
           justify-content: center;
+          @media screen and (max-width: 768px) {
+            width: 100%;
+          }
           img {
             width: 100%;
             height: 100%;

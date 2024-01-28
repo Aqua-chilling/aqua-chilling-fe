@@ -25,16 +25,15 @@ export const Section3 = () => {
                 <img src={ic1} alt='' />
                 <Title className='title-mobile'>Play & Explore </Title>
                 <Description style={{ textAlign: 'left' }}>
-                  Embark on a captivating underwater odyssey in AQUACHILLING, where you play and explore, building your
-                  own majestic aquatic kingdom, feeding and caring for your fish, and uncovering endless aquatic
-                  adventures!
+                  Embark on a captivating underwater odyssey in AQUACHILLING, where you play and explore, build your own
+                  majestic aquatic kingdom, feed and care for your fish, and uncover endless aquatic adventures!
                 </Description>
               </div>
             </div>
             <div className='feat middle'>
               <div className='right'>
                 <img src={ic2} alt='' />
-                <Title className='title-mobile'>Play & Earn </Title>
+                <Title className='title-mobile'>Trade & Earn </Title>
                 <Description style={{ textAlign: 'left' }}>
                   Cultivate your fish to adulthood and reap the rewards by selling them in a dynamic market, or choose
                   to keep them and enjoy a steady stream of daily income.
@@ -50,7 +49,9 @@ export const Section3 = () => {
               </div>
               <div className='right'>
                 <img src={ic3} alt='' />
-                <Title className='title-mobile'>Build your own underwater kingdom </Title>
+                <Title className='title-mobile' style={{ textAlign: 'left' }}>
+                  Build your own underwater kingdom{' '}
+                </Title>
                 <Description style={{ textAlign: 'left' }}>
                   Collect majestic fish species to create and reign over your own magnificent marine realm!
                 </Description>
