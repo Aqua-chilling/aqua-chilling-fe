@@ -26,16 +26,16 @@ export const Wrapper = styled.div`
       padding-bottom: 6%;
     }
     @media screen and (max-width: 680px) {
-      top: -4%;
+      top: -5%;
       padding-bottom: 8%;
     }
     @media screen and (max-width: 500px) {
-      top: -4%;
-      padding-bottom: 9%;
+      top: -6%;
+      padding-bottom: 15%;
     }
     @media screen and (max-width: 350px) {
-      top: -4%;
-      padding-bottom: 13%;
+      top: -6%;
+      padding-bottom: 15%;
     }
     img {
       width: 100%;
