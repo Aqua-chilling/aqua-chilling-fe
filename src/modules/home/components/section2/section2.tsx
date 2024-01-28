@@ -22,6 +22,9 @@ export const Section2 = ({ setCurrentImg, setIsShowDetailImage }: any) => {
     // if (window.innerWidth < 768) {
     //   return;
     // }
+    if (window.innerWidth <= 720) {
+      return;
+    }
     const cards = gsap.utils.toArray('.card');
     gsap.from(cards, {
       scrollTrigger: {
