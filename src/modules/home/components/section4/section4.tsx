@@ -30,6 +30,9 @@ export const Section4 = () => {
   const ref = useRef<any>(null);
   const refBg = useRef<any>(null);
   useEffect(() => {
+    if (window.innerWidth <= 780) {
+      return;
+    }
     gsap.to(refBg.current, {
       scrollTrigger: {
         trigger: ref.current,
@@ -48,7 +51,7 @@ export const Section4 = () => {
           scrub: 1
         },
         y: Math.random() * 700 - 50,
-        opacity: Math.random() * 1 + 0.3,
+        scale: Math.random() * 1 + 0.3,
         duration: Math.random() * 5
       });
     });
@@ -61,7 +64,7 @@ export const Section4 = () => {
           scrub: 1
         },
         y: Math.random() * 300 - 150,
-        opacity: Math.random() * 1 + 0.3,
+        scale: Math.random() * 1 + 0.3,
         duration: Math.random() * 5
       });
     });
