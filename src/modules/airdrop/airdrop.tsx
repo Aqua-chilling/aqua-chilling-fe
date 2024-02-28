@@ -1,9 +1,10 @@
 import { Wrapper } from './airdrop.styled';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
-import nft1 from '@/assets/airdrop/nft1.png';
-import nft2 from '@/assets/airdrop/nft2.png';
-import nft3 from '@/assets/airdrop/nft3.png';
+import nft1 from '@/assets/airdrop/triden 1.jpg';
+import nft2 from '@/assets/airdrop/triden 2.jpg';
+import nft3 from '@/assets/airdrop/triden 3.jpg';
+import nft4 from '@/assets/airdrop/triden 4.jpg';
 import btnRight from '@/assets/airdrop/btn-right.png';
 import btnLeft from '@/assets/airdrop/btn-left.png';
 
@@ -32,6 +33,8 @@ export const AirDrop = () => {
         <div className='right'>
           <div className='slider-container'>
             <Swiper
+              loop
+              autoplay
               slidesPerView={'auto'}
               centeredSlides={true}
               navigation={{
@@ -42,13 +45,20 @@ export const AirDrop = () => {
               className='swiper_container'
             >
               <SwiperSlide>
-                <img src={nft1} alt='slide_image' />
+                <img src={nft1} alt='' className='icon' />
+                <span>Trident </span>
               </SwiperSlide>
               <SwiperSlide>
-                <img src={nft2} alt='slide_image' />
+                <img src={nft2} alt='' className='icon' />
+                <span>Trident </span>
               </SwiperSlide>
               <SwiperSlide>
-                <img src={nft3} alt='slide_image' />
+                <img src={nft3} alt='' className='icon' />
+                <span>Trident </span>
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src={nft4} alt='' className='icon' />
+                <span>Trident </span>
               </SwiperSlide>
 
               <div className='slider-controler'>

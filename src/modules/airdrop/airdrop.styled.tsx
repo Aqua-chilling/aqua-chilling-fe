@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import bg from '@/assets/airdrop/bg.png';
+import bgNFT from '@/assets/airdrop/bg-triden.png';
 import bgTop from '@/assets/airdrop/bg-top.png';
 import bgBottom from '@/assets/airdrop/bg-time.png';
 export const Wrapper = styled.div`
@@ -79,26 +80,55 @@ export const Wrapper = styled.div`
     .right {
       .slider-container {
         position: relative;
-        max-width: 500px;
+        max-width: 600px;
         overflow: hidden;
         display: flex;
         .swiper_container {
           padding: 2rem 0;
+          width: 100%;
+          display: flex;
+          align-items: center;
           .swiper-slide {
+            width: 250px;
+            height: 315px;
             position: relative;
-            width: auto;
-
+            background-image: url(${bgNFT});
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            padding: 37px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
             img {
-              object-fit: cover;
+              width: 175px;
+              height: 200px;
+              border-radius: 6.687px;
             }
-            opacity: 0.3;
-            transform: scale(0.8);
+            span {
+              color: #090910;
+              text-align: center;
+              font-size: 15px;
+              font-style: normal;
+              font-weight: 700;
+              line-height: 150%; /* 22.5px */
+              margin-top: 12px;
+            }
             transition: all 0.3s;
+            opacity: 0.3;
             &-active {
               opacity: 1;
-              transform: scale(1);
+              transform: scale(1.1);
+              z-index: 333;
+            }
+            &-next {
+              transform: scale(0.9) translateX(-100px);
+            }
+            &-prev {
+              transform: scale(0.9) translateX(100px);
             }
           }
+
           .swiper-slide .swiper-slide-shadow-left,
           .swiper-slide-shadow-right {
             display: none;
