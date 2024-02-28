@@ -13,10 +13,14 @@ import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { PrimaryButton } from '@/components/button/button.styled';
+import { PopUpQuest } from './components/popup-quest';
+import React from 'react';
 
 export const AirDrop = () => {
+  const [isShowPopupQuest, setIsShowPopupQuest] = React.useState(false);
   return (
     <Wrapper>
+      {isShowPopupQuest && <PopUpQuest setVisibility={setIsShowPopupQuest} />}
       <div className='top-airdrop'>Aquachilling Airdrop</div>
       <div className='airdrop'>
         <div className='left'>
@@ -75,7 +79,15 @@ export const AirDrop = () => {
       </div>
       <div className='bottom-airdrop'>
         <div className='timer'>12 : 24 : 32 : 33</div>
-        <PrimaryButton w={120}>Join now</PrimaryButton>
+        <PrimaryButton w={120}>
+          <div
+            onClick={() => {
+              setIsShowPopupQuest(true);
+            }}
+          >
+            Join now
+          </div>
+        </PrimaryButton>
       </div>
     </Wrapper>
   );
