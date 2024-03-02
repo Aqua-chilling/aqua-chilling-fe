@@ -19,7 +19,10 @@ export const Wrapper = styled.div`
   top: -20px;
   @media screen and (max-width: 1024px) {
     gap: 32px;
+    padding: 24px 0px;
+    max-height: 680px;
   }
+
   .fishs {
     width: 100%;
     display: flex;
