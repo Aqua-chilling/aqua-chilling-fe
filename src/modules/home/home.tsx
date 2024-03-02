@@ -14,7 +14,7 @@ import { Magnifier } from './components/section1/components/magnifier';
 import React from 'react';
 import { PopupViewImage } from './components/section2/components/popup-view-image';
 export const Home = () => {
-  useLocoScroll();
+  window.innerWidth > 1024 && useLocoScroll();
   const app = useRef<any>(null);
   const [isShowDetailImage, setIsShowDetailImage] = React.useState(false);
   const [currentImg, setCurrentImg] = React.useState(0);
@@ -27,7 +27,7 @@ export const Home = () => {
     });
     ScrollTrigger.create({
       trigger: '.section4',
-      start: 'top+=50px top',
+      start: 'top+=220px top',
       pin: true,
       pinSpacing: false
     });

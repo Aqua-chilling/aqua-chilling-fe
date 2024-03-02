@@ -29,6 +29,7 @@ export const Wrapper = styled.div`
     margin-bottom: 59px;
     @media screen and (max-width: 1024px) {
       margin-bottom: 32px;
+      gap: 0px;
     }
     gap: 27px;
     position: relative;
@@ -82,6 +83,9 @@ export const Wrapper = styled.div`
 
       @media screen and (max-width: 1024px) {
         flex-direction: column;
+        img {
+          width: 200px;
+        }
       }
     }
   }
