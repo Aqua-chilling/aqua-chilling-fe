@@ -23,37 +23,35 @@ export const PrivacyPolicy = () => {
           with its websites and services (collectively, the “Services”).
         </p>
         <h3>Personal Information We Collect</h3>
-        <h4>
-          Information you provide to us:
-          <ul>
-            <li>
-              Contact details and registration information, such as email address, username, and public contact
-              information you provide.
-            </li>
-            <li>
-              Payment and transaction information, such as your account information, ETH (Optimism) wallet information,
-              payment information, and information regarding transaction amounts and history. Please note that to effect
-              cryptocurrency transactions, we work with, among others, the third-party electronic wallet extension,
-              MetaMask. Your interactions with MetaMask are governed by its own privacy policies.
-            </li>
-            <li>
-              Communications that we exchange with you, including when you contact us with questions, feedback, or
-              otherwise.
-            </li>
-            <li>
-              Marketing data, such as your preferences for receiving our marketing communications, and details about
-              your engagement with them.
-            </li>
-            <li>
-              User generated content that you choose to post on the Services. Such content may be viewable publicly, and
-              by other users of the Services
-            </li>
-            <li>
-              Other data not specifically listed here, which we will use as described in this Privacy Policy or as
-              otherwise disclosed at the time of collection.
-            </li>
-          </ul>
-        </h4>
+        <h4>Information you provide to us:</h4>
+        <ul>
+          <li>
+            Contact details and registration information, such as email address, username, and public contact
+            information you provide.
+          </li>
+          <li>
+            Payment and transaction information, such as your account information, ETH (Optimism) wallet information,
+            payment information, and information regarding transaction amounts and history. Please note that to effect
+            cryptocurrency transactions, we work with, among others, the third-party electronic wallet extension,
+            MetaMask. Your interactions with MetaMask are governed by its own privacy policies.
+          </li>
+          <li>
+            Communications that we exchange with you, including when you contact us with questions, feedback, or
+            otherwise.
+          </li>
+          <li>
+            Marketing data, such as your preferences for receiving our marketing communications, and details about your
+            engagement with them.
+          </li>
+          <li>
+            User generated content that you choose to post on the Services. Such content may be viewable publicly, and
+            by other users of the Services
+          </li>
+          <li>
+            Other data not specifically listed here, which we will use as described in this Privacy Policy or as
+            otherwise disclosed at the time of collection.
+          </li>
+        </ul>
         <p>
           Third party sources. We may combine personal information we receive from you with personal information we
           obtain from other sources, such as:
@@ -101,26 +99,23 @@ export const PrivacyPolicy = () => {
             </li>
           </ul>
         </p>
-        <h3>
-          We use the following tools for automatic data collection:
-          <ul>
-            <li>
-              Cookies, which are text files that websites store on a visitor’s device to uniquely identify the visitor’s
-              browser or to store information or settings in the browser for the purpose of helping you navigate between
-              pages efficiently, remembering your preferences, enabling functionality and helping us understand user
-              activity and patterns.
-            </li>
-            <li>
-              Local storage technologies, like HTML5, that provide cookie-equivalent functionality but can store larger
-              amounts of data, including on your device outside of your browser in connection with specific
-              applications.
-            </li>
-            <li>
-              Web beacons, also known as pixel tags or clear GIFs, which are used to demonstrate that a webpage or email
-              was accessed or opened, or that certain content was viewed or clicked.
-            </li>
-          </ul>
-        </h3>
+        <h3>We use the following tools for automatic data collection:</h3>
+        <ul>
+          <li>
+            Cookies, which are text files that websites store on a visitor’s device to uniquely identify the visitor’s
+            browser or to store information or settings in the browser for the purpose of helping you navigate between
+            pages efficiently, remembering your preferences, enabling functionality and helping us understand user
+            activity and patterns.
+          </li>
+          <li>
+            Local storage technologies, like HTML5, that provide cookie-equivalent functionality but can store larger
+            amounts of data, including on your device outside of your browser in connection with specific applications.
+          </li>
+          <li>
+            Web beacons, also known as pixel tags or clear GIFs, which are used to demonstrate that a webpage or email
+            was accessed or opened, or that certain content was viewed or clicked.
+          </li>
+        </ul>
         <h3>How We Use Personal Information</h3>
         <p>
           We use your personal information for the following purposes:
@@ -219,19 +214,17 @@ export const PrivacyPolicy = () => {
           community. This information may include your profile information and other content you choose to submit on the
           Services.
         </p>
-        <h3>
-          Your Choices
-          <ul>
-            <li>
-              Access or update your information. If you have created a profile with us, you may review and update
-              certain personal information in your account profile by logging into the account.
-            </li>
-            <li>
-              Opt out of marketing communications. You may opt out of marketing-related email communications by
-              following the opt out or unsubscribe instructions contained in the marketing communications we send you.
-            </li>
-          </ul>
-        </h3>
+        <h3>Your Choices</h3>
+        <ul>
+          <li>
+            Access or update your information. If you have created a profile with us, you may review and update certain
+            personal information in your account profile by logging into the account.
+          </li>
+          <li>
+            Opt out of marketing communications. You may opt out of marketing-related email communications by following
+            the opt out or unsubscribe instructions contained in the marketing communications we send you.
+          </li>
+        </ul>
         <p>
           Online tracking opt-out. There are a number of ways to limit online tracking on our Services, which we have
           summarized below:
