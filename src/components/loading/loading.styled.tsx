@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import bg from '@/assets/home/section1/bg.png';
 export const Wrapper = styled.div`
   width: 100vw;
   height: 100vh;
@@ -14,6 +15,9 @@ export const Wrapper = styled.div`
   visibility: visible;
   opacity: 1;
   background: #143464;
+  background-image: url(${bg});
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
   .loading-content {
     display: flex;
     align-items: center;

@@ -13,6 +13,12 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
+  @media screen and (max-width: 1024px) {
+    background-size: cover;
+  }
+  @media screen and (max-width: 600px) {
+    min-height: 1200px;
+  }
 
   .top-airdrop {
     background-image: url(${bgTop});
@@ -32,15 +38,30 @@ export const Wrapper = styled.div`
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.64px;
+    @media screen and (max-width: 768px) {
+      width: 110%;
+      margin-top: 0px;
+    }
   }
   .airdrop {
     display: flex;
     height: fit-content;
     gap: 48px;
+    @media screen and (max-width: 1240px) {
+      flex-direction: column-reverse;
+      gap: 0px;
+    }
     .left {
       display: flex;
       align-items: flex-start;
       flex-direction: column;
+      @media screen and (max-width: 1240px) {
+        width: 100%;
+      }
+      @media screen and (max-width: 600px) {
+        padding: 0px 12px;
+        transform: translateY(-64px);
+      }
       .title {
         color: #090910;
         font-size: 80px;
@@ -50,6 +71,11 @@ export const Wrapper = styled.div`
         letter-spacing: -1.6px;
         white-space: nowrap;
         width: 100%;
+        @media screen and (max-width: 1240px) {
+          font-size: 60px;
+          display: flex;
+          white-space: wrap;
+        }
       }
       ul {
         width: 100%;
@@ -58,6 +84,10 @@ export const Wrapper = styled.div`
         font-style: normal;
         font-weight: 600;
         line-height: 150%; /* 36px */
+        @media screen and (max-width: 1240px) {
+          margin-block-start: 0;
+          margin-block-end: 0;
+        }
         li {
         }
       }
@@ -78,11 +108,20 @@ export const Wrapper = styled.div`
       }
     }
     .right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      @media screen and (max-width: 600px) {
+        transform: translateY(-100px);
+      }
       .slider-container {
         position: relative;
         max-width: 600px;
         overflow: hidden;
         display: flex;
+        @media screen and (max-width: 600px) {
+          max-width: 325px;
+        }
         .swiper_container {
           padding: 2rem 0;
           width: 100%;
@@ -91,6 +130,10 @@ export const Wrapper = styled.div`
           .swiper-slide {
             width: 250px;
             height: 315px;
+            @media screen and (max-width: 600px) {
+              width: 225px;
+              height: 290px;
+            }
             position: relative;
             background-image: url(${bgNFT});
             background-size: 100% 100%;
@@ -104,6 +147,10 @@ export const Wrapper = styled.div`
               width: 175px;
               height: 200px;
               border-radius: 6.687px;
+              @media screen and (max-width: 600px) {
+                width: 150px;
+                height: 175px;
+              }
             }
             span {
               color: #090910;
@@ -136,6 +183,7 @@ export const Wrapper = styled.div`
           .slider-controler {
             .swiper-button-prev,
             .swiper-button-next {
+              position: absolute;
               width: 64px;
               height: 64px;
               .icon {
@@ -162,6 +210,12 @@ export const Wrapper = styled.div`
     background-size: 100% 100%;
     background-repeat: no-repeat;
     margin-bottom: 64px;
+    @media screen and (max-width: 1240px) {
+      margin-bottom: 16px;
+    }
+    @media screen and (max-width: 600px) {
+      transform: translateY(-64px);
+    }
     .timer {
       color: #fff;
       font-size: 20px;
