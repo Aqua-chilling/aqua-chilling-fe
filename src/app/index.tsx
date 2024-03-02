@@ -15,6 +15,7 @@ import { WalletContextProvider } from '@/contexts/wallet.context';
 import { FixedGlobalStyle } from '@/providers/theme.provider';
 import { CustomCurSor } from '@/components/custom-cursor/custom-cursor';
 import '@/constants/style/locomotive-scroll.css';
+import { LoadingProvider } from '@/providers/loading.provider';
 
 const queryClient = new QueryClient();
 let persistor = persistStore(store);
@@ -35,7 +36,7 @@ export const App = () => {
               <CredentialProvider>
                 <FixedGlobalStyle />
                 {window.innerWidth > 780 && <CustomCurSor />}
-                <RouterProvider>{/* <LoadingProvider /> */}</RouterProvider>
+                <RouterProvider>{<LoadingProvider />}</RouterProvider>
                 <ToastContainer
                   position='bottom-right'
                   autoClose={5000}

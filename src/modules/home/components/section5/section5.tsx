@@ -70,7 +70,6 @@ export const Section5 = () => {
     shuffle(arr);
     setRandomImages(arr);
   };
-  console.log(randomImages);
   React.useEffect(() => {
     const timer = setInterval(() => {
       gennerateListRandomImg();

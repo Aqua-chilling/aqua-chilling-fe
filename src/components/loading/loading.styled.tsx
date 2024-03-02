@@ -6,7 +6,6 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: white;
   z-index: 10000;
   position: fixed;
   top: 0;
@@ -14,8 +13,36 @@ export const Wrapper = styled.div`
   transition: all 0.3s;
   visibility: visible;
   opacity: 1;
+  background: #143464;
   .loading-content {
-    width: 300px;
-    height: 300px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    .lf-player-container {
+      position: relative;
+      @media screen and (max-width: 768px) {
+        width: 328px;
+        height: 262.4px;
+      }
+      #lottie {
+        @media screen and (max-width: 768px) {
+          width: 120px !important;
+          height: 120px !important;
+        }
+      }
+      .bubbles-token {
+        width: 100%;
+        height: 100%;
+        .bubbles {
+          width: 100%;
+          height: 100%;
+        }
+        position: absolute;
+        bottom: -10%;
+      }
+    }
   }
 `;
