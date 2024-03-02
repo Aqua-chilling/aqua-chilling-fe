@@ -23,7 +23,9 @@ export const Home = () => {
       trigger: '.section2',
       start: 'bottom-=100px center',
       pin: true,
-      pinSpacing: false
+      pinSpacing: false,
+
+      markers: true
     });
     ScrollTrigger.create({
       trigger: '.section4',
