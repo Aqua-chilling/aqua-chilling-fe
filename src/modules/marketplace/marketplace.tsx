@@ -9,10 +9,21 @@ import { CustomCheckbox } from '@/components/custom-checkbox/custom-checkbox';
 import React from 'react';
 import { ArrowDownSVG, SearchIconSVG, defaultColors, defaultRarities } from './hard';
 import { FallOutlined, RiseOutlined } from '@ant-design/icons';
+import { useNotification } from '@/contexts/notification.context';
+import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 
 export const MarketPlace = () => {
   const [raritiesState, setRaritiesState] = React.useState<any>(defaultRarities);
   const [colorsState, setColorsState] = React.useState<any>(defaultColors);
+  const { addNotification } = useNotification();
+  React.useEffect(() => {
+    addNotification({ message: 'hello', id: new Date().getTime(), type: NOTIFICATION_TYPE.SUCCESS });
+    addNotification({
+      message: 'Buy failed , something went wrong',
+      id: new Date().getTime(),
+      type: NOTIFICATION_TYPE.ERROR
+    });
+  }, []);
   return (
     <Wrapper>
       <div className='marketplace'>

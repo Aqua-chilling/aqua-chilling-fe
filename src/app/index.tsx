@@ -3,7 +3,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import { store } from './store';
 import { QueryClientProvider } from 'react-query';
-import { ToastContainer } from 'react-toastify';
 import { ThirdwebProvider } from '@thirdweb-dev/react';
 import { QueryClient } from 'react-query';
 import { CredentialProvider } from '@/providers/credential.provider';
@@ -16,6 +15,7 @@ import { FixedGlobalStyle } from '@/providers/theme.provider';
 import { CustomCurSor } from '@/components/custom-cursor/custom-cursor';
 import '@/constants/style/locomotive-scroll.css';
 import { LoadingProvider } from '@/providers/loading.provider';
+import { NotificationProvider } from '@/contexts/notification.context';
 
 const queryClient = new QueryClient();
 let persistor = persistStore(store);
@@ -36,16 +36,9 @@ export const App = () => {
               <CredentialProvider>
                 <FixedGlobalStyle />
                 {window.innerWidth > 780 && <CustomCurSor />}
-                <RouterProvider>{<LoadingProvider />}</RouterProvider>
-                <ToastContainer
-                  position='bottom-right'
-                  autoClose={5000}
-                  hideProgressBar={false}
-                  newestOnTop={false}
-                  closeOnClick
-                  pauseOnFocusLoss
-                  pauseOnHover
-                />
+                <NotificationProvider>
+                  <RouterProvider>{<LoadingProvider />}</RouterProvider>
+                </NotificationProvider>
               </CredentialProvider>
             </WalletContextProvider>
           </ThirdwebProvider>
