@@ -5,7 +5,6 @@ import { WALLET_SUPPORTED, WALLET_TYPE_SUPPORTED, WalletInfo } from '@/config/wa
 import MetamaskImage from '@/assets/wallet/metamask.png';
 import WalletConnectImage from '@/assets/wallet/walletconnect.png';
 import { Button } from 'antd';
-import { toast } from 'react-toastify';
 import { formatErrorMessageWallet } from '@/utilities/format.utils';
 
 interface IConnectFormProps {
@@ -29,7 +28,7 @@ const ConnectFormComponent = ({ connect, open, close }: IConnectFormProps) => {
         close();
       } catch (err: any) {
         const formattedMessage = formatErrorMessageWallet(err.message);
-        toast.error(formattedMessage?.message || err?.message);
+        // toast.error(formattedMessage?.message || err?.message);
       } finally {
         setIsLoading({ ...isLoading, [wallet.connector]: false });
       }
