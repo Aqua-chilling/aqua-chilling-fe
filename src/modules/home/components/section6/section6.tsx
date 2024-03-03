@@ -35,7 +35,7 @@ export const Section6 = () => {
               </div>
               <div className='stat'>
                 <div className='label'>Chain</div>
-                <div className='value'>BLAST</div>
+                <div className='value'>ZKSYNC</div>
               </div>
               <div className='stat'>
                 <div className='label'>Total Supply</div>

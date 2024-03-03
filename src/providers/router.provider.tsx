@@ -1,6 +1,7 @@
 import { Footer, Header, Loading } from '@/components';
 import { AirDrop } from '@/modules/airdrop/airdrop';
 import Home from '@/modules/home';
+import { MarketPlace } from '@/modules/marketplace/marketplace';
 import { NFTTermsOfService } from '@/modules/nft-terms-of-service/nft-terms-of-service';
 import { PrivacyPolicy } from '@/modules/privacy-policy/privacy-policy';
 import { TermsOfService } from '@/modules/terms-of-service/terms-of-service';
@@ -15,6 +16,10 @@ const elements = [
   {
     Component: AirDrop,
     path: '/airdrop'
+  },
+  {
+    Component: MarketPlace,
+    path: '/marketplace'
   },
   {
     Component: TermsOfService,

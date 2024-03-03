@@ -31,7 +31,6 @@ export const Wrapper = styled.div`
   animation: ${anim} 0.3s forwards;
   z-index: 1001;
   @media screen and (max-width: 1024px) {
-    align-items: flex-end;
     top: auto;
     bottom: 0;
   }
@@ -53,12 +52,23 @@ export const Wrapper = styled.div`
     border: 8px solid #090910;
     background: #131b26;
     position: relative;
+    @media screen and (max-width: 600px) {
+      padding: 24px;
+      gap: 0px;
+    }
+    @media screen and (max-width: 400px) {
+      width: 95%;
+    }
     .close {
       position: absolute;
       top: 16px;
       right: 16px;
       cursor: pointer;
       transition: all 0.3s;
+      @media screen and (max-width: 600px) {
+        top: 4px;
+        right: 4px;
+      }
       &:hover {
         transform: scale(1.1);
       }
@@ -73,6 +83,9 @@ export const Wrapper = styled.div`
       letter-spacing: -0.64px;
       width: 100%;
       max-width: 320px;
+      @media screen and (max-width: 600px) {
+        font-size: 22px;
+      }
     }
     .step {
       width: 100%;
@@ -101,6 +114,7 @@ export const Wrapper = styled.div`
         justify-content: center;
         align-items: center;
         gap: 8px;
+
         .btn {
           color: #fff;
           font-size: 14px;
@@ -125,8 +139,14 @@ export const Wrapper = styled.div`
             background: #090910;
             border: 3px solid #0a80b8;
           }
+          @media screen and (max-width: 350px) {
+            width: 30%;
+          }
         }
         input {
+          @media screen and (max-width: 350px) {
+            width: 70%;
+          }
           flex: 1;
           border-radius: 12px;
           padding: 9px 12px;

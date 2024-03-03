@@ -50,19 +50,19 @@ export const AirDrop = () => {
             >
               <SwiperSlide>
                 <img src={nft1} alt='' className='icon' />
-                <span>Trident </span>
+                <span>Trident Lv.1 </span>
               </SwiperSlide>
               <SwiperSlide>
                 <img src={nft2} alt='' className='icon' />
-                <span>Trident </span>
+                <span>Trident Lv.2 </span>
               </SwiperSlide>
               <SwiperSlide>
                 <img src={nft3} alt='' className='icon' />
-                <span>Trident </span>
+                <span>Trident Lv.3 </span>
               </SwiperSlide>
               <SwiperSlide>
                 <img src={nft4} alt='' className='icon' />
-                <span>Trident </span>
+                <span>Trident Lv.4 </span>
               </SwiperSlide>
 
               <div className='slider-controler'>
