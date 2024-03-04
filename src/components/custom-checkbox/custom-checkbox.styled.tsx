@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
     justify-content: center;
     transition: all 0.3s;
     &:hover {
-      box-shadow: rgba(114, 114, 248, 1) 0px 7px 29px 0px;
+      filter: drop-shadow(2px 2px 10px #eaeaf9);
       background-color: transparent;
     }
     svg {

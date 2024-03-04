@@ -1,6 +1,7 @@
 import { Wrapper } from './popup-quest.styled';
 import X from '@/assets/X.png';
 import Discord from '@/assets/Discord.png';
+import nft1 from '@/assets/airdrop/triden 1.jpg';
 import { PrimaryButton } from '@/components/button/button.styled';
 
 export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) => void }) => {
@@ -50,40 +51,50 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
           </svg>
         </div>
         <div className='title'>Claim your first Aquachilling NFT now</div>
-        <div className='step st'>
-          <div className='label'>Step 1</div>
-          <div className='btns'>
-            <div className='btn'>
-              <img src={X} alt='' />
-              Follow us on X
+        <div className='quest-content'>
+          <div className='steps'>
+            <div className='step st'>
+              <div className='label'>Step 1</div>
+              <div className='btns'>
+                <div className='btn'>
+                  <img src={X} alt='' />
+                  Follow us on X
+                </div>
+              </div>
+            </div>
+            <div className='step nd'>
+              <div className='label'>Step 2</div>
+              <div className='btns'>
+                <div className='btn'>
+                  <img src={Discord} alt='' />
+                  Join Discord
+                </div>
+              </div>
+            </div>
+            <div className='step rd'>
+              <div className='label'>Step 3</div>
+              <div className='btns'>
+                <input type='text' placeholder='Enter invitation code' />
+                <div className='btn'>Submit</div>
+              </div>
+              <span>Join Discord to receive your invitation code</span>
+            </div>
+            <div className='step th'>
+              <div className='label'>Step 4</div>
+              <div className='btns'>
+                <div className='btn'>Share a tweet</div>
+              </div>
             </div>
           </div>
-        </div>
-        <div className='step nd'>
-          <div className='label'>Step 2</div>
-          <div className='btns'>
-            <div className='btn'>
-              <img src={Discord} alt='' />
-              Join Discord
+          <div className='nft'>
+            <div className='nft-img'>
+              {/* <img src={new URL(`/src/assets/home/section4/card${1}.png`, import.meta.url).href} alt='' /> */}
+              <img src={nft1} alt='' />
+              <span>Trident Lv.1 </span>
             </div>
+            <PrimaryButton>Claim your NFT</PrimaryButton>
           </div>
         </div>
-        <div className='step rd'>
-          <div className='label'>Step 3</div>
-          <div className='btns'>
-            <input type='text' placeholder='Enter invitation code' />
-            <div className='btn'>Submit</div>
-          </div>
-          <span>Join Discord to receive your invitation code</span>
-        </div>
-        <div className='step th'>
-          <div className='label'>Step 4</div>
-          <div className='btns'>
-            <div className='btn'>Share a tweet</div>
-          </div>
-        </div>
-        <div className='line'></div>
-        <PrimaryButton>Claim your NFT</PrimaryButton>
       </div>
     </Wrapper>
   );

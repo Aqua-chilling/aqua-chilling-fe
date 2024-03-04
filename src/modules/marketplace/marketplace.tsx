@@ -11,21 +11,20 @@ import { ArrowDownSVG, SearchIconSVG, defaultColors, defaultRarities } from './h
 import { FallOutlined, RiseOutlined } from '@ant-design/icons';
 import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
+import { Modal } from '@/components/modal/modal';
+import { NftDetail } from './components/nft-detail';
 
 export const MarketPlace = () => {
   const [raritiesState, setRaritiesState] = React.useState<any>(defaultRarities);
   const [colorsState, setColorsState] = React.useState<any>(defaultColors);
+  const [isShowDetail, setIsShowDetail] = React.useState<boolean>(true);
   const { addNotification } = useNotification();
-  React.useEffect(() => {
-    addNotification({ message: 'hello', id: new Date().getTime(), type: NOTIFICATION_TYPE.SUCCESS });
-    addNotification({
-      message: 'Buy failed , something went wrong',
-      id: new Date().getTime(),
-      type: NOTIFICATION_TYPE.ERROR
-    });
-  }, []);
+  React.useEffect(() => {}, []);
   return (
     <Wrapper>
+      <Modal control={isShowDetail} setControl={setIsShowDetail}>
+        <NftDetail />
+      </Modal>
       <div className='marketplace'>
         {/* --------------------------------------top-bar------------------------------- */}
         <div className='top-bar'>
@@ -148,7 +147,12 @@ export const MarketPlace = () => {
           <div className='fish-list'>
             {Array.from(Array(10).keys()).map((item, key) => {
               return (
-                <div className='fish'>
+                <div
+                  className='fish'
+                  onClick={() => {
+                    setIsShowDetail(true);
+                  }}
+                >
                   <div className='top'>
                     <img
                       key={key}

@@ -23,7 +23,7 @@ export const SecondaryButton = ({ children, w }: { children: any; w?: number }) 
   );
 };
 export const PrimaryBtn = styled.div<{ w: any }>`
-  width: ${(props) => (props.w ? `${props.w}px` : ' auto')};
+  width: ${(props) => (props.w ? `${props.w}px` : '70%')};
   height: 48px;
   border-radius: 6px;
   background: #090910;
