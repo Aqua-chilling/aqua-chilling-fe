@@ -16,7 +16,7 @@ import fish11 from '@/assets/home/section3/fish11.png';
 import fish12 from '@/assets/home/section3/fish12.png';
 import fish13 from '@/assets/home/section3/fish13.png';
 import fish14 from '@/assets/home/section3/fish14.png';
-import blast from '@/assets/home/section3/blast.png';
+import zksync from '@/assets/home/section3/zksync.png';
 import orbiter from '@/assets/home/section3/orbiter.png';
 import chainlink from '@/assets/home/section3/chainlink.png';
 import galxe from '@/assets/home/section3/galxe.png';
@@ -143,7 +143,7 @@ export const Section4 = () => {
         <div className='section4'>
           <Title>Our Partners</Title>
           <div className='partners'>
-            <img src={blast} alt='' />
+            <img src={zksync} alt='' />
             <img src={orbiter} alt='' />
             <img src={chainlink} alt='' />
             <img src={galxe} alt='' />
