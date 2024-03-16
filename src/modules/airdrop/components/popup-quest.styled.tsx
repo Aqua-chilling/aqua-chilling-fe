@@ -48,12 +48,10 @@ export const Wrapper = styled.div`
     max-width: 60vw;
     display: flex;
     flex-direction: column;
-    padding: 40px;
-    border-radius: 16px;
-    border: 8px solid #090910;
     background: #131b26;
     position: relative;
     gap: 24px;
+    border-radius: 16px;
 
     @media screen and (max-width: 900px) {
       max-height: 90vh;
@@ -78,25 +76,29 @@ export const Wrapper = styled.div`
         transform: scale(1.1);
       }
     }
-    .title {
-      margin: 0 auto;
-      color: #fff;
-      text-align: center;
-      font-size: 32px;
-      font-style: normal;
-      font-weight: 700;
-      line-height: normal;
-      letter-spacing: -0.64px;
-      width: 100%;
-      max-width: 320px;
-      @media screen and (max-width: 600px) {
-        font-size: 22px;
-      }
-    }
+
     .quest-content {
       display: flex;
       width: 100%;
       gap: 24px;
+      border-radius: 16px;
+      border: 8px solid #090910;
+      background: #131b26;
+      .title {
+        margin: 0 auto;
+        color: #fff;
+        text-align: center;
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        letter-spacing: -0.64px;
+        width: 100%;
+        max-width: 320px;
+        @media screen and (max-width: 600px) {
+          font-size: 22px;
+        }
+      }
       @media screen and (max-width: 900px) {
         flex-direction: column-reverse;
         align-items: center;
@@ -113,9 +115,21 @@ export const Wrapper = styled.div`
       .nft {
         display: flex;
         flex-direction: column;
-        justify-content: space-around;
+        justify-content: center;
         align-items: center;
+        gap: 12px;
         flex: 1;
+        background: #d8fbff;
+        border-top-right-radius: 16px;
+        border-bottom-right-radius: 16px;
+        padding: 0px 12px;
+        .title {
+          display: none;
+
+          @media screen and (max-width: 900px) {
+            display: block;
+          }
+        }
         .nft-img {
           position: relative;
           background-image: url(${bgNFT});
@@ -128,16 +142,17 @@ export const Wrapper = styled.div`
           background-size: 100% 100%;
           width: 250px;
           height: 315px;
-          @media screen and (max-width: 600px) {
-            width: 150px;
-            height: 215px;
+          @media screen and (max-width: 900px) {
+            width: 100px;
+            height: 126px;
+            padding: 15px;
           }
           img {
             width: 175px;
             height: 200px;
-            @media screen and (max-width: 600px) {
-              width: 75px;
-              height: 100px;
+            @media screen and (max-width: 900px) {
+              width: 70px;
+              height: 80px;
             }
             border-radius: 6.687px;
           }
@@ -149,6 +164,10 @@ export const Wrapper = styled.div`
             font-weight: 700;
             line-height: 150%; /* 22.5px */
             margin-top: 12px;
+            @media screen and (max-width: 900px) {
+              font-size: 7.5px;
+              margin-top: 4px;
+            }
           }
         }
       }
@@ -157,12 +176,30 @@ export const Wrapper = styled.div`
         display: flex;
         flex-direction: column;
         gap: 24px;
+        padding: 40px;
+        border-top-left-radius: 16px;
+        border-bottom-left-radius: 16px;
+        .title {
+          text-align: left;
+          @media screen and (max-width: 900px) {
+            display: none;
+          }
+        }
         .step {
           width: 100%;
           display: flex;
           flex-direction: column;
           align-items: flex-start;
           gap: 8px;
+
+          &.completed {
+            color: #37ff7b;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+          }
+
           &.nd {
             .btns {
               .btn {

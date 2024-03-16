@@ -22,7 +22,7 @@ export const SecondaryButton = ({ children, w }: { children: any; w?: number }) 
     </SecondButton>
   );
 };
-export const PrimaryBtn = styled.div<{ w: any }>`
+export const PrimaryBtn = styled.div<{ w?: any }>`
   width: ${(props) => (props.w ? `${props.w}px` : '70%')};
   height: 48px;
   border-radius: 6px;
@@ -64,8 +64,6 @@ export const PrimaryBtn = styled.div<{ w: any }>`
         align-items: center;
         justify-content: center;
 
-        /* B16 */
-        font-family: Quicksand;
         font-size: 16px;
         font-style: normal;
         font-weight: 700;

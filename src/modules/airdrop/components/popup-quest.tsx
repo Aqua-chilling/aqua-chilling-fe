@@ -3,8 +3,10 @@ import X from '@/assets/X.png';
 import Discord from '@/assets/Discord.png';
 import nft1 from '@/assets/airdrop/triden 1.jpg';
 import { PrimaryButton } from '@/components/button/button.styled';
+import { useNavigate } from 'react-router';
 
 export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) => void }) => {
+  const navigate = useNavigate();
   return (
     <Wrapper>
       <div
@@ -50,9 +52,9 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
             />
           </svg>
         </div>
-        <div className='title'>Claim your first Aquachilling NFT now</div>
         <div className='quest-content'>
           <div className='steps'>
+            <div className='title'>Claim your first Aquachilling NFT now</div>
             <div className='step st'>
               <div className='label'>Step 1</div>
               <div className='btns'>
@@ -79,7 +81,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
               </div>
               <span>Join Discord to receive your invitation code</span>
             </div>
-            <div className='step th'>
+            <div className='step completed th'>
               <div className='label'>Step 4</div>
               <div className='btns'>
                 <div className='btn'>Share a tweet</div>
@@ -87,12 +89,19 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
             </div>
           </div>
           <div className='nft'>
+            <div className='title'>Claim your first Aquachilling NFT now</div>
             <div className='nft-img'>
               {/* <img src={new URL(`/src/assets/home/section4/card${1}.png`, import.meta.url).href} alt='' /> */}
               <img src={nft1} alt='' />
               <span>Trident Lv.1 </span>
             </div>
-            <PrimaryButton>Claim your NFT</PrimaryButton>
+            <div
+              onClick={() => {
+                navigate('/airdrop/detail');
+              }}
+            >
+              <PrimaryButton>Claim your NFT</PrimaryButton>
+            </div>
           </div>
         </div>
       </div>

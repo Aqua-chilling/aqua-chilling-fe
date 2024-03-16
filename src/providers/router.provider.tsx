@@ -1,4 +1,5 @@
 import { Footer, Header, Loading } from '@/components';
+import { AirdropDetail } from '@/modules/airdrop-detail/airdrop-detail';
 import { AirDrop } from '@/modules/airdrop/airdrop';
 import Home from '@/modules/home';
 import { MarketPlace } from '@/modules/marketplace/marketplace';
@@ -16,6 +17,10 @@ const elements = [
   {
     Component: AirDrop,
     path: '/airdrop'
+  },
+  {
+    Component: AirdropDetail,
+    path: '/airdrop/detail'
   },
   {
     Component: MarketPlace,

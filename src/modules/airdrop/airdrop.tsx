@@ -17,7 +17,7 @@ import { PopUpQuest } from './components/popup-quest';
 import React from 'react';
 
 export const AirDrop = () => {
-  const [isShowPopupQuest, setIsShowPopupQuest] = React.useState(false);
+  const [isShowPopupQuest, setIsShowPopupQuest] = React.useState(true);
   return (
     <Wrapper>
       {isShowPopupQuest && <PopUpQuest setVisibility={setIsShowPopupQuest} />}
