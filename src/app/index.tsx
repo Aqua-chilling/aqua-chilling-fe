@@ -16,6 +16,7 @@ import { CustomCurSor } from '@/components/custom-cursor/custom-cursor';
 import '@/constants/style/locomotive-scroll.css';
 import { LoadingProvider } from '@/providers/loading.provider';
 import { NotificationProvider } from '@/contexts/notification.context';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 const queryClient = new QueryClient();
 let persistor = persistStore(store);
@@ -37,7 +38,10 @@ export const App = () => {
                 <FixedGlobalStyle />
                 {window.innerWidth > 780 && <CustomCurSor />}
                 <NotificationProvider>
-                  <RouterProvider>{<LoadingProvider />}</RouterProvider>
+                  <GoogleOAuthProvider clientId='198313885183-ui9dkp1ugn16kk026k1i9oi0jtab76te.apps.googleusercontent.com'>
+                    <RouterProvider>{<LoadingProvider />}</RouterProvider>
+                  </GoogleOAuthProvider>
+                  ,
                 </NotificationProvider>
               </CredentialProvider>
             </WalletContextProvider>
