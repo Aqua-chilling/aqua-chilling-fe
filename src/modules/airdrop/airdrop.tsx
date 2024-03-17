@@ -17,7 +17,6 @@ import { PopUpQuest } from './components/popup-quest';
 import React from 'react';
 import { Modal } from '@/components/modal/modal';
 import { PopUpLogin } from './components/popup-login';
-import { IRootState, dispatch } from '@/app/store';
 import { selectToken } from '@/redux';
 import { useSelector } from 'react-redux';
 
@@ -27,15 +26,14 @@ export const AirDrop = () => {
   const token = useSelector(selectToken);
 
   React.useEffect(() => {
-    console.log('changed');
-    console.log('isShow login', isShowPopupLogin);
-    console.log(isShowPopupQuest);
     if (token) {
+      console.log('changed');
+      console.log('isShow login', isShowPopupLogin);
+      console.log(isShowPopupQuest);
       setIsShowPopupLogin(false);
       setIsShowPopupQuest(true);
     }
   }, [token]);
-  console.log(token);
 
   return (
     <Wrapper>
