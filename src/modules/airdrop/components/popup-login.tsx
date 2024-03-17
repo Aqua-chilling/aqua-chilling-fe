@@ -7,7 +7,6 @@ import { useNavigate } from 'react-router';
 import { ENVS } from '@/config';
 import { Wrapper } from './popup-login.styled';
 import React from 'react';
-import { toSafeInteger } from 'lodash';
 import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';

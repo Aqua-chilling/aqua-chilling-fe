@@ -8,4 +8,7 @@ export class OauthRepository {
   static login(body: ILoginPayload): Promise<ILoginResponse> {
     return httpGame.post(`/auth/login`, body);
   }
+  static loginByGoogle(code: string): Promise<any> {
+    return httpGame.post(`/auth/login-google`, code);
+  }
 }
