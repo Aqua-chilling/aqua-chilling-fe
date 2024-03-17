@@ -3,9 +3,11 @@ import { useParams } from 'react-router';
 import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 export const OauthGoogleSuccess = () => {
-  const { google_code } = useParams();
+  const [searchParams] = useSearchParams();
+  const google_code = searchParams.get('google_code');
   const { addNotification } = useNotification();
   React.useEffect(() => {
     if (google_code) {
