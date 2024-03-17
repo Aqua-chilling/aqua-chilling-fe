@@ -2,6 +2,7 @@ import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import { useParams } from 'react-router';
 import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
+import React from 'react';
 
 export const OauthGoogleSuccess = () => {
   const { google_code } = useParams();
