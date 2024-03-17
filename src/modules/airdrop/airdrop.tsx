@@ -101,19 +101,18 @@ export const AirDrop = () => {
       </div>
       <div className='bottom-airdrop'>
         <div className='timer'>12 : 24 : 32 : 33</div>
-        <PrimaryButton w={120}>
-          <div
-            onClick={() => {
-              if (token) {
-                setIsShowPopupQuest(true);
-              } else {
-                setIsShowPopupLogin(true);
-              }
-            }}
-          >
-            Join now
-          </div>
-        </PrimaryButton>
+
+        <div
+          onClick={() => {
+            if (token) {
+              setIsShowPopupQuest(true);
+            } else {
+              setIsShowPopupLogin(true);
+            }
+          }}
+        >
+          <PrimaryButton w={120}>Join now</PrimaryButton>
+        </div>
       </div>
     </Wrapper>
   );

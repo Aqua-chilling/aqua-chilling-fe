@@ -1,20 +1,19 @@
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
-import { useNavigate, useParams } from 'react-router';
 import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
-import React from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { dispatch } from '@/app/store';
 import { updateAccount } from '@/redux';
+import React from 'react';
 
-export const OauthGoogleSuccess = () => {
+export const OauthDiscordSuccess = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
-  const google_code = searchParams.get('google_code');
+  const discord_code = searchParams.get('discord_code');
   const { addNotification } = useNotification();
   React.useEffect(() => {
-    if (google_code) {
-      OauthRepository.loginByGoogle(google_code)
+    if (discord_code) {
+      OauthRepository.loginByDiscord(discord_code)
         .then((rs) => {
           addNotification({
             message: 'Login successfully',
@@ -38,7 +37,6 @@ export const OauthGoogleSuccess = () => {
           });
         });
     }
-  }, [google_code]);
-  console.log(google_code);
+  }, [discord_code]);
   return <></>;
 };

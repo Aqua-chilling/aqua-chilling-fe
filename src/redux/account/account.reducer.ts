@@ -6,10 +6,10 @@ import { ERROR_CODE } from '@/constants';
 
 export interface IAccountState {
   email: string;
-  name: string;
   token: string;
-  address?: string;
   id: string;
+  name?: string;
+  address?: string;
 }
 
 export interface IResponseWalletStatus {

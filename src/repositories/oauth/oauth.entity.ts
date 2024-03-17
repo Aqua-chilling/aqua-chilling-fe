@@ -9,3 +9,9 @@ export interface ILoginResponse {
   address: string;
   token: string;
 }
+export interface IOauthLoginResponse {
+  id: string;
+  seq_id: number;
+  email: string;
+  token: string;
+}
