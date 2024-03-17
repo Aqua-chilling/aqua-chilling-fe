@@ -1,10 +1,12 @@
 import { Wrapper } from './popup-quest.styled';
+import { useNotification } from '@/contexts/notification.context';
+import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import X from '@/assets/X.png';
 import Discord from '@/assets/Discord.png';
 import nft1 from '@/assets/airdrop/triden 1.jpg';
 import { PrimaryButton } from '@/components/button/button.styled';
 import { useNavigate } from 'react-router';
-import { CloseIconSVG } from '../hard';
+import { CloseIconSVG, CompletedIconSVG } from '../hard';
 import { ENVS } from '@/config';
 import React from 'react';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
@@ -15,16 +17,43 @@ import { LoadingOutlined } from '@ant-design/icons';
 
 export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) => void }) => {
   const navigate = useNavigate();
+  const { addNotification } = useNotification();
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  const [isFollowed, setIsFollowed] = React.useState<boolean>(false);
+  const [isRetweeted, setIsRetweeted] = React.useState<boolean>(false);
+  const [isJoinedDiscord, setIsJoinedDiscord] = React.useState<boolean>(false);
 
   const userId = useSelector(selectId);
   React.useEffect(() => {
     setIsLoading(true);
-    OnboardingRepository.RetrieveTaskOfTwitter(userId).then((rs) => {
-      console.log(rs);
-      setIsLoading(false);
-    });
+    OnboardingRepository.RetrieveTaskOfTwitter(userId)
+      .then((rs) => {
+        setIsFollowed(rs.follows.Aquachilling);
+        setIsRetweeted(rs.retweets['1752366812929605836']);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        addNotification({
+          message: err,
+          type: NOTIFICATION_TYPE.INFO,
+          id: new Date().getTime()
+        });
+      });
+    OnboardingRepository.RetrieveTaskOfDiscord(userId)
+      .then((rs) => {
+        setIsJoinedDiscord(rs.joined);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        addNotification({
+          message: err,
+          type: NOTIFICATION_TYPE.INFO,
+          id: new Date().getTime()
+        });
+      });
   }, []);
+  console.log(isFollowed);
+  console.log(isRetweeted);
   return (
     <Wrapper>
       <div
@@ -48,25 +77,43 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
             <div className='step st'>
               <div className='label'>Step 1</div>
               <div className='btns'>
-                <div
-                  className='btn'
-                  onClick={() => {
-                    console.log(ENVS.VITE_BASE_BC_API);
-                    window.open(`${ENVS.VITE_BASE_BC_API}/api/oauth/google`, '_blank');
-                  }}
-                >
-                  <img src={X} alt='' />
-                  Follow us on X{isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />}
-                </div>
+                {isFollowed ? (
+                  <div className='btn completed'>
+                    <div className='ic' dangerouslySetInnerHTML={{ __html: CompletedIconSVG }}></div>
+                    Followed us on X
+                  </div>
+                ) : (
+                  <div
+                    className='btn'
+                    onClick={() => {
+                      window.open(`https://twitter.com/Aquachilling`, '_blank');
+                    }}
+                  >
+                    <img src={X} alt='' />
+                    Follow us on X {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />}
+                  </div>
+                )}
               </div>
             </div>
             <div className='step nd'>
               <div className='label'>Step 2</div>
               <div className='btns'>
-                <div className='btn'>
-                  <img src={Discord} alt='' />
-                  Join Discord
-                </div>
+                {isJoinedDiscord ? (
+                  <div className='btn completed'>
+                    <div className='ic' dangerouslySetInnerHTML={{ __html: CompletedIconSVG }}></div>
+                    Joined Discord
+                  </div>
+                ) : (
+                  <div
+                    className='btn'
+                    onClick={() => {
+                      window.open('https://discord.com/channels/1186953047457398824');
+                    }}
+                  >
+                    <img src={Discord} alt='' />
+                    Join Discord {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />}
+                  </div>
+                )}
               </div>
             </div>
             <div className='step rd'>
@@ -80,7 +127,21 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
             <div className='step completed th'>
               <div className='label'>Step 4</div>
               <div className='btns'>
-                <div className='btn'>Share a tweet</div>
+                {isFollowed ? (
+                  <div className='btn completed'>
+                    <div className='ic' dangerouslySetInnerHTML={{ __html: CompletedIconSVG }}></div>
+                    Shared a tweet
+                  </div>
+                ) : (
+                  <div
+                    className='btn'
+                    onClick={() => {
+                      window.open(`https://twitter.com/Aquachilling/status/1752366812929605836`, '_blank');
+                    }}
+                  >
+                    Share a tweet {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />}
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -91,13 +152,18 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
               <img src={nft1} alt='' />
               <span>Trident Lv.1 </span>
             </div>
-            <div
-              onClick={() => {
-                navigate('/airdrop/detail');
-              }}
-            >
-              <PrimaryButton w={160}>Claim your NFT</PrimaryButton>
-            </div>
+            {isFollowed && isRetweeted && isJoinedDiscord ? (
+              <div
+                className='btn-claim'
+                onClick={() => {
+                  navigate('/airdrop/detail');
+                }}
+              >
+                <PrimaryButton w={240}>Claim your NFT</PrimaryButton>
+              </div>
+            ) : (
+              <p>Finish all task to receive this NFT</p>
+            )}
           </div>
         </div>
       </div>

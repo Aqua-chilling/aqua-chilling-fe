@@ -22,7 +22,7 @@ export const LoadingProvider = ({ children }: any) => {
       }
     };
     const isAtHome = location.pathname.length <= 1;
-    const timer1 = setTimeout(onHidePreLoading, isAtHome ? 0 : 2500);
+    const timer1 = setTimeout(onHidePreLoading, isAtHome ? 0 : 1500);
     return () => {
       clearTimeout(timer1);
     };

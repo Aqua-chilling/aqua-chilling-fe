@@ -55,12 +55,8 @@ export const Wrapper = styled.div`
 
     @media screen and (max-width: 900px) {
       max-height: 90vh;
-      overflow-y: scroll;
-    }
-    @media screen and (max-width: 600px) {
       max-width: 90vw;
-    }
-    @media screen and (max-width: 400px) {
+      overflow-y: scroll;
     }
     .close {
       position: absolute;
@@ -123,6 +119,10 @@ export const Wrapper = styled.div`
         border-top-right-radius: 16px;
         border-bottom-right-radius: 16px;
         padding: 0px 12px;
+        @media screen and (max-width: 900px) {
+          background: transparent;
+          margin-top: 24px;
+        }
         .title {
           display: none;
 
@@ -170,6 +170,16 @@ export const Wrapper = styled.div`
             }
           }
         }
+        .btn-claim {
+        }
+        p {
+          color: #090910;
+          text-align: center;
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+        }
       }
       .steps {
         width: 50%;
@@ -179,6 +189,10 @@ export const Wrapper = styled.div`
         padding: 40px;
         border-top-left-radius: 16px;
         border-bottom-left-radius: 16px;
+
+        @media screen and (max-width: 900px) {
+          padding: 12px;
+        }
         .title {
           text-align: left;
           @media screen and (max-width: 900px) {
@@ -251,6 +265,21 @@ export const Wrapper = styled.div`
               &:hover {
                 background: #090910;
                 border: 3px solid #0a80b8;
+              }
+              &.completed {
+                color: #37ff7b;
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                border-radius: 12px;
+                border: 3px solid rgba(255, 255, 255, 0.1);
+                background: transparent;
+                .ic {
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                }
               }
             }
             input {
