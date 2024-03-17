@@ -28,6 +28,8 @@ export const AirDrop = () => {
 
   React.useEffect(() => {
     console.log('changed');
+    console.log('isShow login', isShowPopupLogin);
+    console.log(isShowPopupQuest);
     if (token) {
       setIsShowPopupLogin(false);
       setIsShowPopupQuest(true);

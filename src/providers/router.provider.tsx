@@ -1,5 +1,7 @@
 import { Footer, Header, Loading } from '@/components';
+import { OauthDiscordSuccess } from '@/components/oauth-discord-success/oauth-discord-success';
 import { OauthGoogleSuccess } from '@/components/oauth-google-success/oauth-google-sucess';
+import { OauthXSuccess } from '@/components/oauth-x-success/oauth-x-success';
 import { AirdropDetail } from '@/modules/airdrop-detail/airdrop-detail';
 import { AirDrop } from '@/modules/airdrop/airdrop';
 import Home from '@/modules/home';
@@ -42,6 +44,14 @@ const elements = [
   {
     Component: OauthGoogleSuccess,
     path: '/airdrop/oauth/google/success'
+  },
+  {
+    Component: OauthDiscordSuccess,
+    path: '/airdrop/oauth/discord/success'
+  },
+  {
+    Component: OauthXSuccess,
+    path: '/airdrop/oauth/twitter/success'
   }
 ];
 

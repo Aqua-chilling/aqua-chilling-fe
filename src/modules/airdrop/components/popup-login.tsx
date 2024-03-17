@@ -139,7 +139,7 @@ export const PopUpLogin = ({ setControl }: any) => {
                 className='btn'
                 onClick={() => {
                   window.open(
-                    `https://api.twitter.com/oauth/authenticate?oauth_token=eEJrbnBGcHVFUU56MlN5THVJWHY6MTpjaQ&oauth_callback=https%3A%2F%2Fapi-game-test.aquachilling.com%2Fv1%2Fauth%2Ftwitter`,
+                    `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=eEJrbnBGcHVFUU56MlN5THVJWHY6MTpjaQ&redirect_uri=https://api-game-test.aquachilling.com/v1/auth/twitter&scope=tweet.read%20users.read%20offline.access&state=state&code_challenge=challenge&code_challenge_method=plain`,
                     '_blank'
                   );
                 }}
