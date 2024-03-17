@@ -119,7 +119,15 @@ export const PopUpLogin = ({ setControl }: any) => {
           </div>
           <div className='step nd'>
             <div className='btns'>
-              <div className='btn google'>
+              <div
+                className='btn google'
+                onClick={() => {
+                  window.open(
+                    'https://accounts.google.com/o/oauth2/v2/auth/oauthchooseaccount?client_id=198313885183-ui9dkp1ugn16kk026k1i9oi0jtab76te.apps.googleusercontent.com&redirect_uri=https%3A%2F%2Fapi-game-test.aquachilling.com%2Fv1%2Fauth%2Fgoogle&response_type=code&scope=profile%20email&service=lso&o2v=2&theme=glif&ddm=0&flowName=GeneralOAuthFlow',
+                    '_blank'
+                  );
+                }}
+              >
                 <img src={google} alt='' />
                 Sign in by Google
               </div>

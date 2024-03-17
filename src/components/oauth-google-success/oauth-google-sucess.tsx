@@ -1,7 +1,7 @@
 import { useParams } from 'react-router';
 
 export const OauthGoogleSuccess = () => {
-  const { code } = useParams();
-  console.log(code);
+  const { google_code } = useParams();
+  console.log(google_code);
   return <></>;
 };
