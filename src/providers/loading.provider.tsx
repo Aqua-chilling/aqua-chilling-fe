@@ -18,10 +18,11 @@ export const LoadingProvider = ({ children }: any) => {
         }, 100);
       } catch (err: any) {
         console.log(err);
+        setIsLoading(false);
       }
     };
     const isAtHome = location.pathname.length <= 1;
-    const timer1 = setTimeout(onHidePreLoading, isAtHome ? 0 : 0);
+    const timer1 = setTimeout(onHidePreLoading, isAtHome ? 0 : 2500);
     return () => {
       clearTimeout(timer1);
     };
