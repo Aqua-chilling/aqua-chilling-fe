@@ -7,11 +7,22 @@ import { Modal } from '@/components/modal/modal';
 import React from 'react';
 import { PrimaryButton } from '@/components/button/button.styled';
 import { Task } from './components/task-component/task';
+import { useNavigate } from 'react-router';
+import { selectToken } from '@/redux';
+import { useSelector } from 'react-redux';
 
 export const AirdropDetail = () => {
-  const [isShowDetail, setIsShowDetail] = React.useState<boolean>(false);
   const { addNotification } = useNotification();
-  React.useEffect(() => {}, []);
+  const token = useSelector(selectToken);
+  const navigate = useNavigate();
+
+  const [isShowDetail, setIsShowDetail] = React.useState<boolean>(false);
+
+  React.useEffect(() => {
+    if (!token) {
+      navigate('/airdrop');
+    }
+  }, [token]);
   return (
     <Wrapper>
       <Modal control={isShowDetail} setControl={setIsShowDetail}>
