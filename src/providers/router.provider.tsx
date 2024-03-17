@@ -1,4 +1,5 @@
 import { Footer, Header, Loading } from '@/components';
+import { OauthGoogleSuccess } from '@/components/oauth-google-success/oauth-google-sucess';
 import { AirdropDetail } from '@/modules/airdrop-detail/airdrop-detail';
 import { AirDrop } from '@/modules/airdrop/airdrop';
 import Home from '@/modules/home';
@@ -37,6 +38,10 @@ const elements = [
   {
     Component: PrivacyPolicy,
     path: '/privacy-policy'
+  },
+  {
+    Component: OauthGoogleSuccess,
+    path: '/oauth/google/success'
   }
 ];
 
