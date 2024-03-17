@@ -138,7 +138,10 @@ export const PopUpLogin = ({ setControl }: any) => {
               <div
                 className='btn'
                 onClick={() => {
-                  window.open(`${ENVS.VITE_BASE_GAME_API}/api/oauth/google`, '_blank');
+                  window.open(
+                    `https://api.twitter.com/oauth/authenticate?oauth_token=eEJrbnBGcHVFUU56MlN5THVJWHY6MTpjaQ&oauth_callback=https%3A%2F%2Fapi-game-test.aquachilling.com%2Fv1%2Fauth%2Ftwitter`,
+                    '_blank'
+                  );
                 }}
               >
                 <img src={X} alt='' />
@@ -148,7 +151,15 @@ export const PopUpLogin = ({ setControl }: any) => {
           </div>
           <div className='step nd'>
             <div className='btns'>
-              <div className='btn'>
+              <div
+                className='btn'
+                onClick={() => {
+                  window.open(
+                    'https://discord.com/api/oauth2/authorize?client_id=1215514040986767380&redirect_uri=https%3A%2F%2Fapi-game-test.aquachilling.com%2Fv1%2Fauth%2Fdiscord&response_type=code&scope=identify%20email',
+                    '_blank'
+                  );
+                }}
+              >
                 <img src={Discord} alt='' />
                 Join Discord
               </div>
