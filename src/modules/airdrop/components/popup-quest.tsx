@@ -6,25 +6,9 @@ import { PrimaryButton } from '@/components/button/button.styled';
 import { useNavigate } from 'react-router';
 import { CloseIconSVG } from '../hard';
 import { ENVS } from '@/config';
-import React from 'react';
-import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
-import { useSelector } from 'react-redux';
-import { selectId } from '@/redux';
-import { Spin } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
 
 export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) => void }) => {
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
-
-  const userId = useSelector(selectId);
-  React.useEffect(() => {
-    setIsLoading(true);
-    OnboardingRepository.RetrieveTaskOfTwitter(userId).then((rs) => {
-      console.log(rs);
-      setIsLoading(false);
-    });
-  }, []);
   return (
     <Wrapper>
       <div
@@ -55,8 +39,8 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                     window.open(`${ENVS.VITE_BASE_BC_API}/api/oauth/google`, '_blank');
                   }}
                 >
-                  {/* <img src={X} alt='' /> */}
-                  {/* Follow us on X {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />} */}
+                  <img src={X} alt='' />
+                  Follow us on X
                 </div>
               </div>
             </div>

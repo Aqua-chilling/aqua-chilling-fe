@@ -1,6 +1,5 @@
 import X from '@/assets/X.png';
 import Discord from '@/assets/Discord.png';
-import { GoogleLogin } from '@react-oauth/google';
 import google from '@/assets/google.svg';
 import show from '@/assets/show.png';
 import hide from '@/assets/hide.png';
@@ -28,10 +27,6 @@ export const PopUpLogin = ({ setControl }: any) => {
   const { addNotification } = useNotification();
   const navigate = useNavigate();
 
-  const responseMessage = (response: any) => {
-    console.log(response);
-  };
-  const errorMessage = () => {};
   return (
     <Wrapper>
       <div className='login-content'>
@@ -125,10 +120,8 @@ export const PopUpLogin = ({ setControl }: any) => {
           <div className='step nd'>
             <div className='btns'>
               <div className='btn google'>
-                {/* <img src={google} alt='' /> */}
-                {/* Sign in by Google */}
-
-                <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+                <img src={google} alt='' />
+                Sign in by Google
               </div>
             </div>
           </div>

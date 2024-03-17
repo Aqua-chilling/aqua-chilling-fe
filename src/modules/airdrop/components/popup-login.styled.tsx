@@ -148,9 +148,7 @@ export const Wrapper = styled.div`
             &.google {
               border-radius: 12px;
               background: #fff;
-              span {
-                color: #090910;
-              }
+              color: #090910;
               font-size: 14px;
               font-style: normal;
               font-weight: 700;
@@ -190,6 +188,7 @@ export const Wrapper = styled.div`
             font-weight: 500;
             line-height: normal;
             &::-webkit-input-placeholder {
+              font-family: Quicksand;
             }
           }
         }
