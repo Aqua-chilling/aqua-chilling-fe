@@ -41,7 +41,7 @@ const elements = [
   },
   {
     Component: OauthGoogleSuccess,
-    path: '/oauth/google/success'
+    path: '/airdrop/oauth/google/success'
   }
 ];
 
