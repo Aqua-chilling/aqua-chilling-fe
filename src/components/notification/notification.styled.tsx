@@ -20,9 +20,9 @@ const animNotifyDisapear = keyframes`
 
 export const Wrapper = styled.div`
   display: inline-flex;
-  padding: 6px 52px 6px 8px;
+  padding: 12px 52px 12px 12px;
   align-items: center;
-  gap: 4px;
+  gap: 8px;
   border-radius: 12px;
   border: 1px solid transparent;
   background: #253a5c;

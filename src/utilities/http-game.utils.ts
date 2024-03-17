@@ -16,7 +16,7 @@ export let accessToken = '';
 
 instance.interceptors.request.use(
   (req: any) => {
-    req.baseURL = `${ENVS.VITE_BASE_BC_API}/`;
+    req.baseURL = `${ENVS.VITE_BASE_GAME_API}v1/`;
     let authen = {};
     if (accessToken) {
       authen = { Authorization: `Bearer ${accessToken}` };
@@ -44,19 +44,20 @@ instance.interceptors.response.use(
     return Promise.resolve(result?.data || result);
   },
   (axiosError: AxiosError) => {
-    const { response: { data } = {} } = axiosError;
+    const dataError = axiosError.response?.data;
     if (axiosError && !axiosError?.response) {
       throw new Error('Send request API failed');
     }
     if (
-      ((data as any).message === ERROR_CODE.Guard_MalformedJWT || (data as any).message === 'jwt expired') &&
+      ((dataError as any).data.message === ERROR_CODE.Guard_MalformedJWT ||
+        (dataError as any).data.message === 'jwt expired') &&
       accessToken
     ) {
       dispatch(deleteAccount());
     }
+    const messge = (dataError as any).data?.message;
 
-    const { message } = (data as any) || {};
-    return Promise.reject(camelCaseKeys(message || axiosError));
+    return Promise.reject(camelCaseKeys(messge || axiosError));
   }
 );
 

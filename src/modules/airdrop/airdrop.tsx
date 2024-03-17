@@ -15,12 +15,34 @@ import 'swiper/css/navigation';
 import { PrimaryButton } from '@/components/button/button.styled';
 import { PopUpQuest } from './components/popup-quest';
 import React from 'react';
+import { Modal } from '@/components/modal/modal';
+import { PopUpLogin } from './components/popup-login';
+import { IRootState, dispatch } from '@/app/store';
+import { selectToken } from '@/redux';
+import { useSelector } from 'react-redux';
 
 export const AirDrop = () => {
-  const [isShowPopupQuest, setIsShowPopupQuest] = React.useState(true);
+  const [isShowPopupQuest, setIsShowPopupQuest] = React.useState(false);
+  const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
+  const token = useSelector(selectToken);
+
+  React.useEffect(() => {
+    console.log('changed');
+    if (token) {
+      setIsShowPopupLogin(false);
+      setIsShowPopupQuest(true);
+    }
+  }, [token]);
+  console.log(token);
+
   return (
     <Wrapper>
       {isShowPopupQuest && <PopUpQuest setVisibility={setIsShowPopupQuest} />}
+      {isShowPopupLogin && (
+        <Modal control={isShowPopupLogin} setControl={setIsShowPopupLogin}>
+          <PopUpLogin />
+        </Modal>
+      )}
       <div className='top-airdrop'>Aquachilling Airdrop</div>
       <div className='airdrop'>
         <div className='left'>
@@ -82,7 +104,11 @@ export const AirDrop = () => {
         <PrimaryButton w={120}>
           <div
             onClick={() => {
-              setIsShowPopupQuest(true);
+              if (token) {
+                setIsShowPopupQuest(true);
+              } else {
+                setIsShowPopupLogin(true);
+              }
             }}
           >
             Join now

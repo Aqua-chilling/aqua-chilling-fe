@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 // import { ButtonCancel, Wrapper } from './authenticate-form.styled';
 // import { ButtonConfirm } from './authenticate-form.styled';
 import { useSelector } from 'react-redux';
-import { selectIsLoadingVerifyWallet } from '@/redux';
 import { Wrapper } from './authenticate-form.styled';
 
 interface IAuthenticateFormProps {
@@ -12,7 +11,7 @@ interface IAuthenticateFormProps {
 }
 
 const AuthenticateFormComponent = ({ open, close, verify }: IAuthenticateFormProps) => {
-  const isLoading = useSelector(selectIsLoadingVerifyWallet);
+  const isLoading = false;
   const actions = useMemo(
     () => (
       <div className='actions'>

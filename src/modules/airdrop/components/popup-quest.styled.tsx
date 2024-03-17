@@ -45,7 +45,7 @@ export const Wrapper = styled.div`
     z-index: -1;
   }
   .popup-quest {
-    max-width: 60vw;
+    width: 800px;
     display: flex;
     flex-direction: column;
     background: #131b26;

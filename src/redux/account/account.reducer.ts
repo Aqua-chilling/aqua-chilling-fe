@@ -5,10 +5,11 @@ import { ENVS } from '@/config';
 import { ERROR_CODE } from '@/constants';
 
 export interface IAccountState {
+  email: string;
+  name: string;
   token: string;
-  expiresIn: string;
   address?: string;
-  isLoadingVerifyWallet: boolean;
+  id: string;
 }
 
 export interface IResponseWalletStatus {
@@ -24,9 +25,11 @@ export interface IWalletProvider {
 }
 
 const initialState: IAccountState = {
+  email: '',
+  name: '',
   token: '',
-  expiresIn: '',
-  isLoadingVerifyWallet: false
+  address: '',
+  id: ''
 };
 
 export const signInByWallet = createAsyncThunk('account/signinUserByWallet', async (wallet: IWalletProvider) => {
@@ -67,28 +70,24 @@ const accountSlice = createSlice({
   reducers: {
     updateAccount(state: IAccountState, action: PayloadAction<IAccountState>) {
       state.token = action.payload.token;
-      state.expiresIn = action.payload.expiresIn;
+      state.email = action.payload.email;
+      state.name = action.payload.name;
+      state.id = action.payload.id;
       state.address = action.payload.address;
     },
     deleteAccount(state: IAccountState) {
-      (state.token = ''), (state.expiresIn = ''), (state.address = undefined);
+      (state.token = ''), (state.email = ''), (state.name = ''), (state.id = ''), (state.address = undefined);
     }
   },
   extraReducers: (builder) => {
     builder.addCase(signInByWallet.fulfilled, (state: IAccountState, action: any) => {
       // Add user to the state array
       state.token = action?.payload?.token;
-      state.expiresIn = action?.payload?.expiresIn;
       state.address = action?.payload?.address;
-      state.isLoadingVerifyWallet = false;
       action.payload.callback && action.payload.callback();
     });
-    builder.addCase(signInByWallet.pending, (state: IAccountState) => {
-      state.isLoadingVerifyWallet = true;
-    });
-    builder.addCase(signInByWallet.rejected, (state: IAccountState) => {
-      state.isLoadingVerifyWallet = false;
-    });
+    builder.addCase(signInByWallet.pending, (state: IAccountState) => {});
+    builder.addCase(signInByWallet.rejected, (state: IAccountState) => {});
   }
 });
 

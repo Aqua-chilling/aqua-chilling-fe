@@ -41,7 +41,7 @@ export const FixedGlobalStyle = createGlobalStyle`
         position: fixed;
         top:15%;
         right: 2%;
-        z-index: 999;
+        z-index: 99999999;
         display: flex;
         flex-direction: column;
         gap: 12px;

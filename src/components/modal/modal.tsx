@@ -39,7 +39,7 @@ export const Modal = ({ children, control, setControl }: IModal) => {
         >
           <div dangerouslySetInnerHTML={{ __html: CloseIconSVG }}></div>
         </div>
-        {children}
+        {React.cloneElement(children, { setControl })}
       </div>
     </Wrapper>
   ) : null;
