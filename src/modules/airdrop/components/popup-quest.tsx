@@ -22,7 +22,22 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
   const [isFollowed, setIsFollowed] = React.useState<boolean>(false);
   const [isRetweeted, setIsRetweeted] = React.useState<boolean>(false);
   const [isJoinedDiscord, setIsJoinedDiscord] = React.useState<boolean>(false);
+  const TWITTER_CLIENT_ID = 'eEJrbnBGcHVFUU56MlN5THVJWHY6MTpjaQ';
 
+  const getTwitterOauthUrl = () => {
+    const rootUrl = 'https://twitter.com/i/oauth2/authorize';
+    const options = {
+      redirect_uri: 'https://api-game-test.aquachilling.com/v1/auth/twitter', // client url cannot be http://localhost:3000/ or http://127.0.0.1:3000/
+      client_id: TWITTER_CLIENT_ID,
+      state: 'state',
+      response_type: 'code',
+      code_challenge: 'OM53qIbsMTKujsaSGpbFal4fz3nZa-4VEHWuo5CVKVI',
+      code_challenge_method: 'S256',
+      scope: ['users.read', 'tweet.read', 'follows.read', 'follows.write'].join(' ')
+    };
+    const qs = new URLSearchParams(options).toString();
+    return `${rootUrl}?${qs}`;
+  };
   const userId = useSelector(selectId);
   const twitter = useSelector(selectTwitter);
   const discord = useSelector(selectDiscord);
@@ -101,10 +116,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                 <div
                   className='tooltip'
                   onClick={() => {
-                    window.open(
-                      `https://twitter.com/i/oauth2/authorize?response_type=code&redirect_uri=https://api-game-test.aquachilling.com/v1/auth/twitter&scope=tweet.read%20users.read%20offline.access&code_challenge=IcB6It09qpnH6Dd3nh02c5dvlARYEcExEUrvR7aWFGo&code_challenge_method=S256&state=2yV3QZAYTrWu7gcjGi2wRxfs&client_id=eEJrbnBGcHVFUU56MlN5THVJWHY6MTpjaQ`,
-                      '_blank'
-                    );
+                    window.open(getTwitterOauthUrl(), '_blank');
                   }}
                 >
                   <span>Link your X account </span>first for complete this task
