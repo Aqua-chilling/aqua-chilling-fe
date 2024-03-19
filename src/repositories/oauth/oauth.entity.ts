@@ -10,6 +10,8 @@ export interface ILoginResponse {
   token: string;
   discord: string;
   twitter: string;
+  referral_code: string;
+  referral_code_status: number;
 }
 export interface IOauthLoginResponse {
   id: string;

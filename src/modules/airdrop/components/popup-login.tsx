@@ -15,6 +15,7 @@ import { Spin, message } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { updateAccount, updateSocial } from '@/redux';
 import { dispatch } from '@/app/store';
+import { updateReferral } from '@/redux/referral';
 
 export const PopUpLogin = ({ setControl }: any) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -96,6 +97,12 @@ export const PopUpLogin = ({ setControl }: any) => {
                           updateSocial({
                             discord: rs.discord,
                             twitter: rs.twitter
+                          })
+                        );
+                        dispatch(
+                          updateReferral({
+                            referral_code: rs.referral_code,
+                            refreferral_code_status: rs.referral_code_status
                           })
                         );
                         setControl(false);

@@ -6,6 +6,7 @@ import thunk from 'redux-thunk';
 import { useDispatch } from 'react-redux';
 import { AccountReducer } from '@/redux';
 import { SocialReducer } from '@/redux';
+import { ReferralReducer } from '@/redux';
 
 const accountPersistConfig = {
   key: 'account',
@@ -14,7 +15,8 @@ const accountPersistConfig = {
 };
 const reducers = combineReducers({
   account: persistReducer(accountPersistConfig, AccountReducer),
-  social: persistReducer(accountPersistConfig, SocialReducer)
+  social: persistReducer(accountPersistConfig, SocialReducer),
+  referral: persistReducer(accountPersistConfig, ReferralReducer)
 });
 
 const persistConfig = {

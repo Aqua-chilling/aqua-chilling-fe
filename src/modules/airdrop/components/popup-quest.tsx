@@ -14,6 +14,7 @@ import { useSelector } from 'react-redux';
 import { selectDiscord, selectId, selectTwitter } from '@/redux';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
+import { selectReferralCode, selectReferralCodeStatus } from '@/redux/referral';
 
 export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) => void }) => {
   const navigate = useNavigate();
@@ -41,9 +42,11 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
     const qs = new URLSearchParams(options).toString();
     return `${rootUrl}?${qs}`;
   };
-  const userId = useSelector(selectId);
   const twitter = useSelector(selectTwitter);
   const discord = useSelector(selectDiscord);
+  const referral_code_status = useSelector(selectReferralCodeStatus);
+  const referral_code = useSelector(selectReferralCode);
+
   React.useEffect(() => {
     if (twitter) {
       setIsLoading(true);
@@ -79,7 +82,6 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
         });
     }
   }, []);
-  console.log(twitter);
   return (
     <Wrapper>
       <div
@@ -165,8 +167,14 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
             <div className='step rd'>
               <div className='label'>Step 3</div>
               <div className='btns'>
-                <input type='text' placeholder='Enter invitation code' />
-                <div className='btn'>Submit</div>
+                {referral_code_status === 1 && referral_code ? (
+                  <div className='btn completed'>Invitation code: ${referral_code ?? '...'}</div>
+                ) : (
+                  <>
+                    <input type='text' placeholder='Enter invitation code' />
+                    <div className='btn'>Submit</div>
+                  </>
+                )}
               </div>
               <span>Join Discord to receive your invitation code</span>
             </div>
