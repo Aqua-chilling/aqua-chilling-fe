@@ -238,7 +238,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
               <img src={nft1} alt='' />
               <span>Trident Lv.1 </span>
             </div>
-            {isFollowed && isRetweeted && isJoinedDiscord ? (
+            {isFollowed && isRetweeted && isJoinedDiscord && referral_code && referral_code_status ? (
               <div
                 className='btn-claim'
                 onClick={() => {
