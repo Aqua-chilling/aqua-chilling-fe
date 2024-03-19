@@ -17,4 +17,13 @@ export class OauthRepository {
   static loginByDiscord(code: string): Promise<IOauthLoginResponse> {
     return httpGame.post(`/auth/login-discord`, { code: code });
   }
+  static getProfile(): Promise<ILoginResponse> {
+    return httpGame.get(`/auth/profile`);
+  }
+  static linkXAccount(code: string): Promise<any> {
+    return httpGame.post(`/bc/link-twitter`, { code: code });
+  }
+  static linkDiscordAccount(code: string): Promise<any> {
+    return httpGame.post(`/bc/link-discord`, { code: code });
+  }
 }

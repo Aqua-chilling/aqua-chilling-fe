@@ -13,7 +13,7 @@ import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import { ILoginPayload } from '@/repositories/oauth/oauth.entity';
 import { Spin, message } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import { updateAccount } from '@/redux';
+import { updateAccount, updateSocial } from '@/redux';
 import { dispatch } from '@/app/store';
 
 export const PopUpLogin = ({ setControl }: any) => {
@@ -90,6 +90,12 @@ export const PopUpLogin = ({ setControl }: any) => {
                             token: rs.token,
                             id: rs.id,
                             name: rs.name
+                          })
+                        );
+                        dispatch(
+                          updateSocial({
+                            discord: rs.discord,
+                            twitter: rs.twitter
                           })
                         );
                         setControl(false);

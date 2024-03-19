@@ -228,6 +228,16 @@ export const Wrapper = styled.div`
             font-weight: 700;
             line-height: normal;
           }
+          .tooltip {
+            color: #fff;
+            span {
+              color: #37ff7b;
+              text-decoration: underline;
+            }
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+          }
           .btns {
             padding: 8px 0px;
             width: 100%;
@@ -280,6 +290,10 @@ export const Wrapper = styled.div`
                   align-items: center;
                   justify-content: center;
                 }
+              }
+              &.disabled {
+                opacity: 0.5;
+                pointer-events: none;
               }
             }
             input {

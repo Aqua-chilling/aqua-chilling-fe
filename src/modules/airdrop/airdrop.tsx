@@ -17,8 +17,11 @@ import { PopUpQuest } from './components/popup-quest';
 import React from 'react';
 import { Modal } from '@/components/modal/modal';
 import { PopUpLogin } from './components/popup-login';
-import { selectToken } from '@/redux';
+import { selectToken, updateAccount } from '@/redux';
 import { useSelector } from 'react-redux';
+import { OauthRepository } from '@/repositories/oauth/oauth.repository';
+import { dispatch } from '@/app/store';
+import { updateSocial } from '@/redux/social/social.reducer';
 
 export const AirDrop = () => {
   const [isShowPopupQuest, setIsShowPopupQuest] = React.useState(false);
@@ -27,12 +30,19 @@ export const AirDrop = () => {
 
   React.useEffect(() => {
     if (token) {
-      console.log('changed');
-      console.log('isShow login', isShowPopupLogin);
-      console.log(isShowPopupQuest);
       setIsShowPopupLogin(false);
       setIsShowPopupQuest(true);
+      console.log('changed');
+      OauthRepository.getProfile().then((rs) => {
+        dispatch(
+          updateSocial({
+            discord: rs.discord,
+            twitter: rs.twitter
+          })
+        );
+      });
     }
+    console.log(token);
   }, [token]);
 
   return (

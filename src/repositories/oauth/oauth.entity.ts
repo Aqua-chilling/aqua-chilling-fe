@@ -8,6 +8,8 @@ export interface ILoginResponse {
   email: string;
   address: string;
   token: string;
+  discord: string;
+  twitter: string;
 }
 export interface IOauthLoginResponse {
   id: string;

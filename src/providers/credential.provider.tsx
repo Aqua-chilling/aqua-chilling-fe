@@ -5,6 +5,7 @@ import { useAppDispatch } from '@/app/store';
 import { selectToken, selectAddress, deleteAccount } from '@/redux';
 import { setAccessToken } from '@/utilities';
 import { ConnectionStatus, useWalletContext } from '@/contexts/wallet.context';
+import { setAccessGameToken } from '@/utilities/http-game.utils';
 
 export const CredentialProvider = ({ children }: { children: any }) => {
   const isFirstTimeRender = useRef(true);
@@ -15,6 +16,7 @@ export const CredentialProvider = ({ children }: { children: any }) => {
 
   useEffect(() => {
     setAccessToken(token);
+    setAccessGameToken(token);
     if (!token && status === ConnectionStatus.CONNECTED && addressSigned?.toLowerCase() === address?.toLowerCase()) {
       handleOpenAuthenticateModal();
     }

@@ -11,7 +11,7 @@ import { ENVS } from '@/config';
 import React from 'react';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
 import { useSelector } from 'react-redux';
-import { selectId } from '@/redux';
+import { selectDiscord, selectId, selectTwitter } from '@/redux';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 
@@ -24,36 +24,39 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
   const [isJoinedDiscord, setIsJoinedDiscord] = React.useState<boolean>(false);
 
   const userId = useSelector(selectId);
+  const twitter = useSelector(selectTwitter);
+  const discord = useSelector(selectDiscord);
   React.useEffect(() => {
-    setIsLoading(true);
-    OnboardingRepository.RetrieveTaskOfTwitter(userId)
-      .then((rs) => {
-        setIsFollowed(rs.follows.Aquachilling);
-        setIsRetweeted(rs.retweets['1752366812929605836']);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        addNotification({
-          message: err,
-          type: NOTIFICATION_TYPE.INFO,
-          id: new Date().getTime()
+    if (twitter && discord) {
+      setIsLoading(true);
+      OnboardingRepository.RetrieveTaskOfTwitter(twitter || ' ')
+        .then((rs) => {
+          setIsFollowed(rs.follows.Aquachilling);
+          setIsRetweeted(rs.retweets['1752366812929605836']);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          addNotification({
+            message: err,
+            type: NOTIFICATION_TYPE.INFO,
+            id: new Date().getTime()
+          });
         });
-      });
-    OnboardingRepository.RetrieveTaskOfDiscord(userId)
-      .then((rs) => {
-        setIsJoinedDiscord(rs.joined);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        addNotification({
-          message: err,
-          type: NOTIFICATION_TYPE.INFO,
-          id: new Date().getTime()
+      OnboardingRepository.RetrieveTaskOfDiscord(discord || ' ')
+        .then((rs) => {
+          setIsJoinedDiscord(rs.joined);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          addNotification({
+            message: err,
+            type: NOTIFICATION_TYPE.INFO,
+            id: new Date().getTime()
+          });
         });
-      });
+    }
   }, []);
-  console.log(isFollowed);
-  console.log(isRetweeted);
+  console.log(twitter);
   return (
     <Wrapper>
       <div
@@ -84,7 +87,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                   </div>
                 ) : (
                   <div
-                    className='btn'
+                    className={twitter ? 'btn' : 'btn disabled'}
                     onClick={() => {
                       window.open(`https://twitter.com/Aquachilling`, '_blank');
                     }}
@@ -94,6 +97,19 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                   </div>
                 )}
               </div>
+              {!twitter && (
+                <div
+                  className='tooltip'
+                  onClick={() => {
+                    window.open(
+                      `https://twitter.com/i/oauth2/authorize?response_type=code&redirect_uri=https://api-game-test.aquachilling.com/v1/auth/twitter&scope=tweet.read%20users.read%20offline.access&code_challenge=IcB6It09qpnH6Dd3nh02c5dvlARYEcExEUrvR7aWFGo&code_challenge_method=S256&state=2yV3QZAYTrWu7gcjGi2wRxfs&client_id=eEJrbnBGcHVFUU56MlN5THVJWHY6MTpjaQ`,
+                      '_blank'
+                    );
+                  }}
+                >
+                  <span>Link your X account </span>first for complete this task
+                </div>
+              )}
             </div>
             <div className='step nd'>
               <div className='label'>Step 2</div>

@@ -19,7 +19,7 @@ instance.interceptors.request.use(
     req.baseURL = `${ENVS.VITE_BASE_GAME_API}v1/`;
     let authen = {};
     if (accessToken) {
-      authen = { Authorization: `Bearer ${accessToken}` };
+      authen = { 'X-Access-Token': `${accessToken}` };
     }
 
     req.headers = {
@@ -61,7 +61,7 @@ instance.interceptors.response.use(
   }
 );
 
-export const setAccessToken = (token: string) => {
+export const setAccessGameToken = (token: string) => {
   accessToken = token;
 };
 
