@@ -1,3 +1,4 @@
 export * from './account';
-export * from './social';
+export * from './discord-id';
+export * from './twitter-id';
 export * from './referral';

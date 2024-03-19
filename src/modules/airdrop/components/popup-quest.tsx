@@ -14,7 +14,9 @@ import { useSelector } from 'react-redux';
 import { selectDiscord, selectId, selectTwitter } from '@/redux';
 import { Spin } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import { selectReferralCode, selectReferralCodeStatus } from '@/redux/referral';
+import { selectReferralCode, selectReferralCodeStatus, updateReferral } from '@/redux/referral';
+import { OauthRepository } from '@/repositories/oauth/oauth.repository';
+import { dispatch } from '@/app/store';
 
 export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) => void }) => {
   const navigate = useNavigate();
@@ -23,6 +25,8 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
   const [isFollowed, setIsFollowed] = React.useState<boolean>(false);
   const [isRetweeted, setIsRetweeted] = React.useState<boolean>(false);
   const [isJoinedDiscord, setIsJoinedDiscord] = React.useState<boolean>(false);
+  const [inputReferralCode, setInputReferralCode] = React.useState<string>('');
+
   const TWITTER_CLIENT_ID = 'eEJrbnBGcHVFUU56MlN5THVJWHY6MTpjaQ';
 
   const getDiscordOauthUrl = () => {
@@ -171,12 +175,40 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                   <div className='btn completed'>Invitation code: ${referral_code ?? '...'}</div>
                 ) : (
                   <>
-                    <input type='text' placeholder='Enter invitation code' />
-                    <div className='btn'>Submit</div>
+                    <input
+                      type='text'
+                      placeholder='Enter invitation code'
+                      onChange={(e) => {
+                        setInputReferralCode(e.target.value);
+                      }}
+                    />
+                    <div
+                      className='btn'
+                      onClick={() => {
+                        if (!inputReferralCode) {
+                          addNotification({
+                            message: 'Please enter referral code',
+                            type: NOTIFICATION_TYPE.ERROR,
+                            id: new Date().getTime()
+                          });
+                          return;
+                        }
+                        OauthRepository.enterReferralCode(inputReferralCode).then((rs) => {
+                          dispatch(
+                            updateReferral({
+                              referral_code: inputReferralCode,
+                              refreferral_code_status: rs.referral_code_status ?? 1
+                            })
+                          );
+                        });
+                      }}
+                    >
+                      Submit
+                    </div>
                   </>
                 )}
               </div>
-              <span>Join Discord to receive your invitation code</span>
+              {!referral_code && !referral_code_status && <span>Join Discord to receive your invitation code</span>}
             </div>
             <div className='step completed th'>
               <div className='label'>Step 4</div>

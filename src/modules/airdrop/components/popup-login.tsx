@@ -13,7 +13,7 @@ import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import { ILoginPayload } from '@/repositories/oauth/oauth.entity';
 import { Spin, message } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import { updateAccount, updateSocial } from '@/redux';
+import { updateAccount, updateDiscordId, updateTwitterId } from '@/redux';
 import { dispatch } from '@/app/store';
 import { updateReferral } from '@/redux/referral';
 
@@ -94,8 +94,12 @@ export const PopUpLogin = ({ setControl }: any) => {
                           })
                         );
                         dispatch(
-                          updateSocial({
-                            discord: rs.discord,
+                          updateDiscordId({
+                            discord: rs.discord
+                          })
+                        );
+                        dispatch(
+                          updateTwitterId({
                             twitter: rs.twitter
                           })
                         );
@@ -106,7 +110,6 @@ export const PopUpLogin = ({ setControl }: any) => {
                           })
                         );
                         setControl(false);
-                        console.log(rs);
                       })
                       .catch((err) => {
                         setIsLoading(false);

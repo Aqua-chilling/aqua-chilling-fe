@@ -26,4 +26,7 @@ export class OauthRepository {
   static linkDiscordAccount(code: string): Promise<any> {
     return httpGame.post(`/bc/link-discord`, { code: code });
   }
+  static enterReferralCode(code: string): Promise<any> {
+    return httpGame.post(`/bc/enter-referral-code`, { referral_code: code });
+  }
 }
