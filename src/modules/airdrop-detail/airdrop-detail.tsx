@@ -10,6 +10,7 @@ import { Task } from './components/task-component/task';
 import { useNavigate } from 'react-router';
 import { selectToken } from '@/redux';
 import { useSelector } from 'react-redux';
+import { Received } from './components/popups/received';
 
 export const AirdropDetail = () => {
   const { addNotification } = useNotification();
@@ -17,16 +18,17 @@ export const AirdropDetail = () => {
   const navigate = useNavigate();
 
   const [isShowDetail, setIsShowDetail] = React.useState<boolean>(false);
+  const [isShowReceived, setIsShowReceived] = React.useState<boolean>(true);
 
   React.useEffect(() => {
     if (!token) {
-      navigate('/airdrop');
+      // navigate('/airdrop');
     }
   }, [token]);
   return (
     <Wrapper>
-      <Modal control={isShowDetail} setControl={setIsShowDetail}>
-        fsdf
+      <Modal control={isShowReceived} setControl={setIsShowReceived}>
+        <Received />
       </Modal>
       {/* --------------------------------------top-bar------------------------------- */}
       <div className='top-bar'>
