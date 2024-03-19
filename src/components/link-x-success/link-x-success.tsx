@@ -19,16 +19,7 @@ export const LinkXSuccess = () => {
             message: 'Link X account successfully',
             type: NOTIFICATION_TYPE.SUCCESS,
             id: new Date().getTime()
-          });
-          dispatch(
-            updateAccount({
-              id: rs.id,
-              token: rs.token,
-              email: rs.email,
-              discord: rs.discord,
-              twitter: rs.twitter
-            })
-          );
+          }); 
           navigate('/airdrop');
         })
         .catch((err) => {
