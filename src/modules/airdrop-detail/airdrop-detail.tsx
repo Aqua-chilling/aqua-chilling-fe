@@ -11,6 +11,7 @@ import { useNavigate } from 'react-router';
 import { selectToken } from '@/redux';
 import { useSelector } from 'react-redux';
 import { Received } from './components/popups/received';
+import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
 
 export const AirdropDetail = () => {
   const { addNotification } = useNotification();
@@ -20,11 +21,18 @@ export const AirdropDetail = () => {
   const [isShowDetail, setIsShowDetail] = React.useState<boolean>(false);
   const [isShowReceived, setIsShowReceived] = React.useState<boolean>(true);
 
+  const [tasks, setTasks] = React.useState<any[]>();
+
   React.useEffect(() => {
     if (!token) {
       // navigate('/airdrop');
     }
   }, [token]);
+  React.useEffect(() => {
+    OnboardingRepository.RetrieveTaskList().then((rs) => {
+      setTasks(rs?.items);
+    });
+  }, []);
   return (
     <Wrapper>
       <Modal control={isShowReceived} setControl={setIsShowReceived}>
@@ -73,7 +81,7 @@ export const AirdropDetail = () => {
           </div>
         </div>
         {/* --------------------------------------content------------------------------- */}
-        <div className='airdrop-detail-content'>{true && <Task />}</div>
+        <div className='airdrop-detail-content'>{true && <Task data={tasks} />}</div>
       </div>
     </Wrapper>
   );

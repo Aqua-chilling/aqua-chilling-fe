@@ -2,7 +2,8 @@ import { PrimaryButton } from '@/components/button/button.styled';
 import nft from '@/assets/airdrop-detail/nft.png';
 import { Wrapper } from './task.styled';
 
-export const Task = () => {
+export const Task = ({ data }: any) => {
+  console.log(data);
   return (
     <Wrapper>
       <div className='title'>What is Aquachilling airdrop?</div>
@@ -28,114 +29,17 @@ export const Task = () => {
           <div className='quest-point'>Points</div>
           <div className='quest-status'>Status</div>
         </div>
-        <div className='table-row'>
-          <div className='quest-name'>
-            Follow us on X<span>(Join and get verify on Discord)</span>
-          </div>
-          <div className='quest-point'>Join Discord</div>
-          <div className='quest-status'>
-            <div className='status-0'>Connect wallet</div>
-          </div>
-        </div>
-        <div className='table-row'>
-          <div className='quest-name'>
-            Follow us on X<span>(Join and get verify on Discord)</span>
-          </div>
-          <div className='quest-point'>Join Discord</div>
-          <div className='quest-status'>
-            <div className='status-0'>Connect wallet</div>
-          </div>
-        </div>
-        <div className='table-row'>
-          <div className='quest-name'>
-            Follow us on X<span>(Join and get verify on Discord)</span>
-          </div>
-          <div className='quest-point'>Join Discord</div>
-          <div className='quest-status'>
-            <div className='status-0'>Connect wallet</div>
-          </div>
-        </div>
-        <div className='table-row'>
-          <div className='quest-name'>
-            Follow us on X<span>(Join and get verify on Discord)</span>
-          </div>
-          <div className='quest-point'>Join Discord</div>
-          <div className='quest-status'>
-            <div className='status-0'>Connect wallet</div>
-          </div>
-        </div>
-        <div className='table-row'>
-          <div className='quest-name'>
-            Follow us on X<span>(Join and get verify on Discord)</span>
-          </div>
-          <div className='quest-point'>Join Discord</div>
-          <div className='quest-status'>
-            <div className='status-0'>Connect wallet</div>
-          </div>
-        </div>
-        <div className='table-row'>
-          <div className='quest-name'>
-            Follow us on X<span>(Join and get verify on Discord)</span>
-          </div>
-          <div className='quest-point'>Join Discord</div>
-          <div className='quest-status'>
-            <div className='status-0'>Connect wallet</div>
-          </div>
-        </div>
-        <div className='table-row'>
-          <div className='quest-name'>
-            Follow us on X<span>(Join and get verify on Discord)</span>
-          </div>
-          <div className='quest-point'>Join Discord</div>
-          <div className='quest-status'>
-            <div className='status-0'>Connect wallet</div>
-          </div>
-        </div>
-        <div className='table-row'>
-          <div className='quest-name'>
-            Follow us on X<span>(Join and get verify on Discord)</span>
-          </div>
-          <div className='quest-point'>Join Discord</div>
-          <div className='quest-status'>
-            <div className='status-0'>Connect wallet</div>
-          </div>
-        </div>
-        <div className='table-row'>
-          <div className='quest-name'>
-            Follow us on X<span>(Join and get verify on Discord)</span>
-          </div>
-          <div className='quest-point'>Join Discord</div>
-          <div className='quest-status'>
-            <div className='status-0'>Connect wallet</div>
-          </div>
-        </div>
-        <div className='table-row'>
-          <div className='quest-name'>
-            Follow us on X<span>(Join and get verify on Discord)</span>
-          </div>
-          <div className='quest-point'>Join Discord</div>
-          <div className='quest-status'>
-            <div className='status-0'>Connect wallet</div>
-          </div>
-        </div>
-        <div className='table-row'>
-          <div className='quest-name'>
-            Follow us on X<span>(Join and get verify on Discord)</span>
-          </div>
-          <div className='quest-point'>Join Discord</div>
-          <div className='quest-status'>
-            <div className='status-0'>Connect wallet</div>
-          </div>
-        </div>
-        <div className='table-row'>
-          <div className='quest-name'>
-            Follow us on X<span>(Join and get verify on Discord)</span>
-          </div>
-          <div className='quest-point'>Join Discord</div>
-          <div className='quest-status'>
-            <div className='status-0'>Connect wallet</div>
-          </div>
-        </div>
+        {data?.map((item: any, key: number) => {
+          return (
+            <div className='table-row' key={key}>
+              <div className='quest-name'>{item?.desc}</div>
+              <div className='quest-point'>{item?.point}</div>
+              <div className='quest-status'>
+                <div className='status-0'>...</div>
+              </div>
+            </div>
+          );
+        })}
       </div>
     </Wrapper>
   );
