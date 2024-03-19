@@ -41,29 +41,29 @@ export const OauthGoogleSuccess = () => {
         });
     }
     if (twitter_code) {
-      OauthRepository.loginByX(twitter_code)
-        .then((rs) => {
-          addNotification({
-            message: 'Login successfully',
-            type: NOTIFICATION_TYPE.SUCCESS,
-            id: new Date().getTime()
-          });
-          dispatch(
-            updateAccount({
-              email: rs.email,
-              token: rs.token,
-              id: rs.id
-            })
-          );
-          navigate('/airdrop');
-        })
-        .catch((err) => {
-          addNotification({
-            message: err,
-            type: NOTIFICATION_TYPE.ERROR,
-            id: new Date().getTime()
-          });
-        });
+      // OauthRepository.loginByX(twitter_code)
+      //   .then((rs) => {
+      //     addNotification({
+      //       message: 'Login successfully',
+      //       type: NOTIFICATION_TYPE.SUCCESS,
+      //       id: new Date().getTime()
+      //     });
+      //     dispatch(
+      //       updateAccount({
+      //         email: rs.email,
+      //         token: rs.token,
+      //         id: rs.id
+      //       })
+      //     );
+      //     navigate('/airdrop');
+      //   })
+      //   .catch((err) => {
+      //     addNotification({
+      //       message: err,
+      //       type: NOTIFICATION_TYPE.ERROR,
+      //       id: new Date().getTime()
+      //     });
+      //   });
       OauthRepository.linkXAccount(twitter_code)
         .then((rs) => {
           addNotification({
