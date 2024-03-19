@@ -5,7 +5,7 @@ import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { dispatch } from '@/app/store';
-import { updateAccount } from '@/redux';
+import { updateAccount, updateSocial } from '@/redux';
 
 export const OauthGoogleSuccess = () => {
   const navigate = useNavigate();
@@ -55,6 +55,28 @@ export const OauthGoogleSuccess = () => {
               id: rs.id
             })
           );
+          navigate('/airdrop');
+        })
+        .catch((err) => {
+          addNotification({
+            message: err,
+            type: NOTIFICATION_TYPE.ERROR,
+            id: new Date().getTime()
+          });
+        });
+      OauthRepository.linkXAccount(twitter_code)
+        .then((rs) => {
+          addNotification({
+            message: 'Link X account successfully',
+            type: NOTIFICATION_TYPE.SUCCESS,
+            id: new Date().getTime()
+          });
+          // dispatch(
+          //   updateSocial({
+
+          //   })
+          // );
+          console.log(rs);
           navigate('/airdrop');
         })
         .catch((err) => {
