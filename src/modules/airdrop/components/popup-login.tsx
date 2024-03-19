@@ -16,6 +16,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { updateAccount, updateDiscordId, updateTwitterId } from '@/redux';
 import { dispatch } from '@/app/store';
 import { updateReferral } from '@/redux/referral';
+import { getDiscordOauthUrl, getTwitterOauthUrl } from '../hard';
 
 export const PopUpLogin = ({ setControl }: any) => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -154,10 +155,7 @@ export const PopUpLogin = ({ setControl }: any) => {
               <div
                 className='btn'
                 onClick={() => {
-                  window.open(
-                    `https://twitter.com/i/oauth2/authorize?response_type=code&client_id=eEJrbnBGcHVFUU56MlN5THVJWHY6MTpjaQ&redirect_uri=https://api-game-test.aquachilling.com/v1/auth/twitter&scope=tweet.read%20users.read%20offline.access&state=state&code_challenge=challenge&code_challenge_method=plain`,
-                    '_blank'
-                  );
+                  window.open(getTwitterOauthUrl(), '_blank');
                 }}
               >
                 <img src={X} alt='' />
@@ -170,10 +168,7 @@ export const PopUpLogin = ({ setControl }: any) => {
               <div
                 className='btn'
                 onClick={() => {
-                  window.open(
-                    'https://discord.com/api/oauth2/authorize?client_id=1215514040986767380&redirect_uri=https%3A%2F%2Fapi-game-test.aquachilling.com%2Fv1%2Fauth%2Fdiscord&response_type=code&scope=identify%20email',
-                    '_blank'
-                  );
+                  window.open(getDiscordOauthUrl(), '_blank');
                 }}
               >
                 <img src={Discord} alt='' />
