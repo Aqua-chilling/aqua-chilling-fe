@@ -172,7 +172,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
               <div className='label'>Step 3</div>
               <div className='btns'>
                 {referral_code_status === 1 && referral_code ? (
-                  <div className='btn completed'>Invitation code: ${referral_code ?? '...'}</div>
+                  <div className='btn completed'>Invitation code: {referral_code ?? '...'}</div>
                 ) : (
                   <>
                     <input
@@ -220,7 +220,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                   </div>
                 ) : (
                   <div
-                    className='btn'
+                    className={twitter ? 'btn' : 'btn disabled'}
                     onClick={() => {
                       window.open(`https://twitter.com/Aquachilling/status/1752366812929605836`, '_blank');
                     }}
