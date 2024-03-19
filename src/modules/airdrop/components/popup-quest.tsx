@@ -24,6 +24,9 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
   const [isJoinedDiscord, setIsJoinedDiscord] = React.useState<boolean>(false);
   const TWITTER_CLIENT_ID = 'eEJrbnBGcHVFUU56MlN5THVJWHY6MTpjaQ';
 
+  const getDiscordOauthUrl = () => {
+    return 'https://discord.com/api/oauth2/authorize?client_id=1215514040986767380&redirect_uri=https%3A%2F%2Fapi-game-test.aquachilling.com%2Fv1%2Fauth%2Fdiscord&response_type=code&scope=identify%20email';
+  };
   const getTwitterOauthUrl = () => {
     const rootUrl = 'https://twitter.com/i/oauth2/authorize';
     const options = {
@@ -42,7 +45,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
   const twitter = useSelector(selectTwitter);
   const discord = useSelector(selectDiscord);
   React.useEffect(() => {
-    if (twitter && discord) {
+    if (twitter) {
       setIsLoading(true);
       OnboardingRepository.RetrieveTaskOfTwitter(twitter || ' ')
         .then((rs) => {
@@ -51,18 +54,23 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
           setIsLoading(false);
         })
         .catch((err) => {
+          setIsLoading(false);
           addNotification({
             message: err,
             type: NOTIFICATION_TYPE.INFO,
             id: new Date().getTime()
           });
         });
+    }
+    if (discord) {
+      setIsLoading(true);
       OnboardingRepository.RetrieveTaskOfDiscord(discord || ' ')
         .then((rs) => {
           setIsJoinedDiscord(rs.joined);
           setIsLoading(false);
         })
         .catch((err) => {
+          setIsLoading(false);
           addNotification({
             message: err,
             type: NOTIFICATION_TYPE.INFO,
@@ -133,9 +141,9 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                   </div>
                 ) : (
                   <div
-                    className='btn'
+                    className={discord ? 'btn' : 'btn disabled'}
                     onClick={() => {
-                      window.open('https://discord.com/channels/1186953047457398824');
+                      window.open('https://discord.gg/fhNSPtEpzg');
                     }}
                   >
                     <img src={Discord} alt='' />
@@ -143,6 +151,16 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                   </div>
                 )}
               </div>
+              {!discord && (
+                <div
+                  className='tooltip'
+                  onClick={() => {
+                    window.open(getDiscordOauthUrl(), '_blank');
+                  }}
+                >
+                  <span>Link your Discord account </span>first for complete this task
+                </div>
+              )}
             </div>
             <div className='step rd'>
               <div className='label'>Step 3</div>
