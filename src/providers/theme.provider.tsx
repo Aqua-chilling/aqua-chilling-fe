@@ -25,6 +25,9 @@ export const FixedGlobalStyle = createGlobalStyle`
           z-index: -1 !important;
         }
     }
+    #tc-widget-root *{
+        cursor: none !important;
+    }
     *{
         cursor: none;
         box-sizing: border-box;

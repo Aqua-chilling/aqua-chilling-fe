@@ -10,6 +10,7 @@ interface IENVS {
   VITE_NFT_CONTRACT: string;
   VITE_SELLER_CONTRACT: string;
   VITE_DISTRIBUTER_CONTRACT: string;
+  VITE_ISTESTNET: boolean;
 }
 
 const defaultEnvs: IENVS = {
@@ -20,7 +21,8 @@ const defaultEnvs: IENVS = {
   VITE_THIRD_WEB_CLIENT_ID: '',
   VITE_DISTRIBUTER_CONTRACT: '',
   VITE_NFT_CONTRACT: '',
-  VITE_SELLER_CONTRACT: ''
+  VITE_SELLER_CONTRACT: '',
+  VITE_ISTESTNET: true,
 };
 
 export const getEnvs = () => {
