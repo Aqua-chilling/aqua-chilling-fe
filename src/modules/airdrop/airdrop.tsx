@@ -21,12 +21,17 @@ import { selectToken, updateAccount, updateDiscordId, updateTwitterId } from '@/
 import { useSelector } from 'react-redux';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import { dispatch } from '@/app/store';
+import { useWriteTransaction } from '@/hooks/use-write-transaction';
 
 export const AirDrop = () => {
   const [isShowPopupQuest, setIsShowPopupQuest] = React.useState(false);
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
+  // const { sendTransaction } = useWriteTransaction();
+  // const messages = {
+  //   address: 'kQCSES0TZYqcVkgoguhIb8iMEo4cvaEwmIrU5qbQgnN8ftBF',
+  //   amount: '0.5'
+  // };
   const token = useSelector(selectToken);
-
   React.useEffect(() => {
     if (token) {
       setIsShowPopupLogin(false);
