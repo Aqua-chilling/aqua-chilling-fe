@@ -82,6 +82,9 @@ export const Wrapper = styled.div`
       .blast {
         width: 90px;
         margin-right: 32px;
+        @media screen and (max-width: 1024px) {
+          margin-right: 0;
+        }
       }
       @media screen and (max-width: 1024px) {
         gap: 24px;
