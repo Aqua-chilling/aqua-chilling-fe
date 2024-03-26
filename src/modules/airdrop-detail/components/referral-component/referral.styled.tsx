@@ -37,6 +37,10 @@ export const Wrapper = styled.div`
   .referral-wrapper {
     width: 100%;
     display: flex;
+    @media screen and (max-width: 600px) {
+      flex-direction: column;
+      gap: 24px;
+    }
 
     .referral-link {
       width: 50%;
@@ -44,6 +48,9 @@ export const Wrapper = styled.div`
       flex-direction: column;
       gap: 8px;
       align-items: start;
+      @media screen and (max-width: 600px) {
+        width: 100%;
+      }
     }
     .referral-code {
       gap: 8px;
@@ -51,6 +58,9 @@ export const Wrapper = styled.div`
       display: flex;
       flex-direction: column;
       align-items: start;
+      @media screen and (max-width: 600px) {
+        width: 100%;
+      }
     }
   }
   .ranking-wrapper {
