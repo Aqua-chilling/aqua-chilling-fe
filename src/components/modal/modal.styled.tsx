@@ -46,7 +46,7 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: center;
   animation: ${anim} 0.3s forwards;
-  z-index: 1001;
+  z-index: 999;
   &.disapear {
     animation: ${animDisapear} 0.3s forwards;
   }

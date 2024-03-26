@@ -17,7 +17,7 @@ import { PopUpQuest } from './components/popup-quest';
 import React from 'react';
 import { Modal } from '@/components/modal/modal';
 import { PopUpLogin } from './components/popup-login';
-import { selectToken, updateAccount, updateDiscordId, updateTwitterId } from '@/redux';
+import { deleteAccount, selectToken, updateAccount, updateDiscordId, updateTwitterId } from '@/redux';
 import { useSelector } from 'react-redux';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import { dispatch } from '@/app/store';
@@ -26,11 +26,7 @@ import { useWriteTransaction } from '@/hooks/use-write-transaction';
 export const AirDrop = () => {
   const [isShowPopupQuest, setIsShowPopupQuest] = React.useState(false);
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
-  // const { sendTransaction } = useWriteTransaction();
-  // const messages = {
-  //   address: 'kQCSES0TZYqcVkgoguhIb8iMEo4cvaEwmIrU5qbQgnN8ftBF',
-  //   amount: '0.5'
-  // };
+
   const token = useSelector(selectToken);
   React.useEffect(() => {
     if (token) {

@@ -4,7 +4,7 @@ import { TonConnectButton } from '@tonconnect/ui-react';
 
 const ConnectButtonComponent = () => {
   return (
-    <Wrapper>
+    <Wrapper className='w-full'>
       <TonConnectButton />
     </Wrapper>
   );

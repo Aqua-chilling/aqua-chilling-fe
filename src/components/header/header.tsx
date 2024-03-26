@@ -6,8 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import LogoImage from '@/assets/logo.png';
 import { HeaderMobile } from './header-mobile';
 import { WrapperContent } from '../wrapper-content/wrapper-content.styled';
-import { PrimaryButton } from '../button/button.styled';
-import ConnectButton from '../ton-connect/ton-connect';
 interface IHeaderProps {}
 
 const HeaderComponent = ({}: IHeaderProps) => {
@@ -27,7 +25,6 @@ const HeaderComponent = ({}: IHeaderProps) => {
           >
             <img src={LogoImage} alt='Logo' />
           </div>
-          <ConnectButton />
         </div>
       </WrapperContent>
     </Wrapper>

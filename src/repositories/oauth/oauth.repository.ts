@@ -29,4 +29,10 @@ export class OauthRepository {
   static enterReferralCode(code: string): Promise<any> {
     return httpGame.post(`/bc/enter-referral-code`, { referral_code: code });
   }
+  static oauthTon(tonProof: any): Promise<any> {
+    return httpGame.post(`/auth/login-ton`, tonProof);
+  }
+  static generateTonPayload(): Promise<any> {
+    return httpGame.post(`/auth/ton-generate-payload`);
+  }
 }
