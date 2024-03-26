@@ -33,6 +33,12 @@ export const Wrapper = styled.div`
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    .ic {
+      transition: all 0.3s;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
   }
   .referral-wrapper {
     width: 100%;
