@@ -143,7 +143,7 @@ export const Section4 = () => {
         <div className='section4'>
           <Title>Our Partners</Title>
           <div className='partners'>
-            <img src={blast} alt='' />
+            <img src={blast} className='blast' alt='' />
             <img src={orbiter} alt='' />
             <img src={chainlink} alt='' />
             <img src={galxe} alt='' />

@@ -76,6 +76,13 @@ export const Wrapper = styled.div`
     .partners {
       display: flex;
       align-items: center;
+      img {
+        max-width: 300px;
+      }
+      .blast {
+        width: 90px;
+        margin-right: 32px;
+      }
       @media screen and (max-width: 1024px) {
         gap: 24px;
       }
