@@ -1,12 +1,12 @@
 import { ENVS } from "@/config";
 import { CHAIN, SendTransactionRequest, useTonConnectUI } from "@tonconnect/ui-react";
+import { useEffect } from "react";
 
 interface IWriteTransactionProps {
   onSuccess?: () => void;
 }
 export const useWriteTransaction = (props?: IWriteTransactionProps) => {
   const [tonConnectUi] = useTonConnectUI();
-
   const sendTransaction = async (
     messages: SendTransactionRequest["messages"]
   ): Promise<any> => {
@@ -16,9 +16,10 @@ export const useWriteTransaction = (props?: IWriteTransactionProps) => {
       messages: messages
     }
     try {
-      tonConnectUi.sendTransaction(tx)
+      const response = await tonConnectUi.sendTransaction(tx)
+      console.log('response', response)
     } catch (err: any) {
-      throw new Error(`${err?.message?.substring(0, 25)}...` || err);
+      console.log('erro', err)
     }
   };
   return { sendTransaction };

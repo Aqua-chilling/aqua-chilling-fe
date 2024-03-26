@@ -36,6 +36,19 @@ export const Wrapper = styled.div`
         font-size: 22px;
       }
     }
+    .subtitle {
+      margin: 0 auto;
+      color: #f1c8dd;
+      text-align: center;
+      font-size: 18px;
+      font-weight: 400;
+      width: 100%;
+      max-width: 320px;
+      margin-top: 12px;
+      @media screen and (max-width: 600px) {
+        font-size: 16px;
+      }
+    }
 
     .steps {
       width: 100%;

@@ -1,4 +1,5 @@
 import X from '@/assets/X.png';
+import TonSymbol from '@/assets/wallet/ton_symbol.svg';
 import Discord from '@/assets/Discord.png';
 import google from '@/assets/google.svg';
 import show from '@/assets/show.png';
@@ -17,23 +18,32 @@ import { updateAccount, updateDiscordId, updateTwitterId } from '@/redux';
 import { dispatch } from '@/app/store';
 import { updateReferral } from '@/redux/referral';
 import { getDiscordOauthUrl, getTwitterOauthUrl } from '../hard';
+import { useTonConnectModal, useTonWallet } from '@tonconnect/ui-react';
+import ConnectButton from '@/components/ton-connect/ton-connect';
+import { useLoginWithTon } from '@/hooks/use-login-with-ton';
 
 export const PopUpLogin = ({ setControl }: any) => {
-  const [isLoading, setIsLoading] = React.useState<boolean>(false);
+  // const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
-  const [email, setEmail] = React.useState<string>('');
-  const [password, setPassword] = React.useState<string>('');
-  const [showPassword, setShowPassword] = React.useState<boolean>(false);
+  // const [email, setEmail] = React.useState<string>('');
+  // const [password, setPassword] = React.useState<string>('');
+  // const [showPassword, setShowPassword] = React.useState<boolean>(false);
 
-  const { addNotification } = useNotification();
-  const navigate = useNavigate();
-
+  // const { addNotification } = useNotification();
+  // const navigate = useNavigate();
+  const wallet = useTonWallet();
+  const { open } = useLoginWithTon();
   return (
     <Wrapper>
       <div className='login-content'>
         <div className='steps'>
           <div className='title'>Login</div>
-          <div className='step '>
+          <div className='subtitle'>
+            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+            industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+            scrambled it to make a type specimen book.
+          </div>
+          {/* <div className='step '>
             <div className='label'>Enter email</div>
             <div className='btns'>
               <input type='text' placeholder='Enter your email' onChange={(e) => setEmail(e.target.value)} />
@@ -127,13 +137,13 @@ export const PopUpLogin = ({ setControl }: any) => {
                 {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />}
               </div>
             </div>
-          </div>
-          <div className='divider'>
+          </div> */}
+          {/* <div className='divider'>
             <div className='line'></div>
             <span>Or</span>
             <div className='line'></div>
-          </div>
-          <div className='step nd'>
+          </div> */}
+          {/* <div className='step nd'>
             <div className='btns'>
               <div
                 className='btn google'
@@ -148,22 +158,25 @@ export const PopUpLogin = ({ setControl }: any) => {
                 Sign in by Google
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className='step st'>
-            <div className='btns'>
-              <div
-                className='btn'
-                onClick={() => {
-                  window.open(getTwitterOauthUrl(), '_blank');
-                }}
-              >
-                <img src={X} alt='' />
-                Sign in by X
+          {!wallet && (
+            <div className='step st'>
+              <div className='btns'>
+                <div
+                  className='btn'
+                  onClick={() => {
+                    open();
+                  }}
+                >
+                  <img src={TonSymbol} alt='' />
+                  Sign in with TON
+                </div>
               </div>
             </div>
-          </div>
-          <div className='step nd'>
+          )}
+
+          {/* <div className='step nd'>
             <div className='btns'>
               <div
                 className='btn'
@@ -175,7 +188,7 @@ export const PopUpLogin = ({ setControl }: any) => {
                 Join Discord
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </Wrapper>
