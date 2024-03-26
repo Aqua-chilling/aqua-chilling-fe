@@ -19,7 +19,7 @@ export const getSignature = async (nonce: string, sdk: any) => {
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   if (!sdk) {
-    toast.error('Connection failed!');
+     
   } else {
     const signature = await sdk.wallet.sign(message);
     return signature;
