@@ -11,7 +11,6 @@ export const Wrapper = styled.div`
   border: 1px solid #143464;
   background: #0a1d3a;
   padding: 16px;
-  max-width: 800px;
   .title {
     color: #fff;
     font-size: 24px;
