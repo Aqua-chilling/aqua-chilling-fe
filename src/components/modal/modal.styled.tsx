@@ -50,11 +50,6 @@ export const Wrapper = styled.div`
   &.disapear {
     animation: ${animDisapear} 0.3s forwards;
   }
-  @media screen and (max-width: 1024px) {
-    align-items: flex-end;
-    top: auto;
-    bottom: 0;
-  }
 
   .overlay {
     background: rgba(0, 0, 0, 0.7);

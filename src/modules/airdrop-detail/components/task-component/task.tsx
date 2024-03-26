@@ -3,7 +3,6 @@ import nft from '@/assets/airdrop-detail/nft.png';
 import { Wrapper } from './task.styled';
 
 export const Task = ({ data }: any) => {
-  console.log(data);
   return (
     <Wrapper>
       <div className='title'>What is Aquachilling airdrop?</div>
@@ -13,12 +12,15 @@ export const Task = ({ data }: any) => {
       <div className='nft'>
         <div className='left'>
           <img src={nft} alt='' />
-          <div className='flex flex-col align-start'>
+          <div className='flex flex-col align-start flex-1'>
             <div>300 points</div>
             <span>Trident Lv. 1</span>
+            <div className='upgrade-btn' style={{ display: 'none' }}>
+              <PrimaryButton w={160}>Upgrade NFT</PrimaryButton>
+            </div>
           </div>
         </div>
-        <div>
+        <div className='upgrade-btn-below'>
           <PrimaryButton w={160}>Upgrade NFT</PrimaryButton>
         </div>
       </div>
@@ -35,7 +37,7 @@ export const Task = ({ data }: any) => {
               <div className='quest-name'>{item?.desc}</div>
               <div className='quest-point'>{item?.point}</div>
               <div className='quest-status'>
-                <div className='status-0'>...</div>
+                <div className='status-0'>Start task</div>
               </div>
             </div>
           );

@@ -11,95 +11,78 @@ export const Wrapper = styled.div`
   border: 1px solid #143464;
   background: #0a1d3a;
   padding: 16px;
-  .title {
+  .line {
+    width: 100%;
+    height: 1px;
+    flex-shrink: 0;
+    margin: 16px 0px;
+  }
+  span {
     color: #fff;
-    font-size: 24px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
-    letter-spacing: -0.48px;
+    letter-spacing: -0.32px;
   }
-  .subtitle {
+  .value {
+    display: flex;
+    gap: 8px;
     color: rgba(255, 255, 255, 0.7);
     font-size: 14px;
     font-style: normal;
-    font-weight: 500;
+    font-weight: 600;
     line-height: normal;
   }
-  .nft {
-    display: flex;
-    padding: 16px;
-    align-items: center;
-    gap: 20px;
-    justify-content: space-between;
+  .referral-wrapper {
     width: 100%;
-    border-radius: 20px;
-    background: #143464;
-    @media screen and (max-width: 680px) {
-      flex-direction: column;
-      .upgrade-btn-below {
-        display: none !important;
-      }
-    }
-    .left {
-      img {
-        width: 100%;
-        @media screen and (max-width: 680px) {
-          width: 50%;
-        }
-        @media screen and (max-width: 500px) {
-          max-width: 80px;
-        }
-      }
-      @media screen and (max-width: 680px) {
-        width: 100%;
-        justify-content: space-between;
-        gap: 32px;
-        .upgrade-btn {
-          display: flex !important;
-          margin-top: 16px;
-        }
-      }
-      @media screen and (max-width: 500px) {
-        align-items: start;
-        gap: 12px;
-      }
-      color: rgba(255, 255, 255, 0.7);
-      font-size: 14px;
-      font-weight: 500;
+    display: flex;
+
+    .referral-link {
+      width: 50%;
       display: flex;
-      align-items: center;
-      gap: 12px;
-      span {
-        color: #fff;
-        font-size: 24px;
-        font-weight: 700;
-      }
+      flex-direction: column;
+      gap: 8px;
+      align-items: start;
+    }
+    .referral-code {
+      gap: 8px;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
     }
   }
-  p {
-    color: #fff;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 150%; /* 21px */
-    margin: 0 auto;
-    @media screen and (max-width: 600px) {
-      display: none;
+  .ranking-wrapper {
+    width: 100%;
+    display: flex;
+    .ranking {
+      width: 30%;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: start;
+    }
+    .total-ref {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      align-items: start;
     }
   }
   .table {
     width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 6px;
     flex: 1;
     overflow: scroll;
     &::-webkit-scrollbar {
       display: none;
     }
-    .quest-name {
-      flex: 1;
+    .rank {
+      width: 15%;
       display: flex;
       align-items: start;
       flex-direction: column;
@@ -111,19 +94,15 @@ export const Wrapper = styled.div`
         line-height: normal;
       }
     }
-    .quest-point {
-      width: 15%;
-      @media screen and (max-width: 600px) {
-        width: 20%;
-      }
+    .address {
+      flex: 1;
+      text-align: start;
     }
-    .quest-status {
+    .point,
+    .total-point {
       width: 20%;
       display: flex;
       justify-content: end;
-      @media screen and (max-width: 600px) {
-        width: 25%;
-      }
       .status-0 {
         color: #fff;
         font-weight: 700;
@@ -148,6 +127,8 @@ export const Wrapper = styled.div`
       font-size: 14px;
       font-weight: 500;
       gap: 12px;
+      padding: 8px 0px;
+      border-bottom: 1px solid #556680;
       @media screen and (max-width: 600px) {
         width: 130%;
       }
@@ -160,8 +141,15 @@ export const Wrapper = styled.div`
       font-size: 14px;
       font-style: normal;
       font-weight: 500;
+      padding: 8px 0px;
+      transition: all 0.3s;
       @media screen and (max-width: 600px) {
         width: 130%;
+      }
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.7);
+        transform: translateY(-4px);
+        box-shadow: rgba(29, 218, 228, 0.35) 0px 5px 15px;
       }
     }
   }

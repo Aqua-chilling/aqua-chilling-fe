@@ -26,9 +26,10 @@ export const Wrapper = styled.div`
   border: 6px solid #090910;
   @media screen and (max-width: 1024px) {
     background-size: cover;
+    height: unset;
+    position: relative;
   }
   @media screen and (max-width: 600px) {
-    min-height: 1200px;
   }
   .land {
     position: fixed;
@@ -47,8 +48,15 @@ export const Wrapper = styled.div`
     justify-content: space-between;
     padding: 12px 24px;
     background: #061225;
+    z-index: 3;
+    @media screen and (max-width: 1024px) {
+      padding: 12px 6px;
+    }
     .title {
       width: 160px;
+      @media screen and (max-width: 1024px) {
+        display: none;
+      }
     }
     .tabs {
       display: flex;
@@ -59,6 +67,9 @@ export const Wrapper = styled.div`
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.1);
       gap: 8px;
+      @media screen and (max-width: 1024px) {
+        width: 100%;
+      }
       .tab {
         width: 136px;
         color: #fff;
@@ -85,13 +96,9 @@ export const Wrapper = styled.div`
       }
     }
     .btn-sell {
-      border-radius: 12px;
-      border: 4px solid #71b6a9;
-      background: #588d99;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 10px 32px;
+      @media screen and (max-width: 1024px) {
+        display: none;
+      }
     }
   }
   .airdrop-detail-content-container {
@@ -102,6 +109,12 @@ export const Wrapper = styled.div`
     width: 100%;
     position: relative;
     z-index: 2;
+    justify-content: center;
+    @media screen and (max-width: 1024px) {
+      flex-direction: column;
+      margin-top: 50px;
+      padding: 12px;
+    }
     .left-bar {
       background: #0c2449;
       width: 360px;
@@ -111,6 +124,10 @@ export const Wrapper = styled.div`
       align-items: flex-start;
       overflow-y: auto;
       border-radius: 6px;
+      @media screen and (max-width: 1024px) {
+        width: 100%;
+        height: unset;
+      }
 
       &::-webkit-scrollbar {
         display: none;
@@ -126,6 +143,9 @@ export const Wrapper = styled.div`
         background: #090910;
         padding: 6px;
         height: 100%;
+        @media screen and (max-width: 1024px) {
+          width: 100%;
+        }
         .outer-2 {
           height: 100%;
           border-radius: 6px;
@@ -252,8 +272,19 @@ export const Wrapper = styled.div`
       }
     }
     .airdrop-detail-content {
-      flex: 1;
+      &.task {
+        flex: 1;
+      }
       max-height: 80vh;
+      overflow: scroll;
+      min-width: 70%;
+      @media screen and (max-width: 1024px) {
+        max-height: unset;
+      }
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
       display: flex;
       flex-direction: column;
       align-items: flex-start;
@@ -262,6 +293,9 @@ export const Wrapper = styled.div`
       border: 1px solid #143464;
       background: #0a1d3a;
       padding: 16px;
+      @media screen and (max-width: 500px) {
+        padding: 0;
+      }
     }
   }
 `;
