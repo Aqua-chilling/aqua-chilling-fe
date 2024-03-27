@@ -10,7 +10,7 @@ export const Footer = () => {
       <div className='footer'>
         <div className='logos'>
           <img src={x} alt='' onClick={() => window.open('https://twitter.com/aquachilling')} />
-          <img src={discord} alt='' onClick={() => window.open('https://discord.gg/S2JY3JQz')} />
+          <img src={discord} alt='' onClick={() => window.open('https://discord.com/invite/3AFGvRmqRH')} />
         </div>
         {/* <span>Made by Tevel team. All right reserved</span> */}
       </div>
