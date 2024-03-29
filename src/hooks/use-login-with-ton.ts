@@ -68,7 +68,8 @@ export const useLoginWithTon = () => {
       });
       return;
     }
-    if (wallet.connectItems?.tonProof && !('error' in wallet.connectItems.tonProof)) {
+    console.log('wallet', wallet);
+    if (wallet.connectItems?.tonProof && 'proof' in wallet.connectItems.tonProof) {
       const account = wallet.account;
       const proof = wallet.connectItems.tonProof.proof;
       const tonProof = {
@@ -79,46 +80,58 @@ export const useLoginWithTon = () => {
           state_init: account.walletStateInit
         }
       };
-      OauthRepository.oauthTon(tonProof).then((tonOauthResponse) => {
-        if (tonOauthResponse?.token) {
-          addNotification({
-            message: 'Sign with TON successfully',
-            type: NOTIFICATION_TYPE.SUCCESS,
-            id: new Date().getTime()
-          });
-          dispatch(
-            updateAccount({
-              email: tonOauthResponse?.email,
-              address: tonOauthResponse?.address,
-              token: tonOauthResponse?.token,
-              id: tonOauthResponse?.id,
-              name: tonOauthResponse?.name
-            })
-          );
-          dispatch(
-            updateDiscordId({
-              discord: tonOauthResponse?.discord
-            })
-          );
-          dispatch(
-            updateTwitterId({
-              twitter: tonOauthResponse?.twitter
-            })
-          );
-          dispatch(
-            updateReferral({
-              referral_code: tonOauthResponse?.referral_code,
-              refreferral_code_status: tonOauthResponse?.referral_code_status
-            })
-          );
-        } else {
-          addNotification({
-            message: 'Sign with TON failed',
-            type: NOTIFICATION_TYPE.ERROR,
-            id: new Date().getTime()
-          });
-        }
-      });
+
+      console.log('tonProof', tonProof);
+      try {
+        OauthRepository.oauthTon(tonProof).then((tonOauthResponse) => {
+          if (tonOauthResponse?.token) {
+            addNotification({
+              message: 'Sign with TON successfully',
+              type: NOTIFICATION_TYPE.SUCCESS,
+              id: new Date().getTime()
+            });
+            dispatch(
+              updateAccount({
+                email: tonOauthResponse?.email,
+                address: tonOauthResponse?.address,
+                token: tonOauthResponse?.token,
+                id: tonOauthResponse?.id,
+                name: tonOauthResponse?.name
+              })
+            );
+            dispatch(
+              updateDiscordId({
+                discord: tonOauthResponse?.discord
+              })
+            );
+            dispatch(
+              updateTwitterId({
+                twitter: tonOauthResponse?.twitter
+              })
+            );
+            dispatch(
+              updateReferral({
+                referral_code: tonOauthResponse?.referral_code,
+                refreferral_code_status: tonOauthResponse?.referral_code_status
+              })
+            );
+          } else {
+            addNotification({
+              message: 'Something went wrong! Try another wallet or try again later!',
+              type: NOTIFICATION_TYPE.ERROR,
+              id: new Date().getTime()
+            });
+            tonConnectUI.disconnect();
+          }
+        });
+      } catch {
+        addNotification({
+          message: `Something went wrong! Try another wallet or try again later!`,
+          type: NOTIFICATION_TYPE.ERROR,
+          id: new Date().getTime()
+        });
+        tonConnectUI.disconnect();
+      }
     } else {
       addNotification({
         message: 'Sign with TON failed',
