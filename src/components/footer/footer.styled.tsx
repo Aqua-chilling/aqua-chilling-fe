@@ -22,13 +22,19 @@ export const Wrapper = styled.div`
         }
       }
     }
-    span {
+    .navs {
       color: rgba(255, 255, 255, 0.7);
       text-align: center;
       font-size: 16px;
       font-style: normal;
       font-weight: 400;
       line-height: 150%; /* 24px */
+      span {
+        transition: all 0.3s;
+        &:hover {
+          color: white;
+        }
+      }
     }
   }
 `;

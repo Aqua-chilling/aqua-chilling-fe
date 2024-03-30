@@ -4,7 +4,7 @@ import { combineReducers } from 'redux';
 import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import { useDispatch } from 'react-redux';
-import { AccountReducer } from '@/redux';
+import { AccountReducer, DiscordIdReducer, ReferralReducer, TwitterIdReducer } from '@/redux';
 
 const accountPersistConfig = {
   key: 'account',
@@ -12,7 +12,10 @@ const accountPersistConfig = {
   blacklist: ['isLoadingVerifyWallet']
 };
 const reducers = combineReducers({
-  account: persistReducer(accountPersistConfig, AccountReducer)
+  account: persistReducer(accountPersistConfig, AccountReducer),
+  discord: persistReducer(accountPersistConfig, DiscordIdReducer),
+  twitter: persistReducer(accountPersistConfig, TwitterIdReducer),
+  referral: persistReducer(accountPersistConfig, ReferralReducer)
 });
 
 const persistConfig = {

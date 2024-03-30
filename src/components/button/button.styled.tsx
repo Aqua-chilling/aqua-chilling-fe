@@ -22,8 +22,8 @@ export const SecondaryButton = ({ children, w }: { children: any; w?: number }) 
     </SecondButton>
   );
 };
-export const PrimaryBtn = styled.div<{ w: any }>`
-  width: ${(props) => (props.w ? `${props.w}px` : ' auto')};
+export const PrimaryBtn = styled.div<{ w?: any }>`
+  width: ${(props) => (props.w ? `${props.w}px` : '100%')};
   height: 48px;
   border-radius: 6px;
   background: #090910;
@@ -31,41 +31,29 @@ export const PrimaryBtn = styled.div<{ w: any }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 2px;
   .layer1 {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 97%;
-    height: 97%;
-    z-index: 1;
-    border-radius: 4px;
-    background: #f2de29;
+    border-radius: 6px;
+    background: #ffcf27;
+    padding: 2px;
+    width: 100%;
+    height: 100%;
     .layer2 {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 97%;
-      height: 97%;
-      z-index: 2;
       border-radius: 4px;
       background: #fffd8a;
-      color: #4b1606;
+      padding: 4px;
+      width: 100%;
+      height: 100%;
       .layer3 {
-        border-radius: 4px;
-        background: #f2de29;
-        position: relative;
-        z-index: 3;
-        width: 96%;
-        height: 95%;
-
+        width: 100%;
+        height: 100%;
         display: flex;
         align-items: center;
         justify-content: center;
-
-        /* B16 */
-        font-family: Quicksand;
+        border-radius: 4px;
+        background: #f2de29;
+        color: #4b1606;
+        text-align: center;
         font-size: 16px;
         font-style: normal;
         font-weight: 700;

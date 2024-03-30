@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Loading } from "@/components";
-import { useLocation } from "react-router";
+import React, { useState } from 'react';
+import { Loading } from '@/components';
+import { useLocation } from 'react-router';
 
 export const LoadingProvider = ({ children }: any) => {
   const location = useLocation();
@@ -10,17 +10,19 @@ export const LoadingProvider = ({ children }: any) => {
     window.scrollTo(0, 0);
     const onHidePreLoading = () => {
       try {
-        const element = document.querySelector("#loading") as HTMLElement;
-        element.style.opacity = "0";
-        element.style.visibility = "hidden";
+        const element = document.querySelector('#loading') as HTMLElement;
+        element.style.opacity = '0';
+        element.style.visibility = 'hidden';
         setTimeout(() => {
           setIsLoading(false);
-        }, 3000);
+        }, 100);
       } catch (err: any) {
-        console.log;
+        console.log(err);
+        setIsLoading(false);
       }
     };
-    const timer1 = setTimeout(onHidePreLoading, 2500);
+    const isAtHome = location.pathname.length <= 1;
+    const timer1 = setTimeout(onHidePreLoading, isAtHome ? 0 : 1500);
     return () => {
       clearTimeout(timer1);
     };

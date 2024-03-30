@@ -25,6 +25,9 @@ export const FixedGlobalStyle = createGlobalStyle`
           z-index: -1 !important;
         }
     }
+    #tc-widget-root *{
+        cursor: none !important;
+    }
     *{
         cursor: none;
         box-sizing: border-box;
@@ -36,5 +39,15 @@ export const FixedGlobalStyle = createGlobalStyle`
             width: 100%;
             height: 100%;
         }
+    }
+    .notifications-container{
+        position: fixed;
+        top:15%;
+        right: 2%;
+        z-index: 99999999;
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        
     }
 `;

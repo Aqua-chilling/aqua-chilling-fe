@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 import LogoImage from '@/assets/logo.png';
 import { HeaderMobile } from './header-mobile';
 import { WrapperContent } from '../wrapper-content/wrapper-content.styled';
-import { PrimaryButton } from '../button/button.styled';
 interface IHeaderProps {}
 
 const HeaderComponent = ({}: IHeaderProps) => {
@@ -26,7 +25,6 @@ const HeaderComponent = ({}: IHeaderProps) => {
           >
             <img src={LogoImage} alt='Logo' />
           </div>
-          {/* <PrimaryButton w={160}>Connect wallet</PrimaryButton> */}
         </div>
       </WrapperContent>
     </Wrapper>

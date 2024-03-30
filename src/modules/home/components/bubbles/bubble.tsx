@@ -2,7 +2,7 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import React, { useEffect, useRef } from 'react';
 import './bubble.css';
-export const Bubble = ({ style, y, x }: { style?: string; y?: number; x?: number }) => {
+export const Bubble = ({ style, y, x, maxScale }: { style?: string; y?: number; x?: number; maxScale?: number }) => {
   const randomX = () => {
     return Math.random() * (x || 205) - (x ? Math.round(x / 2) : 100);
   };
@@ -10,7 +10,7 @@ export const Bubble = ({ style, y, x }: { style?: string; y?: number; x?: number
     return Math.random() * (y || 300) + (y ? 0 : 260);
   };
   const randomScale = () => {
-    return Math.random() * 3 - 1;
+    return Math.random() * (maxScale ? maxScale : 3) - 1;
   };
   const randomXHover = () => {
     return Math.random() * 100 - 50;

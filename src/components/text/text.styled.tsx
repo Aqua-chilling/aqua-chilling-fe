@@ -11,6 +11,9 @@ export const Title = styled.div`
   @media screen and (max-width: 768px) {
     font-size: 28px;
   }
+  @media screen and (max-width: 500px) {
+    font-size: 20px;
+  }
 `;
 export const Description = styled.div`
   color: #f1c8dd;

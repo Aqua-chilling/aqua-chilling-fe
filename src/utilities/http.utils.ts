@@ -16,7 +16,7 @@ export let accessToken = '';
 
 instance.interceptors.request.use(
   (req: any) => {
-    req.baseURL = `${ENVS.VITE_BASE_API}/`;
+    req.baseURL = `${ENVS.VITE_BASE_BC_API}/api/`;
     let authen = {};
     if (accessToken) {
       authen = { Authorization: `Bearer ${accessToken}` };

@@ -12,7 +12,24 @@ export const Footer = () => {
           <img src={x} alt='' onClick={() => window.open('https://twitter.com/aquachilling')} />
           <img src={discord} alt='' onClick={() => window.open('https://discord.com/invite/3AFGvRmqRH')} />
         </div>
-        {/* <span>Made by Tevel team. All right reserved</span> */}
+        <div className='navs'>
+          <span
+            onClick={() => {
+              window.open('/privacy-policy', '_blank');
+            }}
+          >
+            Privacy policy
+          </span>{' '}
+          -{' '}
+          <span
+            onClick={() => {
+              window.open('/terms-of-service', '_blank');
+            }}
+          >
+            {' '}
+            Terms of service
+          </span>
+        </div>
       </div>
     </Wrapper>
   );
