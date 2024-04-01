@@ -7,6 +7,7 @@ import { MarketPlace } from '@/modules/marketplace/marketplace';
 import { NFTTermsOfService } from '@/modules/nft-terms-of-service/nft-terms-of-service';
 import { PrivacyPolicy } from '@/modules/privacy-policy/privacy-policy';
 import { TermsOfService } from '@/modules/terms-of-service/terms-of-service';
+import { Packages } from '@/modules/packages/packages';
 import React, { PropsWithChildren } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
@@ -42,6 +43,10 @@ const elements = [
   {
     Component: OauthSuccess,
     path: '/airdrop/oauth/success'
+  },
+  {
+    Component: Packages,
+    path: '/packages'
   }
 ];
 

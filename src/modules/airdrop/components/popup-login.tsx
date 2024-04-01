@@ -38,11 +38,7 @@ export const PopUpLogin = ({ setControl }: any) => {
       <div className='login-content'>
         <div className='steps'>
           <div className='title'>Login</div>
-          <div className='subtitle'>
-          Connect your TON wallet to start joining airdrop program.
-            
-        
-          </div>
+          <div className='subtitle'>Connect your TON wallet to start joining airdrop program.</div>
           {/* <div className='step '>
             <div className='label'>Enter email</div>
             <div className='btns'>
