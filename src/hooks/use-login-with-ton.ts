@@ -88,8 +88,8 @@ export const useLoginWithTon = () => {
           };
 
           console.log('tonProof', tonProof);
-          try {
-            OauthRepository.oauthTon(tonProof).then((tonOauthResponse) => {
+          OauthRepository.oauthTon(tonProof)
+            .then((tonOauthResponse) => {
               if (tonOauthResponse?.token) {
                 addNotification({
                   message: 'Sign with TON successfully',
@@ -129,15 +129,15 @@ export const useLoginWithTon = () => {
                 });
                 tonConnectUI.disconnect();
               }
+            })
+            .catch(() => {
+              addNotification({
+                message: `Something went wrong! Try another wallet or try again later!`,
+                type: NOTIFICATION_TYPE.ERROR,
+                id: new Date().getTime()
+              });
+              tonConnectUI.disconnect();
             });
-          } catch {
-            addNotification({
-              message: `Something went wrong! Try another wallet or try again later!`,
-              type: NOTIFICATION_TYPE.ERROR,
-              id: new Date().getTime()
-            });
-            tonConnectUI.disconnect();
-          }
         } else {
           console.log('invalid proof');
           addNotification({
