@@ -20,13 +20,13 @@ const copyICONSVG = `
 
 export const Referral = ({ data }: any) => {
   const { addNotification } = useNotification();
-  const [refHistory, setRefHistory] = React.useState<any[]>();
+  const [refHistory, setRefHistory] = React.useState<any>();
   console.log(data);
 
   React.useEffect(() => {
     OnboardingRepository.RetrieveReferralsHistory()
       .then((rs) => {
-        console.log(rs);
+        setRefHistory(rs);
       })
       .catch((err) => {
         console.log(err);
@@ -75,11 +75,11 @@ export const Referral = ({ data }: any) => {
       <div className='ranking-wrapper'>
         <div className='ranking'>
           <span>Ranking</span>
-          <div className='value'>...</div>
+          <div className='value'>{refHistory?.rank}</div>
         </div>
         <div className='total-ref'>
           <span>Total Referrals</span>
-          <div className='value'>...</div>
+          <div className='value'>{refHistory?.total_referral}</div>
         </div>
       </div>
       <div className='link'></div>
@@ -90,8 +90,8 @@ export const Referral = ({ data }: any) => {
           <div className='point'> </div>
           <div className='total-point'> </div>
         </div>
-        {refHistory ? (
-          refHistory?.map((item: any, key: number) => {
+        {refHistory?.referrals?.length > 0 ? (
+          refHistory?.referrals?.map((item: any, key: number) => {
             return (
               <div className='table-row' key={key}>
                 <div className='rank'>{item?.rank}</div>

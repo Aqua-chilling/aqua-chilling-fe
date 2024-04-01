@@ -82,7 +82,7 @@ export const Wrapper = styled.div`
       font-size: 14px;
       font-weight: 500;
       gap: 12px;
-      padding: 8px 0px;
+      padding: 8px;
       border-bottom: 1px solid #556680;
       @media screen and (max-width: 600px) {
         width: 130%;
@@ -96,13 +96,14 @@ export const Wrapper = styled.div`
       font-size: 14px;
       font-style: normal;
       font-weight: 500;
-      padding: 8px 0px;
+      padding: 8px;
       transition: all 0.3s;
+      border-radius: 4px;
       @media screen and (max-width: 600px) {
         width: 130%;
       }
       &:hover {
-        background-color: rgba(255, 255, 255, 0.7);
+        background-color: rgba(255, 255, 255, 0.121);
         transform: translateY(-4px);
         box-shadow: rgba(29, 218, 228, 0.35) 0px 5px 15px;
       }
