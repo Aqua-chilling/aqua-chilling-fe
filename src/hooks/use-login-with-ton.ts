@@ -63,17 +63,17 @@ export const useLoginWithTon = () => {
           dispatch(deleteAccount());
           return;
         }
-        if (w.account?.chain !== activeChain) {
-          console.log('invalid chain', activeChain, w.account?.chain);
-          dispatch(deleteAccount());
-          tonConnectUI.disconnect();
-          addNotification({
-            message: `Invalid chain. Please switch to TON ${activeChainName}`,
-            type: NOTIFICATION_TYPE.ERROR,
-            id: new Date().getTime()
-          });
-          return;
-        }
+        // if (w.account?.chain !== activeChain) {
+        //   console.log('invalid chain', activeChain, w.account?.chain);
+        //   dispatch(deleteAccount());
+        //   tonConnectUI.disconnect();
+        //   addNotification({
+        //     message: `Invalid chain. Please switch to TON ${activeChainName}`,
+        //     type: NOTIFICATION_TYPE.ERROR,
+        //     id: new Date().getTime()
+        //   });
+        //   return;
+        // }
 
         if (w.connectItems?.tonProof && 'proof' in w.connectItems.tonProof) {
           const account = w.account;
