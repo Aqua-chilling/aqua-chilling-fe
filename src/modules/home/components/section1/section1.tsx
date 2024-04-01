@@ -16,6 +16,8 @@ import fish7 from '@/assets/home/fish7.png';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { Description, Title } from '@/components/text/text.styled';
+import { NOTIFICATION_TYPE } from '@/components/notification/notification';
+import { useNotification } from '@/contexts/notification.context';
 
 export const Section1 = () => {
   const ref = useRef<any>(null);
@@ -26,6 +28,7 @@ export const Section1 = () => {
   const fish5Ref = useRef<any>(null);
   const fish6Ref = useRef<any>(null);
   const fish7Ref = useRef<any>(null);
+  const { addNotification } = useNotification();
   useGSAP(() => {
     const animFish1 = () => {
       const tl = gsap.timeline({ delay: 0 });
@@ -244,6 +247,18 @@ export const Section1 = () => {
           <div className='btns'>
             {/* <Magnifier /> */}
             <PrimaryButton w={220}>Join Quest</PrimaryButton>
+
+            <div
+              onClick={() => {
+                addNotification({
+                  message: 'Comming soon',
+                  type: NOTIFICATION_TYPE.SUCCESS,
+                  id: new Date().getTime()
+                });
+              }}
+            >
+              <SecondaryButton w={220}>Play game</SecondaryButton>
+            </div>
           </div>
         </div>
       </WrapperContent>
