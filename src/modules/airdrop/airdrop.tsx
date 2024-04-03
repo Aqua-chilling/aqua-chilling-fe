@@ -22,11 +22,11 @@ import { useSelector } from 'react-redux';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import { dispatch } from '@/app/store';
 import { useWriteTransaction } from '@/hooks/use-write-transaction';
+import { useLocation } from 'react-router';
 
 export const AirDrop = () => {
   const [isShowPopupQuest, setIsShowPopupQuest] = React.useState(false);
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
-
   const token = useSelector(selectToken);
   React.useEffect(() => {
     if (token) {

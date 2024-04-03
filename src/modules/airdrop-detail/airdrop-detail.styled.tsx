@@ -261,8 +261,10 @@ export const Wrapper = styled.div`
                     font-style: normal;
                     font-weight: 700;
                     line-height: normal;
-                    letter-spacing: -0.32px;
-                    cursor: pointer;
+                    transition: all 0.3s;
+                    &:hover {
+                      transform: scale(1.1);
+                    }
                   }
                 }
               }

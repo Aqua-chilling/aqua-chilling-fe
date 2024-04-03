@@ -14,17 +14,19 @@ import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import { ILoginPayload } from '@/repositories/oauth/oauth.entity';
 import { Spin, message } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import { updateAccount, updateDiscordId, updateTwitterId } from '@/redux';
+import { selectToken, updateAccount, updateDiscordId, updateTwitterId } from '@/redux';
 import { dispatch } from '@/app/store';
 import { updateReferral } from '@/redux/referral';
 import { getDiscordOauthUrl, getTwitterOauthUrl } from '../hard';
 import { useTonConnectModal, useTonWallet } from '@tonconnect/ui-react';
 import ConnectButton from '@/components/ton-connect/ton-connect';
 import { useLoginWithTon } from '@/hooks/use-login-with-ton';
+import { useSelector } from 'react-redux';
 
 export const PopUpLogin = ({ setControl }: any) => {
   // const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
+  const token = useSelector(selectToken);
   // const [email, setEmail] = React.useState<string>('');
   // const [password, setPassword] = React.useState<string>('');
   // const [showPassword, setShowPassword] = React.useState<boolean>(false);
@@ -156,7 +158,7 @@ export const PopUpLogin = ({ setControl }: any) => {
             </div>
           </div> */}
 
-          {!wallet && (
+          {!token && (
             <div className='step st'>
               <div className='btns'>
                 <div

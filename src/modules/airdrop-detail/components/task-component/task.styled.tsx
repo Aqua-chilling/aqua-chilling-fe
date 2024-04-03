@@ -35,6 +35,7 @@ export const Wrapper = styled.div`
     width: 100%;
     border-radius: 20px;
     background: #143464;
+    max-height: 200px;
     @media screen and (max-width: 680px) {
       flex-direction: column;
       .upgrade-btn-below {
@@ -42,11 +43,10 @@ export const Wrapper = styled.div`
       }
     }
     .left {
+      height: 100%;
       img {
-        width: 100%;
-        @media screen and (max-width: 680px) {
-          width: 50%;
-        }
+        max-height: 180px;
+
         @media screen and (max-width: 500px) {
           max-width: 80px;
         }
@@ -122,7 +122,7 @@ export const Wrapper = styled.div`
       display: flex;
       justify-content: end;
       @media screen and (max-width: 600px) {
-        width: 25%;
+        width: 30%;
       }
       .status-0 {
         color: #fff;
@@ -134,10 +134,20 @@ export const Wrapper = styled.div`
         border-radius: 12px;
         border: 4px solid #71b6a9;
         background: #588d99;
-        padding: 0px 15px;
+        padding: 4px 15px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
         &:hover {
-          transform: scale(1.1);
+          transform: scale(1.01);
         }
+      }
+      .status-1 {
+        color: #37ff7b;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
       }
     }
     .table-head {
@@ -149,7 +159,7 @@ export const Wrapper = styled.div`
       font-weight: 500;
       gap: 12px;
       @media screen and (max-width: 600px) {
-        width: 130%;
+        width: 170%;
       }
     }
     .table-row {
@@ -161,7 +171,7 @@ export const Wrapper = styled.div`
       font-style: normal;
       font-weight: 500;
       @media screen and (max-width: 600px) {
-        width: 130%;
+        width: 170%;
       }
     }
   }

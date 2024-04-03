@@ -5,8 +5,18 @@ import close from '@/assets/airdrop-detail/close.png';
 export const Received = ({ setControl }: any) => {
   return (
     <Wrapper>
-      <img src={nftLevel1} alt='' className='nft' />
-      <img src={close} className='close-received' alt='' onClick={() => setControl(false)} />
+      <div className='imgs'>
+        <img src={nftLevel1} alt='' className='nft' />
+        <img
+          src={close}
+          className='close-received'
+          alt=''
+          onClick={() => {
+            setControl(false);
+            localStorage.setItem('received', 'true');
+          }}
+        />
+      </div>
     </Wrapper>
   );
 };
