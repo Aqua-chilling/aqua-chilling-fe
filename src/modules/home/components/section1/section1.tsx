@@ -18,7 +18,7 @@ import gsap from 'gsap';
 import { Description, Title } from '@/components/text/text.styled';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { useNotification } from '@/contexts/notification.context';
-
+import {useNavigate} from "react-router-dom";
 export const Section1 = () => {
   const ref = useRef<any>(null);
   const navigate = useNavigate();
