@@ -16,13 +16,13 @@ export const CredentialProvider = ({ children }: { children: any }) => {
   useEffect(() => {
     setAccessToken(token);
     setAccessGameToken(token);
-    if (!token && status === ConnectionStatus.CONNECTED && addressSigned?.toLowerCase() === address?.toLowerCase()) {
+    if (!token  && addressSigned?.toLowerCase() === address?.toLowerCase()) {
       handleOpenAuthenticateModal();
     }
   }, [token]);
 
   useEffect(() => {
-    if (status === ConnectionStatus.CONNECTED && addressSigned?.toLowerCase() !== address?.toLowerCase()) {
+    if ( addressSigned?.toLowerCase() !== address?.toLowerCase()) {
       dispatch(deleteAccount());
       handleOpenAuthenticateModal();
     }
