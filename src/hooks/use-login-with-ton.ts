@@ -158,7 +158,29 @@ export const useLoginWithTon = () => {
       tonConnectUI.disconnect();
     }
   }, [wallet, isConnectionRestored]);
+
+  const signOut = useCallback(()=>{
+    tonConnectUI.disconnect();
+    dispatch(deleteAccount());
+    dispatch(
+      updateDiscordId({
+        discord: undefined
+      })
+    );
+    dispatch(
+      updateTwitterId({
+        twitter: undefined
+      })
+    );
+    dispatch(
+      updateReferral({
+        referral_code: '',
+        refreferral_code_status: 0
+      })
+    );
+  }, [tonConnectUI,dispatch])
   return {
-    open
+    open,
+    signOut
   };
 };
