@@ -249,7 +249,7 @@ export const Section1 = () => {
           <div className='btns'>
             {/* <Magnifier /> */}
             <div onClick={
-            navigate("/airdrop")
+            ()=>navigate("/airdrop")
             }>
 
             
