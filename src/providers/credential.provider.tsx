@@ -11,7 +11,7 @@ export const CredentialProvider = ({ children }: { children: any }) => {
   const dispatch = useAppDispatch();
   const token = useSelector(selectToken);
   const addressSigned = useSelector(selectAddress);
-  const { handleOpenAuthenticateModal, address, status } = useWalletContext() || {};
+  
 
   useEffect(() => {
     setAccessToken(token);
