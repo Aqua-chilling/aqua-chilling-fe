@@ -4,7 +4,6 @@ import { ERROR_CODE } from '@/constants';
 import { deleteAccount } from '@/redux';
 import { dispatch } from '@/app/store';
 import { camelCaseKeys } from './string.utils';
-import { useWalletContext } from '@/contexts/wallet.context';
 const TIMEOUT = 20000;
 const instance = axios.create({
   timeout: TIMEOUT
