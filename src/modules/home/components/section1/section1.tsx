@@ -21,6 +21,8 @@ import { useNotification } from '@/contexts/notification.context';
 
 export const Section1 = () => {
   const ref = useRef<any>(null);
+  const navigate = useNavigate();
+  
   const fish1Ref = useRef<any>(null);
   const fish2Ref = useRef<any>(null);
   const fish3Ref = useRef<any>(null);
@@ -246,8 +248,13 @@ export const Section1 = () => {
           </Description>
           <div className='btns'>
             {/* <Magnifier /> */}
-            <PrimaryButton w={220}>Join Quest</PrimaryButton>
+            <div onClick={
+            navigate("/airdrop")
+            }>
 
+            
+            <PrimaryButton w={220}>Join Quest</PrimaryButton>
+</div>
             <div
               onClick={() => {
                 addNotification({
