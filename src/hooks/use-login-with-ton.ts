@@ -168,117 +168,28 @@ export const useLoginWithTon = () => {
     [tonConnectUI, isConnectionRestored]
   );
 
-  // useEffect(() => {
-  //   const activeChain = ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
-  //   const activeChainName = ENVS.VITE_ISTESTNET ? 'Testnet' : 'Mainnet';
-  //   if (!isConnectionRestored) {
-  //     return;
-  //   }
-  //   if (!wallet) {
-  //     dispatch(deleteAccount());
-  //     return;
-  //   }
-  //   if (wallet.account?.chain !== activeChain) {
-  //     dispatch(deleteAccount());
-  //     tonConnectUI.disconnect();
-  //     addNotification({
-  //       message: `Invalid chain. Please switch to TON ${activeChainName}`,
-  //       type: NOTIFICATION_TYPE.ERROR,
-  //       id: new Date().getTime()
-  //     });
-  //     return;
-  //   }
-  //   console.log('wallet', wallet);
-  //   if (wallet.connectItems?.tonProof && 'proof' in wallet.connectItems.tonProof) {
-  //     const account = wallet.account;
-  //     const proof = wallet.connectItems.tonProof.proof;
-  //     const tonProof = {
-  //       address: account.address,
-  //       network: account.chain,
-  //       proof: {
-  //         ...proof,
-  //         state_init: account.walletStateInit
-  //       }
-  //     };
-
-  //     console.log('tonProof', tonProof);
-  //     try {
-  //       OauthRepository.oauthTon(tonProof).then((tonOauthResponse) => {
-  //         if (tonOauthResponse?.token) {
-  //           addNotification({
-  //             message: 'Sign with TON successfully',
-  //             type: NOTIFICATION_TYPE.SUCCESS,
-  //             id: new Date().getTime()
-  //           });
-  //           dispatch(
-  //             updateAccount({
-  //               email: tonOauthResponse?.email,
-  //               address: tonOauthResponse?.address,
-  //               token: tonOauthResponse?.token,
-  //               id: tonOauthResponse?.id,
-  //               name: tonOauthResponse?.name
-  //             })
-  //           );
-  //           dispatch(
-  //             updateDiscordId({
-  //               discord: tonOauthResponse?.discord
-  //             })
-  //           );
-  //           dispatch(
-  //             updateTwitterId({
-  //               twitter: tonOauthResponse?.twitter
-  //             })
-  //           );
-  //           dispatch(
-  //             updateReferral({
-  //               referral_code: tonOauthResponse?.referral_code,
-  //               refreferral_code_status: tonOauthResponse?.referral_code_status
-  //             })
-  //           );
-  //         } else {
-  //           addNotification({
-  //             message: 'Something went wrong! Try another wallet or try again later!',
-  //             type: NOTIFICATION_TYPE.ERROR,
-  //             id: new Date().getTime()
-  //           });
-  //           tonConnectUI.disconnect();
-  //         }
-  //       });
-  //     } catch {
-  //       addNotification({
-  //         message: `Something went wrong! Try another wallet or try again later!`,
-  //         type: NOTIFICATION_TYPE.ERROR,
-  //         id: new Date().getTime()
-  //       });
-  //       tonConnectUI.disconnect();
-  //     }
-  //   } else {
-  //     addNotification({
-  //       message: 'Sign with TON failed',
-  //       type: NOTIFICATION_TYPE.ERROR,
-  //       id: new Date().getTime()
-  //     });
-  //     dispatch(deleteAccount());
-  //     dispatch(
-  //       updateDiscordId({
-  //         discord: undefined
-  //       })
-  //     );
-  //     dispatch(
-  //       updateTwitterId({
-  //         twitter: undefined
-  //       })
-  //     );
-  //     dispatch(
-  //       updateReferral({
-  //         referral_code: '',
-  //         refreferral_code_status: 0
-  //       })
-  //     );
-  //     tonConnectUI.disconnect();
-  //   }
-  // }, [wallet, isConnectionRestored]);
+  const signOut = useCallback(()=>{
+    tonConnectUI.disconnect();
+    dispatch(deleteAccount());
+    dispatch(
+      updateDiscordId({
+        discord: undefined
+      })
+    );
+    dispatch(
+      updateTwitterId({
+        twitter: undefined
+      })
+    );
+    dispatch(
+      updateReferral({
+        referral_code: '',
+        refreferral_code_status: 0
+      })
+    );
+  }, [tonConnectUI,dispatch])
   return {
-    open
+    open,
+    signOut
   };
 };
