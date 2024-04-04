@@ -5,7 +5,7 @@ import { store } from './store';
 import { QueryClientProvider } from 'react-query';
 import { ThirdwebProvider } from '@thirdweb-dev/react';
 import { QueryClient } from 'react-query';
-import { CredentialProvider } from '@/providers/credential.provider';
+
 import { RouterProvider } from '@/providers/router.provider';
 import { ENVS } from '@/config';
 // import { LoadingProvider } from '@/providers/loading.provider';
@@ -49,13 +49,13 @@ export const App = () => {
               ]
             }}
           >
-            <CredentialProvider>
+            
               <FixedGlobalStyle />
               {window.innerWidth > 780 && <CustomCurSor />}
               <NotificationProvider>
                 <RouterProvider>{<LoadingProvider />}</RouterProvider>
               </NotificationProvider>
-            </CredentialProvider>
+            
           </TonConnectUIProvider>
         </QueryClientProvider>
       </PersistGate>
