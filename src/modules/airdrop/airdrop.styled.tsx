@@ -20,6 +20,8 @@ export const Wrapper = styled.div`
     min-height: 1200px;
   }
 
+  position: relative;
+  z-index: 1;
   .top-airdrop {
     background-image: url(${bgTop});
     background-size: 100% 100%;
@@ -223,6 +225,50 @@ export const Wrapper = styled.div`
       font-weight: 700;
       line-height: normal;
       letter-spacing: -0.4px;
+    }
+  }
+  .fish {
+    position: absolute;
+    z-index: 0;
+    &.a {
+      top: 300px;
+      right: 60px;
+    }
+    &.b {
+      top: 500px;
+      left: 200px;
+    }
+    &.c {
+      top: 158px;
+      right: 356px;
+    }
+    &.d {
+      bottom: 0px;
+      left: 456px;
+    }
+    &.e {
+      bottom: 10px;
+      right: 356px;
+    }
+    &.f {
+      top: 350px;
+      left: 556px;
+    }
+    &.g {
+      bottom: 10px;
+      right: left;
+    }
+  }
+  .bubbles-section1 {
+    position: absolute;
+    z-index: 2;
+    &.left {
+      left: 10%;
+      bottom: -20%;
+    }
+    &.right {
+      bottom: -20%;
+      right: 10%;
     }
   }
 `;

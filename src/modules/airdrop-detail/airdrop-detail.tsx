@@ -8,7 +8,7 @@ import ton from '@/assets/ton.png';
 import land from '@/assets/airdrop-detail/land.png';
 import { Wrapper } from './airdrop-detail.styled';
 import { Modal } from '@/components/modal/modal';
-import React from 'react';
+import React, { useRef } from 'react';
 import { PrimaryButton } from '@/components/button/button.styled';
 import { Task } from './components/task-component/task';
 import { useNavigate } from 'react-router';

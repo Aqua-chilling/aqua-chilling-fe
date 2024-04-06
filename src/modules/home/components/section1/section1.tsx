@@ -18,11 +18,11 @@ import gsap from 'gsap';
 import { Description, Title } from '@/components/text/text.styled';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { useNotification } from '@/contexts/notification.context';
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 export const Section1 = () => {
   const ref = useRef<any>(null);
   const navigate = useNavigate();
-  
+
   const fish1Ref = useRef<any>(null);
   const fish2Ref = useRef<any>(null);
   const fish3Ref = useRef<any>(null);
@@ -248,13 +248,9 @@ export const Section1 = () => {
           </Description>
           <div className='btns'>
             {/* <Magnifier /> */}
-            <div onClick={
-            ()=>navigate("/airdrop")
-            }>
-
-            
-            <PrimaryButton w={220}>Join Quest</PrimaryButton>
-</div>
+            <div onClick={() => navigate('/airdrop')}>
+              <PrimaryButton w={220}>Join Quest</PrimaryButton>
+            </div>
             <div
               onClick={() => {
                 addNotification({
