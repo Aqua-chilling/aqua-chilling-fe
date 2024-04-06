@@ -13,6 +13,7 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
+  overflow: hidden;
   @media screen and (max-width: 1024px) {
     background-size: cover;
   }
@@ -264,10 +265,10 @@ export const Wrapper = styled.div`
     z-index: 2;
     &.left {
       left: 10%;
-      bottom: -20%;
+      bottom: 0%;
     }
     &.right {
-      bottom: -20%;
+      bottom: 0%;
       right: 10%;
     }
   }
