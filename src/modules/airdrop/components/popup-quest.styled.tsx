@@ -53,10 +53,11 @@ export const Wrapper = styled.div`
     gap: 24px;
     border-radius: 16px;
 
-    @media screen and (max-width: 900px) {
-      max-height: 90vh;
-      max-width: 90vw;
+    @media screen and (max-width: 768px) {
+      height: 100vh;
+      width: 100vw;
       overflow-y: scroll;
+      border-radius: 0;
     }
     .close {
       position: absolute;
@@ -64,9 +65,9 @@ export const Wrapper = styled.div`
       right: 16px;
       cursor: pointer;
       transition: all 0.3s;
-      @media screen and (max-width: 600px) {
-        top: 4px;
-        right: 4px;
+      @media screen and (max-width: 768px) {
+        top: 16px;
+        right: 16px;
       }
       &:hover {
         transform: scale(1.1);
@@ -80,6 +81,11 @@ export const Wrapper = styled.div`
       border-radius: 16px;
       border: 8px solid #090910;
       background: #131b26;
+      @media screen and (max-width: 768px) {
+        height: 100%;
+        border-radius: 0;
+        border: none;
+      }
       .title {
         margin: 0 auto;
         color: #fff;
@@ -173,7 +179,7 @@ export const Wrapper = styled.div`
         .btn-claim {
         }
         p {
-          color: #090910;
+          color: white;
           text-align: center;
           font-size: 14px;
           font-style: normal;

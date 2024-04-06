@@ -45,11 +45,9 @@ export const Wrapper = styled.div`
     }
     .trivent {
       width: 300px;
-      height: 378px;
       position: relative;
       @media screen and (max-width: 768px) {
         width: 200px;
-        height: 252px;
       }
 
       img {
