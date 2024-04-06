@@ -99,6 +99,29 @@ export const Wrapper = styled.div`
       @media screen and (max-width: 1024px) {
         display: none;
       }
+      position: relative;
+      .sign-out {
+        position: absolute;
+        padding-top: 72px;
+        width: 328px;
+        right: 0px;
+        top: 0px;
+        transition: all 0.3s;
+        z-index: 2;
+        display: none;
+        &.show {
+          display: flex !important;
+        }
+        .overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 1;
+          width: 100vw;
+          height: 100vh;
+          background-color: transparent;
+        }
+      }
     }
   }
   .airdrop-detail-content-container {
@@ -297,6 +320,75 @@ export const Wrapper = styled.div`
       padding: 16px;
       @media screen and (max-width: 500px) {
         padding: 0;
+      }
+    }
+  }
+
+  .outer-1 {
+    border-radius: 6px;
+    background: #090910;
+    padding: 6px;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+    }
+    .outer-2 {
+      height: 100%;
+      border-radius: 6px;
+      background: #285cc4;
+      padding: 6px;
+      .outer-3 {
+        height: 100%;
+        border-radius: 4px;
+        background: #143464;
+        padding: 4px;
+        .outer-4 {
+          height: 100%;
+          padding: 12px;
+          border-radius: 4px;
+          background: #249fde;
+          .outer-5 {
+            height: 100%;
+            border-radius: 8px;
+            border: 4px solid #090910;
+            background: #143464;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            &.signout {
+              background-color: black;
+              align-items: center;
+              gap: 12px;
+              color: rgba(255, 255, 255, 0.7);
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 700;
+              line-height: normal;
+              letter-spacing: -0.32px;
+              .value {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                img {
+                  width: 24px;
+                  height: 24px;
+                }
+              }
+              span {
+                color: #fff;
+                font-size: 32px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                letter-spacing: -0.64px;
+              }
+            }
+          }
+        }
       }
     }
   }
