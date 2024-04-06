@@ -14,6 +14,8 @@ import { dispatch } from '@/app/store';
 import { deleteAccount, updateAccount, updateDiscordId, updateTwitterId } from '@/redux';
 import { updateReferral } from '@/redux/referral';
 import useInterval from './use-interval';
+import { setAccessGameToken } from '@/utilities/http-game.utils';
+import { setAccessToken } from '@/utilities';
 const refreshIntervalMs = 60 * 60 * 1000;
 export const useLoginWithTon = () => {
   const firstProofLoading = useRef<boolean>(true);
@@ -96,6 +98,8 @@ export const useLoginWithTon = () => {
                   type: NOTIFICATION_TYPE.SUCCESS,
                   id: new Date().getTime()
                 });
+                setAccessGameToken(tonOauthResponse?.token);
+                setAccessToken(tonOauthResponse?.token);
                 dispatch(
                   updateAccount({
                     email: tonOauthResponse?.email,
@@ -168,7 +172,7 @@ export const useLoginWithTon = () => {
     [tonConnectUI, isConnectionRestored]
   );
 
-  const signOut = useCallback(()=>{
+  const signOut = useCallback(() => {
     tonConnectUI.disconnect();
     dispatch(deleteAccount());
     dispatch(
@@ -187,7 +191,7 @@ export const useLoginWithTon = () => {
         refreferral_code_status: 0
       })
     );
-  }, [tonConnectUI,dispatch])
+  }, [tonConnectUI, dispatch]);
   return {
     open,
     signOut
