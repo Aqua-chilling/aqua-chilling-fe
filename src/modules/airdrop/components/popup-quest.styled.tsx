@@ -59,6 +59,8 @@ export const Wrapper = styled.div`
       overflow-y: scroll;
       border-radius: 0;
       position: fixed;
+      top: 0;
+      left: 0;
     }
     .close {
       position: absolute;
