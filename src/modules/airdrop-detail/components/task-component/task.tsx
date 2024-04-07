@@ -1,5 +1,5 @@
 import { PrimaryButton } from '@/components/button/button.styled';
-import nft from '@/assets/airdrop-detail/nft.png';
+import nft1 from '@/assets/airdrop-detail/nft1.png';
 import nft2 from '@/assets/airdrop-detail/nft2.png';
 import nft3 from '@/assets/airdrop-detail/nft3.png';
 import nft4 from '@/assets/airdrop-detail/nft4.png';
