@@ -233,6 +233,7 @@ export const Wrapper = styled.div`
   .fish {
     position: absolute;
     z-index: 0;
+    width: 96px;
     @media screen and (max-width: 600px) {
       display: none;
     }

@@ -115,6 +115,7 @@ export const Wrapper = styled.div`
       width: 15%;
       @media screen and (max-width: 600px) {
         width: 20%;
+        text-align: start;
       }
     }
     .quest-status {

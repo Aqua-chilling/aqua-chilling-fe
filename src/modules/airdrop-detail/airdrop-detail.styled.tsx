@@ -49,7 +49,7 @@ export const Wrapper = styled.div`
     padding: 12px 24px;
     background: #061225;
     z-index: 3;
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 768px) {
       padding: 12px 6px;
     }
     .title {
@@ -67,8 +67,9 @@ export const Wrapper = styled.div`
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.1);
       gap: 8px;
-      @media screen and (max-width: 1024px) {
-        width: 100%;
+      @media screen and (max-width: 768px) {
+        gap: 2px;
+        flex: 1;
       }
       .tab {
         width: 136px;
@@ -85,6 +86,10 @@ export const Wrapper = styled.div`
         justify-content: center;
         border: 4px solid transparent;
         border-radius: 12px;
+        @media screen and (max-width: 768px) {
+          width: fit-content;
+          padding: 4px 8px;
+        }
         &.active {
           border: 4px solid #71b6a9;
           background: #588d99;
@@ -96,10 +101,29 @@ export const Wrapper = styled.div`
       }
     }
     .btn-sell {
-      @media screen and (max-width: 1024px) {
-        display: none;
-      }
       position: relative;
+      .toogle {
+        .btn {
+          @media screen and (max-width: 768px) {
+            display: none;
+          }
+        }
+        .btn-mobile {
+          display: none;
+          color: white;
+          align-items: center;
+          justify-content: center;
+          width: 48px;
+          height: 48px;
+          svg {
+            width: 24px;
+            height: 24px;
+          }
+          @media screen and (max-width: 768px) {
+            display: flex;
+          }
+        }
+      }
       .sign-out {
         position: absolute;
         padding-top: 72px;

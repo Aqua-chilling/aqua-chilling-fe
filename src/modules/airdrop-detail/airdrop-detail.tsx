@@ -22,6 +22,7 @@ import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { dispatch } from '@/app/store';
 import { useLoginWithTon } from '@/hooks/use-login-with-ton';
+import { MenuOutlined } from '@ant-design/icons';
 
 export const AirdropDetail = () => {
   const { addNotification } = useNotification();
@@ -101,8 +102,18 @@ export const AirdropDetail = () => {
               const ele = document.querySelector('#sign-out') as HTMLElement;
               ele && ele.classList.add('show');
             }}
+            className='toogle'
           >
-            <PrimaryButton w={160}>{token ? 'Sign out' : 'Connect wallet'}</PrimaryButton>
+            <div className='btn'>
+              <PrimaryButton w={160}>{token ? 'Sign out' : 'Connect wallet'}</PrimaryButton>
+            </div>
+            <MenuOutlined
+              className='btn-mobile'
+              onClick={() => {
+                const ele = document.querySelector('#sign-out') as HTMLElement;
+                ele && ele.classList.add('show');
+              }}
+            />
           </div>
           <div className='sign-out' id='sign-out'>
             <div
