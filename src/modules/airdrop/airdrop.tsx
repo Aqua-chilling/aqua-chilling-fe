@@ -1,4 +1,5 @@
 import { Wrapper } from './airdrop.styled';
+import ton from '@/assets/ton.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 import nft1 from '@/assets/airdrop/triden 1.jpg';
@@ -32,6 +33,8 @@ import { useLocation } from 'react-router';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { Bubble } from '../home/components/bubbles/bubble';
+import { MenuOutlined } from '@ant-design/icons';
+import { useLoginWithTon } from '@/hooks/use-login-with-ton';
 
 export const AirDrop = () => {
   const fish1Ref = useRef<any>(null);
@@ -230,6 +233,7 @@ export const AirDrop = () => {
   const [isShowPopupQuest, setIsShowPopupQuest] = React.useState(false);
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
   const token = useSelector(selectToken);
+  const { signOut } = useLoginWithTon();
   React.useEffect(() => {
     if (token) {
       setIsShowPopupLogin(false);
@@ -271,7 +275,60 @@ export const AirDrop = () => {
           <PopUpLogin />
         </Modal>
       )}
-      <div className='top-airdrop'>Aquachilling Airdrop</div>
+      <div className='top-airdrop'>
+        <div className='hole'>aaaa</div>
+        <span>Aquachilling Airdrop</span>
+        <div className='btn-sell'>
+          <div
+            onClick={() => {
+              const ele = document.querySelector('#sign-out') as HTMLElement;
+              ele && ele.classList.add('show');
+            }}
+            className='toogle'
+          >
+            <div className='btn'>
+              <PrimaryButton w={160}>{token ? 'Sign out' : 'Connect wallet'}</PrimaryButton>
+            </div>
+            <MenuOutlined
+              className='btn-mobile'
+              onClick={() => {
+                const ele = document.querySelector('#sign-out') as HTMLElement;
+                ele && ele.classList.add('show');
+              }}
+            />
+          </div>
+          <div className='sign-out' id='sign-out'>
+            <div
+              className='overlay'
+              onClick={() => {
+                const ele = document.querySelector('#sign-out') as HTMLElement;
+                ele && ele.classList.remove('show');
+              }}
+            ></div>
+            <div className='outer-1'>
+              <div className='outer-2'>
+                <div className='outer-3'>
+                  <div className='outer-4'>
+                    <div className='outer-5 signout'>
+                      <div className='signout-content'>
+                        <div>Balance</div>
+                        <div className='value'>
+                          <img src={ton} alt='' />
+                          <span>...</span>
+                          <span>TON</span>
+                        </div>
+                        <div onClick={() => signOut()}>
+                          <PrimaryButton w={160}>{'Sign out'}</PrimaryButton>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div className='airdrop'>
         <div className='left'>
           <div className='title'>Join the airdrop</div>
