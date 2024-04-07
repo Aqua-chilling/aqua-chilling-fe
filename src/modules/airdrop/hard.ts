@@ -55,8 +55,7 @@ export const getTwitterOauthUrl = () => {
     client_id: TWITTER_CLIENT_ID,
     state: 'state',
     response_type: 'code',
-    code_challenge:
-      'yroVJle7WEs4I_PDFNnh0VeIaNlG9ZbdFe47Am_XtUsfMJpC-JzDI0idEtt9zaGkpX7CzzD_QxuG1wTdZMZuA-XE0y9qdmM8MFX-VwPjyYbPtt>',
+    code_challenge: 'nIEo9xKfSvb49Refywo6XT_DGZDATVw2SZzX8cX0iYQ',
     code_challenge_method: 'S256',
     scope: ['users.read', 'tweet.read', 'follows.read', 'follows.write'].join(' ')
   };
