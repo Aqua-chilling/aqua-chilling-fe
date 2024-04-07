@@ -160,8 +160,9 @@ export const Wrapper = styled.div`
                   }
                 }
                 span {
+                  margin: 12px 0px;
                   color: #fff;
-                  font-size: 32px;
+                  font-size: 22px;
                   font-style: normal;
                   font-weight: 700;
                   line-height: normal;

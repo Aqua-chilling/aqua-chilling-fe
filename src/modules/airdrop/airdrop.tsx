@@ -1,5 +1,6 @@
 import { Wrapper } from './airdrop.styled';
-import ton from '@/assets/ton-icon.png';
+import { NOTIFICATION_TYPE } from '@/components/notification/notification';
+import { useNotification } from '@/contexts/notification.context';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 import nft1 from '@/assets/airdrop/triden 1.jpg';
@@ -24,19 +25,20 @@ import { PopUpQuest } from './components/popup-quest';
 import React, { useRef } from 'react';
 import { Modal } from '@/components/modal/modal';
 import { PopUpLogin } from './components/popup-login';
-import { deleteAccount, selectToken, updateAccount, updateDiscordId, updateTwitterId } from '@/redux';
+import { selectAddress, selectToken, updateDiscordId, updateTwitterId } from '@/redux';
 import { useSelector } from 'react-redux';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import { dispatch } from '@/app/store';
-import { useWriteTransaction } from '@/hooks/use-write-transaction';
-import { useLocation } from 'react-router';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { Bubble } from '../home/components/bubbles/bubble';
 import { MenuOutlined } from '@ant-design/icons';
 import { useLoginWithTon } from '@/hooks/use-login-with-ton';
+import { formatAddressToHuman } from '@/utilities/format.utils';
+import { copyICONSVG } from '../airdrop-detail/components/referral-component/referral';
 
 export const AirDrop = () => {
+  const { addNotification } = useNotification();
   const fish1Ref = useRef<any>(null);
   const fish2Ref = useRef<any>(null);
   const fish3Ref = useRef<any>(null);
@@ -233,6 +235,7 @@ export const AirDrop = () => {
   const [isShowPopupQuest, setIsShowPopupQuest] = React.useState(false);
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
   const token = useSelector(selectToken);
+  const address = useSelector(selectAddress);
   const { signOut } = useLoginWithTon();
   React.useEffect(() => {
     if (token) {
@@ -253,6 +256,14 @@ export const AirDrop = () => {
     }
   }, [token]);
 
+  const copy = () => {
+    addNotification({
+      message: 'Copied',
+      type: NOTIFICATION_TYPE.SUCCESS,
+      id: new Date().getTime()
+    });
+    navigator.clipboard.writeText(address || '');
+  };
   return (
     <Wrapper>
       {' '}
@@ -312,11 +323,10 @@ export const AirDrop = () => {
                     <div className='outer-4'>
                       <div className='outer-5 signout'>
                         <div className='signout-content'>
-                          <div>Balance</div>
-                          <div className='value'>
-                            <img src={ton} alt='' />
-                            <span>...</span>
-                            <span>TON</span>
+                          <div>Wallet address</div>
+                          <div className='value' onClick={() => copy()}>
+                            <span>{formatAddressToHuman(address, 8)}</span>
+                            <div className='ic' dangerouslySetInnerHTML={{ __html: copyICONSVG }}></div>
                           </div>
                           <div onClick={() => signOut()}>
                             <PrimaryButton w={160}>{'Sign out'}</PrimaryButton>
