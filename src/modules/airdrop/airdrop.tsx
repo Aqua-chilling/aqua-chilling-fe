@@ -1,5 +1,5 @@
 import { Wrapper } from './airdrop.styled';
-import ton from '@/assets/ton.png';
+import ton from '@/assets/ton-icon.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { EffectCoverflow, Pagination, Navigation } from 'swiper/modules';
 import nft1 from '@/assets/airdrop/triden 1.jpg';

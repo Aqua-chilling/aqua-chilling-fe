@@ -4,7 +4,7 @@ import nft2 from '@/assets/airdrop/triden 2.jpg';
 import nft3 from '@/assets/airdrop/triden 3.jpg';
 import nft4 from '@/assets/airdrop/triden 4.jpg';
 import coin from '@/assets/airdrop-detail/coin.png';
-import ton from '@/assets/ton.png';
+import ton from '@/assets/ton-icon.png';
 import land from '@/assets/airdrop-detail/land.png';
 import { Wrapper } from './airdrop-detail.styled';
 import { Modal } from '@/components/modal/modal';

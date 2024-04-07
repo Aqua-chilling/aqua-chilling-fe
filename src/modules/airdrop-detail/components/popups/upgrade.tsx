@@ -10,7 +10,7 @@ import React from 'react';
 
 export const Upgrade = ({ setControl, point }: any) => {
   const { addNotification } = useNotification();
-  const [activeNft, setActiveNft] = React.useState<number>();
+  const [activeNft, setActiveNft] = React.useState<number>(point >= 1500 ? 4 : point >= 800 ? 3 : point >= 500 ? 2 : 1);
   return (
     <Wrapper>
       <div className='points'>
@@ -18,7 +18,7 @@ export const Upgrade = ({ setControl, point }: any) => {
       </div>
       <div className='imgs'>
         <div
-          className={point >= 1500 ? 'trivent' : 'trivent disabled'}
+          className={point >= 500 ? 'trivent' : 'trivent disabled'}
           onClick={() => {
             setActiveNft(2);
           }}
@@ -36,7 +36,7 @@ export const Upgrade = ({ setControl, point }: any) => {
           <div className='mask'></div>
         </div>
         <div
-          className={point >= 500 ? 'trivent' : 'trivent disabled'}
+          className={point >= 1500 ? 'trivent' : 'trivent disabled'}
           onClick={() => {
             setActiveNft(4);
           }}

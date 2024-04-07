@@ -1,5 +1,8 @@
 import { PrimaryButton } from '@/components/button/button.styled';
 import nft from '@/assets/airdrop-detail/nft.png';
+import nft2 from '@/assets/airdrop-detail/nft2.png';
+import nft3 from '@/assets/airdrop-detail/nft3.png';
+import nft4 from '@/assets/airdrop-detail/nft4.png';
 import { Wrapper } from './task.styled';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
 import React from 'react';
@@ -55,7 +58,10 @@ export const Task = ({ data, profile }: any) => {
       </div>
       <div className='nft'>
         <div className='left'>
-          <img src={nft} alt='' />
+          <img
+            src={profile?.point >= 800 ? nft4 : profile?.point >= 500 ? nft3 : profile?.point >= 300 ? nft2 : nft1}
+            alt=''
+          />
           <div className='flex flex-col align-start flex-1'>
             <div>
               {profile?.point >= 800 ? '1500' : profile?.point >= 500 ? '800' : profile?.point >= 300 ? '500' : 'error'}{' '}
