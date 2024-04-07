@@ -14,6 +14,7 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
   @media screen and (max-width: 1024px) {
     background-size: cover;
   }
@@ -21,8 +22,6 @@ export const Wrapper = styled.div`
     min-height: 1200px;
   }
 
-  position: relative;
-  z-index: 1;
   .top-airdrop {
     background-image: url(${bgTop});
     background-size: 100% 100%;
@@ -50,6 +49,9 @@ export const Wrapper = styled.div`
     display: flex;
     height: fit-content;
     gap: 48px;
+
+    position: relative;
+    z-index: 3;
     @media screen and (max-width: 1240px) {
       flex-direction: column-reverse;
       gap: 0px;
@@ -231,6 +233,9 @@ export const Wrapper = styled.div`
   .fish {
     position: absolute;
     z-index: 0;
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
     &.a {
       top: 300px;
       right: 60px;
@@ -262,7 +267,7 @@ export const Wrapper = styled.div`
   }
   .bubbles-section1 {
     position: absolute;
-    z-index: 2;
+    z-index: 0;
     &.left {
       left: 10%;
       bottom: 0%;

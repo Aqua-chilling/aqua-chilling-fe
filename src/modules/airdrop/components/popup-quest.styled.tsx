@@ -58,6 +58,7 @@ export const Wrapper = styled.div`
       width: 100vw;
       overflow-y: scroll;
       border-radius: 0;
+      position: fixed;
     }
     .close {
       position: absolute;
@@ -81,10 +82,24 @@ export const Wrapper = styled.div`
       border-radius: 16px;
       border: 8px solid #090910;
       background: #131b26;
+
+      @media screen and (max-width: 900px) {
+        flex-direction: column-reverse;
+        align-items: center;
+        .nft {
+          width: 100%;
+          gap: 24px;
+          .nft-image {
+          }
+        }
+        .steps {
+          width: 100% !important;
+        }
+      }
       @media screen and (max-width: 768px) {
-        height: 100%;
         border-radius: 0;
         border: none;
+        gap: 0;
       }
       .title {
         margin: 0 auto;
@@ -101,19 +116,6 @@ export const Wrapper = styled.div`
           font-size: 22px;
         }
       }
-      @media screen and (max-width: 900px) {
-        flex-direction: column-reverse;
-        align-items: center;
-        .nft {
-          width: 100%;
-          gap: 24px;
-          .nft-image {
-          }
-        }
-        .steps {
-          width: 100% !important;
-        }
-      }
       .nft {
         display: flex;
         flex-direction: column;
@@ -128,6 +130,9 @@ export const Wrapper = styled.div`
         @media screen and (max-width: 900px) {
           background: transparent;
           margin-top: 24px;
+        }
+        @media screen and (max-width: 768px) {
+          margin-top: 54px;
         }
         .title {
           display: none;
