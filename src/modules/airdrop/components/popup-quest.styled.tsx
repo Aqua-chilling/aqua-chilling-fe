@@ -141,6 +141,12 @@ export const Wrapper = styled.div`
             display: block;
           }
         }
+        .finish {
+          @media screen and (max-width: 900px) {
+            color: white;
+          }
+          color: black;
+        }
         .nft-img {
           position: relative;
           background-image: url(${bgNFT});

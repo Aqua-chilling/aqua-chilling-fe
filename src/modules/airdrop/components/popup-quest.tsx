@@ -54,7 +54,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
       OnboardingRepository.RetrieveTaskOfTwitter(twitter || ' ')
         .then((rs) => {
           setIsFollowed(rs.follows.Aquachilling);
-          setIsRetweeted(rs.retweets['1752366812929605836']);
+          setIsRetweeted(rs.retweets['1772973413365141606']);
           setIsLoading(false);
         })
         .catch((err) => {
@@ -82,7 +82,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
           });
         });
     }
-  });
+  }, [twitter, discord]);
   return (
     <Wrapper>
       <div
@@ -214,7 +214,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
             <div className='step completed th'>
               <div className='label'>Step 4</div>
               <div className='btns'>
-                {isFollowed ? (
+                {isRetweeted ? (
                   <div className='btn completed'>
                     <div className='ic' dangerouslySetInnerHTML={{ __html: CompletedIconSVG }}></div>
                     Shared a tweet
@@ -249,7 +249,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                 <PrimaryButton w={240}>Claim your NFT</PrimaryButton>
               </div>
             ) : (
-              <p>Finish all task to receive this NFT</p>
+              <span className='finish'>Finish all task to receive this NFT</span>
             )}
           </div>
         </div>
