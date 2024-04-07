@@ -278,47 +278,49 @@ export const AirDrop = () => {
       <div className='top-airdrop'>
         <div className='hole'>aaaa</div>
         <span>Aquachilling Airdrop</span>
-        <div className='btn-sell'>
-          <div
-            onClick={() => {
-              const ele = document.querySelector('#sign-out') as HTMLElement;
-              ele && ele.classList.add('show');
-            }}
-            className='toogle'
-          >
-            <div className='btn'>
-              <PrimaryButton w={160}>{token ? 'Sign out' : 'Connect wallet'}</PrimaryButton>
-            </div>
-            <MenuOutlined
-              className='btn-mobile'
+        {token ? (
+          <div className='btn-sell'>
+            <div
               onClick={() => {
                 const ele = document.querySelector('#sign-out') as HTMLElement;
                 ele && ele.classList.add('show');
               }}
-            />
-          </div>
-          <div className='sign-out' id='sign-out'>
-            <div
-              className='overlay'
-              onClick={() => {
-                const ele = document.querySelector('#sign-out') as HTMLElement;
-                ele && ele.classList.remove('show');
-              }}
-            ></div>
-            <div className='outer-1'>
-              <div className='outer-2'>
-                <div className='outer-3'>
-                  <div className='outer-4'>
-                    <div className='outer-5 signout'>
-                      <div className='signout-content'>
-                        <div>Balance</div>
-                        <div className='value'>
-                          <img src={ton} alt='' />
-                          <span>...</span>
-                          <span>TON</span>
-                        </div>
-                        <div onClick={() => signOut()}>
-                          <PrimaryButton w={160}>{'Sign out'}</PrimaryButton>
+              className='toogle'
+            >
+              <div className='btn'>
+                <PrimaryButton w={160}>{token ? 'Sign out' : 'Connect wallet'}</PrimaryButton>
+              </div>
+              <MenuOutlined
+                className='btn-mobile'
+                onClick={() => {
+                  const ele = document.querySelector('#sign-out') as HTMLElement;
+                  ele && ele.classList.add('show');
+                }}
+              />
+            </div>
+            <div className='sign-out' id='sign-out'>
+              <div
+                className='overlay'
+                onClick={() => {
+                  const ele = document.querySelector('#sign-out') as HTMLElement;
+                  ele && ele.classList.remove('show');
+                }}
+              ></div>
+              <div className='outer-1'>
+                <div className='outer-2'>
+                  <div className='outer-3'>
+                    <div className='outer-4'>
+                      <div className='outer-5 signout'>
+                        <div className='signout-content'>
+                          <div>Balance</div>
+                          <div className='value'>
+                            <img src={ton} alt='' />
+                            <span>...</span>
+                            <span>TON</span>
+                          </div>
+                          <div onClick={() => signOut()}>
+                            <PrimaryButton w={160}>{'Sign out'}</PrimaryButton>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -327,7 +329,9 @@ export const AirDrop = () => {
               </div>
             </div>
           </div>
-        </div>
+        ) : (
+          <div className='hole'></div>
+        )}
       </div>
       <div className='airdrop'>
         <div className='left'>

@@ -191,6 +191,11 @@ export const useLoginWithTon = () => {
         refreferral_code_status: 0
       })
     );
+    addNotification({
+      message: 'Sign out successfully',
+      type: NOTIFICATION_TYPE.SUCCESS,
+      id: new Date().getTime()
+    });
   }, [tonConnectUI, dispatch]);
   return {
     open,
