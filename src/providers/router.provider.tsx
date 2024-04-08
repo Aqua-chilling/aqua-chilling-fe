@@ -11,6 +11,7 @@ import { TermsOfService } from '@/modules/terms-of-service/terms-of-service';
 import { Packages } from '@/modules/packages/packages';
 import React, { PropsWithChildren } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { GamePlay } from '@/modules/play-game/play-game';
 
 const elements = [
   {
@@ -52,7 +53,11 @@ const elements = [
   {
     Component: Earning,
     path: '/earning'
-  }
+  },
+  {
+    Component: GamePlay,
+    path: '/game'
+  },
 ];
 
 export const RouterProvider = ({ children }: PropsWithChildren) => {
