@@ -1,27 +1,41 @@
 import { useSelector } from 'react-redux';
 import { Wrapper } from './play-game.styled';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { selectToken } from '@/redux';
 import { PopUpLogin } from './components/popup-login';
 import { Modal } from '@/components/modal/modal';
 import { usePlayGame } from '@/hooks/use-play-game';
+import { COMMUNICATIONFUNCTION } from '@/constants/app-constaints';
+import { useNotification } from '@/contexts/notification.context';
+import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 
+function iframe() {
+  return {
+    __html: '<iframe src="https://game-test.aquachilling.com/" id="game-iframeID"></iframe>',
+  };
+}
 export const GamePlay = () => {
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
   const token = useSelector(selectToken);
+  const { addNotification } = useNotification();
   const {gameMessage, sendMessage}   = usePlayGame()
-  React.useEffect(() => {
-    console.log('useEFFect222')
-    if (!token) {
-      console.log('asasa')
-      setIsShowPopupLogin(true);
-      sendMessage('token', '12313123123')
-    } else {
-      console.log('sendmess')
-      sendMessage('token', token)
-      setIsShowPopupLogin(false);
+  console.log('gameMessage', gameMessage)
+  useEffect(()=>{
+    if(gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST) {
+      if(!token){
+        setIsShowPopupLogin(true)
+      }
+      else{
+        addNotification({
+          message: 'Sign with TON successfully',
+          type: NOTIFICATION_TYPE.SUCCESS,
+          id: new Date().getTime()
+        });
+        setIsShowPopupLogin(false)
+        sendMessage(COMMUNICATIONFUNCTION.LOGIN_SUCCESS, token)
+      }
     }
-  }, [token]);
+  }, [gameMessage, token])
   return (
     <Wrapper>
    {isShowPopupLogin && (
@@ -29,9 +43,9 @@ export const GamePlay = () => {
           <PopUpLogin />
         </Modal>
       )}
-      {
-        !isShowPopupLogin && <iframe src="https://game-test.aquachilling.com/" className='game-iframe' id="iframe-aqua-gameID"></iframe>
-      }
+      
+      <div dangerouslySetInnerHTML={iframe()} className='game-iframe' />
+      
     </Wrapper>
   );
 };
