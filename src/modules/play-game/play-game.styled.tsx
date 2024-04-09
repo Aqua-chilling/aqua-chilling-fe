@@ -20,11 +20,14 @@ export const Wrapper = styled.div`
     min-height: 1200px;
   }
   .game-iframe{
-    width: 100%;
+    width: 100vw;
     height: auto;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    iframe{
+      width:100% ;
+    }
   }
 `;
