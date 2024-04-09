@@ -4,7 +4,7 @@ import purchaseSuccess from '@/assets/packages/purchase-success.png';
 import cardSuccess from '@/assets/packages/card-success.png';
 export const Wrapper = styled.div`
   background-image: url(${bg});
-  background-size: 100% 100%;
+  background-size: cover;
   background-repeat: no-repeat;
   width: 100vw;
   height: 100vh;
@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
     background-size: cover;
   }
   @media screen and (max-width: 600px) {
-    min-height: 1200px;
+
   }
   .game-iframe{
     width: 100vw;
