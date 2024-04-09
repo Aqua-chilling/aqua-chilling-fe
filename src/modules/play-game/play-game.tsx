@@ -22,7 +22,11 @@ export const GamePlay = () => {
   console.log('gameMessage', gameMessage)
   useEffect(()=>{
     const tele = (window as any).Telegram.WebApp;
-    tele?.expand()
+    if(tele){
+      tele?.expand()
+      tele?.enableClosingConfirmation()
+    }
+ 
   })
   useEffect(()=>{
     if(gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST) {
