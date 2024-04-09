@@ -21,6 +21,10 @@ export const GamePlay = () => {
   const {gameMessage, sendMessage}   = usePlayGame()
   console.log('gameMessage', gameMessage)
   useEffect(()=>{
+    const tele = (window as any).Telegram.WebApp;
+    tele?.expand()
+  })
+  useEffect(()=>{
     if(gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST) {
       if(!token){
         setIsShowPopupLogin(true)
