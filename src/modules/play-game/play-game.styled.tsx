@@ -21,13 +21,17 @@ export const Wrapper = styled.div`
   }
   .game-iframe{
     width: 100vw;
-    height: auto;
+    padding-top: 56.24vW;
+    height:0;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     iframe{
       width:100% ;
+      height: 100%;
+      top:0;
+      position:absolute ;
     }
   }
 `;
