@@ -342,6 +342,25 @@ export const Wrapper = styled.div`
             line-height: normal;
           }
         }
+        .btn-refresh {
+          border-radius: 8px;
+          background: rgba(255, 255, 255, 0.1);
+          display: flex;
+          padding: 8px 12px;
+          align-items: center;
+          gap: 8px;
+          color: #f2de29;
+          text-align: center;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          width: fit-content;
+          transition: all 0.3s;
+          &:hover {
+            background: rgba(255, 255, 255, 0.3);
+          }
+        }
       }
     }
   }
