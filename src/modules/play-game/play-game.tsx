@@ -22,6 +22,7 @@ export const GamePlay = () => {
   const {gameMessage, sendMessage}   = usePlayGame()
   console.log('gameMessage', gameMessage)
   useEffect(()=>{
+    console.log('isExpand', WebApp.isExpanded)
     if(!WebApp.isExpanded) {
       WebApp.expand()
     }
