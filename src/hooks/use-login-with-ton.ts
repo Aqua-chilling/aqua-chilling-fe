@@ -3,7 +3,6 @@ import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import {
   CHAIN,
   useIsConnectionRestored,
-  useTonConnectModal,
   useTonConnectUI,
   useTonWallet
 } from '@tonconnect/ui-react';
@@ -23,8 +22,6 @@ export const useLoginWithTon = () => {
   const isConnectionRestored = useIsConnectionRestored();
   const wallet = useTonWallet();
   const { addNotification } = useNotification();
-  const { open, state } = useTonConnectModal();
-  console.log('onStateChange',state)
   const recreateProofPayload = useCallback(async () => {
     if (firstProofLoading.current) {
       tonConnectUI.setConnectRequestParameters({ state: 'loading' });
@@ -199,7 +196,7 @@ export const useLoginWithTon = () => {
     });
   }, [tonConnectUI, dispatch]);
   return {
-    open,
+    tonConnectUI,
     signOut
   };
 };

@@ -53,9 +53,6 @@ export const GamePlay = () => {
       )}
       
       <div dangerouslySetInnerHTML={iframe()} className='game-iframe' />
-      <div onClick={()=>{
-        window.open("https://www.facebook.com/", 'blank')
-      }}> BUTTON TEST</div>
     </Wrapper>
   );
 };
