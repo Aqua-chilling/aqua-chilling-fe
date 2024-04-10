@@ -8,6 +8,7 @@ import { usePlayGame } from '@/hooks/use-play-game';
 import { COMMUNICATIONFUNCTION } from '@/constants/app-constaints';
 import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
+import WebApp from '@twa-dev/sdk'
 
 function iframe() {
   return {
@@ -20,14 +21,14 @@ export const GamePlay = () => {
   const { addNotification } = useNotification();
   const {gameMessage, sendMessage}   = usePlayGame()
   console.log('gameMessage', gameMessage)
-  useEffect(()=>{
-    const tele = (window as any).Telegram.WebApp;
-    if(tele){
-      tele?.expand()
-      tele?.enableClosingConfirmation()
-    }
- 
-  })
+  // useEffect(()=>{
+  //   if(!WebApp.isExpanded) {
+  //     WebApp.expand()
+  //   }
+  //   if(!WebApp.isClosingConfirmationEnabled){
+  //     WebApp.enableClosingConfirmation()
+  //   }
+  // })
   useEffect(()=>{
     if(gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST) {
       if(!token){
