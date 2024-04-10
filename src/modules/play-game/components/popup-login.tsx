@@ -4,7 +4,7 @@ import React from 'react';
 import { selectToken } from '@/redux';
 import { useLoginWithTon } from '@/hooks/use-login-with-ton';
 import { useSelector } from 'react-redux';
-import { TonConnectButton, useTonWallet } from '@tonconnect/ui-react';
+import { useTonWallet } from '@tonconnect/ui-react';
 
 export const PopUpLogin = () => {
   const token = useSelector(selectToken);
@@ -29,9 +29,6 @@ export const PopUpLogin = () => {
                   Sign in with TON
                 </div>
               </div>
-            </div>
-            <div className='step st'>
-              <TonConnectButton/>
             </div>
         </div>
       </div>
