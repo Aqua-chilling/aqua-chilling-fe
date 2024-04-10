@@ -10,7 +10,7 @@ import { RouterProvider } from '@/providers/router.provider';
 import { ENVS } from '@/config';
 // import { LoadingProvider } from '@/providers/loading.provider';
 import { FixedGlobalStyle } from '@/providers/theme.provider';
-import { CustomCurSor } from '@/components/custom-cursor/custom-cursor';
+// import { CustomCurSor } from '@/components/custom-cursor/custom-cursor';
 import '@/constants/style/locomotive-scroll.css';
 import { LoadingProvider } from '@/providers/loading.provider';
 import { NotificationProvider } from '@/contexts/notification.context';
@@ -51,7 +51,7 @@ export const App = () => {
           >
             
               <FixedGlobalStyle />
-              {window.innerWidth > 780 && <CustomCurSor />}
+              {/* {window.innerWidth > 780 && <CustomCurSor />} */}
               <NotificationProvider>
                 <RouterProvider>{<LoadingProvider />}</RouterProvider>
               </NotificationProvider>
