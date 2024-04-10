@@ -25,21 +25,21 @@ export const FixedGlobalStyle = createGlobalStyle`
           z-index: -1 !important;
         }
     }
-    #tc-widget-root *{
+    /* #tc-widget-root *{
         cursor: none !important;
     }
     *{
         cursor: none;
         box-sizing: border-box;
-    }
-    #custom-cursor{
+    } */
+    /* #custom-cursor{
         width: 32px;
         height: 32px;
         img{
             width: 100%;
             height: 100%;
         }
-    }
+    } */
     .notifications-container{
         position: fixed;
         top:15%;
