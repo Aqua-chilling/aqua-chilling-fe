@@ -9,7 +9,7 @@ import { TonConnectButton, useTonWallet } from '@tonconnect/ui-react';
 export const PopUpLogin = () => {
   const token = useSelector(selectToken);
   const wallet = useTonWallet();
-  const { open } = useLoginWithTon();
+  const { tonConnectUI } = useLoginWithTon();
   
   return (
     <Wrapper>
@@ -22,7 +22,7 @@ export const PopUpLogin = () => {
                 <div
                   className='btn'
                   onClick={() => {
-                    open();
+                    tonConnectUI.openModal();
                   }}
                 >
                   <img src={TonSymbol} alt='' />
