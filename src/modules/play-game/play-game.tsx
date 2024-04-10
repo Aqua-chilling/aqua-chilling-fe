@@ -21,14 +21,14 @@ export const GamePlay = () => {
   const { addNotification } = useNotification();
   const {gameMessage, sendMessage}   = usePlayGame()
   console.log('gameMessage', gameMessage)
-  // useEffect(()=>{
-  //   if(!WebApp.isExpanded) {
-  //     WebApp.expand()
-  //   }
-  //   if(!WebApp.isClosingConfirmationEnabled){
-  //     WebApp.enableClosingConfirmation()
-  //   }
-  // })
+  useEffect(()=>{
+    if(!WebApp.isExpanded) {
+      WebApp.expand()
+    }
+    if(!WebApp.isClosingConfirmationEnabled){
+      WebApp.enableClosingConfirmation()
+    }
+  })
   useEffect(()=>{
     if(gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST) {
       if(!token){
