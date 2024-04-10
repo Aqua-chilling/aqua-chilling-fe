@@ -4,10 +4,11 @@ import nft2 from '@/assets/airdrop/triden 2.jpg';
 import nft3 from '@/assets/airdrop/triden 3.jpg';
 import nft4 from '@/assets/airdrop/triden 4.jpg';
 import coin from '@/assets/airdrop-detail/coin.png';
+import ton from '@/assets/ton-icon.png';
 import land from '@/assets/airdrop-detail/land.png';
 import { Wrapper } from './airdrop-detail.styled';
 import { Modal } from '@/components/modal/modal';
-import React from 'react';
+import React, { useRef } from 'react';
 import { PrimaryButton } from '@/components/button/button.styled';
 import { Task } from './components/task-component/task';
 import { useNavigate } from 'react-router';
@@ -20,16 +21,20 @@ import { Referral } from './components/referral-component/referral';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { dispatch } from '@/app/store';
+import { useLoginWithTon } from '@/hooks/use-login-with-ton';
+import { MenuOutlined } from '@ant-design/icons';
 
 export const AirdropDetail = () => {
   const { addNotification } = useNotification();
   const token = useSelector(selectToken);
   const navigate = useNavigate();
+  const { signOut } = useLoginWithTon();
 
   const [isShowDetail, setIsShowDetail] = React.useState<boolean>(false);
   const [isShowReceived, setIsShowReceived] = React.useState<boolean>(
     localStorage.getItem('received') === 'true' ? false : true
   );
+  const [isShowSignout, setIsShowSignout] = React.useState<boolean>(false);
   const [activeTab, setActiveTab] = React.useState<number>(0);
 
   const [tasks, setTasks] = React.useState<any[]>();
@@ -91,16 +96,55 @@ export const AirdropDetail = () => {
             );
           })}
         </div>
-        <div
-          className='btn-sell'
-          onClick={() => {
-            if (token) {
-              localStorage.clear();
-              dispatch(deleteAccount());
-            }
-          }}
-        >
-          <PrimaryButton w={160}>{token ? 'Sign out' : 'Connect wallet'}</PrimaryButton>
+        <div className='btn-sell'>
+          <div
+            onClick={() => {
+              const ele = document.querySelector('#sign-out') as HTMLElement;
+              ele && ele.classList.add('show');
+            }}
+            className='toogle'
+          >
+            <div className='btn'>
+              <PrimaryButton w={160}>{token ? 'Sign out' : 'Connect wallet'}</PrimaryButton>
+            </div>
+            <MenuOutlined
+              className='btn-mobile'
+              onClick={() => {
+                const ele = document.querySelector('#sign-out') as HTMLElement;
+                ele && ele.classList.add('show');
+              }}
+            />
+          </div>
+          <div className='sign-out' id='sign-out'>
+            <div
+              className='overlay'
+              onClick={() => {
+                const ele = document.querySelector('#sign-out') as HTMLElement;
+                ele && ele.classList.remove('show');
+              }}
+            ></div>
+            <div className='outer-1'>
+              <div className='outer-2'>
+                <div className='outer-3'>
+                  <div className='outer-4'>
+                    <div className='outer-5 signout'>
+                      <div className='signout-content'>
+                        <div>Balance</div>
+                        <div className='value'>
+                          <img src={ton} alt='' />
+                          <span>...</span>
+                          <span>TON</span>
+                        </div>
+                        <div onClick={() => signOut()}>
+                          <PrimaryButton w={160}>{'Sign out'}</PrimaryButton>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <img src={land} alt='' className='land' />

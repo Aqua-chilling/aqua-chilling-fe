@@ -45,15 +45,20 @@ export const Wrapper = styled.div`
     }
     .trivent {
       width: 300px;
-      height: 378px;
       position: relative;
+      transition: all 0.3s;
+      border-radius: 8px;
+      &:hover {
+        border: 1px solid #09f;
+        border-radius: 8px;
+      }
       @media screen and (max-width: 768px) {
         width: 200px;
-        height: 252px;
       }
 
       img {
         width: 100%;
+        border-radius: 8px;
       }
       .mask {
         background: rgba(0, 0, 0, 0.7);
@@ -64,6 +69,7 @@ export const Wrapper = styled.div`
         left: 0;
         z-index: 1;
         display: none;
+        border-radius: 8px;
       }
       &.disabled {
         .mask {

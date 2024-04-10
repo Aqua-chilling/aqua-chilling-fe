@@ -3,6 +3,7 @@ import { Wrapper } from './referral.styled';
 import React from 'react';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { useNotification } from '@/contexts/notification.context';
+import { formatAddressToHuman } from '@/utilities/format.utils';
 export const copyICONSVG = `
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
   <g clip-path="url(#clip0_1797_24170)">
@@ -85,19 +86,15 @@ export const Referral = ({ data }: any) => {
       <div className='link'></div>
       <div className='table'>
         <div className='table-head'>
-          <div className='rank'>Your referrals</div>
-          <div className='address'></div>
-          <div className='point'> </div>
-          <div className='total-point'> </div>
+          <div className='email'>Your referrals</div>
+          <div className='date'></div>
         </div>
         {refHistory?.referrals?.length > 0 ? (
           refHistory?.referrals?.map((item: any, key: number) => {
             return (
               <div className='table-row' key={key}>
-                <div className='rank'>{item?.email}</div>
-                <div className='address'></div>
-                <div className='point'></div>
-                <div className='total-point'>
+                <div className='email'>{item?.email}</div>
+                <div className='date'>
                   {new Date(item?.createdAt).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',

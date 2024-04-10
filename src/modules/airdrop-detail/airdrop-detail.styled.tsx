@@ -49,7 +49,7 @@ export const Wrapper = styled.div`
     padding: 12px 24px;
     background: #061225;
     z-index: 3;
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 768px) {
       padding: 12px 6px;
     }
     .title {
@@ -67,8 +67,9 @@ export const Wrapper = styled.div`
       border-radius: 12px;
       background: rgba(255, 255, 255, 0.1);
       gap: 8px;
-      @media screen and (max-width: 1024px) {
-        width: 100%;
+      @media screen and (max-width: 768px) {
+        gap: 2px;
+        flex: 1;
       }
       .tab {
         width: 136px;
@@ -85,6 +86,10 @@ export const Wrapper = styled.div`
         justify-content: center;
         border: 4px solid transparent;
         border-radius: 12px;
+        @media screen and (max-width: 768px) {
+          width: fit-content;
+          padding: 4px 8px;
+        }
         &.active {
           border: 4px solid #71b6a9;
           background: #588d99;
@@ -96,8 +101,50 @@ export const Wrapper = styled.div`
       }
     }
     .btn-sell {
-      @media screen and (max-width: 1024px) {
+      position: relative;
+      .toogle {
+        .btn {
+          @media screen and (max-width: 768px) {
+            display: none;
+          }
+        }
+        .btn-mobile {
+          display: none;
+          color: white;
+          align-items: center;
+          justify-content: center;
+          width: 48px;
+          height: 48px;
+          svg {
+            width: 24px;
+            height: 24px;
+          }
+          @media screen and (max-width: 768px) {
+            display: flex;
+          }
+        }
+      }
+      .sign-out {
+        position: absolute;
+        padding-top: 72px;
+        width: 328px;
+        right: 0px;
+        top: 0px;
+        transition: all 0.3s;
+        z-index: 2;
         display: none;
+        &.show {
+          display: flex !important;
+        }
+        .overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 1;
+          width: 100vw;
+          height: 100vh;
+          background-color: transparent;
+        }
       }
     }
   }
@@ -297,6 +344,75 @@ export const Wrapper = styled.div`
       padding: 16px;
       @media screen and (max-width: 500px) {
         padding: 0;
+      }
+    }
+  }
+
+  .outer-1 {
+    border-radius: 6px;
+    background: #090910;
+    padding: 6px;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+    }
+    .outer-2 {
+      height: 100%;
+      border-radius: 6px;
+      background: #285cc4;
+      padding: 6px;
+      .outer-3 {
+        height: 100%;
+        border-radius: 4px;
+        background: #143464;
+        padding: 4px;
+        .outer-4 {
+          height: 100%;
+          padding: 12px;
+          border-radius: 4px;
+          background: #249fde;
+          .outer-5 {
+            height: 100%;
+            border-radius: 8px;
+            border: 4px solid #090910;
+            background: #143464;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            &.signout {
+              background-color: black;
+              align-items: center;
+              gap: 12px;
+              color: rgba(255, 255, 255, 0.7);
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 700;
+              line-height: normal;
+              letter-spacing: -0.32px;
+              .value {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                img {
+                  width: 24px;
+                  height: 24px;
+                }
+              }
+              span {
+                color: #fff;
+                font-size: 32px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                letter-spacing: -0.64px;
+              }
+            }
+          }
+        }
       }
     }
   }

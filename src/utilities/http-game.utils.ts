@@ -17,6 +17,7 @@ instance.interceptors.request.use(
   (req: any) => {
     req.baseURL = `${ENVS.VITE_BASE_GAME_API}v1/`;
     let authen = {};
+    console.log(accessToken);
     if (accessToken) {
       authen = { 'X-Access-Token': `${accessToken}` };
     }

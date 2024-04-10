@@ -54,7 +54,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
       OnboardingRepository.RetrieveTaskOfTwitter(twitter || ' ')
         .then((rs) => {
           setIsFollowed(rs.follows.Aquachilling);
-          setIsRetweeted(rs.retweets['1752366812929605836']);
+          setIsRetweeted(rs.retweets['1772973413365141606']);
           setIsLoading(false);
         })
         .catch((err) => {
@@ -82,7 +82,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
           });
         });
     }
-  });
+  }, [twitter, discord]);
   return (
     <Wrapper>
       <div
@@ -214,7 +214,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
             <div className='step completed th'>
               <div className='label'>Step 4</div>
               <div className='btns'>
-                {isFollowed ? (
+                {isRetweeted ? (
                   <div className='btn completed'>
                     <div className='ic' dangerouslySetInnerHTML={{ __html: CompletedIconSVG }}></div>
                     Shared a tweet
@@ -223,13 +223,83 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                   <div
                     className={twitter ? 'btn' : 'btn disabled'}
                     onClick={() => {
-                      window.open(`https://twitter.com/Aquachilling/status/1752366812929605836`, '_blank');
+                      window.open(`https://twitter.com/Aquachilling/status/1772973413365141606`, '_blank');
                     }}
                   >
                     Share a tweet {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />}
                   </div>
                 )}
               </div>
+            </div>
+            <div
+              className='btn-refresh'
+              onClick={() => {
+                if (twitter) {
+                  setIsLoading(true);
+                  OnboardingRepository.RetrieveTaskOfTwitter(twitter || ' ')
+                    .then((rs) => {
+                      setIsFollowed(rs.follows.Aquachilling);
+                      setIsRetweeted(rs.retweets['1772973413365141606']);
+                      setIsLoading(false);
+                    })
+                    .catch((err) => {
+                      setIsLoading(false);
+                      addNotification({
+                        message: err,
+                        type: NOTIFICATION_TYPE.INFO,
+                        id: new Date().getTime()
+                      });
+                    });
+                }
+                if (discord) {
+                  setIsLoading(true);
+                  OnboardingRepository.RetrieveTaskOfDiscord(discord || ' ')
+                    .then((rs) => {
+                      setIsJoinedDiscord(rs.joined);
+                      setIsLoading(false);
+                    })
+                    .catch((err) => {
+                      setIsLoading(false);
+                      addNotification({
+                        message: err,
+                        type: NOTIFICATION_TYPE.INFO,
+                        id: new Date().getTime()
+                      });
+                    });
+                }
+              }}
+            >
+              <svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none'>
+                <g clip-path='url(#clip0_2169_29226)'>
+                  <path
+                    d='M2.34041 5.99921C2.67859 5.04355 3.25335 4.18912 4.01105 3.51567C4.76876 2.84221 5.68471 2.37167 6.67346 2.14796C7.6622 1.92424 8.6915 1.95464 9.66532 2.23632C10.6391 2.518 11.5257 3.04177 12.2424 3.75877L15.3363 6.66601M0.666748 9.3332L3.76069 12.2404C4.47733 12.9574 5.36392 13.4812 6.33774 13.7629C7.31156 14.0446 8.34086 14.075 9.3296 13.8513C10.3183 13.6275 11.2343 13.157 11.992 12.4835C12.7497 11.8101 13.3245 10.9557 13.6626 10'
+                    stroke='#F2DE29'
+                    stroke-width='1.3336'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                  />
+                  <path
+                    d='M15.3362 2.66797V6.66797H11.3354'
+                    stroke='#F2DE29'
+                    stroke-width='1.3336'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                  />
+                  <path
+                    d='M0.666748 13.334V9.33398H4.66754'
+                    stroke='#F2DE29'
+                    stroke-width='1.3336'
+                    stroke-linecap='round'
+                    stroke-linejoin='round'
+                  />
+                </g>
+                <defs>
+                  <clipPath id='clip0_2169_29226'>
+                    <rect width='16.0032' height='16' fill='white' />
+                  </clipPath>
+                </defs>
+              </svg>
+              <span>Get latest task status</span>
             </div>
           </div>
           <div className='nft'>
@@ -249,7 +319,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                 <PrimaryButton w={240}>Claim your NFT</PrimaryButton>
               </div>
             ) : (
-              <p>Finish all task to receive this NFT</p>
+              <span className='finish'>Finish all task to receive this NFT</span>
             )}
           </div>
         </div>

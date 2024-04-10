@@ -53,10 +53,14 @@ export const Wrapper = styled.div`
     gap: 24px;
     border-radius: 16px;
 
-    @media screen and (max-width: 900px) {
-      max-height: 90vh;
-      max-width: 90vw;
+    @media screen and (max-width: 768px) {
+      height: 100vh;
+      width: 100vw;
       overflow-y: scroll;
+      border-radius: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
     }
     .close {
       position: absolute;
@@ -64,9 +68,9 @@ export const Wrapper = styled.div`
       right: 16px;
       cursor: pointer;
       transition: all 0.3s;
-      @media screen and (max-width: 600px) {
-        top: 4px;
-        right: 4px;
+      @media screen and (max-width: 768px) {
+        top: 16px;
+        right: 16px;
       }
       &:hover {
         transform: scale(1.1);
@@ -80,6 +84,25 @@ export const Wrapper = styled.div`
       border-radius: 16px;
       border: 8px solid #090910;
       background: #131b26;
+
+      @media screen and (max-width: 900px) {
+        flex-direction: column-reverse;
+        align-items: center;
+        .nft {
+          width: 100%;
+          gap: 24px;
+          .nft-image {
+          }
+        }
+        .steps {
+          width: 100% !important;
+        }
+      }
+      @media screen and (max-width: 768px) {
+        border-radius: 0;
+        border: none;
+        gap: 0;
+      }
       .title {
         margin: 0 auto;
         color: #fff;
@@ -93,19 +116,6 @@ export const Wrapper = styled.div`
         max-width: 320px;
         @media screen and (max-width: 600px) {
           font-size: 22px;
-        }
-      }
-      @media screen and (max-width: 900px) {
-        flex-direction: column-reverse;
-        align-items: center;
-        .nft {
-          width: 100%;
-          gap: 24px;
-          .nft-image {
-          }
-        }
-        .steps {
-          width: 100% !important;
         }
       }
       .nft {
@@ -123,12 +133,21 @@ export const Wrapper = styled.div`
           background: transparent;
           margin-top: 24px;
         }
+        @media screen and (max-width: 768px) {
+          margin-top: 54px;
+        }
         .title {
           display: none;
 
           @media screen and (max-width: 900px) {
             display: block;
           }
+        }
+        .finish {
+          @media screen and (max-width: 900px) {
+            color: white;
+          }
+          color: black;
         }
         .nft-img {
           position: relative;
@@ -173,7 +192,7 @@ export const Wrapper = styled.div`
         .btn-claim {
         }
         p {
-          color: #090910;
+          color: white;
           text-align: center;
           font-size: 14px;
           font-style: normal;
@@ -321,6 +340,25 @@ export const Wrapper = styled.div`
             font-style: normal;
             font-weight: 500;
             line-height: normal;
+          }
+        }
+        .btn-refresh {
+          border-radius: 8px;
+          background: rgba(255, 255, 255, 0.1);
+          display: flex;
+          padding: 8px 12px;
+          align-items: center;
+          gap: 8px;
+          color: #f2de29;
+          text-align: center;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 700;
+          line-height: normal;
+          width: fit-content;
+          transition: all 0.3s;
+          &:hover {
+            background: rgba(255, 255, 255, 0.3);
           }
         }
       }
