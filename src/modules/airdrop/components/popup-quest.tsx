@@ -4,6 +4,7 @@ import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import X from '@/assets/X.png';
 import Discord from '@/assets/Discord.png';
 import nft1 from '@/assets/airdrop/triden 1.jpg';
+import telegram from '@/assets/telegram-icon.svg';
 import { PrimaryButton } from '@/components/button/button.styled';
 import { useLocation, useNavigate } from 'react-router';
 import { CloseIconSVG, CompletedIconSVG, getDiscordOauthUrl, getTwitterOauthUrl } from '../hard';
@@ -84,24 +85,23 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
     }
   }, [twitter, discord]);
 
-  React.useEffect(() => {
-    const ele = document.querySelector('#quest-content');
-    const script = document.createElement('script');
-    script.src = '';
-    script.async = true;
-    script.setAttribute('src', 'https://telegram.org/js/telegram-widget.js?22');
-    script.setAttribute('data-telegram-login', 'aquachilling_bot');
-    script.setAttribute('data-size', 'large');
-    script.setAttribute('data-userpic', 'false');
-    script.setAttribute('data-auth-url', 'https://test.aquachilling.com/oauth/telegram/success');
-    script.setAttribute('data-request-access', 'write');
+  // React.useEffect(() => {
+  //   const ele = document.querySelector('#quest-content');
+  //   const script = document.createElement('script');
+  //   script.src = '';
+  //   script.async = true;
+  //   script.setAttribute('src', 'https://telegram.org/js/telegram-widget.js?22');
+  //   script.setAttribute('data-telegram-login', 'aquachilling_bot');
+  //   script.setAttribute('data-size', 'large');
+  //   script.setAttribute('data-userpic', 'false');
+  //   script.setAttribute('data-auth-url', 'https://test.aquachilling.com/oauth/telegram/success');
+  //   script.setAttribute('data-request-access', 'write');
 
-    ele?.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+  //   ele?.appendChild(script);
+  // }, []);
+  const generateTelegramOauthLink = () => {
+    return `https://oauth.telegram.org/auth?bot_id=7025473920&origin=https%3A%2F%2Ftest.aquachilling.com&embed=1&request_access=write&return_to=https%3A%2F%2Ftest.aquachilling.com%2Fairdrop`;
+  };
 
   return (
     <Wrapper>
@@ -250,6 +250,10 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                   </div>
                 )}
               </div>
+            </div>
+            <div className='connect-telegram' onClick={() => window.open(generateTelegramOauthLink())}>
+              <img src={telegram} alt='' />
+              Connect with telegram
             </div>
 
             <div

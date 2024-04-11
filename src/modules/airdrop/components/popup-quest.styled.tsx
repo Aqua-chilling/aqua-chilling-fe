@@ -361,6 +361,24 @@ export const Wrapper = styled.div`
             background: rgba(255, 255, 255, 0.3);
           }
         }
+        .connect-telegram {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 13px;
+          font-weight: 500;
+          line-height: 20px;
+          border-radius: 17px;
+          background-color: #54a9eb;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          padding: 7px 16px 6px;
+          margin: 0;
+          border: none;
+          color: #fff;
+          cursor: pointer;
+          gap: 8px;
+        }
       }
     }
   }
