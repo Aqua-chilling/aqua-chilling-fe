@@ -34,7 +34,7 @@ export const PopUpLogin = ({ setControl }: any) => {
   // const { addNotification } = useNotification();
   // const navigate = useNavigate();
   const wallet = useTonWallet();
-  const { open } = useLoginWithTon();
+  const { tonConnectUI } = useLoginWithTon();
   return (
     <Wrapper>
       <div className='login-content'>
@@ -164,7 +164,7 @@ export const PopUpLogin = ({ setControl }: any) => {
                 <div
                   className='btn'
                   onClick={() => {
-                    open();
+                    tonConnectUI.openModal()
                   }}
                 >
                   <img src={TonSymbol} alt='' />
