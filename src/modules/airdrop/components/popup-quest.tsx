@@ -83,6 +83,26 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
         });
     }
   }, [twitter, discord]);
+
+  React.useEffect(() => {
+    const ele = document.querySelector('#quest-content');
+    const script = document.createElement('script');
+    script.src = '';
+    script.async = true;
+    script.setAttribute('src', 'https://telegram.org/js/telegram-widget.js?22');
+    script.setAttribute('data-telegram-login', 'aquachilling_bot');
+    script.setAttribute('data-size', 'large');
+    script.setAttribute('data-userpic', 'false');
+    script.setAttribute('data-auth-url', 'https://test.aquachilling.com/oauth/telegram/success');
+    script.setAttribute('data-request-access', 'write');
+
+    ele?.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
+
   return (
     <Wrapper>
       <div
@@ -100,7 +120,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
         >
           <div dangerouslySetInnerHTML={{ __html: CloseIconSVG }}></div>
         </div>
-        <div className='quest-content'>
+        <div className='quest-content' id='quest-content'>
           <div className='steps'>
             <div className='title'>Claim your first Aquachilling NFT now</div>
             <div className='step st'>
@@ -231,15 +251,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                 )}
               </div>
             </div>
-            <script
-              async
-              src='https://telegram.org/js/telegram-widget.js?22'
-              data-telegram-login='aquachilling_bot'
-              data-size='large'
-              data-userpic='false'
-              data-auth-url='https://test.aquachilling.com/oauth/telegram/success'
-              data-request-access='write'
-            ></script>
+
             <div
               className='btn-refresh'
               onClick={() => {
