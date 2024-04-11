@@ -231,6 +231,15 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                 )}
               </div>
             </div>
+            <script
+              async
+              src='https://telegram.org/js/telegram-widget.js?22'
+              data-telegram-login='aquachilling_bot'
+              data-size='large'
+              data-userpic='false'
+              data-auth-url='https://test.aquachilling.com/oauth/telegram/success'
+              data-request-access='write'
+            ></script>
             <div
               className='btn-refresh'
               onClick={() => {
