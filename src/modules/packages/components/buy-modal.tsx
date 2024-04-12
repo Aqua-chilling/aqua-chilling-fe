@@ -19,11 +19,21 @@ const cards = [
   }
 ];
 
+import { Spin } from "antd";
+import BuyBgs from '@/assets/packages/buy-bgs.png'
 import BuyModalBg from '@/assets/packages/buy-modal.png';
 import { PackageCard } from './package-card';
 import { useMemo, useState } from 'react';
+import { useBuyPack } from '../hooks/use-buy-pack';
+import { ENVS } from '@/config';
+import { CHAIN, useTonWallet } from '@tonconnect/ui-react';
+import { useSelector } from 'react-redux';
+import { selectToken } from '@/redux';
+import { useLoginWithTon } from '@/hooks/use-login-with-ton';
 export const BuyModal = () => {
   const [amount, setAmount] = useState<any>({});
+  const token = useSelector(selectToken)
+  const { tonConnectUI } = useLoginWithTon();
   const total = useMemo(() => {
     let _total = 0;
     cards.map((card, key) => {
@@ -31,10 +41,31 @@ export const BuyModal = () => {
     });
     return _total;
   }, [amount]);
+  const address  = useTonWallet()
+  const transaction = useMemo(()=>{
+    return {
+      validUntil:10000,
+      network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
+      from: address,
+      messages:{
+        address: '', //CONTRACT
+        amount: '0.1' ,
+        stateInit: '',
+        payload: '',
+      }
+    }
+  }, [])
+  const {isLoading, handleBuyPack} = useBuyPack(
+   {
+    transaction
+   }
+  )
+
   return (
     <div className='buy-modal'>
       <img src={BuyModalBg} alt='' className='buy-background' />
       <div className='buy-content'>
+        <img src={BuyBgs} alt="" className='buy-background-mb' />
         <div className='buy-package'>
           <div className='buy-title'>Fish packages</div>
           <div className='package-cards'>
@@ -77,7 +108,12 @@ export const BuyModal = () => {
               <div className='info-value'>${total}</div>
             </div>
           </div>
-          <div className='summary-button'>Buy now</div>
+          <div className={`summary-button ${isLoading && 'summary-loading'}`} onClick={()=>{
+            !token ? tonConnectUI.openModal() : handleBuyPack()
+          }}>
+            {!token ? 'Connect TON' : isLoading ? <span>Buying</span> :'Buy now'}
+            {isLoading && <div className='button-spin'><Spin/></div>}
+          </div>
         </div>
       </div>
     </div>

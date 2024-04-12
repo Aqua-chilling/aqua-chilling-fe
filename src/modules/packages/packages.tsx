@@ -42,9 +42,14 @@ export const Packages = () => {
         </Modal>
       )}
       {isShowPopupLogin && <BuyModal />}
-      {isPurchaseSuccess && <div className='purchase-success'>Purchase successful</div>}
-      {isPurchaseSuccess && <PurchaseCard />}
-      <div className=''></div>
+      {
+        !isPurchaseSuccess &&<div className='purchase-result'>
+        <div className='purchase-success'>Purchase successful</div>
+        <PurchaseCard />
+        <div className='card-btn'>Open all</div>
+       </div>
+      }
+     
     </Wrapper>
   );
 };

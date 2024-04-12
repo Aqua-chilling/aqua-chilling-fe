@@ -10,6 +10,7 @@ export const PackageCard = ({ thumnail, title, price, amount, setAmount }: ICard
   return (
     <div className='package-card'>
       <img src={thumnail} alt='' className='' />
+      <div className="card-content">
       <div className='card-title'>{title}</div>
       <div className='card-border'></div>
       <div className='card-info'>
@@ -34,6 +35,7 @@ export const PackageCard = ({ thumnail, title, price, amount, setAmount }: ICard
             +
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
