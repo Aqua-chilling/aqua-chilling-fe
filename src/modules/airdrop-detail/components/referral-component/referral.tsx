@@ -22,7 +22,6 @@ export const copyICONSVG = `
 export const Referral = ({ data }: any) => {
   const { addNotification } = useNotification();
   const [refHistory, setRefHistory] = React.useState<any>();
-  console.log(data);
 
   React.useEffect(() => {
     OnboardingRepository.RetrieveReferralsHistory()

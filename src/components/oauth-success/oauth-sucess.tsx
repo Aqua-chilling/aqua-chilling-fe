@@ -16,6 +16,7 @@ export const OauthSuccess = () => {
   const google_code = searchParams.get('google_code');
   const twitter_code = searchParams.get('twitter_code');
   const discord_code = searchParams.get('discord_code');
+  const telegram_id = searchParams.get('id');
   const { addNotification } = useNotification();
   const token = useSelector(selectToken);
 

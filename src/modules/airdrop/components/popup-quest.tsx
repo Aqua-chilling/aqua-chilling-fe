@@ -4,7 +4,7 @@ import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import X from '@/assets/X.png';
 import Discord from '@/assets/Discord.png';
 import nft1 from '@/assets/airdrop/triden 1.jpg';
-import telegram from '@/assets/telegram-icon.svg';
+import telegram_icon from '@/assets/telegram-icon.svg';
 import { PrimaryButton } from '@/components/button/button.styled';
 import { useLocation, useNavigate } from 'react-router';
 import { CloseIconSVG, CompletedIconSVG, getDiscordOauthUrl, getTwitterOauthUrl } from '../hard';
@@ -18,6 +18,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { selectReferralCode, selectReferralCodeStatus, updateReferral } from '@/redux/referral';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import { dispatch } from '@/app/store';
+import { selectTelegram } from '@/redux/telegram-id';
 
 export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) => void }) => {
   const navigate = useNavigate();
@@ -41,11 +42,11 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
   const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [isFollowed, setIsFollowed] = React.useState<boolean>(false);
   const [isRetweeted, setIsRetweeted] = React.useState<boolean>(false);
-  const [isJoinedDiscord, setIsJoinedDiscord] = React.useState<boolean>(false);
+  const [isJoinedTelegram, setIsJoinedTelegram] = React.useState<boolean>(false);
   const [inputReferralCode, setInputReferralCode] = React.useState<string>('');
 
   const twitter = useSelector(selectTwitter);
-  const discord = useSelector(selectDiscord);
+  const telegram = useSelector(selectTelegram);
   const referral_code_status = useSelector(selectReferralCodeStatus);
   const referral_code = useSelector(selectReferralCode);
 
@@ -67,23 +68,10 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
           });
         });
     }
-    if (discord) {
-      setIsLoading(true);
-      OnboardingRepository.RetrieveTaskOfDiscord(discord || ' ')
-        .then((rs) => {
-          setIsJoinedDiscord(rs.joined);
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          setIsLoading(false);
-          addNotification({
-            message: err,
-            type: NOTIFICATION_TYPE.INFO,
-            id: new Date().getTime()
-          });
-        });
+    if (telegram) {
+      setIsJoinedTelegram(true);
     }
-  }, [twitter, discord]);
+  }, [twitter, telegram]);
 
   // React.useEffect(() => {
   //   const ele = document.querySelector('#quest-content');
@@ -99,9 +87,6 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
 
   //   ele?.appendChild(script);
   // }, []);
-  const generateTelegramOauthLink = () => {
-    return `https://oauth.telegram.org/auth?bot_id=7025473920&origin=https%3A%2F%2Ftest.aquachilling.com&embed=1&request_access=write&return_to=https%3A%2F%2Ftest.aquachilling.com%2Fairdrop`;
-  };
 
   return (
     <Wrapper>
@@ -157,31 +142,26 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
             <div className='step nd'>
               <div className='label'>Step 2</div>
               <div className='btns'>
-                {isJoinedDiscord ? (
+                {isJoinedTelegram ? (
                   <div className='btn completed'>
                     <div className='ic' dangerouslySetInnerHTML={{ __html: CompletedIconSVG }}></div>
-                    Joined Discord
+                    Joined Telegram
                   </div>
                 ) : (
-                  <div
-                    className={discord ? 'btn' : 'btn disabled'}
-                    onClick={() => {
-                      window.open('https://discord.gg/fhNSPtEpzg');
-                    }}
-                  >
-                    <img src={Discord} alt='' />
-                    Join Discord {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />}
+                  <div className={telegram ? 'btn' : 'btn disabled'}>
+                    <img src={telegram_icon} alt='' />
+                    Join Telegram Channel
                   </div>
                 )}
               </div>
-              {!discord && (
+              {!telegram && (
                 <div
                   className='tooltip'
                   onClick={() => {
-                    window.open(getDiscordOauthUrl(), '_blank');
+                    window.open(generateTelegramOauthLink(), '_blank');
                   }}
                 >
-                  <span>Link your Discord account </span>first for complete this task
+                  <span>Link your Telegram account </span>first for complete this task
                 </div>
               )}
             </div>
@@ -251,10 +231,6 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                 )}
               </div>
             </div>
-            <div className='connect-telegram' onClick={() => window.open(generateTelegramOauthLink())}>
-              <img src={telegram} alt='' />
-              Connect with telegram
-            </div>
 
             <div
               className='btn-refresh'
@@ -276,11 +252,11 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                       });
                     });
                 }
-                if (discord) {
+                if (telegram) {
                   setIsLoading(true);
-                  OnboardingRepository.RetrieveTaskOfDiscord(discord || ' ')
+                  OnboardingRepository.RetrieveTaskOfTelegram(undefined)
                     .then((rs) => {
-                      setIsJoinedDiscord(rs.joined);
+                      setIsJoinedTelegram(rs.joined);
                       setIsLoading(false);
                     })
                     .catch((err) => {
@@ -334,7 +310,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
               <img src={nft1} alt='' />
               <span>Trident Lv.1 </span>
             </div>
-            {isFollowed && isRetweeted && isJoinedDiscord && referral_code && referral_code_status ? (
+            {isFollowed && isRetweeted && isJoinedTelegram && referral_code && referral_code_status ? (
               <div
                 className='btn-claim'
                 onClick={() => {
