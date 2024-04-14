@@ -181,7 +181,7 @@ export const OauthSuccess = () => {
             type: NOTIFICATION_TYPE.ERROR,
             id: new Date().getTime()
           });
-          navigate('/airdrop');
+          navigate('/game');
         });
     }
   }, [google_code, twitter_code, discord_code]);

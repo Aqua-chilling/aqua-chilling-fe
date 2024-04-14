@@ -8,7 +8,7 @@ export class OnboardingRepository {
     return http.get(`/v1/onboarding/discord/${id}`);
   }
   static RetrieveTaskOfTelegram(body: any): Promise<any> {
-    return http.post(`/v1/telegram/add`, body);
+    return http.post(`/v1/telegram/check`, body);
   }
   static RetrieveTaskList(): Promise<any> {
     return http.get(`/v1/onboarding/tasks`);
