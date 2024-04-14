@@ -24,6 +24,9 @@ export const Task = ({ data, profile }: any) => {
   const referral_code = useSelector(selectReferralCode);
   const telegram = useSelector(selectTelegram);
   const { addNotification } = useNotification();
+  React.useEffect(() => {
+    fetchTelegramTaskStatus();
+  }, [telegram]);
 
   const fetchTelegramTaskStatus = () => {
     setIsLoading(true);
@@ -58,15 +61,12 @@ export const Task = ({ data, profile }: any) => {
     script.setAttribute('data-telegram-login', 'aquachilling_bot');
     script.setAttribute('data-size', 'large');
     script.setAttribute('data-userpic', 'false');
-    script.setAttribute('data-auth-url', 'https://api-game-test.aquachilling.com/v1/bc/link-telegram');
+    script.setAttribute('data-auth-url', 'https://api-game-test.aquachilling.com/v1/auth/telegram');
     script.setAttribute('data-request-access', 'write');
 
     ele?.appendChild(script);
   }, []);
-  const generateTelegramOauthLink = () => {
-    // return `https://oauth.telegram.org/auth?bot_id=7025473920&origin=https%3A%2F%2Ftest.aquachilling.com&embed=1&request_access=write&return_to=https%3A%2F%2Fapi-game-test.aquachilling.com%2Fv1%2Fbc%2Flink-telegram`;
-    return `https://oauth.telegram.org/auth?bot_id=7025473920&origin=https%3A%2F%2Ftest.aquachilling.com&embed=1&request_access=write&return_to=https%3A%2F%2Ftest.aquachilling.com`;
-  };
+
   return (
     <Wrapper>
       <Modal control={isShowPopupUpgrade} setControl={setIsShowPopupUpgrade} isShowClose={false}>
@@ -85,7 +85,7 @@ export const Task = ({ data, profile }: any) => {
           <div className='quest-status'>
             <div className='status-0' onClick={() => copy()}>
               {referral_code}
-              <div className='ic' dangerouslySetInnerHTML={{ __html: copyICONSVG }} onClick={() => copy()}></div>
+              <div className='ic' dangerouslySetInnerHTML={{ __html: copyICONSVG }}></div>
             </div>
           </div>
         </div>
@@ -94,17 +94,13 @@ export const Task = ({ data, profile }: any) => {
           <div className='quest-point'>100 Points</div>
           <div className='quest-status'>
             {telegram ? (
-              'Fdsf'
-            ) : isJoinedTelegram ? (
-              'joined'
+              isJoinedTelegram ? (
+                <div className='status-1'>Joined</div>
+              ) : (
+                <div className='status-0'>Join Telegram Channel</div>
+              )
             ) : (
-              <div
-                className='connect-telegram'
-                id='connect-telegram'
-                // onClick={() => window.open(generateTelegramOauthLink())}
-              >
-                {/* <img src={telegram_icon} alt='' /> Connect telegram */}
-              </div>
+              <div className='connect-telegram' id='connect-telegram'></div>
             )}
           </div>
         </div>

@@ -48,7 +48,7 @@ export const Wrapper = styled.div`
       display: none;
     }
     .quest-name {
-      flex: 1;
+      width: 40%;
       display: flex;
       align-items: start;
       flex-direction: column;
@@ -68,7 +68,7 @@ export const Wrapper = styled.div`
       }
     }
     .quest-status {
-      width: 20%;
+      flex: 1;
       display: flex;
       justify-content: end;
       @media screen and (max-width: 600px) {
@@ -100,23 +100,6 @@ export const Wrapper = styled.div`
         line-height: normal;
       }
       .connect-telegram {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 13px;
-        font-weight: 500;
-        line-height: 20px;
-        border-radius: 17px;
-        background-color: #54a9eb;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        padding: 7px 16px 6px;
-        margin: 0;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-        gap: 8px;
-        width: 100%;
       }
     }
     .table-head {

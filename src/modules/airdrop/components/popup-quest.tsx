@@ -69,7 +69,20 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
         });
     }
     if (telegram) {
-      setIsJoinedTelegram(true);
+      setIsLoading(true);
+      OnboardingRepository.RetrieveTaskOfTelegram({ telegram_id: telegram, channel_id: '88888' })
+        .then((rs) => {
+          setIsJoinedTelegram(rs.joined);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          setIsLoading(false);
+          addNotification({
+            message: err,
+            type: NOTIFICATION_TYPE.INFO,
+            id: new Date().getTime()
+          });
+        });
     }
   }, [twitter, telegram]);
 
@@ -234,7 +247,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                 }
                 if (telegram) {
                   setIsLoading(true);
-                  OnboardingRepository.RetrieveTaskOfTelegram(undefined)
+                  OnboardingRepository.RetrieveTaskOfTelegram({ telegram_id: telegram, channel_id: '88888' })
                     .then((rs) => {
                       setIsJoinedTelegram(rs.joined);
                       setIsLoading(false);

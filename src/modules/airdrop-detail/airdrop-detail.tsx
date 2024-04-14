@@ -30,10 +30,6 @@ export const AirdropDetail = () => {
   const navigate = useNavigate();
   const { signOut } = useLoginWithTon();
 
-  const [isShowDetail, setIsShowDetail] = React.useState<boolean>(false);
-  const [isShowReceived, setIsShowReceived] = React.useState<boolean>(
-    localStorage.getItem('received') === 'true' ? false : true
-  );
   const [isShowSignout, setIsShowSignout] = React.useState<boolean>(false);
   const [activeTab, setActiveTab] = React.useState<number>(0);
 
@@ -81,9 +77,6 @@ export const AirdropDetail = () => {
   }, []);
   return (
     <Wrapper>
-      <Modal control={isShowReceived} setControl={setIsShowReceived}>
-        <Received />
-      </Modal>
       {/* --------------------------------------top-bar------------------------------- */}
       <div className='left-bar'>
         <div className='tabs'>
