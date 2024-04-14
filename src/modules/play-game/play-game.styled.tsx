@@ -7,32 +7,33 @@ export const Wrapper = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   width: 100vw;
-  height: 100svh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  padding: 12px;
+  overflow: hidden;
+  /* padding: 12px; */
   @media screen and (max-width: 1024px) {
     background-size: cover;
   }
   @media screen and (max-width: 600px) {
-
   }
-  .game-iframe{
+  .game-iframe {
     width: 100vw;
-    max-width: 56.25svh;
-    padding-top: min(100svh ,  177.77vw);
-    height:0;
+    /* max-width: 56.25svh;
+    padding-top: min(100svh, 177.77vw);
+    height: 0; */
+    height: 100vh;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    iframe{
-      width:100% ;
+    iframe {
+      width: 100%;
       height: 100%;
-      top:0;
-      position:absolute ;
+      top: 0;
+      position: absolute;
     }
   }
 `;
