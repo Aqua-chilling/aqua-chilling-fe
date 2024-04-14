@@ -23,7 +23,7 @@ import { PurchaseCard } from './components/purchase-card';
 
 export const Packages = () => {
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
-  const [isShowBuyModal, setIsShowBuyModal] = React.useState(false);
+  const [isShowBuyModal, setIsShowBuyModal] = React.useState(true);
   const [isPurchaseSuccess, setPurchaseSuccess] = React.useState(true);
   const token = useSelector(selectToken);
   React.useEffect(() => {
@@ -37,11 +37,11 @@ export const Packages = () => {
     <Wrapper>
       <PackageNav />
       {isShowPopupLogin && (
-        <Modal control={isShowBuyModal} setControl={setIsShowBuyModal}>
+        <Modal control={isShowPopupLogin} setControl={setIsShowPopupLogin}>
           <PopUpLogin />
         </Modal>
       )}
-      {isShowPopupLogin && <BuyModal />}
+      {isShowBuyModal && <BuyModal />}
       {
         !isPurchaseSuccess &&<div className='purchase-result'>
         <div className='purchase-success'>Purchase successful</div>

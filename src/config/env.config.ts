@@ -11,6 +11,7 @@ interface IENVS {
   VITE_SELLER_CONTRACT: string;
   VITE_DISTRIBUTER_CONTRACT: string;
   VITE_ISTESTNET: boolean;
+  VITE_BASE_PACKAGE_TON_CONTRACT: string;
 }
 
 const defaultEnvs: IENVS = {
@@ -22,6 +23,7 @@ const defaultEnvs: IENVS = {
   VITE_DISTRIBUTER_CONTRACT: '',
   VITE_NFT_CONTRACT: '',
   VITE_SELLER_CONTRACT: '',
+  VITE_BASE_PACKAGE_TON_CONTRACT :  '',
   VITE_ISTESTNET: true,
 };
 

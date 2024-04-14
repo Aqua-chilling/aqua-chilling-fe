@@ -30,6 +30,9 @@ import { CHAIN, useTonWallet } from '@tonconnect/ui-react';
 import { useSelector } from 'react-redux';
 import { selectToken } from '@/redux';
 import { useLoginWithTon } from '@/hooks/use-login-with-ton';
+import {beginCell, toNano, Address} from '@ton/ton'
+import { storeBuyPack } from '@/constants/app-constaints';
+
 export const BuyModal = () => {
   const [amount, setAmount] = useState<any>({});
   const token = useSelector(selectToken)
@@ -41,20 +44,37 @@ export const BuyModal = () => {
     });
     return _total;
   }, [amount]);
-  const address  = useTonWallet()
+  const wallet  = useTonWallet()
+  console.log('wallet',wallet)
+  console.log("ENV", ENVS.VITE_BASE_PACKAGE_TON_CONTRACT)
   const transaction = useMemo(()=>{
-    return {
-      validUntil:10000,
-      network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
-      from: address,
+    if(!wallet?.account){
+      return {
+        validUntil: Date.now()/1000 + 10000,
+         network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
+         from: wallet?.account?.address || '',
       messages:{
-        address: '', //CONTRACT
-        amount: '0.1' ,
-        stateInit: '',
-        payload: '',
+        address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
+        amount: 0.1,
+      }
       }
     }
-  }, [])
+    const transactionPayload = beginCell().storeUint(3850333806, 32).storeUint(1, 64).storeInt(2, 257).storeAddress(Address.parse(wallet.account.address)).storeInt(3, 257).endCell() 
+
+    console.log('transactionPayload',transactionPayload)
+    return {
+      // validUntil: Date.now()/1000 + 10000,
+      // network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
+      // from: wallet?.account?.address || '',
+      messages:[
+        {
+          address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
+          amount: '100000000',
+          payload: transactionPayload.toBoc().toString("base64"),
+        }
+      ]
+    }
+  }, [wallet])
   const {isLoading, handleBuyPack} = useBuyPack(
    {
     transaction

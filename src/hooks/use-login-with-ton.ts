@@ -52,8 +52,9 @@ export const useLoginWithTon = () => {
     () =>
       tonConnectUI.onStatusChange(async (w) => {
         console.log('hi', w);
-        const activeChain = !ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
+        const activeChain = ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
         const activeChainName = ENVS.VITE_ISTESTNET ? 'Testnet' : 'Mainnet';
+        console.log("activeChian",activeChainName, activeChain )
         if (!isConnectionRestored) {
           console.log('!isConnectionRestored');
           return;
