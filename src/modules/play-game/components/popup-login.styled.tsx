@@ -7,15 +7,16 @@ export const Wrapper = styled.div`
   gap: 24px;
   border-radius: 16px;
   min-width: 360px;
+  overflow:hidden ;
 
   @media screen and (max-width: 900px) {
     max-height: 90vh;
-    overflow-y: scroll;
   }
   @media screen and (max-width: 600px) {
     max-width: 90vw;
   }
   @media screen and (max-width: 400px) {
+    min-width: unset;
   }
 
   .login-content {

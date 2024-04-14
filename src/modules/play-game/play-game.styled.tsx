@@ -7,7 +7,7 @@ export const Wrapper = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -21,7 +21,8 @@ export const Wrapper = styled.div`
   }
   .game-iframe{
     width: 100vw;
-    padding-top: 56.24vW;
+    max-width: 56.25svh;
+    padding-top: min(100svh ,  177.77vw);
     height:0;
     position: absolute;
     top: 50%;
