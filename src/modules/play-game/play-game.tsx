@@ -8,47 +8,62 @@ import { usePlayGame } from '@/hooks/use-play-game';
 import { COMMUNICATIONFUNCTION } from '@/constants/app-constaints';
 import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
-import WebApp from '@twa-dev/sdk'
+import WebApp from '@twa-dev/sdk';
+import { AirdropDetail } from '../airdrop-detail/airdrop-detail';
 
 function iframe() {
   return {
-    __html: '<iframe src="https://game-test.aquachilling.com/" id="game-iframeID"></iframe>',
+    __html: '<iframe src="https://game-test.aquachilling.com/" id="game-iframeID"></iframe>'
   };
 }
 export const GamePlay = () => {
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
+  const [isShowAirdropQuestLogin, setIsShowAirdropQuestLogin] = React.useState(false);
   const token = useSelector(selectToken);
   const { addNotification } = useNotification();
-  const {gameMessage, sendMessage}   = usePlayGame()
-  console.log('gameMessage', gameMessage)
-  useEffect(()=>{
-    WebApp.expand()
-    WebApp.enableClosingConfirmation()
-  }, [])
-  useEffect(()=>{
-    if(gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST) {
-      if(!token){
-        setIsShowPopupLogin(true)
-      }
-      else{
+  const { gameMessage, sendMessage } = usePlayGame();
+  console.log('gameMessage', gameMessage);
+  useEffect(() => {
+    WebApp.expand();
+    WebApp.enableClosingConfirmation();
+  }, []);
+  useEffect(() => {
+    if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST) {
+      if (!token) {
+        setIsShowPopupLogin(true);
+      } else {
         addNotification({
           message: 'Sign with TON successfully',
           type: NOTIFICATION_TYPE.SUCCESS,
           id: new Date().getTime()
         });
-        setIsShowPopupLogin(false)
-        sendMessage(COMMUNICATIONFUNCTION.LOGIN_SUCCESS, token)
+        setIsShowPopupLogin(false);
+        sendMessage(COMMUNICATIONFUNCTION.LOGIN_SUCCESS, token);
       }
     }
-  }, [gameMessage, token])
+    if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_QUEST) {
+      setIsShowAirdropQuestLogin(true);
+    }
+  }, [gameMessage, token]);
+
   return (
     <Wrapper>
-   {isShowPopupLogin && (
-        <Modal control={isShowPopupLogin} setControl={()=>{setIsShowPopupLogin}}>
+      {isShowPopupLogin && (
+        <Modal
+          control={isShowPopupLogin}
+          setControl={() => {
+            setIsShowPopupLogin;
+          }}
+        >
           <PopUpLogin />
         </Modal>
       )}
-      
+      {isShowAirdropQuestLogin && (
+        <Modal control={isShowAirdropQuestLogin} setControl={setIsShowAirdropQuestLogin}>
+          <AirdropDetail />
+        </Modal>
+      )}
+
       <div dangerouslySetInnerHTML={iframe()} className='game-iframe' />
     </Wrapper>
   );

@@ -1,4 +1,5 @@
 import { PrimaryButton } from '@/components/button/button.styled';
+import telegram_icon from '@/assets/telegram-icon.svg';
 import nft1 from '@/assets/airdrop-detail/nft1.png';
 import nft2 from '@/assets/airdrop-detail/nft2.png';
 import nft3 from '@/assets/airdrop-detail/nft3.png';
@@ -13,22 +14,26 @@ import { useNotification } from '@/contexts/notification.context';
 import { copyICONSVG } from '../referral-component/referral';
 import { Modal } from '@/components/modal/modal';
 import { Upgrade } from '../popups/upgrade';
+import { selectTelegram } from '@/redux/telegram-id';
 
 export const Task = ({ data, profile }: any) => {
-  const [isSayGM, setIsSayGM] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [isJoinedTelegram, setIsJoinedTelegram] = React.useState(false);
   const [isShowPopupUpgrade, setIsShowPopupUpgrade] = React.useState(false);
 
-  const discord = useSelector(selectDiscord);
   const referral_code = useSelector(selectReferralCode);
+  const telegram = useSelector(selectTelegram);
   const { addNotification } = useNotification();
+  React.useEffect(() => {
+    fetchTelegramTaskStatus();
+  }, [telegram]);
 
-  const fetchDiscordTaskStatus = () => {
+  const fetchTelegramTaskStatus = () => {
     setIsLoading(true);
-    OnboardingRepository.RetrieveTaskOfDiscord(discord || ' ')
+    OnboardingRepository.RetrieveTaskOfTelegram({ telegram_id: telegram, telegram_channel: 'aquachilling' })
       .then((rs) => {
-        setIsSayGM(rs.today_gm);
         setIsLoading(false);
+        setIsJoinedTelegram(rs?.joined);
       })
       .catch((err) => {
         setIsLoading(false);
@@ -47,97 +52,58 @@ export const Task = ({ data, profile }: any) => {
     });
     navigator.clipboard.writeText(referral_code || '');
   };
+  React.useEffect(() => {
+    const ele = document.querySelector('#connect-telegram');
+    const script = document.createElement('script');
+    script.src = '';
+    script.async = true;
+    script.setAttribute('src', 'https://telegram.org/js/telegram-widget.js?22');
+    script.setAttribute('data-telegram-login', 'aquachilling_bot');
+    script.setAttribute('data-size', 'large');
+    script.setAttribute('data-userpic', 'false');
+    script.setAttribute('data-auth-url', 'https://api-game-test.aquachilling.com/v1/auth/telegram');
+    script.setAttribute('data-request-access', 'write');
+
+    ele?.appendChild(script);
+  }, []);
+
   return (
     <Wrapper>
       <Modal control={isShowPopupUpgrade} setControl={setIsShowPopupUpgrade} isShowClose={false}>
         <Upgrade point={profile?.point} />
       </Modal>
-      <div className='title'>What is Aquachilling airdrop?</div>
-      <div className='subtitle'>
-        The more point you accumulate from the quest, the more token will be dropped to your wallet address on TGE.
+      <div className='titles'>
+        <span>Airdrop quests</span>
+        <p>
+          Your point: <div className='point'>{profile?.point}</div>
+        </p>
       </div>
-      <div className='nft'>
-        <div className='left'>
-          <img
-            src={profile?.point >= 800 ? nft4 : profile?.point >= 500 ? nft3 : profile?.point >= 300 ? nft2 : nft1}
-            alt=''
-          />
-          <div className='flex flex-col align-start flex-1'>
-            <div>
-              {profile?.point >= 800 ? '1500' : profile?.point >= 500 ? '800' : profile?.point >= 300 ? '500' : 'error'}{' '}
-              points
-            </div>
-            <span>
-              {profile?.point >= 800
-                ? 'Trident Lv. 4'
-                : profile?.point >= 500
-                ? 'Trident Lv. 3'
-                : profile?.point >= 300
-                ? 'Trident Lv.2'
-                : 'error'}
-            </span>
-            <div
-              className='upgrade-btn'
-              onClick={() => {
-                setIsShowPopupUpgrade(true);
-              }}
-              style={{ display: 'none' }}
-            >
-              <PrimaryButton w={160}>Upgrade NFT</PrimaryButton>
+      <div className='table'>
+        <div className='table-row'>
+          <div className='quest-name'>Follow us on X</div>
+          <div className='quest-point'>100 Points</div>
+          <div className='quest-status'>
+            <div className='status-0' onClick={() => copy()}>
+              {referral_code}
+              <div className='ic' dangerouslySetInnerHTML={{ __html: copyICONSVG }}></div>
             </div>
           </div>
         </div>
-        <div
-          className='upgrade-btn-below'
-          onClick={() => {
-            setIsShowPopupUpgrade(true);
-          }}
-        >
-          <PrimaryButton w={160}>Upgrade NFT</PrimaryButton>
+        <div className='table-row'>
+          <div className='quest-name'>Join Telegram Channle</div>
+          <div className='quest-point'>100 Points</div>
+          <div className='quest-status'>
+            {telegram ? (
+              isJoinedTelegram ? (
+                <div className='status-1'>Joined</div>
+              ) : (
+                <div className='status-0'>Join Telegram Channel</div>
+              )
+            ) : (
+              <div className='connect-telegram' id='connect-telegram'></div>
+            )}
+          </div>
         </div>
-      </div>
-      <p>Complete tasks below to upgrade your NFT</p>
-      <div className='table'>
-        <div className='table-head'>
-          <div className='quest-name'>Quest</div>
-          <div className='quest-point'>Points</div>
-          <div className='quest-status'>Status</div>
-        </div>
-        {data?.map((item: any, key: number) => {
-          return (
-            <div className='table-row' key={key}>
-              <div className='quest-name'>{item?.desc}</div>
-              <div className='quest-point'>{item?.point}</div>
-              <div className='quest-status'>
-                {item?.type === 'twitter_follow' && <div className='status-1'>Followed</div>}
-                {item?.type === 'retweet' && <div className='status-1'>Retweeted</div>}
-                {item?.type === 'discord_join' && <div className='status-1'>Joined</div>}
-                {item?.type === 'discord_gm' &&
-                  (isSayGM ? (
-                    <div className='status-1'>Said GM Today</div>
-                  ) : (
-                    <div
-                      className='status-0'
-                      onClick={() => {
-                        if (item?.type === 'discord_gm') {
-                          window.open(item?.data?.link, '_blank');
-                          fetchDiscordTaskStatus();
-                        }
-                      }}
-                    >
-                      Start task
-                    </div>
-                  ))}
-                {item?.type === 'referal' && (
-                  <div className='status-0' onClick={() => copy()}>
-                    {referral_code}
-                    <div className='ic' dangerouslySetInnerHTML={{ __html: copyICONSVG }} onClick={() => copy()}></div>
-                  </div>
-                )}
-              </div>
-            </div>
-          );
-        })}
       </div>
     </Wrapper>
   );

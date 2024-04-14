@@ -30,10 +30,6 @@ export const AirdropDetail = () => {
   const navigate = useNavigate();
   const { signOut } = useLoginWithTon();
 
-  const [isShowDetail, setIsShowDetail] = React.useState<boolean>(false);
-  const [isShowReceived, setIsShowReceived] = React.useState<boolean>(
-    localStorage.getItem('received') === 'true' ? false : true
-  );
   const [isShowSignout, setIsShowSignout] = React.useState<boolean>(false);
   const [activeTab, setActiveTab] = React.useState<number>(0);
 
@@ -81,14 +77,10 @@ export const AirdropDetail = () => {
   }, []);
   return (
     <Wrapper>
-      <Modal control={isShowReceived} setControl={setIsShowReceived}>
-        <Received />
-      </Modal>
       {/* --------------------------------------top-bar------------------------------- */}
-      <div className='top-bar'>
-        <div className='title'>fsdfs</div>
+      <div className='left-bar'>
         <div className='tabs'>
-          {['Task', 'Leaderboard', 'Referral'].map((item, key) => {
+          {['Airdrop quests', 'Leaderboard', 'Referral'].map((item, key) => {
             return (
               <div className={activeTab === key ? 'tab active' : 'tab '} onClick={() => setActiveTab(key)}>
                 {item}
@@ -96,108 +88,10 @@ export const AirdropDetail = () => {
             );
           })}
         </div>
-        <div className='btn-sell'>
-          <div
-            onClick={() => {
-              const ele = document.querySelector('#sign-out') as HTMLElement;
-              ele && ele.classList.add('show');
-            }}
-            className='toogle'
-          >
-            <div className='btn'>
-              <PrimaryButton w={160}>{token ? 'Sign out' : 'Connect wallet'}</PrimaryButton>
-            </div>
-            <MenuOutlined
-              className='btn-mobile'
-              onClick={() => {
-                const ele = document.querySelector('#sign-out') as HTMLElement;
-                ele && ele.classList.add('show');
-              }}
-            />
-          </div>
-          <div className='sign-out' id='sign-out'>
-            <div
-              className='overlay'
-              onClick={() => {
-                const ele = document.querySelector('#sign-out') as HTMLElement;
-                ele && ele.classList.remove('show');
-              }}
-            ></div>
-            <div className='outer-1'>
-              <div className='outer-2'>
-                <div className='outer-3'>
-                  <div className='outer-4'>
-                    <div className='outer-5 signout'>
-                      <div className='signout-content'>
-                        <div>Balance</div>
-                        <div className='value'>
-                          <img src={ton} alt='' />
-                          <span>...</span>
-                          <span>TON</span>
-                        </div>
-                        <div onClick={() => signOut()}>
-                          <PrimaryButton w={160}>{'Sign out'}</PrimaryButton>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
       <img src={land} alt='' className='land' />
 
       <div className='airdrop-detail-content-container'>
-        {/* --------------------------------------left-bar------------------------------- */}
-        {activeTab === 0 && (
-          <div className='left-bar'>
-            <div className='outer-1'>
-              <div className='outer-2'>
-                <div className='outer-3'>
-                  <div className='outer-4'>
-                    <div className='outer-5'>
-                      <img src={coin} alt='' className='coin' />
-                      <div className='your-nft'>
-                        <span>Your NFT</span>
-                        <img
-                          src={
-                            referral?.point >= 1500
-                              ? nft4
-                              : referral?.point >= 800
-                              ? nft3
-                              : referral?.point >= 500
-                              ? nft2
-                              : referral?.point >= 300
-                              ? nft1
-                              : undefined
-                          }
-                          alt=''
-                        />
-                        <div className='btn-upgrade'>Upgrade NFT</div>
-                      </div>
-                      <div className='available-points'>
-                        <span>Available Points</span>
-                        <div className='value'>{referral?.point}</div>
-                      </div>
-                      <div className='line'></div>
-                      <div className='referral-links'>
-                        <div>Refer to earn</div>
-                        <span>
-                          Invite friends, earn points & share a 20% point bonus after each successful referral.
-                        </span>
-                        <div className='btn-copy-link' onClick={() => copyLink()}>
-                          Copy link
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
         {/* --------------------------------------content------------------------------- */}
         <div className={activeTab === 0 ? 'airdrop-detail-content task' : 'airdrop-detail-content'}>
           {activeTab === 0 && <Task data={tasks} profile={referral} />}

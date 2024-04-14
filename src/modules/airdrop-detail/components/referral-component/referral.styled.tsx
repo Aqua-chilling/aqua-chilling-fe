@@ -43,6 +43,9 @@ export const Wrapper = styled.div`
   .referral-wrapper {
     width: 100%;
     display: flex;
+    .ic {
+      cursor: pointer;
+    }
     @media screen and (max-width: 600px) {
       flex-direction: column;
       gap: 24px;

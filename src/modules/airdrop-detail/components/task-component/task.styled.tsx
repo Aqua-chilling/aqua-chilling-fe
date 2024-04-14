@@ -7,85 +7,34 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
-  border-radius: 8px;
-  border: 1px solid #143464;
-  background: #0a1d3a;
-  padding: 16px;
-  .title {
-    color: #fff;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    letter-spacing: -0.48px;
-  }
-  .subtitle {
-    color: rgba(255, 255, 255, 0.7);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-  }
-  .nft {
-    display: flex;
-    padding: 16px;
-    align-items: center;
-    gap: 20px;
-    justify-content: space-between;
+  .titles {
     width: 100%;
-    border-radius: 20px;
-    background: #143464;
-    max-height: 200px;
-    @media screen and (max-width: 680px) {
-      flex-direction: column;
-      .upgrade-btn-below {
-        display: none !important;
-      }
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    span {
+      color: #fff;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      letter-spacing: -0.48px;
     }
-    .left {
-      height: 100%;
-      img {
-        max-height: 180px;
-
-        @media screen and (max-width: 500px) {
-          max-width: 80px;
-        }
-      }
-      @media screen and (max-width: 680px) {
-        width: 100%;
-        justify-content: space-between;
-        gap: 32px;
-        .upgrade-btn {
-          display: flex !important;
-          margin-top: 16px;
-        }
-      }
-      @media screen and (max-width: 500px) {
-        align-items: start;
-        gap: 12px;
-      }
+    p {
       color: rgba(255, 255, 255, 0.7);
-      font-size: 14px;
+      font-size: 24px;
+      font-style: normal;
       font-weight: 500;
+      line-height: normal;
       display: flex;
-      align-items: center;
-      gap: 12px;
-      span {
+      gap: 6px;
+      .point {
         color: #fff;
         font-size: 24px;
+        font-style: normal;
         font-weight: 700;
+        line-height: normal;
       }
-    }
-  }
-  p {
-    color: #fff;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: 150%; /* 21px */
-    margin: 0 auto;
-    @media screen and (max-width: 600px) {
-      display: none;
     }
   }
   .table {
@@ -99,7 +48,7 @@ export const Wrapper = styled.div`
       display: none;
     }
     .quest-name {
-      flex: 1;
+      width: 40%;
       display: flex;
       align-items: start;
       flex-direction: column;
@@ -119,7 +68,7 @@ export const Wrapper = styled.div`
       }
     }
     .quest-status {
-      width: 20%;
+      flex: 1;
       display: flex;
       justify-content: end;
       @media screen and (max-width: 600px) {
@@ -150,6 +99,8 @@ export const Wrapper = styled.div`
         font-weight: 700;
         line-height: normal;
       }
+      .connect-telegram {
+      }
     }
     .table-head {
       display: flex;
@@ -164,13 +115,20 @@ export const Wrapper = styled.div`
       }
     }
     .table-row {
-      gap: 12px;
+      border-radius: 16px;
+      background: #0a1d3a;
       display: flex;
+      padding: 8px 16px;
+      align-items: center;
+      gap: 16px;
+      align-self: stretch;
+      min-height: 56px;
+
       color: #fff;
-      text-align: right;
       font-size: 14px;
       font-style: normal;
-      font-weight: 500;
+      font-weight: 700;
+      line-height: 150%; /* 21px */
       @media screen and (max-width: 600px) {
         width: 170%;
       }
