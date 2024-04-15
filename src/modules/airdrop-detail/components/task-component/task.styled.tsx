@@ -88,6 +88,7 @@ export const Wrapper = styled.div`
         display: flex;
         align-items: center;
         gap: 8px;
+        cursor: pointer;
         &:hover {
           transform: scale(1.01);
         }

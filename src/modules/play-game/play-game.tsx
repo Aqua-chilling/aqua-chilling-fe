@@ -1,4 +1,6 @@
 import { useSelector } from 'react-redux';
+import close from '@/assets/airdrop-detail/close.png';
+import nft1 from '@/assets/airdrop/triden 1.jpg';
 import { Wrapper } from './play-game.styled';
 import React, { useEffect } from 'react';
 import { selectToken } from '@/redux';
@@ -10,6 +12,7 @@ import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import WebApp from '@twa-dev/sdk';
 import { AirdropDetail } from '../airdrop-detail/airdrop-detail';
+import { CloseIconSVG } from '../airdrop/hard';
 
 function iframe() {
   return {
@@ -18,7 +21,7 @@ function iframe() {
 }
 export const GamePlay = () => {
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
-  const [isShowAirdropQuestLogin, setIsShowAirdropQuestLogin] = React.useState(false);
+  const [isShowAirdropQuestLogin, setIsShowAirdropQuestLogin] = React.useState(true);
   const token = useSelector(selectToken);
   const { addNotification } = useNotification();
   const { gameMessage, sendMessage } = usePlayGame();
@@ -59,8 +62,21 @@ export const GamePlay = () => {
         </Modal>
       )}
       {isShowAirdropQuestLogin && (
-        <Modal control={isShowAirdropQuestLogin} setControl={setIsShowAirdropQuestLogin}>
-          <AirdropDetail />
+        <Modal control={isShowAirdropQuestLogin} setControl={setIsShowAirdropQuestLogin} isShowClose={false}>
+          <div className='airdrop-wrapper'>
+            <div className='close-mobile' onClick={() => setIsShowAirdropQuestLogin(false)}>
+              <div dangerouslySetInnerHTML={{ __html: CloseIconSVG }}></div>
+            </div>
+            <AirdropDetail setControl={setIsShowAirdropQuestLogin} />
+            <img
+              src={close}
+              className='close-received'
+              alt=''
+              onClick={() => {
+                setIsShowAirdropQuestLogin(false);
+              }}
+            />
+          </div>
         </Modal>
       )}
 

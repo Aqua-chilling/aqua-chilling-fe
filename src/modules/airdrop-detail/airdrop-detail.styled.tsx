@@ -14,8 +14,6 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 80vw;
-  height: 80vh;
   border-radius: 22.5px;
   border: 6px solid #090910;
   background: #0c2449;
@@ -23,12 +21,15 @@ export const Wrapper = styled.div`
   gap: 40px;
   position: relative;
   overflow: hidden;
+  width: 80%;
+  height: 68%;
   @media screen and (max-width: 1024px) {
-    background-size: cover;
-    height: unset;
-    position: relative;
+    flex-direction: column;
+    gap: 12px;
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    height: 100%;
   }
   .land {
     position: absolute;
@@ -44,8 +45,9 @@ export const Wrapper = styled.div`
     align-items: center;
     flex-direction: column;
     z-index: 3;
-    @media screen and (max-width: 768px) {
-      padding: 12px 6px;
+    @media screen and (max-width: 1024px) {
+      width: 100%;
+      height: fit-content;
     }
     .tabs {
       display: flex;
@@ -55,14 +57,13 @@ export const Wrapper = styled.div`
       border-radius: 12px;
       gap: 8px;
       width: 100%;
-      @media screen and (max-width: 768px) {
-        gap: 2px;
-        flex: 1;
+      @media screen and (max-width: 1024px) {
+        flex-direction: row;
       }
       .tab {
         width: 100%;
         color: #fff;
-        text-align: center;
+        text-align: left;
         font-style: normal;
         font-weight: 700;
         letter-spacing: -0.32px;
@@ -73,6 +74,10 @@ export const Wrapper = styled.div`
         justify-content: start;
         border-radius: 12px;
         padding: 8px;
+        cursor: pointer;
+        @media screen and (max-width: 1024px) {
+          justify-content: center;
+        }
         &.active {
           background: #061225;
         }
@@ -95,10 +100,10 @@ export const Wrapper = styled.div`
     position: relative;
     z-index: 2;
     justify-content: center;
+
     @media screen and (max-width: 1024px) {
-      flex-direction: column;
-      margin-top: 50px;
-      padding: 12px;
+      width: 100%;
+      padding: 0px;
     }
     .airdrop-detail-content {
       width: 100%;
