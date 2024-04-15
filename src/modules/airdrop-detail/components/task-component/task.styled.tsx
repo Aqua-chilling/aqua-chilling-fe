@@ -7,6 +7,9 @@ export const Wrapper = styled.div`
   flex-direction: column;
   align-items: flex-start;
   gap: 12px;
+  @media screen and (max-width: 768px) {
+    gap: 32px;
+  }
   .titles {
     width: 100%;
     display: flex;
@@ -19,6 +22,9 @@ export const Wrapper = styled.div`
       font-weight: 700;
       line-height: normal;
       letter-spacing: -0.48px;
+      @media screen and (max-width: 768px) {
+        display: none;
+      }
     }
     p {
       color: rgba(255, 255, 255, 0.7);
@@ -59,9 +65,14 @@ export const Wrapper = styled.div`
         font-weight: 500;
         line-height: normal;
       }
+      @media screen and (max-width: 600px) {
+        width: 100%;
+      }
     }
     .quest-point {
       width: 15%;
+      font-weight: 500;
+
       @media screen and (max-width: 600px) {
         width: 20%;
         text-align: start;
@@ -72,7 +83,7 @@ export const Wrapper = styled.div`
       display: flex;
       justify-content: end;
       @media screen and (max-width: 600px) {
-        width: 30%;
+        width: 70%;
       }
       .status-0 {
         color: #fff;
@@ -111,6 +122,7 @@ export const Wrapper = styled.div`
       font-size: 14px;
       font-weight: 500;
       gap: 12px;
+
       @media screen and (max-width: 600px) {
         width: 170%;
       }
@@ -130,9 +142,7 @@ export const Wrapper = styled.div`
       font-style: normal;
       font-weight: 700;
       line-height: 150%; /* 21px */
-      @media screen and (max-width: 600px) {
-        width: 170%;
-      }
+      flex-wrap: wrap;
     }
   }
 `;

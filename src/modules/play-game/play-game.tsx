@@ -21,7 +21,7 @@ function iframe() {
 }
 export const GamePlay = () => {
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
-  const [isShowAirdropQuestLogin, setIsShowAirdropQuestLogin] = React.useState(true);
+  const [isShowAirdropQuestLogin, setIsShowAirdropQuestLogin] = React.useState(false);
   const token = useSelector(selectToken);
   const { addNotification } = useNotification();
   const { gameMessage, sendMessage } = usePlayGame();

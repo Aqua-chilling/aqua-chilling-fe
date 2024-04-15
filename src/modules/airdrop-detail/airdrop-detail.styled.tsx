@@ -23,6 +23,9 @@ export const Wrapper = styled.div`
   overflow: hidden;
   width: 80%;
   height: 68%;
+  p {
+    margin: 0;
+  }
   @media screen and (max-width: 1024px) {
     flex-direction: column;
     gap: 12px;
@@ -30,6 +33,12 @@ export const Wrapper = styled.div`
   @media screen and (max-width: 768px) {
     width: 100%;
     height: 100%;
+    border: none;
+    padding: 0;
+    gap: 0px;
+    .land {
+      display: none;
+    }
   }
   .land {
     position: absolute;
@@ -57,8 +66,17 @@ export const Wrapper = styled.div`
       border-radius: 12px;
       gap: 8px;
       width: 100%;
+      overflow: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
       @media screen and (max-width: 1024px) {
         flex-direction: row;
+      }
+      @media screen and (max-width: 768px) {
+        padding: 16px 16px 16px 16px;
+        border-bottom: 1px solid #556680;
+        border-radius: 0px;
       }
       .tab {
         width: 100%;
@@ -75,18 +93,21 @@ export const Wrapper = styled.div`
         border-radius: 12px;
         padding: 8px;
         cursor: pointer;
-        @media screen and (max-width: 1024px) {
-          justify-content: center;
-        }
         &.active {
           background: #061225;
         }
         &:hover {
           background: #061225;
         }
+        @media screen and (max-width: 1024px) {
+          justify-content: center;
+        }
         @media screen and (max-width: 768px) {
           width: fit-content;
           padding: 4px 8px;
+        }
+        @media screen and (max-width: 500px) {
+          white-space: nowrap;
         }
       }
     }
@@ -114,8 +135,8 @@ export const Wrapper = styled.div`
       flex-direction: column;
       align-items: flex-start;
       gap: 12px;
-      @media screen and (max-width: 500px) {
-        padding: 0;
+      @media screen and (max-width: 768px) {
+        padding: 16px;
       }
     }
   }
