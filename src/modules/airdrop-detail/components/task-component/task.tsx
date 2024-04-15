@@ -142,7 +142,9 @@ export const Task = ({ data, profile }: any) => {
               isJoinedTelegram ? (
                 <div className='status-1'>Joined</div>
               ) : (
-                <div className='status-0'>Join Telegram Channel</div>
+                <div className='status-0' onClick={() => window.open('https://t.me/aquachilling')}>
+                  Join Telegram Channel
+                </div>
               )
             ) : (
               <div className='connect-telegram' id='connect-telegram'></div>

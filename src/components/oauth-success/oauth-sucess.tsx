@@ -68,7 +68,7 @@ export const OauthSuccess = () => {
                 twitter: rs.id
               })
             );
-            navigate('/airdrop');
+            navigate('/game');
           })
           .catch((err) => {
             addNotification({
@@ -76,7 +76,7 @@ export const OauthSuccess = () => {
               type: NOTIFICATION_TYPE.ERROR,
               id: new Date().getTime()
             });
-            navigate('/airdrop');
+            navigate('/game');
           });
       } else {
         OauthRepository.loginByX(twitter_code)
@@ -166,13 +166,12 @@ export const OauthSuccess = () => {
         hash: hash
       })
         .then((rs) => {
-          console.log(rs);
           addNotification({
             message: 'Link telegram successfull',
             type: NOTIFICATION_TYPE.SUCCESS,
             id: new Date().getTime()
           });
-          dispatch(updateTelegramId(rs?.telegram));
+          dispatch(updateTelegramId({ telegram: id }));
           navigate('/game');
         })
         .catch((err) => {

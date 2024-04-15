@@ -110,6 +110,9 @@ export const Wrapper = styled.div`
         font-style: normal;
         font-weight: 700;
         line-height: normal;
+        display: flex;
+        align-items: center;
+        gap: 6px;
       }
       .connect-telegram {
       }
