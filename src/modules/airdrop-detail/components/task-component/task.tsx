@@ -135,7 +135,7 @@ export const Task = ({ data, profile }: any) => {
           </div>
         </div>
         <div className='table-row'>
-          <div className='quest-name'>Join Telegram Channle</div>
+          <div className='quest-name'>Join Telegram Channel</div>
           <div className='quest-point'>100 Points</div>
           <div className='quest-status'>
             {telegram ? (
@@ -152,7 +152,7 @@ export const Task = ({ data, profile }: any) => {
           </div>
         </div>
         <div className='table-row'>
-          <div className='quest-name'>Follow us on X</div>
+          <div className='quest-name'>Refer your friends</div>
           <div className='quest-point'>100 Points</div>
           <div className='quest-status'>
             <div className='status-0' onClick={() => copy()}>
