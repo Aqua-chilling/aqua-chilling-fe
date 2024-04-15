@@ -1,7 +1,5 @@
 import styled from 'styled-components';
 import bg from '@/assets/airdrop/bg.png';
-import purchaseSuccess from '@/assets/packages/purchase-success.png';
-import cardSuccess from '@/assets/packages/card-success.png';
 export const Wrapper = styled.div`
   background-image: url(${bg});
   background-size: cover;
@@ -21,10 +19,9 @@ export const Wrapper = styled.div`
   }
   .game-iframe {
     width: 100vw;
-    /* max-width: 56.25svh;
-    padding-top: min(100svh, 177.77vw);
-    height: 0; */
-    height: 100vh;
+    max-width: 56.25vh;
+    padding-top: min(100vh, 177.77vw);
+    height: 0;
     position: absolute;
     top: 50%;
     left: 50%;
