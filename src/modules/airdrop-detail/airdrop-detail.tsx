@@ -1,5 +1,4 @@
 import { useNotification } from '@/contexts/notification.context';
-import nft1 from '@/assets/airdrop/triden 1.jpg';
 import nft2 from '@/assets/airdrop/triden 2.jpg';
 import nft3 from '@/assets/airdrop/triden 3.jpg';
 import nft4 from '@/assets/airdrop/triden 4.jpg';
@@ -24,7 +23,7 @@ import { dispatch } from '@/app/store';
 import { useLoginWithTon } from '@/hooks/use-login-with-ton';
 import { MenuOutlined } from '@ant-design/icons';
 
-export const AirdropDetail = () => {
+export const AirdropDetail = ({ setControl }: any) => {
   const { addNotification } = useNotification();
   const token = useSelector(selectToken);
   const navigate = useNavigate();
