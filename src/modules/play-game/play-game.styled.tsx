@@ -8,12 +8,13 @@ export const Wrapper = styled.div`
   background-size: cover;
   background-repeat: no-repeat;
   width: 100vw;
-  height: 100svh;
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
-  padding: 12px;
+  overflow: hidden;
+  /* padding: 12px; */
   @media screen and (max-width: 1024px) {
     background-size: cover;
   }
@@ -21,9 +22,10 @@ export const Wrapper = styled.div`
   }
   .game-iframe {
     width: 100vw;
-    max-width: 56.25svh;
+    /* max-width: 56.25svh;
     padding-top: min(100svh, 177.77vw);
-    height: 0;
+    height: 0; */
+    height: 100vh;
     position: absolute;
     top: 50%;
     left: 50%;
@@ -33,41 +35,6 @@ export const Wrapper = styled.div`
       height: 100%;
       top: 0;
       position: absolute;
-    }
-  }
-  .airdrop-wrapper {
-    background-image: url(${bgAirdrop});
-    background-size: 100% 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 90vw;
-    height: 95vh;
-    position: relative;
-    @media screen and (max-width: 768px) {
-      background-image: none;
-      background-color: #0c2449;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 24px;
-      gap: 24px;
-      width: 100vw;
-      height: 100vh;
-    }
-    .close-received {
-      position: absolute;
-      top: -10px;
-      right: 0px;
-      z-index: 2;
-      @media screen and (max-width: 768px) {
-        display: none;
-      }
-    }
-    .close-mobile {
-      display: none;
-      @media screen and (max-width: 768px) {
-        display: flex;
-      }
     }
   }
 `;
