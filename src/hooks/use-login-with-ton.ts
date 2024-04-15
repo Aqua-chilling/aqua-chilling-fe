@@ -1,11 +1,6 @@
 import { ENVS } from '@/config';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
-import {
-  CHAIN,
-  useIsConnectionRestored,
-  useTonConnectUI,
-  useTonWallet
-} from '@tonconnect/ui-react';
+import { CHAIN, useIsConnectionRestored, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { useEffect, useState, useRef, useCallback } from 'react';
 import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
@@ -54,7 +49,7 @@ export const useLoginWithTon = () => {
         console.log('hi', w);
         const activeChain = ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
         const activeChainName = ENVS.VITE_ISTESTNET ? 'Testnet' : 'Mainnet';
-        console.log("activeChian",activeChainName, activeChain )
+        console.log('activeChian', activeChainName, activeChain);
         if (!isConnectionRestored) {
           console.log('!isConnectionRestored');
           return;
@@ -64,17 +59,17 @@ export const useLoginWithTon = () => {
           dispatch(deleteAccount());
           return;
         }
-        if (w.account?.chain !== activeChain) {
-          console.log('invalid chain', activeChain, w.account?.chain);
-          dispatch(deleteAccount());
-          tonConnectUI.disconnect();
-          addNotification({
-            message: `Invalid chain. Please switch to TON ${activeChainName}`,
-            type: NOTIFICATION_TYPE.ERROR,
-            id: new Date().getTime()
-          });
-          return;
-        }
+        // if (w.account?.chain !== activeChain) {
+        //   console.log('invalid chain', activeChain, w.account?.chain);
+        //   dispatch(deleteAccount());
+        //   tonConnectUI.disconnect();
+        //   addNotification({
+        //     message: `Invalid chain. Please switch to TON ${activeChainName}`,
+        //     type: NOTIFICATION_TYPE.ERROR,
+        //     id: new Date().getTime()
+        //   });
+        //   return;
+        // }
 
         if (w.connectItems?.tonProof && 'proof' in w.connectItems.tonProof) {
           const account = w.account;
