@@ -10,6 +10,7 @@ import { updateReferral } from '@/redux/referral';
 import useInterval from './use-interval';
 import { setAccessGameToken } from '@/utilities/http-game.utils';
 import { setAccessToken } from '@/utilities';
+import { updateTelegramId } from '@/redux/telegram-id';
 const refreshIntervalMs = 60 * 60 * 1000;
 export const useLoginWithTon = () => {
   const firstProofLoading = useRef<boolean>(true);
@@ -119,6 +120,11 @@ export const useLoginWithTon = () => {
                     refreferral_code_status: tonOauthResponse?.referral_code_status
                   })
                 );
+                dispatch(
+                  updateTelegramId({
+                    telegram: tonOauthResponse?.telegram
+                  })
+                );
               } else {
                 addNotification({
                   message: 'Something went wrong! Try another wallet or try again later!',
@@ -155,6 +161,11 @@ export const useLoginWithTon = () => {
             })
           );
           dispatch(
+            updateTelegramId({
+              telegram: undefined
+            })
+          );
+          dispatch(
             updateReferral({
               referral_code: '',
               refreferral_code_status: 0
@@ -177,6 +188,11 @@ export const useLoginWithTon = () => {
     dispatch(
       updateTwitterId({
         twitter: undefined
+      })
+    );
+    dispatch(
+      updateTelegramId({
+        telegram: undefined
       })
     );
     dispatch(
