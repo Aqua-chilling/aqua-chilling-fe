@@ -10,7 +10,7 @@ export const PopUpLogin = () => {
   const token = useSelector(selectToken);
   const wallet = useTonWallet();
   const { tonConnectUI } = useLoginWithTon();
-  
+
   return (
     <Wrapper>
       <div className='login-content'>
@@ -18,18 +18,18 @@ export const PopUpLogin = () => {
           <div className='title'>Login</div>
           <div className='subtitle'>Connect your TON wallet to start playing game.</div>
           <div className='step st'>
-              <div className='btns'>
-                <div
-                  className='btn'
-                  onClick={() => {
-                    tonConnectUI.openModal();
-                  }}
-                >
-                  <img src={TonSymbol} alt='' />
-                  Sign in with TON
-                </div>
+            <div className='btns'>
+              <div
+                className='btn'
+                onClick={() => {
+                  tonConnectUI.openModal();
+                }}
+              >
+                <img src={TonSymbol} alt='' />
+                Sign in with TON
               </div>
             </div>
+          </div>
         </div>
       </div>
     </Wrapper>

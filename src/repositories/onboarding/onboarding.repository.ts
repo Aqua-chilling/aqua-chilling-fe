@@ -22,4 +22,10 @@ export class OnboardingRepository {
   static RetrieveReferralsHistory(): Promise<any> {
     return httpGame.post(`/bc/referral-info`);
   }
+  static RetrieveAllPackages(): Promise<any> {
+    return httpGame.get(`/bc/shop-pack`);
+  }
+  static RetrieveUserPackages(): Promise<any> {
+    return httpGame.post(`/game/get_owned_pack`);
+  }
 }
