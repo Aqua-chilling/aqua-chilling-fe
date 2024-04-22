@@ -44,7 +44,8 @@
     "redux-thunk": "^2.4.2",
     "slick-carousel": "^1.8.1",
     "styled-components": "^6.1.1",
-    "swiper": "^11.0.7"
+    "swiper": "^11.0.7",
+    "use-local-storage": "^3.0.0"
   },
   "devDependencies": {
     "@types/locomotive-scroll": "^4.1.3",
