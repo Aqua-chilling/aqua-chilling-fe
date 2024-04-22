@@ -1,4 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
+import close from '@/assets/airdrop-detail/close.png';
+import nft1 from '@/assets/airdrop/triden 1.jpg';
 import { Wrapper } from './play-game.styled';
 import React, { useEffect } from 'react';
 import { deleteAccount, selectToken, updateDiscordId, updateReferral, updateTwitterId } from '@/redux';
@@ -16,6 +18,8 @@ import { useQuery } from 'react-query';
 import useLocalStorage from 'use-local-storage';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
 import { PurchaseCard } from './components/purchase-card';
+import { CloseIconSVG } from '../airdrop/hard';
+
 function iframe() {
   return {
     __html: '<iframe src="https://game-test.aquachilling.com/" id="game-iframeID"></iframe>'
@@ -110,8 +114,21 @@ export const GamePlay = () => {
         </Modal>
       )}
       {isShowAirdropQuestLogin && (
-        <Modal control={isShowAirdropQuestLogin} setControl={setIsShowAirdropQuestLogin}>
-          <AirdropDetail />
+        <Modal control={isShowAirdropQuestLogin} setControl={setIsShowAirdropQuestLogin} isShowClose={false}>
+          <div className='airdrop-wrapper'>
+            <div className='close-mobile' onClick={() => setIsShowAirdropQuestLogin(false)}>
+              <div dangerouslySetInnerHTML={{ __html: CloseIconSVG }}></div>
+            </div>
+            <AirdropDetail setControl={setIsShowAirdropQuestLogin} />
+            <img
+              src={close}
+              className='close-received'
+              alt=''
+              onClick={() => {
+                setIsShowAirdropQuestLogin(false);
+              }}
+            />
+          </div>
         </Modal>
       )}
       {isShowBuyModal && (
