@@ -37,7 +37,7 @@ export const Task = ({ data, profile }: any) => {
 
   const fetchTelegramTaskStatus = () => {
     setIsLoading(true);
-    OnboardingRepository.RetrieveTaskOfTelegram({ telegram_id: telegram, telegram_channel: '1002106405894' })
+    OnboardingRepository.RetrieveTaskOfTelegram({ telegram_id: telegram, channel_id: '1002106405894' })
       .then((rs) => {
         setIsLoading(false);
         setIsJoinedTelegram(rs?.joined);
