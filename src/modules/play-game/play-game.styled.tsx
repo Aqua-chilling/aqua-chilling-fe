@@ -14,24 +14,22 @@ export const Wrapper = styled.div`
   justify-content: space-between;
   flex-direction: column;
   overflow: hidden;
+  position: relative;
+  box-sizing: border-box !important;
   /* padding: 12px; */
   @media screen and (max-width: 1024px) {
     background-size: cover;
   }
   .game-iframe {
-    width: 100vw;
-    max-width: 56.25vh;
-    padding-top: min(100vh, 177.77vw);
-    height: 0;
+    box-sizing: border-box !important;
+    width: 100%;
+    height: 100%;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    overflow: hidden;
     iframe {
+      box-sizing: border-box !important;
       width: 100%;
       height: 100%;
-      top: 0;
-      position: absolute;
     }
   }
   .airdrop-wrapper {
@@ -86,6 +84,7 @@ export const Wrapper = styled.div`
     height: 100vh;
     flex-direction: column;
     background: #000000b2;
+    gap: 40px;
   }
   .package-nav {
     width: 100%;

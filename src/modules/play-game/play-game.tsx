@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import close from '@/assets/airdrop-detail/close.png';
 import nft1 from '@/assets/airdrop/triden 1.jpg';
 import { Wrapper } from './play-game.styled';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { deleteAccount, selectToken, updateDiscordId, updateReferral, updateTwitterId } from '@/redux';
 import { PopUpLogin } from './components/popup-login';
 import { Modal } from '@/components/modal/modal';
@@ -49,27 +49,27 @@ export const GamePlay = () => {
     console.log('disconnect');
     WebApp.expand();
     WebApp.enableClosingConfirmation();
-    // if (tonConnectUI.connected) {
-    //   tonConnectUI.disconnect();
-    // }
+    if (tonConnectUI.connected) {
+      tonConnectUI.disconnect();
+    }
 
-    // dispatch(deleteAccount());
-    // dispatch(
-    //   updateDiscordId({
-    //     discord: undefined
-    //   })
-    // );
-    // dispatch(
-    //   updateTwitterId({
-    //     twitter: undefined
-    //   })
-    // );
-    // dispatch(
-    //   updateReferral({
-    //     referral_code: '',
-    //     refreferral_code_status: 0
-    //   })
-    // );
+    dispatch(deleteAccount());
+    dispatch(
+      updateDiscordId({
+        discord: undefined
+      })
+    );
+    dispatch(
+      updateTwitterId({
+        twitter: undefined
+      })
+    );
+    dispatch(
+      updateReferral({
+        referral_code: '',
+        refreferral_code_status: 0
+      })
+    );
   }, []);
   useEffect(() => {
     if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST) {
@@ -77,18 +77,14 @@ export const GamePlay = () => {
         setIsShowPopupLogin(true);
       } else {
         setIsShowPopupLogin(false);
+        console.log('send thsi message', token);
         sendMessage(COMMUNICATIONFUNCTION.LOGIN_SUCCESS, token);
       }
     }
     console.log('pack', userPack?.packs?.length);
-    if (!userPack?.packs) {
-      return;
-    }
-    if (
-      token &&
-      gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_QUEST &&
-      (userPack?.packs?.length || 0) === 0
-    ) {
+
+    if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_QUEST) {
+      console.log('show', isShowAirdropQuestLogin);
       setIsShowAirdropQuestLogin(true);
     }
     if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_BUY_PACK && userPack?.packs?.length > 0) {
