@@ -20,8 +20,8 @@ import { updateReferral } from '@/redux/referral';
 import { getDiscordOauthUrl, getTwitterOauthUrl } from '../hard';
 import { useTonConnectModal, useTonWallet } from '@tonconnect/ui-react';
 import ConnectButton from '@/components/ton-connect/ton-connect';
-import { useLoginWithTon } from '@/hooks/use-login-with-ton';
 import { useSelector } from 'react-redux';
+import { useTonWalletContext } from '@/contexts/ton-wallet.context';
 
 export const PopUpLogin = ({ setControl }: any) => {
   // const [isLoading, setIsLoading] = React.useState<boolean>(false);
@@ -34,7 +34,7 @@ export const PopUpLogin = ({ setControl }: any) => {
   // const { addNotification } = useNotification();
   // const navigate = useNavigate();
   const wallet = useTonWallet();
-  const { tonConnectUI } = useLoginWithTon();
+  const { tonConnectUI } = useTonWalletContext();
   return (
     <Wrapper>
       <div className='login-content'>
@@ -164,7 +164,7 @@ export const PopUpLogin = ({ setControl }: any) => {
                 <div
                   className='btn'
                   onClick={() => {
-                    tonConnectUI.openModal()
+                    tonConnectUI.openModal();
                   }}
                 >
                   <img src={TonSymbol} alt='' />

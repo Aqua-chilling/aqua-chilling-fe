@@ -2,6 +2,7 @@ import Card1 from '@/assets/packages/cards/card1.png';
 import Card2 from '@/assets/packages/cards/card2.png';
 import Card3 from '@/assets/packages/cards/card3.png';
 import CardDefault from '@/assets/packages/cards/card3.png';
+import { CloseIconSVG } from '@/modules/airdrop/hard';
 const cards = [Card1, Card2, Card3];
 
 import { Spin } from 'antd';
@@ -14,15 +15,16 @@ import { ENVS } from '@/config';
 import { CHAIN, useTonWallet } from '@tonconnect/ui-react';
 import { useSelector } from 'react-redux';
 import { selectToken } from '@/redux';
-import { useLoginWithTon } from '@/hooks/use-login-with-ton';
 import { beginCell, toNano, Address } from '@ton/ton';
 import { storeBuyPack } from '@/constants/app-constaints';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
+import { useTonWalletContext } from '@/contexts/ton-wallet.context';
+import ModalBg from '@/assets/packages/buy-modal-bg.png';
 
-export const BuyModal = () => {
+export const BuyModal = ({ onClose, onBuySuccess }: { onClose: () => void; onBuySuccess: () => void }) => {
   const [amount, setAmount] = useState<any>({});
   const token = useSelector(selectToken);
-  const { tonConnectUI } = useLoginWithTon();
+  const { tonConnectUI } = useTonWalletContext();
   const [packList, setPackList] = React.useState<any[]>();
   const total = useMemo(() => {
     let _total = 0;
@@ -74,7 +76,8 @@ export const BuyModal = () => {
     };
   }, [wallet, packList, amount]);
   const { isLoading, handleBuyPack } = useBuyPack({
-    transaction
+    transaction,
+    onBuySuccess
   });
 
   React.useEffect(() => {
@@ -89,10 +92,14 @@ export const BuyModal = () => {
       });
   }, [token]);
 
-  console.log('packl', packList);
-
   return (
     <div className='buy-modal'>
+      <div className='buy-modal-bg'>
+        <img src={ModalBg} alt='' />
+      </div>
+      <div className='close' onClick={onClose}>
+        <div dangerouslySetInnerHTML={{ __html: CloseIconSVG }}></div>
+      </div>
       <img src={BuyModalBg} alt='' className='buy-background' />
       <div className='buy-content'>
         <img src={BuyBgs} alt='' className='buy-background-mb' />

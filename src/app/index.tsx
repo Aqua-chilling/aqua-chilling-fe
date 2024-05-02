@@ -16,6 +16,7 @@ import { LoadingProvider } from '@/providers/loading.provider';
 import { NotificationProvider } from '@/contexts/notification.context';
 import { THEME, TonConnectUIProvider } from '@tonconnect/ui-react';
 import { CredentialProvider } from '@/providers/credential.provider';
+import { TonWalletContextProvider } from '@/contexts/ton-wallet.context';
 const queryClient = new QueryClient();
 let persistor = persistStore(store);
 
@@ -52,12 +53,14 @@ export const App = () => {
               }}
               actionsConfiguration={{
                 twaReturnUrl: 'https://t.me/aquachillingbot'
-            }}
+              }}
             >
               <FixedGlobalStyle />
               {/* {window.innerWidth > 780 && <CustomCurSor />} */}
               <NotificationProvider>
-                <RouterProvider>{<LoadingProvider />}</RouterProvider>
+                <TonWalletContextProvider>
+                  <RouterProvider>{<LoadingProvider />}</RouterProvider>
+                </TonWalletContextProvider>
               </NotificationProvider>
             </TonConnectUIProvider>
           </QueryClientProvider>

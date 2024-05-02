@@ -1,6 +1,7 @@
 import Card1 from '@/assets/packages/cards/card1.png';
 import Card2 from '@/assets/packages/cards/card2.png';
 import Card3 from '@/assets/packages/cards/card3.png';
+import { CloseIconSVG } from '@/modules/airdrop/hard';
 const cards = [
   {
     thumnail: Card1,
@@ -19,8 +20,8 @@ const cards = [
   }
 ];
 
-import { Spin } from "antd";
-import BuyBgs from '@/assets/packages/buy-bgs.png'
+import { Spin } from 'antd';
+import BuyBgs from '@/assets/packages/buy-bgs.png';
 import BuyModalBg from '@/assets/packages/buy-modal.png';
 import { PackageCard } from './package-card';
 import { useMemo, useState } from 'react';
@@ -29,14 +30,14 @@ import { ENVS } from '@/config';
 import { CHAIN, useTonWallet } from '@tonconnect/ui-react';
 import { useSelector } from 'react-redux';
 import { selectToken } from '@/redux';
-import { useLoginWithTon } from '@/hooks/use-login-with-ton';
-import {beginCell, toNano, Address} from '@ton/ton'
+import { beginCell, toNano, Address } from '@ton/ton';
 import { storeBuyPack } from '@/constants/app-constaints';
+import { useTonWalletContext } from '@/contexts/ton-wallet.context';
 
 export const BuyModal = () => {
   const [amount, setAmount] = useState<any>({});
-  const token = useSelector(selectToken)
-  const { tonConnectUI } = useLoginWithTon();
+  const token = useSelector(selectToken);
+  const { tonConnectUI } = useTonWalletContext();
   const total = useMemo(() => {
     let _total = 0;
     cards.map((card, key) => {
@@ -44,48 +45,55 @@ export const BuyModal = () => {
     });
     return _total;
   }, [amount]);
-  const wallet  = useTonWallet()
-  console.log('wallet',wallet)
-  console.log("ENV", ENVS.VITE_BASE_PACKAGE_TON_CONTRACT)
-  const transaction = useMemo(()=>{
-    if(!wallet?.account){
+  const wallet = useTonWallet();
+  console.log('wallet', wallet);
+  console.log('ENV', ENVS.VITE_BASE_PACKAGE_TON_CONTRACT);
+  const transaction = useMemo(() => {
+    if (!wallet?.account) {
       return {
-        validUntil: Date.now()/1000 + 10000,
-         network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
-         from: wallet?.account?.address || '',
-      messages:{
-        address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
-        amount: 0.1,
-      }
-      }
+        validUntil: Date.now() / 1000 + 10000,
+        network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
+        from: wallet?.account?.address || '',
+        messages: {
+          address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
+          amount: 0.1
+        }
+      };
     }
-    const transactionPayload = beginCell().storeUint(3850333806, 32).storeUint(1, 64).storeInt(2, 257).storeAddress(Address.parse(wallet.account.address)).storeInt(3, 257).endCell() 
+    const transactionPayload = beginCell()
+      .storeUint(3850333806, 32)
+      .storeUint(1, 64)
+      .storeInt(2, 257)
+      .storeAddress(Address.parse(wallet.account.address))
+      .storeInt(3, 257)
+      .endCell();
 
-    console.log('transactionPayload',transactionPayload)
+    console.log('transactionPayload', transactionPayload);
     return {
       // validUntil: Date.now()/1000 + 10000,
       // network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
       // from: wallet?.account?.address || '',
-      messages:[
+      messages: [
         {
           address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
           amount: '100000000',
-          payload: transactionPayload.toBoc().toString("base64"),
+          payload: transactionPayload.toBoc().toString('base64')
         }
       ]
-    }
-  }, [wallet])
-  const {isLoading, handleBuyPack} = useBuyPack(
-   {
+    };
+  }, [wallet]);
+  const { isLoading, handleBuyPack } = useBuyPack({
     transaction
-   }
-  )
+  });
 
   return (
     <div className='buy-modal'>
+      <div className='close' onClick={() => {}}>
+        <div dangerouslySetInnerHTML={{ __html: CloseIconSVG }}></div>
+      </div>
       <img src={BuyModalBg} alt='' className='buy-background' />
       <div className='buy-content'>
-        <img src={BuyBgs} alt="" className='buy-background-mb' />
+        <img src={BuyBgs} alt='' className='buy-background-mb' />
         <div className='buy-package'>
           <div className='buy-title'>Fish packages</div>
           <div className='package-cards'>
@@ -128,11 +136,18 @@ export const BuyModal = () => {
               <div className='info-value'>${total}</div>
             </div>
           </div>
-          <div className={`summary-button ${isLoading && 'summary-loading'}`} onClick={()=>{
-            !token ? tonConnectUI.openModal() : handleBuyPack()
-          }}>
-            {!token ? 'Connect TON' : isLoading ? <span>Buying</span> :'Buy now'}
-            {isLoading && <div className='button-spin'><Spin/></div>}
+          <div
+            className={`summary-button ${isLoading && 'summary-loading'}`}
+            onClick={() => {
+              !token ? tonConnectUI.openModal() : handleBuyPack();
+            }}
+          >
+            {!token ? 'Connect TON' : isLoading ? <span>Buying</span> : 'Buy now'}
+            {isLoading && (
+              <div className='button-spin'>
+                <Spin />
+              </div>
+            )}
           </div>
         </div>
       </div>

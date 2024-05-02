@@ -20,14 +20,14 @@ import { Referral } from './components/referral-component/referral';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { dispatch } from '@/app/store';
-import { useLoginWithTon } from '@/hooks/use-login-with-ton';
 import { MenuOutlined } from '@ant-design/icons';
+import { useTonWalletContext } from '@/contexts/ton-wallet.context';
 
 export const AirdropDetail = ({ setControl }: any) => {
   const { addNotification } = useNotification();
   const token = useSelector(selectToken);
   const navigate = useNavigate();
-  const { signOut } = useLoginWithTon();
+  const { signOut } = useTonWalletContext();
 
   const [isShowSignout, setIsShowSignout] = React.useState<boolean>(false);
   const [activeTab, setActiveTab] = React.useState<number>(0);
