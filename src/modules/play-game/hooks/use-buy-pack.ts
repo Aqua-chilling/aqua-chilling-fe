@@ -1,16 +1,20 @@
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
+import { COMMUNICATIONFUNCTION } from '@/constants/app-constaints';
 import { useNotification } from '@/contexts/notification.context';
+import { usePlayGame } from '@/hooks/use-play-game';
 import { useTonConnectUI } from '@tonconnect/ui-react';
 import { useCallback, useState } from 'react';
 
 interface IPropsUseBuyPack {
   transaction: any;
+  onBuySuccess: () => void;
 }
 export const useBuyPack = (props: IPropsUseBuyPack) => {
   const { addNotification } = useNotification();
+  const { sendMessage } = usePlayGame();
   const [tonConnectUI, setOptions] = useTonConnectUI();
   const [isLoading, setIsLoading] = useState(false);
-  const { transaction } = props;
+  const { transaction, onBuySuccess } = props;
   const handleBuyPack = useCallback(async () => {
     console.log(transaction);
     try {
@@ -23,6 +27,7 @@ export const useBuyPack = (props: IPropsUseBuyPack) => {
           type: NOTIFICATION_TYPE.SUCCESS,
           id: new Date().getTime()
         });
+        onBuySuccess();
       }
       console.log('res', res);
       setIsLoading(false);

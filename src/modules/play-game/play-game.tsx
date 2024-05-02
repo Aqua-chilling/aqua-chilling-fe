@@ -19,6 +19,7 @@ import useLocalStorage from 'use-local-storage';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
 import { PurchaseCard } from './components/purchase-card';
 import { CloseIconSVG } from '../airdrop/hard';
+import { useTonWalletContext } from '@/contexts/ton-wallet.context';
 
 function iframe() {
   return {
@@ -29,13 +30,9 @@ export const GamePlay = () => {
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
   const [isShowAirdropQuestLogin, setIsShowAirdropQuestLogin] = React.useState(false);
   const [isShowBuyModal, setIsShowBuyModal] = React.useState(false);
-  const [isShowBuySuccess, setIsShowBuySuccess] = React.useState(false);
-  const [tonConnectUI] = useTonConnectUI();
-  const dispatch = useDispatch();
   const token = useSelector(selectToken);
-  const { addNotification } = useNotification();
   const { gameMessage, sendMessage, setGameMessage } = usePlayGame();
-
+  const { signTokenOut, tonConnectUI } = useTonWalletContext();
   const { data: userPack } = useQuery({
     queryKey: ['retrieveuserPack', token, gameMessage],
     queryFn: () => OnboardingRepository.RetrieveUserPackages(),
@@ -49,28 +46,10 @@ export const GamePlay = () => {
     console.log('disconnect');
     WebApp.expand();
     WebApp.enableClosingConfirmation();
-    if (tonConnectUI.connected) {
-      tonConnectUI.disconnect();
-    }
-
-    dispatch(deleteAccount());
-    dispatch(
-      updateDiscordId({
-        discord: undefined
-      })
-    );
-    dispatch(
-      updateTwitterId({
-        twitter: undefined
-      })
-    );
-    dispatch(
-      updateReferral({
-        referral_code: '',
-        refreferral_code_status: 0
-      })
-    );
+    signTokenOut();
   }, []);
+
+  console.log('tonConnectUI', tonConnectUI);
   useEffect(() => {
     if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST) {
       if (!token) {
@@ -87,16 +66,12 @@ export const GamePlay = () => {
       console.log('show', isShowAirdropQuestLogin);
       setIsShowAirdropQuestLogin(true);
     }
-    if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_BUY_PACK && userPack?.packs?.length > 0) {
-      setIsShowBuyModal(false);
-      setIsShowBuySuccess(true);
-      return;
-    }
     if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_BUY_PACK) {
       setIsShowBuyModal(true);
     }
     console.log('chan ');
   }, [gameMessage, token, userPack?.packs?.length]);
+  console.log('isShow', isShowBuyModal);
   return (
     <Wrapper>
       {isShowPopupLogin && (
@@ -129,35 +104,17 @@ export const GamePlay = () => {
       )}
       {isShowBuyModal && (
         <Modal control={isShowBuyModal} setControl={setIsShowBuyModal} isShowClose={false}>
-          <BuyModal />
-        </Modal>
-      )}
-      {isShowBuySuccess && (
-        <Modal control={isShowBuySuccess} setControl={() => {}} isShowClose={false}>
-          <div className='purchase-result'>
-            <div className='purchase-success'>Your packages</div>
-            <PurchaseCard userPack={userPack} />
-            <div className='card-btns'>
-              <div
-                className='card-btn'
-                onClick={() => {
-                  sendMessage(COMMUNICATIONFUNCTION.BUY_PACK, COMMUNICATIONFUNCTION.SUCCESS_PARAM);
-                  setIsShowBuySuccess(false);
-                }}
-              >
-                Open all
-              </div>
-              <div
-                className='card-btn'
-                onClick={() => {
-                  setIsShowBuySuccess(false);
-                  setIsShowBuyModal(true);
-                }}
-              >
-                Buy more
-              </div>
-            </div>
-          </div>
+          <BuyModal
+            onClose={() => {
+              console.log('click');
+              sendMessage(COMMUNICATIONFUNCTION.BUY_PACK, COMMUNICATIONFUNCTION.FAIL_PARAM);
+              setIsShowBuyModal(false);
+            }}
+            onBuySuccess={() => {
+              sendMessage(COMMUNICATIONFUNCTION.BUY_PACK, COMMUNICATIONFUNCTION.SUCCESS_PARAM);
+              setIsShowBuyModal(false);
+            }}
+          />
         </Modal>
       )}
 

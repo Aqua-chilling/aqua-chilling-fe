@@ -33,9 +33,9 @@ import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { Bubble } from '../home/components/bubbles/bubble';
 import { MenuOutlined } from '@ant-design/icons';
-import { useLoginWithTon } from '@/hooks/use-login-with-ton';
 import { formatAddressToHuman } from '@/utilities/format.utils';
 import { copyICONSVG } from '../airdrop-detail/components/referral-component/referral';
+import { useTonWalletContext } from '@/contexts/ton-wallet.context';
 
 export const AirDrop = () => {
   const { addNotification } = useNotification();
@@ -236,7 +236,7 @@ export const AirDrop = () => {
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
   const token = useSelector(selectToken);
   const address = useSelector(selectAddress);
-  const { signOut } = useLoginWithTon();
+  const { signOut } = useTonWalletContext();
   React.useEffect(() => {
     if (token) {
       setIsShowPopupLogin(false);

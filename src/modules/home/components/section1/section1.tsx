@@ -253,11 +253,7 @@ export const Section1 = () => {
             </div>
             <div
               onClick={() => {
-                addNotification({
-                  message: 'Comming soon',
-                  type: NOTIFICATION_TYPE.SUCCESS,
-                  id: new Date().getTime()
-                });
+                navigate('/game');
               }}
             >
               <SecondaryButton w={220}>Play game</SecondaryButton>

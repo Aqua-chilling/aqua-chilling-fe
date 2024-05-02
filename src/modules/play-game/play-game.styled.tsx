@@ -73,7 +73,7 @@ export const Wrapper = styled.div`
   * {
     box-sizing: border-box !important;
   }
-  @media screen and (max-width: 930px) {
+  @media screen and (max-width: 980px) {
     background-size: cover;
   }
   .purchase-result {
@@ -198,7 +198,8 @@ export const Wrapper = styled.div`
     width: 100%;
     max-width: 1200px;
     position: relative;
-    @media screen and (max-width: 930px) {
+    overflow: visible;
+    @media screen and (max-width: 980px) {
       background: white;
       width: 92vw;
       max-width: 600px;
@@ -208,18 +209,55 @@ export const Wrapper = styled.div`
       border-top-left-radius: 30px;
       border-top-right-radius: 30px;
     }
+    .close {
+      position: absolute;
+      top: 33px !important;
+      right: 68px !important;
+      padding: 4px;
+      padding-bottom: 0px;
+      border-radius: 30%;
+      cursor: pointer;
+      transition: all 0.3s;
+      background: white;
+      z-index: 3 !important;
+      @media screen and (max-width: 980px) {
+        top: 3px !important;
+        right: 4px !important;
+      }
+      @media screen and (max-width: 768px) {
+        top: 16px;
+        right: 16px;
+      }
+      &:hover {
+        transform: scale(1.1);
+      }
+    }
+    .buy-modal-bg {
+      position: absolute;
+      width: 110%;
+      height: 110%;
+      top: 46%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      img {
+        width: 100%;
+      }
+      @media screen and (max-width: 980px) {
+        display: none;
+      }
+    }
     .buy-background {
       position: relative;
       z-index: 1;
       width: 100%;
-      @media screen and (max-width: 930px) {
+      @media screen and (max-width: 980px) {
         display: none;
       }
     }
     .buy-content {
       position: absolute;
       z-index: 2;
-      top: 53%;
+      top: 60%;
       left: 50%;
       transform: translate(-50%, -50%);
       display: flex;
@@ -227,7 +265,7 @@ export const Wrapper = styled.div`
       gap: 35px;
       align-items: center;
       flex-direction: column;
-      @media screen and (max-width: 930px) {
+      @media screen and (max-width: 980px) {
         position: relative;
         width: 100%;
         top: unset;
@@ -242,7 +280,7 @@ export const Wrapper = styled.div`
         width: calc(100% + 90px);
         top: -26px;
         display: none;
-        @media screen and (max-width: 930px) {
+        @media screen and (max-width: 980px) {
           display: block;
         }
       }
@@ -253,7 +291,7 @@ export const Wrapper = styled.div`
         line-height: 60px;
         letter-spacing: -0.02em;
         text-align: center;
-        @media screen and (max-width: 930px) {
+        @media screen and (max-width: 980px) {
           font-size: 24px;
           font-weight: 700;
           line-height: 30px;
@@ -267,7 +305,7 @@ export const Wrapper = styled.div`
         flex-direction: column;
         align-items: center;
         gap: 20px;
-        @media screen and (max-width: 930px) {
+        @media screen and (max-width: 980px) {
           width: 100%;
         }
         .summary-border {
@@ -336,7 +374,7 @@ export const Wrapper = styled.div`
           flex-direction: row;
           gap: 16px;
           padding: 4px;
-          @media screen and (max-width: 930px) {
+          @media screen and (max-width: 980px) {
             width: 100%;
           }
           .info {
@@ -371,7 +409,7 @@ export const Wrapper = styled.div`
         align-items: center;
         gap: 20px;
 
-        @media screen and (max-width: 930px) {
+        @media screen and (max-width: 980px) {
           width: 100%;
         }
         .package-cards {
@@ -379,7 +417,7 @@ export const Wrapper = styled.div`
           gap: 16px;
           max-height: calc(100vh - 290px);
           overflow-y: auto;
-          @media screen and (max-width: 930px) {
+          @media screen and (max-width: 980px) {
             flex-direction: column;
             width: 100%;
           }
@@ -392,14 +430,14 @@ export const Wrapper = styled.div`
 
             img {
               width: 120px;
-              @media screen and (max-width: 930px) {
+              @media screen and (max-width: 980px) {
                 width: 80px;
               }
             }
             display: flex;
             flex-direction: column;
             align-items: center;
-            @media screen and (max-width: 930px) {
+            @media screen and (max-width: 980px) {
               flex-direction: row;
               align-items: stretch;
               gap: 16px;
@@ -410,7 +448,7 @@ export const Wrapper = styled.div`
               align-items: center;
               width: 100%;
               justify-content: space-between;
-              @media screen and (max-width: 930px) {
+              @media screen and (max-width: 980px) {
                 align-items: flex-start;
               }
             }
@@ -423,7 +461,8 @@ export const Wrapper = styled.div`
               text-align: left;
               margin-top: 17px;
               color: #ffffff;
-              @media screen and (max-width: 930px) {
+              white-space: nowrap;
+              @media screen and (max-width: 980px) {
                 margin-top: 10px;
               }
             }
@@ -433,7 +472,7 @@ export const Wrapper = styled.div`
               height: 1px;
               margin-top: 10px;
               margin-bottom: 12px;
-              @media screen and (max-width: 930px) {
+              @media screen and (max-width: 980px) {
                 margin-bottom: 3px;
               }
             }
@@ -441,7 +480,7 @@ export const Wrapper = styled.div`
               display: flex;
               width: 100%;
               justify-content: space-between;
-              @media screen and (max-width: 930px) {
+              @media screen and (max-width: 980px) {
                 margin-bottom: 10px;
               }
             }
