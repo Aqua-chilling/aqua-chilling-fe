@@ -26,9 +26,11 @@ export const Wrapper = styled.div`
   p {
     margin: 0;
   }
-  @media screen and (max-width: 1024px) {
+  @media screen and (max-width: 1280px) {
     flex-direction: column;
     gap: 12px;
+    width: 90%;
+    height: 79%;
   }
   @media screen and (max-width: 768px) {
     width: 100%;
@@ -54,7 +56,7 @@ export const Wrapper = styled.div`
     align-items: center;
     flex-direction: column;
     z-index: 3;
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 1280px) {
       width: 100%;
       height: fit-content;
     }
@@ -70,7 +72,7 @@ export const Wrapper = styled.div`
       &::-webkit-scrollbar {
         display: none;
       }
-      @media screen and (max-width: 1024px) {
+      @media screen and (max-width: 1280px) {
         flex-direction: row;
       }
       @media screen and (max-width: 768px) {
@@ -80,11 +82,6 @@ export const Wrapper = styled.div`
       }
       .tab {
         width: 100%;
-        color: #fff;
-        text-align: left;
-        font-style: normal;
-        font-weight: 700;
-        letter-spacing: -0.32px;
         transition: all 0.3s;
         flex: 1;
         display: flex;
@@ -93,13 +90,25 @@ export const Wrapper = styled.div`
         border-radius: 12px;
         padding: 8px;
         cursor: pointer;
+        display: flex;
+        gap: 8px;
+        span {
+          color: #fff;
+          text-align: left;
+          font-style: normal;
+          font-weight: 700;
+          letter-spacing: -0.32px;
+        }
+        img {
+          width: 24px;
+        }
         &.active {
           background: #061225;
         }
         &:hover {
           background: #061225;
         }
-        @media screen and (max-width: 1024px) {
+        @media screen and (max-width: 1280px) {
           justify-content: center;
         }
         @media screen and (max-width: 768px) {
@@ -122,7 +131,7 @@ export const Wrapper = styled.div`
     z-index: 2;
     justify-content: center;
 
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 1280px) {
       width: 100%;
       padding: 0px;
     }
@@ -149,7 +158,7 @@ export const Wrapper = styled.div`
     width: 100%;
     position: relative;
     z-index: 2;
-    @media screen and (max-width: 1024px) {
+    @media screen and (max-width: 1280px) {
       width: 100%;
     }
     .outer-2 {

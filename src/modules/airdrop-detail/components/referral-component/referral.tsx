@@ -64,7 +64,7 @@ export const Referral = ({ data }: any) => {
           </div>
         </div>
         <div className='referral-code'>
-          <span>Referral link</span>
+          <span>Referral code</span>
           <div className='value'>
             {data?.referral_code}
             <div className='ic' dangerouslySetInnerHTML={{ __html: copyICONSVG }} onClick={() => copy()}></div>

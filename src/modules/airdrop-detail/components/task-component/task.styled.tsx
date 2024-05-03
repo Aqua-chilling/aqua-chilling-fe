@@ -72,6 +72,7 @@ export const Wrapper = styled.div`
     .quest-point {
       width: 15%;
       font-weight: 500;
+      white-space: nowrap;
 
       @media screen and (max-width: 600px) {
         width: 20%;
@@ -83,7 +84,7 @@ export const Wrapper = styled.div`
       display: flex;
       justify-content: end;
       @media screen and (max-width: 600px) {
-        width: 70%;
+        width: 50%;
       }
       .status-0 {
         color: #fff;
@@ -145,7 +146,9 @@ export const Wrapper = styled.div`
       font-style: normal;
       font-weight: 700;
       line-height: 150%; /* 21px */
-      flex-wrap: wrap;
+      @media screen and (max-width: 600px) {
+        flex-wrap: wrap;
+      }
     }
   }
 `;

@@ -22,6 +22,11 @@ import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { dispatch } from '@/app/store';
 import { MenuOutlined } from '@ant-design/icons';
 import { useTonWalletContext } from '@/contexts/ton-wallet.context';
+import QuestIcon from '@/assets/airdrop-detail/Quest.png';
+import LeaderboardIcon from '@/assets/airdrop-detail/Leaderboard.png';
+import ReferralIcon from '@/assets/airdrop-detail/Share.png';
+
+const iconList = [QuestIcon, LeaderboardIcon, ReferralIcon];
 
 export const AirdropDetail = ({ setControl }: any) => {
   const { addNotification } = useNotification();
@@ -82,7 +87,8 @@ export const AirdropDetail = ({ setControl }: any) => {
           {['Airdrop quests', 'Leaderboard', 'Referral'].map((item, key) => {
             return (
               <div className={activeTab === key ? 'tab active' : 'tab '} onClick={() => setActiveTab(key)}>
-                {item}
+                <img src={iconList[key]} alt='' />
+                <span>{item}</span>
               </div>
             );
           })}

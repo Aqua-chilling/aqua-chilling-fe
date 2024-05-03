@@ -43,6 +43,8 @@ export const Wrapper = styled.div`
   .referral-wrapper {
     width: 100%;
     display: flex;
+    justify-content: space-between;
+    gap: 40px;
     .ic {
       cursor: pointer;
     }
