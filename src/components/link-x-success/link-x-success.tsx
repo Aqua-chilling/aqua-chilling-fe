@@ -20,8 +20,7 @@ export const LinkXSuccess = () => {
             type: NOTIFICATION_TYPE.SUCCESS,
             id: new Date().getTime()
           });
-          window.close();
-          // navigate('/airdrop');
+          navigate('/airdrop');
         })
         .catch((err) => {
           addNotification({
@@ -36,8 +35,7 @@ export const LinkXSuccess = () => {
         type: NOTIFICATION_TYPE.ERROR,
         id: new Date().getTime()
       });
-      window.close();
-      // navigate('/airdrop');
+      navigate('/airdrop');
     }
   }, [twitter_code]);
   return <></>;
