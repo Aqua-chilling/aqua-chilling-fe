@@ -19,8 +19,9 @@ export const LinkXSuccess = () => {
             message: 'Link X account successfully',
             type: NOTIFICATION_TYPE.SUCCESS,
             id: new Date().getTime()
-          }); 
-          navigate('/airdrop');
+          });
+          window.close();
+          // navigate('/airdrop');
         })
         .catch((err) => {
           addNotification({
@@ -35,7 +36,8 @@ export const LinkXSuccess = () => {
         type: NOTIFICATION_TYPE.ERROR,
         id: new Date().getTime()
       });
-      navigate('/airdrop');
+      window.close();
+      // navigate('/airdrop');
     }
   }, [twitter_code]);
   return <></>;
