@@ -126,7 +126,7 @@ export const Task = ({ data, profile }: any) => {
               <div
                 className='status-0'
                 onClick={() => {
-                  window.open(getTwitterOauthUrl(), '_blank');
+                  window.open(getTwitterOauthUrl(), '_self');
                 }}
               >
                 Link X Account

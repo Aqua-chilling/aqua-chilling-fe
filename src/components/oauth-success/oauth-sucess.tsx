@@ -68,7 +68,7 @@ export const OauthSuccess = () => {
                 twitter: rs.id
               })
             );
-            navigate('/game');
+            navigate('/game?id=1');
           })
           .catch((err) => {
             addNotification({
@@ -76,7 +76,7 @@ export const OauthSuccess = () => {
               type: NOTIFICATION_TYPE.ERROR,
               id: new Date().getTime()
             });
-            navigate('/game');
+            navigate('/game?id=1');
           });
       } else {
         OauthRepository.loginByX(twitter_code)
@@ -172,7 +172,7 @@ export const OauthSuccess = () => {
             id: new Date().getTime()
           });
           dispatch(updateTelegramId({ telegram: id }));
-          navigate('/game');
+          navigate('/game?id=1');
         })
         .catch((err) => {
           addNotification({
@@ -180,7 +180,7 @@ export const OauthSuccess = () => {
             type: NOTIFICATION_TYPE.ERROR,
             id: new Date().getTime()
           });
-          navigate('/game');
+          navigate('/game?id=1');
         });
     }
   }, [google_code, twitter_code, discord_code]);

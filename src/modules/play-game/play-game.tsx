@@ -20,6 +20,7 @@ import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repos
 import { PurchaseCard } from './components/purchase-card';
 import { CloseIconSVG } from '../airdrop/hard';
 import { useTonWalletContext } from '@/contexts/ton-wallet.context';
+import { useSearchParams } from 'react-router-dom';
 
 function iframe() {
   return {
@@ -29,6 +30,9 @@ function iframe() {
 export const GamePlay = () => {
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
   const [isShowAirdropQuestLogin, setIsShowAirdropQuestLogin] = React.useState(false);
+  const [searchParams] = useSearchParams();
+  const typeId = searchParams.get('id');
+  console.log('typeId', typeId);
   const [isShowBuyModal, setIsShowBuyModal] = React.useState(false);
   const token = useSelector(selectToken);
   const { gameMessage, sendMessage, setGameMessage } = usePlayGame();
@@ -46,8 +50,13 @@ export const GamePlay = () => {
     console.log('disconnect');
     WebApp.expand();
     WebApp.enableClosingConfirmation();
-    signTokenOut();
-  }, []);
+    if (Number(typeId) !== 1) {
+      signTokenOut();
+    }
+    if (Number(typeId) === 1) {
+      setIsShowAirdropQuestLogin(true);
+    }
+  }, [typeId]);
 
   console.log('tonConnectUI', tonConnectUI);
   useEffect(() => {
