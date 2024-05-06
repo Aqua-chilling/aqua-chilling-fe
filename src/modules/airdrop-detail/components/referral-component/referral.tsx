@@ -3,7 +3,8 @@ import { Wrapper } from './referral.styled';
 import React from 'react';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { useNotification } from '@/contexts/notification.context';
-const copyICONSVG = `
+import { formatAddressToHuman } from '@/utilities/format.utils';
+export const copyICONSVG = `
 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
   <g clip-path="url(#clip0_1797_24170)">
     <path d="M13.3333 6H7.33333C6.59695 6 6 6.59695 6 7.33333V13.3333C6 14.0697 6.59695 14.6667 7.33333 14.6667H13.3333C14.0697 14.6667 14.6667 14.0697 14.6667 13.3333V7.33333C14.6667 6.59695 14.0697 6 13.3333 6Z" stroke="#F2DE29" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
@@ -20,13 +21,12 @@ const copyICONSVG = `
 
 export const Referral = ({ data }: any) => {
   const { addNotification } = useNotification();
-  const [refHistory, setRefHistory] = React.useState<any[]>();
-  console.log(data);
+  const [refHistory, setRefHistory] = React.useState<any>();
 
   React.useEffect(() => {
     OnboardingRepository.RetrieveReferralsHistory()
       .then((rs) => {
-        console.log(rs);
+        setRefHistory(rs);
       })
       .catch((err) => {
         console.log(err);
@@ -51,7 +51,7 @@ export const Referral = ({ data }: any) => {
       type: NOTIFICATION_TYPE.SUCCESS,
       id: new Date().getTime()
     });
-    navigator.clipboard.writeText(`test.aquachilling.com?ref=${data?.referral_code}` || '');
+    navigator.clipboard.writeText(`https://test.aquachilling.com/airdrop?ref=${data?.referral_code}` || '');
   };
   return (
     <Wrapper>
@@ -59,12 +59,12 @@ export const Referral = ({ data }: any) => {
         <div className='referral-link'>
           <span>Referral link</span>
           <div className='value'>
-            test.aquachilling.com?ref={data?.referral_code}
+            https://test.aquachilling.com/airdrop?ref={data?.referral_code}
             <div className='ic' dangerouslySetInnerHTML={{ __html: copyICONSVG }} onClick={() => copyLink()}></div>
           </div>
         </div>
         <div className='referral-code'>
-          <span>Referral link</span>
+          <span>Referral code</span>
           <div className='value'>
             {data?.referral_code}
             <div className='ic' dangerouslySetInnerHTML={{ __html: copyICONSVG }} onClick={() => copy()}></div>
@@ -75,29 +75,31 @@ export const Referral = ({ data }: any) => {
       <div className='ranking-wrapper'>
         <div className='ranking'>
           <span>Ranking</span>
-          <div className='value'>...</div>
+          <div className='value'>{refHistory?.rank}</div>
         </div>
         <div className='total-ref'>
           <span>Total Referrals</span>
-          <div className='value'>...</div>
+          <div className='value'>{refHistory?.total_referral}</div>
         </div>
       </div>
       <div className='link'></div>
       <div className='table'>
         <div className='table-head'>
-          <div className='rank'>Your referrals</div>
-          <div className='address'></div>
-          <div className='point'> </div>
-          <div className='total-point'> </div>
+          <div className='email'>Your referrals</div>
+          <div className='date'></div>
         </div>
-        {refHistory ? (
-          refHistory?.map((item: any, key: number) => {
+        {refHistory?.referrals?.length > 0 ? (
+          refHistory?.referrals?.map((item: any, key: number) => {
             return (
               <div className='table-row' key={key}>
-                <div className='rank'>{item?.rank}</div>
-                <div className='address'>{item?.address}</div>
-                <div className='point'>{item?.referral_point}</div>
-                <div className='total-point'>{item?.point}</div>
+                <div className='email'>{item?.email}</div>
+                <div className='date'>
+                  {new Date(item?.createdAt).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                  })}
+                </div>
               </div>
             );
           })

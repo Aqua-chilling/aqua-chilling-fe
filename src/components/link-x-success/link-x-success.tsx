@@ -19,7 +19,7 @@ export const LinkXSuccess = () => {
             message: 'Link X account successfully',
             type: NOTIFICATION_TYPE.SUCCESS,
             id: new Date().getTime()
-          }); 
+          });
           navigate('/airdrop');
         })
         .catch((err) => {

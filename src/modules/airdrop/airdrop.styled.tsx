@@ -13,6 +13,8 @@ export const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   flex-direction: column;
+  overflow: hidden;
+  position: relative;
   @media screen and (max-width: 1024px) {
     background-size: cover;
   }
@@ -28,8 +30,8 @@ export const Wrapper = styled.div`
     height: 87.592px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    padding: 24px 0px;
+    justify-content: space-between;
+    padding: 24px 12px;
     margin-top: 12px;
     color: #fff;
     text-align: center;
@@ -38,15 +40,148 @@ export const Wrapper = styled.div`
     font-weight: 700;
     line-height: normal;
     letter-spacing: -0.64px;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 900px) {
       width: 110%;
       margin-top: 0px;
+      padding: 0px 10%;
+    }
+    span {
+      @media screen and (max-width: 500px) {
+        font-size: 24px;
+      }
+    }
+    .hole {
+      @media screen and (max-width: 900px) {
+        display: none;
+      }
+      width: 160px;
+      visibility: hidden;
+    }
+    .btn-sell {
+      position: relative;
+      z-index: 4;
+      .toogle {
+        .btn {
+          @media screen and (max-width: 768px) {
+            display: none;
+          }
+        }
+        .btn-mobile {
+          display: none;
+          color: white;
+          align-items: center;
+          justify-content: center;
+          width: 48px;
+          height: 48px;
+          svg {
+            width: 24px;
+            height: 24px;
+          }
+          @media screen and (max-width: 768px) {
+            display: flex;
+          }
+        }
+      }
+      .sign-out {
+        position: absolute;
+        padding-top: 72px;
+        width: 328px;
+        right: 0px;
+        top: 0px;
+        transition: all 0.3s;
+        z-index: 2;
+        display: none;
+        &.show {
+          display: flex !important;
+        }
+        .overlay {
+          position: fixed;
+          top: 0;
+          left: 0;
+          z-index: 1;
+          width: 100vw;
+          height: 100vh;
+          background-color: transparent;
+        }
+      }
+    }
+    .outer-1 {
+      border-radius: 6px;
+      background: #090910;
+      padding: 6px;
+      height: 100%;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+      @media screen and (max-width: 1024px) {
+        width: 100%;
+      }
+      .outer-2 {
+        height: 100%;
+        border-radius: 6px;
+        background: #285cc4;
+        padding: 6px;
+        .outer-3 {
+          height: 100%;
+          border-radius: 4px;
+          background: #143464;
+          padding: 4px;
+          .outer-4 {
+            height: 100%;
+            padding: 12px;
+            border-radius: 4px;
+            background: #249fde;
+            .outer-5 {
+              height: 100%;
+              border-radius: 8px;
+              border: 4px solid #090910;
+              background: #143464;
+              padding: 16px;
+              display: flex;
+              flex-direction: column;
+              position: relative;
+              &.signout {
+                background-color: black;
+                align-items: center;
+                gap: 12px;
+                color: rgba(255, 255, 255, 0.7);
+                font-size: 16px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                letter-spacing: -0.32px;
+                .value {
+                  display: flex;
+                  align-items: center;
+                  gap: 8px;
+                  img {
+                    width: 24px;
+                    height: 24px;
+                  }
+                }
+                span {
+                  margin: 12px 0px;
+                  color: #fff;
+                  font-size: 22px;
+                  font-style: normal;
+                  font-weight: 700;
+                  line-height: normal;
+                  letter-spacing: -0.64px;
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
   .airdrop {
     display: flex;
     height: fit-content;
     gap: 48px;
+
+    position: relative;
+    z-index: 3;
     @media screen and (max-width: 1240px) {
       flex-direction: column-reverse;
       gap: 0px;
@@ -223,6 +358,54 @@ export const Wrapper = styled.div`
       font-weight: 700;
       line-height: normal;
       letter-spacing: -0.4px;
+    }
+  }
+  .fish {
+    position: absolute;
+    z-index: 0;
+    width: 96px;
+    @media screen and (max-width: 600px) {
+      display: none;
+    }
+    &.a {
+      top: 300px;
+      right: 60px;
+    }
+    &.b {
+      top: 500px;
+      left: 200px;
+    }
+    &.c {
+      top: 158px;
+      right: 356px;
+    }
+    &.d {
+      bottom: 0px;
+      left: 456px;
+    }
+    &.e {
+      bottom: 10px;
+      right: 356px;
+    }
+    &.f {
+      top: 350px;
+      left: 556px;
+    }
+    &.g {
+      bottom: 10px;
+      right: left;
+    }
+  }
+  .bubbles-section1 {
+    position: absolute;
+    z-index: 0;
+    &.left {
+      left: 10%;
+      bottom: 0%;
+    }
+    &.right {
+      bottom: 0%;
+      right: 10%;
     }
   }
 `;

@@ -9,6 +9,7 @@ import { dispatch } from '@/app/store';
 import { selectToken, updateAccount, updateDiscordId, updateTwitterId } from '@/redux';
 import { Wrapper } from './oauth-success.styled';
 import { useSelector } from 'react-redux';
+import { updateTelegramId } from '@/redux/telegram-id';
 
 export const OauthSuccess = () => {
   const navigate = useNavigate();
@@ -16,6 +17,13 @@ export const OauthSuccess = () => {
   const google_code = searchParams.get('google_code');
   const twitter_code = searchParams.get('twitter_code');
   const discord_code = searchParams.get('discord_code');
+  const telegram_code = searchParams.get('telegram_code');
+  const id = searchParams.get('id');
+  const first_name = searchParams.get('first_name');
+  const last_name = searchParams.get('last_name');
+  const username = searchParams.get('username');
+  const auth_date = searchParams.get('auth_date');
+  const hash = searchParams.get('hash');
   const { addNotification } = useNotification();
   const token = useSelector(selectToken);
 
@@ -60,7 +68,7 @@ export const OauthSuccess = () => {
                 twitter: rs.id
               })
             );
-            navigate('/airdrop');
+            navigate('/game?id=1');
           })
           .catch((err) => {
             addNotification({
@@ -68,7 +76,7 @@ export const OauthSuccess = () => {
               type: NOTIFICATION_TYPE.ERROR,
               id: new Date().getTime()
             });
-            navigate('/airdrop');
+            navigate('/game?id=1');
           });
       } else {
         OauthRepository.loginByX(twitter_code)
@@ -146,6 +154,34 @@ export const OauthSuccess = () => {
             navigate('/airdrop');
           });
       }
+    }
+    if (id) {
+      OauthRepository.linkTelegramAccount({
+        telegram_code: telegram_code,
+        id: id,
+        first_name: first_name,
+        last_name: last_name,
+        username: username,
+        auth_date: auth_date,
+        hash: hash
+      })
+        .then((rs) => {
+          addNotification({
+            message: 'Link telegram successfull',
+            type: NOTIFICATION_TYPE.SUCCESS,
+            id: new Date().getTime()
+          });
+          dispatch(updateTelegramId({ telegram: id }));
+          navigate('/game?id=1');
+        })
+        .catch((err) => {
+          addNotification({
+            message: err,
+            type: NOTIFICATION_TYPE.ERROR,
+            id: new Date().getTime()
+          });
+          navigate('/game?id=1');
+        });
     }
   }, [google_code, twitter_code, discord_code]);
   return (

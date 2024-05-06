@@ -39,7 +39,7 @@ export const Section6 = () => {
               </div>
               <div className='stat'>
                 <div className='label'>Total Supply</div>
-                <div className='value'>100,000,000</div>
+                <div className='value'>1,000,000,000</div>
               </div>
             </div>
             <Description style={{ textAlign: 'left' }}>

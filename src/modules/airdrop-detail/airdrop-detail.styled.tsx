@@ -1,6 +1,4 @@
 import styled, { keyframes } from 'styled-components';
-import frame from '@/assets/home/section4/frame.png';
-import fishPriceBG from '@/assets/marketplace/fish-price-bg.svg';
 export const animDropdown = keyframes`
 0%{
 
@@ -13,91 +11,113 @@ export const animDropdown = keyframes`
 
 `;
 export const Wrapper = styled.div`
-  width: 100vw;
-  height: 100vh;
   display: flex;
-  position: fixed;
-  top: 0;
-  left: 0;
   align-items: center;
   justify-content: space-between;
-  flex-direction: column;
-  border-radius: 24px;
+  border-radius: 22.5px;
   border: 6px solid #090910;
-  @media screen and (max-width: 1024px) {
-    background-size: cover;
-    height: unset;
-    position: relative;
+  background: #0c2449;
+  padding: 40px 24px;
+  gap: 40px;
+  position: relative;
+  overflow: hidden;
+  width: 80%;
+  height: 68%;
+  p {
+    margin: 0;
   }
-  @media screen and (max-width: 600px) {
+  @media screen and (max-width: 1280px) {
+    flex-direction: column;
+    gap: 12px;
+    width: 90%;
+    height: 79%;
+  }
+  @media screen and (max-width: 768px) {
+    width: 100%;
+    height: 100%;
+    border: none;
+    padding: 0;
+    gap: 0px;
+    .land {
+      display: none;
+    }
   }
   .land {
-    position: fixed;
+    position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     z-index: 1;
   }
-  .top-bar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+  .left-bar {
+    width: 15%;
+    height: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    padding: 12px 24px;
-    background: #061225;
+    flex-direction: column;
     z-index: 3;
-    @media screen and (max-width: 1024px) {
-      padding: 12px 6px;
-    }
-    .title {
-      width: 160px;
-      @media screen and (max-width: 1024px) {
-        display: none;
-      }
+    @media screen and (max-width: 1280px) {
+      width: 100%;
+      height: fit-content;
     }
     .tabs {
       display: flex;
+      flex-direction: column;
       padding: 4px;
-      justify-content: center;
       align-items: flex-start;
-      flex-shrink: 0;
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.1);
       gap: 8px;
-      @media screen and (max-width: 1024px) {
-        width: 100%;
+      width: 100%;
+      overflow: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      @media screen and (max-width: 1280px) {
+        flex-direction: row;
+      }
+      @media screen and (max-width: 768px) {
+        padding: 16px 16px 16px 16px;
+        border-bottom: 1px solid #556680;
+        border-radius: 0px;
       }
       .tab {
-        width: 136px;
-        color: #fff;
-        text-align: center;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        letter-spacing: -0.32px;
+        width: 100%;
         transition: all 0.3s;
         flex: 1;
         display: flex;
         align-items: center;
-        justify-content: center;
-        border: 4px solid transparent;
+        justify-content: start;
         border-radius: 12px;
+        padding: 8px;
+        cursor: pointer;
+        display: flex;
+        gap: 8px;
+        span {
+          color: #fff;
+          text-align: left;
+          font-style: normal;
+          font-weight: 700;
+          letter-spacing: -0.32px;
+        }
+        img {
+          width: 24px;
+        }
         &.active {
-          border: 4px solid #71b6a9;
-          background: #588d99;
+          background: #061225;
         }
         &:hover {
-          border: 4px solid #71b6a9;
-          background: #588d99;
+          background: #061225;
         }
-      }
-    }
-    .btn-sell {
-      @media screen and (max-width: 1024px) {
-        display: none;
+        @media screen and (max-width: 1280px) {
+          justify-content: center;
+        }
+        @media screen and (max-width: 768px) {
+          width: fit-content;
+          padding: 4px 8px;
+        }
+        @media screen and (max-width: 500px) {
+          white-space: nowrap;
+        }
       }
     }
   }
@@ -105,183 +125,18 @@ export const Wrapper = styled.div`
     padding: 24px;
     display: flex;
     gap: 24px;
-    margin-top: 104px;
-    width: 100%;
+    flex: 1;
+    height: 100%;
     position: relative;
     z-index: 2;
     justify-content: center;
-    @media screen and (max-width: 1024px) {
-      flex-direction: column;
-      margin-top: 50px;
-      padding: 12px;
-    }
-    .left-bar {
-      background: #0c2449;
-      width: 360px;
-      height: 80vh;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      overflow-y: auto;
-      border-radius: 6px;
-      @media screen and (max-width: 1024px) {
-        width: 100%;
-        height: unset;
-      }
 
-      &::-webkit-scrollbar {
-        display: none;
-      }
-      .line {
-        background: #556680;
-        width: 100%;
-        margin: 16px 0px;
-        height: 1px;
-      }
-      .outer-1 {
-        border-radius: 6px;
-        background: #090910;
-        padding: 6px;
-        height: 100%;
-        @media screen and (max-width: 1024px) {
-          width: 100%;
-        }
-        .outer-2 {
-          height: 100%;
-          border-radius: 6px;
-          background: #285cc4;
-          padding: 6px;
-          .outer-3 {
-            height: 100%;
-            border-radius: 4px;
-            background: #143464;
-            padding: 4px;
-            .outer-4 {
-              height: 100%;
-              padding: 12px;
-              border-radius: 4px;
-              background: #249fde;
-              .outer-5 {
-                height: 100%;
-                border-radius: 8px;
-                border: 4px solid #090910;
-                background: #143464;
-                padding: 16px;
-                display: flex;
-                flex-direction: column;
-                position: relative;
-                .coin {
-                  position: absolute;
-                  right: 0;
-                  bottom: 0;
-                }
-                .your-nft {
-                  width: 100%;
-                  display: flex;
-                  align-items: center;
-                  flex-direction: column;
-                  gap: 16px;
-                  margin-bottom: 40px;
-                  span {
-                    color: #fff;
-                    font-size: 24px;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: normal;
-                    letter-spacing: -0.48px;
-                  }
-                  img {
-                    width: 128px;
-                    border-radius: 12px;
-                    border: 6.44px solid #090910;
-                  }
-                  .btn-upgrade {
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    color: #fff;
-                    font-size: 16px;
-                    font-weight: 700;
-                    width: 137px;
-                    height: 40px;
-                    border-radius: 12px;
-                    border: 4px solid #71b6a9;
-                    background: #588d99;
-                  }
-                }
-                .available-points {
-                  width: 100%;
-                  display: flex;
-                  flex-direction: column;
-                  align-items: start;
-                  color: rgba(255, 255, 255, 0.7);
-                  font-size: 14px;
-                  font-style: normal;
-                  font-weight: 500;
-                  line-height: normal;
-                  gap: 16px;
-                  .value {
-                    color: #fff;
-                    font-size: 24px;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: normal;
-                    letter-spacing: -0.48px;
-                  }
-                  margin-bottom: 8px;
-                }
-                .referral-links {
-                  width: 100%;
-                  display: flex;
-                  flex-direction: column;
-                  align-items: start;
-                  color: rgba(255, 255, 255, 0.7);
-                  font-size: 14px;
-                  font-style: normal;
-                  font-weight: 500;
-                  line-height: normal;
-                  gap: 8px;
-                  color: #fff;
-                  font-size: 16px;
-                  font-style: normal;
-                  font-weight: 700;
-                  line-height: normal;
-                  letter-spacing: -0.32px;
-                  span {
-                    color: rgba(255, 255, 255, 0.7);
-                    font-size: 12px;
-                    font-style: normal;
-                    font-weight: 500;
-                    line-height: normal;
-                    margin-bottom: 8px;
-                  }
-                  .btn-copy-link {
-                    color: #f2de29;
-                    font-size: 16px;
-                    font-style: normal;
-                    font-weight: 700;
-                    line-height: normal;
-                    letter-spacing: -0.32px;
-                    cursor: pointer;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+    @media screen and (max-width: 1280px) {
+      width: 100%;
+      padding: 0px;
     }
     .airdrop-detail-content {
-      &.task {
-        flex: 1;
-      }
-      max-height: 80vh;
-      overflow: scroll;
-      min-width: 70%;
-      @media screen and (max-width: 1024px) {
-        max-height: unset;
-      }
-
+      width: 100%;
       &::-webkit-scrollbar {
         display: none;
       }
@@ -289,12 +144,77 @@ export const Wrapper = styled.div`
       flex-direction: column;
       align-items: flex-start;
       gap: 12px;
-      border-radius: 8px;
-      border: 1px solid #143464;
-      background: #0a1d3a;
-      padding: 16px;
-      @media screen and (max-width: 500px) {
-        padding: 0;
+      @media screen and (max-width: 768px) {
+        padding: 16px;
+      }
+    }
+  }
+
+  .outer-1 {
+    border-radius: 6px;
+    background: #090910;
+    padding: 6px;
+    height: 100%;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+    @media screen and (max-width: 1280px) {
+      width: 100%;
+    }
+    .outer-2 {
+      height: 100%;
+      border-radius: 6px;
+      background: #285cc4;
+      padding: 6px;
+      .outer-3 {
+        height: 100%;
+        border-radius: 4px;
+        background: #143464;
+        padding: 4px;
+        .outer-4 {
+          height: 100%;
+          padding: 12px;
+          border-radius: 4px;
+          background: #249fde;
+          .outer-5 {
+            height: 100%;
+            border-radius: 8px;
+            border: 4px solid #090910;
+            background: #143464;
+            padding: 16px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            &.signout {
+              background-color: black;
+              align-items: center;
+              gap: 12px;
+              color: rgba(255, 255, 255, 0.7);
+              font-size: 16px;
+              font-style: normal;
+              font-weight: 700;
+              line-height: normal;
+              letter-spacing: -0.32px;
+              .value {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                img {
+                  width: 24px;
+                  height: 24px;
+                }
+              }
+              span {
+                color: #fff;
+                font-size: 32px;
+                font-style: normal;
+                font-weight: 700;
+                line-height: normal;
+                letter-spacing: -0.64px;
+              }
+            }
+          }
+        }
       }
     }
   }

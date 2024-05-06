@@ -52,7 +52,7 @@ export const Wrapper = styled.div`
   }
 
   .overlay {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.5);
     position: absolute;
     width: 100%;
     height: 100%;
@@ -60,6 +60,9 @@ export const Wrapper = styled.div`
   }
   #modal-content {
     animation: ${animContent} 0.3s forwards;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     &.disapear {
       animation: ${animContentDisapear} 0.3s forwards;
     }
