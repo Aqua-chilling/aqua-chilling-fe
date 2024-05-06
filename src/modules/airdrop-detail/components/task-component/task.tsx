@@ -19,7 +19,7 @@ import { selectTelegram } from '@/redux/telegram-id';
 import { CompletedIconSVG, getTwitterOauthUrl } from '@/modules/airdrop/hard';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
-
+import WebApp from '@twa-dev/sdk';
 export const Task = ({ data, profile }: any) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [isJoinedTelegram, setIsJoinedTelegram] = React.useState(false);
@@ -137,7 +137,7 @@ export const Task = ({ data, profile }: any) => {
         <div
           className='status-0'
           onClick={() => {
-            window.open(getTwitterOauthUrl(), '_self', '');
+            WebApp.openTelegramLink(getTwitterOauthUrl());
           }}
         >
           Link X Account
