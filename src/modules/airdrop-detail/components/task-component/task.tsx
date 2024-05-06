@@ -126,13 +126,21 @@ export const Task = ({ data, profile }: any) => {
               <div
                 className='status-0'
                 onClick={() => {
-                  window.open(getTwitterOauthUrl(), '_self');
+                  window.open(getTwitterOauthUrl(), '_blank', '');
                 }}
               >
                 Link X Account
               </div>
             )}
           </div>
+        </div>
+        <div
+          className='status-0'
+          onClick={() => {
+            window.open(getTwitterOauthUrl(), '_self', '');
+          }}
+        >
+          Link X Account
         </div>
         <div className='table-row'>
           <div className='quest-name'>Join Telegram Channel</div>
