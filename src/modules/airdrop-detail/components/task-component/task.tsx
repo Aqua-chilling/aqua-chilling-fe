@@ -160,6 +160,16 @@ export const Task = ({ data, profile }: any) => {
         >
           navigate
         </div>
+        <div
+          className='status-0'
+          onClick={() => {
+            WebApp.openInvoice(getTwitterOauthUrl(), (i) => {
+              console.log('hehe', i);
+            });
+          }}
+        >
+          invoicelink
+        </div>
         <div className='table-row'>
           <div className='quest-name'>Join Telegram Channel</div>
           <div className='quest-point'>100 Points</div>
