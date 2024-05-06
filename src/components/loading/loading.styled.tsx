@@ -17,7 +17,7 @@ export const Wrapper = styled.div`
   background: #143464;
   background-image: url(${bg});
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
   .loading-content {
     display: flex;
     align-items: center;

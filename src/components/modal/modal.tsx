@@ -5,9 +5,10 @@ import { CloseIconSVG } from '@/modules/marketplace/hard';
 export interface IModal {
   children: any;
   control: boolean;
+  isShowClose?: boolean;
   setControl: any;
 }
-export const Modal = ({ children, control, setControl }: IModal) => {
+export const Modal = ({ children, control, setControl, isShowClose }: IModal) => {
   const closeModal = () => {
     const modal = document.querySelector('#modal') as HTMLElement;
     const modalContent = document.querySelector('#modal-content') as HTMLElement;
@@ -31,14 +32,16 @@ export const Modal = ({ children, control, setControl }: IModal) => {
         }}
       ></div>
       <div id='modal-content'>
-        <div
-          className='close'
-          onClick={() => {
-            closeModal();
-          }}
-        >
-          <div dangerouslySetInnerHTML={{ __html: CloseIconSVG }}></div>
-        </div>
+        {isShowClose === false ? null : (
+          <div
+            className='close'
+            onClick={() => {
+              closeModal();
+            }}
+          >
+            <div dangerouslySetInnerHTML={{ __html: CloseIconSVG }}></div>
+          </div>
+        )}
         {React.cloneElement(children, { setControl })}
       </div>
     </Wrapper>

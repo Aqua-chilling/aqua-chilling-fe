@@ -14,17 +14,19 @@ import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import { ILoginPayload } from '@/repositories/oauth/oauth.entity';
 import { Spin, message } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
-import { updateAccount, updateDiscordId, updateTwitterId } from '@/redux';
+import { selectToken, updateAccount, updateDiscordId, updateTwitterId } from '@/redux';
 import { dispatch } from '@/app/store';
 import { updateReferral } from '@/redux/referral';
 import { getDiscordOauthUrl, getTwitterOauthUrl } from '../hard';
 import { useTonConnectModal, useTonWallet } from '@tonconnect/ui-react';
 import ConnectButton from '@/components/ton-connect/ton-connect';
-import { useLoginWithTon } from '@/hooks/use-login-with-ton';
+import { useSelector } from 'react-redux';
+import { useTonWalletContext } from '@/contexts/ton-wallet.context';
 
 export const PopUpLogin = ({ setControl }: any) => {
   // const [isLoading, setIsLoading] = React.useState<boolean>(false);
 
+  const token = useSelector(selectToken);
   // const [email, setEmail] = React.useState<string>('');
   // const [password, setPassword] = React.useState<string>('');
   // const [showPassword, setShowPassword] = React.useState<boolean>(false);
@@ -32,7 +34,7 @@ export const PopUpLogin = ({ setControl }: any) => {
   // const { addNotification } = useNotification();
   // const navigate = useNavigate();
   const wallet = useTonWallet();
-  const { open } = useLoginWithTon();
+  const { tonConnectUI } = useTonWalletContext();
   return (
     <Wrapper>
       <div className='login-content'>
@@ -160,13 +162,13 @@ export const PopUpLogin = ({ setControl }: any) => {
             </div>
           </div> */}
 
-          {!wallet && (
+          {!token && (
             <div className='step st'>
               <div className='btns'>
                 <div
                   className='btn'
                   onClick={() => {
-                    open();
+                    tonConnectUI.openModal();
                   }}
                 >
                   <img src={TonSymbol} alt='' />

@@ -1,36 +1,57 @@
 import { useNotification } from '@/contexts/notification.context';
-import nft1 from '@/assets/airdrop/triden 1.jpg';
+import nft2 from '@/assets/airdrop/triden 2.jpg';
+import nft3 from '@/assets/airdrop/triden 3.jpg';
+import nft4 from '@/assets/airdrop/triden 4.jpg';
 import coin from '@/assets/airdrop-detail/coin.png';
+import ton from '@/assets/ton-icon.png';
 import land from '@/assets/airdrop-detail/land.png';
 import { Wrapper } from './airdrop-detail.styled';
 import { Modal } from '@/components/modal/modal';
-import React from 'react';
+import React, { useRef } from 'react';
 import { PrimaryButton } from '@/components/button/button.styled';
 import { Task } from './components/task-component/task';
 import { useNavigate } from 'react-router';
-import { selectToken } from '@/redux';
+import { deleteAccount, selectToken } from '@/redux';
 import { useSelector } from 'react-redux';
 import { Received } from './components/popups/received';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
 import { Leaderboard } from './components/leaderboard-component/leaderboard';
 import { Referral } from './components/referral-component/referral';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
+import { NOTIFICATION_TYPE } from '@/components/notification/notification';
+import { dispatch } from '@/app/store';
+import { MenuOutlined } from '@ant-design/icons';
+import { useTonWalletContext } from '@/contexts/ton-wallet.context';
+import QuestIcon from '@/assets/airdrop-detail/Quest.png';
+import LeaderboardIcon from '@/assets/airdrop-detail/Leaderboard.png';
+import ReferralIcon from '@/assets/airdrop-detail/Share.png';
 
-export const AirdropDetail = () => {
+const iconList = [QuestIcon, LeaderboardIcon, ReferralIcon];
+
+export const AirdropDetail = ({ setControl }: any) => {
   const { addNotification } = useNotification();
   const token = useSelector(selectToken);
   const navigate = useNavigate();
+  const { signOut } = useTonWalletContext();
 
-  const [isShowDetail, setIsShowDetail] = React.useState<boolean>(false);
-  const [isShowReceived, setIsShowReceived] = React.useState<boolean>(true);
+  const [isShowSignout, setIsShowSignout] = React.useState<boolean>(false);
   const [activeTab, setActiveTab] = React.useState<number>(0);
 
   const [tasks, setTasks] = React.useState<any[]>();
   const [leaderboards, setLeaderboards] = React.useState<any[]>();
   const [referral, setReferral] = React.useState<any>();
+
+  const copyLink = () => {
+    addNotification({
+      message: 'Copied',
+      type: NOTIFICATION_TYPE.SUCCESS,
+      id: new Date().getTime()
+    });
+    navigator.clipboard.writeText(`https://test.aquachilling.com/airdrop?ref=${referral?.referral_code}` || '');
+  };
   React.useEffect(() => {
     if (!token) {
-      // navigate('/airdrop');
+      navigate('/airdrop');
     }
   }, [token]);
   React.useEffect(() => {
@@ -60,64 +81,25 @@ export const AirdropDetail = () => {
   }, []);
   return (
     <Wrapper>
-      <Modal control={isShowReceived} setControl={setIsShowReceived}>
-        <Received />
-      </Modal>
       {/* --------------------------------------top-bar------------------------------- */}
-      <div className='top-bar'>
-        <div className='title'>fsdfs</div>
+      <div className='left-bar'>
         <div className='tabs'>
-          {['Task', 'Leaderboard', 'Referral'].map((item, key) => {
+          {['Airdrop quests', 'Leaderboard', 'Referral'].map((item, key) => {
             return (
               <div className={activeTab === key ? 'tab active' : 'tab '} onClick={() => setActiveTab(key)}>
-                {item}
+                <img src={iconList[key]} alt='' />
+                <span>{item}</span>
               </div>
             );
           })}
-        </div>
-        <div className='btn-sell'>
-          <PrimaryButton w={160}>Connect wallet</PrimaryButton>
         </div>
       </div>
       <img src={land} alt='' className='land' />
 
       <div className='airdrop-detail-content-container'>
-        {/* --------------------------------------left-bar------------------------------- */}
-        {activeTab === 0 && (
-          <div className='left-bar'>
-            <div className='outer-1'>
-              <div className='outer-2'>
-                <div className='outer-3'>
-                  <div className='outer-4'>
-                    <div className='outer-5'>
-                      <img src={coin} alt='' className='coin' />
-                      <div className='your-nft'>
-                        <span>Your NFT</span>
-                        <img src={nft1} alt='' />
-                        <div className='btn-upgrade'>Upgrade NFT</div>
-                      </div>
-                      <div className='available-points'>
-                        <span>Available Points</span>
-                        <div className='value'>4000</div>
-                      </div>
-                      <div className='line'></div>
-                      <div className='referral-links'>
-                        <div>Refer to earn</div>
-                        <span>
-                          Invite friends, earn points & share a 20% point bonus after each successful referral.
-                        </span>
-                        <div className='btn-copy-link'>Copy link</div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
         {/* --------------------------------------content------------------------------- */}
         <div className={activeTab === 0 ? 'airdrop-detail-content task' : 'airdrop-detail-content'}>
-          {activeTab === 0 && <Task data={tasks} />}
+          {activeTab === 0 && <Task data={tasks} profile={referral} />}
           {activeTab === 1 && <Leaderboard data={leaderboards} />}
           {activeTab === 2 && <Referral data={referral} />}
         </div>

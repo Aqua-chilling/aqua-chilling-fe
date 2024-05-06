@@ -82,7 +82,7 @@ export const SecondButton = styled.div<{ w: any }>`
     height: 97%;
     z-index: 1;
     border-radius: 6px;
-    background: #b3b9d1;
+    background: #0a80b8;
     .layer2 {
       position: relative;
       display: flex;
@@ -92,11 +92,11 @@ export const SecondButton = styled.div<{ w: any }>`
       height: 97%;
       z-index: 2;
       border-radius: 4px;
-      background: #fff;
+      background: #60bfec;
       color: #4b1606;
       .layer3 {
         border-radius: 4px;
-        background: #dae0ea;
+        background: #0a80b8;
         position: relative;
         z-index: 3;
         width: 96%;
@@ -105,9 +105,9 @@ export const SecondButton = styled.div<{ w: any }>`
         display: flex;
         align-items: center;
         justify-content: center;
+        color: #fff;
 
         /* B16 */
-        font-family: Quicksand;
         font-size: 16px;
         font-style: normal;
         font-weight: 700;

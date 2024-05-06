@@ -5,6 +5,7 @@ import { persistReducer } from 'redux-persist';
 import thunk from 'redux-thunk';
 import { useDispatch } from 'react-redux';
 import { AccountReducer, DiscordIdReducer, ReferralReducer, TwitterIdReducer } from '@/redux';
+import { TelegramIdReducer } from '@/redux/telegram-id';
 
 const accountPersistConfig = {
   key: 'account',
@@ -15,7 +16,8 @@ const reducers = combineReducers({
   account: persistReducer(accountPersistConfig, AccountReducer),
   discord: persistReducer(accountPersistConfig, DiscordIdReducer),
   twitter: persistReducer(accountPersistConfig, TwitterIdReducer),
-  referral: persistReducer(accountPersistConfig, ReferralReducer)
+  referral: persistReducer(accountPersistConfig, ReferralReducer),
+  telegram: persistReducer(accountPersistConfig, TelegramIdReducer)
 });
 
 const persistConfig = {

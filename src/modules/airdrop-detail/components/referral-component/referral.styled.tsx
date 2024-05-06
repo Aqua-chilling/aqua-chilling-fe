@@ -43,6 +43,11 @@ export const Wrapper = styled.div`
   .referral-wrapper {
     width: 100%;
     display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    .ic {
+      cursor: pointer;
+    }
     @media screen and (max-width: 600px) {
       flex-direction: column;
       gap: 24px;
@@ -98,7 +103,7 @@ export const Wrapper = styled.div`
       display: none;
     }
     .rank {
-      width: 15%;
+      flex: 1;
       display: flex;
       align-items: start;
       flex-direction: column;
@@ -110,30 +115,19 @@ export const Wrapper = styled.div`
         line-height: normal;
       }
     }
-    .address {
+    .email {
       flex: 1;
       text-align: start;
+      overflow-x: scroll;
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
-    .point,
-    .total-point {
+    .date {
       width: 20%;
       display: flex;
       justify-content: end;
-      .status-0 {
-        color: #fff;
-        font-weight: 700;
-        transition: all 0.3s;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 12px;
-        border: 4px solid #71b6a9;
-        background: #588d99;
-        padding: 0px 15px;
-        &:hover {
-          transform: scale(1.1);
-        }
-      }
+      color: #fff;
     }
     .table-head {
       display: flex;

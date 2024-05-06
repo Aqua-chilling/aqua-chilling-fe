@@ -15,7 +15,11 @@ export const Wrapper = styled.div`
     .logos {
       display: flex;
       gap: 24px;
+      flex-wrap: wrap;
+      justify-content: center;
       img {
+        width: 64px;
+        height: auto;
         &:hover {
           transform: scale(1.2);
           transition: all 0.3s;
