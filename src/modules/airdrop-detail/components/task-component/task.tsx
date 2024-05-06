@@ -20,7 +20,9 @@ import { CompletedIconSVG, getTwitterOauthUrl } from '@/modules/airdrop/hard';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import WebApp from '@twa-dev/sdk';
+import { useNavigate } from 'react-router';
 export const Task = ({ data, profile }: any) => {
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState(false);
   const [isJoinedTelegram, setIsJoinedTelegram] = React.useState(false);
   const [isShowPopupUpgrade, setIsShowPopupUpgrade] = React.useState(false);
@@ -149,6 +151,14 @@ export const Task = ({ data, profile }: any) => {
           }}
         >
           Link X Account open LInk
+        </div>
+        <div
+          className='status-0'
+          onClick={() => {
+            navigate('/airdrop');
+          }}
+        >
+          navigate
         </div>
         <div className='table-row'>
           <div className='quest-name'>Join Telegram Channel</div>
