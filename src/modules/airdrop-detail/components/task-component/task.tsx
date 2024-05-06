@@ -140,7 +140,15 @@ export const Task = ({ data, profile }: any) => {
             WebApp.openTelegramLink(getTwitterOauthUrl());
           }}
         >
-          Link X Account
+          Link X Account Open tele link
+        </div>
+        <div
+          className='status-0'
+          onClick={() => {
+            WebApp.openLink(getTwitterOauthUrl());
+          }}
+        >
+          Link X Account open LInk
         </div>
         <div className='table-row'>
           <div className='quest-name'>Join Telegram Channel</div>
