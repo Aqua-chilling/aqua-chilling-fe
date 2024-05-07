@@ -25,51 +25,13 @@ import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 export const Task = ({ data, profile }: any) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState(false);
-  const [isJoinedTelegram, setIsJoinedTelegram] = React.useState(false);
+
   const [isShowPopupUpgrade, setIsShowPopupUpgrade] = React.useState(false);
-  const [isFollowed, setIsFollowed] = React.useState<boolean>(false);
 
   const referral_code = useSelector(selectReferralCode);
-  const telegram = useSelector(selectTelegram);
-  const twitter = useSelector(selectTwitter);
+  const isJoinedTelegram = profile?.telegramOnboard?.aquachilling;
+  const isFollowed = profile?.twitterOnboard?.follows?.length > 0;
   const { addNotification } = useNotification();
-  React.useEffect(() => {
-    telegram && fetchTelegramTaskStatus();
-    twitter && fetchTaskTwitterStatus();
-  }, [telegram, twitter]);
-
-  const fetchTelegramTaskStatus = () => {
-    setIsLoading(true);
-    OnboardingRepository.RetrieveTaskOfTelegram({ telegram_id: telegram, channel_id: '1002106405894' })
-      .then((rs) => {
-        setIsLoading(false);
-        setIsJoinedTelegram(rs?.joined);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        addNotification({
-          message: err,
-          type: NOTIFICATION_TYPE.INFO,
-          id: new Date().getTime()
-        });
-      });
-  };
-  const fetchTaskTwitterStatus = () => {
-    setIsLoading(true);
-    OnboardingRepository.RetrieveTaskOfTwitter(twitter || ' ')
-      .then((rs) => {
-        setIsFollowed(rs.follows.Aquachilling);
-        setIsLoading(false);
-      })
-      .catch((err) => {
-        setIsLoading(false);
-        addNotification({
-          message: err,
-          type: NOTIFICATION_TYPE.INFO,
-          id: new Date().getTime()
-        });
-      });
-  };
   const copy = () => {
     addNotification({
       message: 'Copied',
