@@ -130,9 +130,9 @@ export const Wrapper = styled.div`
     position: relative;
     z-index: 2;
     justify-content: center;
-    max-height: 75%;
     overflow: auto;
     @media screen and (max-width: 1280px) {
+      max-height: 100%;
       width: 100%;
       padding: 0px;
     }
