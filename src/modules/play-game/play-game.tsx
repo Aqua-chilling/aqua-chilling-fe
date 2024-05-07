@@ -26,7 +26,7 @@ import { dispatch } from '@/app/store';
 
 function iframe() {
   return {
-    __html: '<iframe src="https://game-test.aquachilling.com/" id="game-iframeID"></iframe>'
+    __html: '<iframe src="https://game-test.aquachilling.com/" frameborder="0" id="game-iframeID" frame ></iframe>'
   };
 }
 export const GamePlay = () => {
