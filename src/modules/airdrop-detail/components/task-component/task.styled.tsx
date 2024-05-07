@@ -101,6 +101,9 @@ export const Wrapper = styled.div`
         align-items: center;
         gap: 8px;
         cursor: pointer;
+        img {
+          width: 24px;
+        }
         &:hover {
           transform: scale(1.01);
         }
