@@ -21,6 +21,8 @@ import { PurchaseCard } from './components/purchase-card';
 import { CloseIconSVG } from '../airdrop/hard';
 import { useTonWalletContext } from '@/contexts/ton-wallet.context';
 import { useSearchParams } from 'react-router-dom';
+import { updateTelegramId } from '@/redux/telegram-id';
+import { dispatch } from '@/app/store';
 
 function iframe() {
   return {
@@ -50,6 +52,9 @@ export const GamePlay = () => {
     console.log('disconnect');
     WebApp.expand();
     WebApp.enableClosingConfirmation();
+    if (WebApp.initDataUnsafe?.user?.id) {
+      dispatch(updateTelegramId({ telegram: WebApp.initDataUnsafe?.user?.id.toString() }));
+    }
     if (Number(typeId) !== 1) {
       signTokenOut();
     }

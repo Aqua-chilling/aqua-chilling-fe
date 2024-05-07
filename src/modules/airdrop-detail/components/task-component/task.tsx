@@ -20,7 +20,6 @@ import { CompletedIconSVG, getTwitterOauthUrl } from '@/modules/airdrop/hard';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import WebApp from '@twa-dev/sdk';
-import WebAppUser from '@twa-dev/sdk';
 import { useNavigate } from 'react-router';
 export const Task = ({ data, profile }: any) => {
   const navigate = useNavigate();
@@ -161,14 +160,6 @@ export const Task = ({ data, profile }: any) => {
             ) : (
               <div className='connect-telegram' id='connect-telegram'></div>
             )}
-          </div>
-          <div
-            className='status-0'
-            onClick={() => {
-              console.log(WebAppUser, 'WebAppUser');
-            }}
-          >
-            Tést
           </div>
         </div>
         <div className='table-row'>
