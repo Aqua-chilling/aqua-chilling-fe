@@ -136,40 +136,6 @@ export const Task = ({ data, profile }: any) => {
             )}
           </div>
         </div>
-        <div
-          className='status-0'
-          onClick={() => {
-            WebApp.openTelegramLink(getTwitterOauthUrl());
-          }}
-        >
-          Link X Account Open tele link
-        </div>
-        <div
-          className='status-0'
-          onClick={() => {
-            WebApp.openLink(getTwitterOauthUrl());
-          }}
-        >
-          Link X Account open LInk
-        </div>
-        <div
-          className='status-0'
-          onClick={() => {
-            navigate('/airdrop');
-          }}
-        >
-          navigate
-        </div>
-        <div
-          className='status-0'
-          onClick={() => {
-            WebApp.openInvoice(getTwitterOauthUrl(), (i) => {
-              console.log('hehe', i);
-            });
-          }}
-        >
-          invoicelink
-        </div>
         <div className='table-row'>
           <div className='quest-name'>Join Telegram Channel</div>
           <div className='quest-point'>100 Points</div>
@@ -178,7 +144,15 @@ export const Task = ({ data, profile }: any) => {
               isJoinedTelegram ? (
                 <div className='status-1'>Joined</div>
               ) : (
-                <div className='status-0' onClick={() => window.open('https://t.me/aquachilling')}>
+                <div
+                  className='status-0'
+                  onClick={() => {
+                    if (!WebApp?.version) window.open('https://t.me/aquachilling');
+                    else {
+                      WebApp.openTelegramLink('https://t.me/aquachilling');
+                    }
+                  }}
+                >
                   Join Telegram Channel
                 </div>
               )
