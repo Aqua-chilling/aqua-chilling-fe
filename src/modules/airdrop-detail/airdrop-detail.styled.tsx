@@ -130,13 +130,15 @@ export const Wrapper = styled.div`
     position: relative;
     z-index: 2;
     justify-content: center;
-
+    max-height: 75%;
+    overflow: auto;
     @media screen and (max-width: 1280px) {
       width: 100%;
       padding: 0px;
     }
     .airdrop-detail-content {
       width: 100%;
+      height: fit-content;
       &::-webkit-scrollbar {
         display: none;
       }

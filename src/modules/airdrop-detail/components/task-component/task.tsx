@@ -147,6 +147,7 @@ export const Task = ({ data, profile }: any) => {
                 <div
                   className='status-0'
                   onClick={() => {
+                    console.log('webApp', WebApp?.version);
                     if (!WebApp?.version) window.open('https://t.me/aquachilling');
                     else {
                       WebApp.openTelegramLink('https://t.me/aquachilling');

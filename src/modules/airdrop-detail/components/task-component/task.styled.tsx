@@ -148,6 +148,7 @@ export const Wrapper = styled.div`
       line-height: 150%; /* 21px */
       @media screen and (max-width: 600px) {
         flex-wrap: wrap;
+        min-height: unset;
       }
     }
   }
