@@ -21,6 +21,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import WebApp from '@twa-dev/sdk';
 import { useNavigate } from 'react-router';
+import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 export const Task = ({ data, profile }: any) => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState(false);
@@ -107,7 +108,7 @@ export const Task = ({ data, profile }: any) => {
           <div className='quest-name'>Follow us on X</div>
           <div className='quest-point'>100 Points</div>
           <div className='quest-status'>
-            {twitter ? (
+            {profile?.twitter ? (
               isFollowed ? (
                 <div className='status-1'>
                   <div className='ic' dangerouslySetInnerHTML={{ __html: CompletedIconSVG }}></div>
@@ -140,7 +141,7 @@ export const Task = ({ data, profile }: any) => {
           <div className='quest-name'>Join Telegram Channel</div>
           <div className='quest-point'>100 Points</div>
           <div className='quest-status'>
-            {telegram ? (
+            {profile?.telegram ? (
               isJoinedTelegram ? (
                 <div className='status-1'>Joined</div>
               ) : (
@@ -148,7 +149,7 @@ export const Task = ({ data, profile }: any) => {
                   className='status-0'
                   onClick={() => {
                     console.log('webApp', WebApp?.version);
-                    if (!WebApp?.version) window.open('https://t.me/aquachilling');
+                    if (!WebApp?.initDataUnsafe?.user) window.open('https://t.me/aquachilling');
                     else {
                       WebApp.openTelegramLink('https://t.me/aquachilling');
                     }
@@ -157,6 +158,41 @@ export const Task = ({ data, profile }: any) => {
                   Join Telegram Channel
                 </div>
               )
+            ) : WebApp?.initDataUnsafe?.user?.id ? (
+              <div
+                className='status-1'
+                onClick={() => {
+                  const user = WebApp.initDataUnsafe;
+                  setIsLoading(true);
+                  OauthRepository.linkTelegramAccount({
+                    telegram_code: undefined,
+                    id: user.user?.id,
+                    first_name: user.user?.first_name,
+                    last_name: user.user?.last_name,
+                    auth_date: user.auth_date,
+                    hash: user.hash
+                  })
+                    .then((rs) => {
+                      addNotification({
+                        message: 'Link telegram successfull',
+                        type: NOTIFICATION_TYPE.SUCCESS,
+                        id: new Date().getTime()
+                      });
+                    })
+                    .catch((err) => {
+                      addNotification({
+                        message: err,
+                        type: NOTIFICATION_TYPE.ERROR,
+                        id: new Date().getTime()
+                      });
+                    })
+                    .finally(() => {
+                      setIsLoading(false);
+                    });
+                }}
+              >
+                Link Telegram {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />}
+              </div>
             ) : (
               <div className='connect-telegram' id='connect-telegram'></div>
             )}

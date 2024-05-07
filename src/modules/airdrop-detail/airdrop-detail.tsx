@@ -40,7 +40,7 @@ export const AirdropDetail = ({ setControl }: any) => {
   const [tasks, setTasks] = React.useState<any[]>();
   const [leaderboards, setLeaderboards] = React.useState<any[]>();
   const [referral, setReferral] = React.useState<any>();
-
+  console.log('refer', referral);
   const copyLink = () => {
     addNotification({
       message: 'Copied',
