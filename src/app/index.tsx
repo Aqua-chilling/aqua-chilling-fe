@@ -52,7 +52,7 @@ export const App = () => {
                 ]
               }}
               actionsConfiguration={{
-                twaReturnUrl: 'https://t.me/aquachillingbot'
+                twaReturnUrl: 'https://t.me/aquachillingbot/start'
               }}
             >
               <FixedGlobalStyle />
