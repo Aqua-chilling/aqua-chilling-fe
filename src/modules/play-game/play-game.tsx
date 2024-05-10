@@ -23,6 +23,7 @@ import { useTonWalletContext } from '@/contexts/ton-wallet.context';
 import { useSearchParams } from 'react-router-dom';
 import { updateTelegramId } from '@/redux/telegram-id';
 import { dispatch } from '@/app/store';
+import { WalletEarn } from './components/wallet-earn';
 
 function iframe() {
   return {
@@ -32,6 +33,7 @@ function iframe() {
 export const GamePlay = () => {
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
   const [isShowAirdropQuestLogin, setIsShowAirdropQuestLogin] = React.useState(false);
+  const [isShowWallet, setIsShowWallet] = React.useState(false);
   const [searchParams] = useSearchParams();
   const typeId = searchParams.get('id');
   console.log('typeId', typeId);
@@ -56,7 +58,7 @@ export const GamePlay = () => {
       dispatch(updateTelegramId({ telegram: WebApp.initDataUnsafe?.user?.id.toString() }));
     }
     if (Number(typeId) !== 1) {
-      signTokenOut();
+      // signTokenOut();
     }
     if (Number(typeId) === 1) {
       setIsShowAirdropQuestLogin(true);
@@ -64,6 +66,7 @@ export const GamePlay = () => {
   }, [typeId]);
 
   console.log('tonConnectUI', tonConnectUI);
+  console.log('gameMes', gameMessage);
   useEffect(() => {
     if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST) {
       if (!token) {
@@ -82,6 +85,9 @@ export const GamePlay = () => {
     }
     if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_BUY_PACK) {
       setIsShowBuyModal(true);
+    }
+    if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_WALLET) {
+      setIsShowWallet(true);
     }
     console.log('chan ');
   }, [gameMessage, token, userPack?.packs?.length]);
@@ -111,6 +117,24 @@ export const GamePlay = () => {
               alt=''
               onClick={() => {
                 setIsShowAirdropQuestLogin(false);
+              }}
+            />
+          </div>
+        </Modal>
+      )}
+      {isShowWallet && (
+        <Modal control={isShowWallet} setControl={setIsShowWallet} isShowClose={false}>
+          <div className='airdrop-wrapper'>
+            <div className='close-mobile' onClick={() => setIsShowWallet(false)}>
+              <div dangerouslySetInnerHTML={{ __html: CloseIconSVG }}></div>
+            </div>
+            <WalletEarn setControl={setIsShowWallet} />
+            <img
+              src={close}
+              className='close-received'
+              alt=''
+              onClick={() => {
+                setIsShowWallet(false);
               }}
             />
           </div>
