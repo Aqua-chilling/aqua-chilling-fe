@@ -58,7 +58,7 @@ export const GamePlay = () => {
       dispatch(updateTelegramId({ telegram: WebApp.initDataUnsafe?.user?.id.toString() }));
     }
     if (Number(typeId) !== 1) {
-      // signTokenOut();
+      signTokenOut();
     }
     if (Number(typeId) === 1) {
       setIsShowAirdropQuestLogin(true);
