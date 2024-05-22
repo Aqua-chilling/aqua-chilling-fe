@@ -116,6 +116,9 @@ export const GamePlay = () => {
           onClose={() => {
             setIsShowAirdropQuestLogin(false);
           }}
+          purchaseAqua={() => {
+            setIsShowBuyModal(true);
+          }}
         />
       )}
       {/* {isShowAirdropQuestLogin && (
@@ -138,7 +141,7 @@ export const GamePlay = () => {
       )} */}
       {isBuy && <BuyPopup pack={pack} onClose={() => setIsBuy(false)} />}
       {isShowWallet && <UserWallet onClose={() => setIsShowWallet(false)} />}
-      {true && (
+      {isShowBuyModal && (
         <Modal control={isShowBuyModal} setControl={setIsShowBuyModal} isShowClose={false}>
           <BuyModal
             onClose={() => {

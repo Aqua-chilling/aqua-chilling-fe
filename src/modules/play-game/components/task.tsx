@@ -26,7 +26,7 @@ import { useAccountInfoContext } from '@/contexts/account-info.context';
 import { useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { ENVS } from '@/config';
 import { beginCell, toNano, Address } from '@ton/ton';
-export const Task = ({ setStep }: { setStep: (step: number) => void }) => {
+export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => void; purchaseAqua: () => void }) => {
   const { userProfile } = useAccountInfoContext();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState(-1);
@@ -156,6 +156,7 @@ export const Task = ({ setStep }: { setStep: (step: number) => void }) => {
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
                 true && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
               }`}
+              onClick={purchaseAqua}
             >
               {false ? 'Start' : 'Completed'}
             </div>
@@ -420,7 +421,10 @@ export const Task = ({ setStep }: { setStep: (step: number) => void }) => {
                   Link Telegram {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />}
                 </div>
               ) : (
-                <div className='connect-telegram' id='connect-telegram'></div>
+                <>
+                  <div className='connect-telegram' id='connect-telegram'></div>
+                  <div className='connect-telegram-text-tg'>Connect with telegram</div>
+                </>
               )}
             </div>
           </div>
