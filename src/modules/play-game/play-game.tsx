@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import close from '@/assets/airdrop-detail/close.png';
 import nft1 from '@/assets/airdrop/triden 1.jpg';
 import { Wrapper } from './play-game.styled';
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { deleteAccount, selectToken, updateDiscordId, updateReferral, updateTwitterId } from '@/redux';
 import { PopUpLogin } from './components/popup-login';
 import { Modal } from '@/components/modal/modal';
@@ -24,6 +24,10 @@ import { useSearchParams } from 'react-router-dom';
 import { updateTelegramId } from '@/redux/telegram-id';
 import { dispatch } from '@/app/store';
 import { WalletEarn } from './components/wallet-earn';
+import { UserWallet } from './components/user-wallet';
+import { AirdropQuests } from './components/airdrop-quest';
+import { BuyPopup } from './components/buy-popup';
+import { useStateCallback } from '@/hooks/use-on-off';
 
 function iframe() {
   return {
@@ -58,7 +62,7 @@ export const GamePlay = () => {
       dispatch(updateTelegramId({ telegram: WebApp.initDataUnsafe?.user?.id.toString() }));
     }
     if (Number(typeId) !== 1) {
-      signTokenOut();
+      // signTokenOut();
     }
     if (Number(typeId) === 1) {
       setIsShowAirdropQuestLogin(true);
@@ -92,6 +96,9 @@ export const GamePlay = () => {
     console.log('chan ');
   }, [gameMessage, token, userPack?.packs?.length]);
   console.log('isShow', isShowBuyModal);
+  const [pack, setPack] = useStateCallback<any>(undefined);
+  const [isBuy, setIsBuy] = useState(false);
+  console.log('isBuy', isBuy);
   return (
     <Wrapper>
       {isShowPopupLogin && (
@@ -105,6 +112,13 @@ export const GamePlay = () => {
         </Modal>
       )}
       {isShowAirdropQuestLogin && (
+        <AirdropQuests
+          onClose={() => {
+            setIsShowAirdropQuestLogin(false);
+          }}
+        />
+      )}
+      {/* {isShowAirdropQuestLogin && (
         <Modal control={isShowAirdropQuestLogin} setControl={setIsShowAirdropQuestLogin} isShowClose={false}>
           <div className='airdrop-wrapper'>
             <div className='close-mobile' onClick={() => setIsShowAirdropQuestLogin(false)}>
@@ -121,26 +135,10 @@ export const GamePlay = () => {
             />
           </div>
         </Modal>
-      )}
-      {isShowWallet && (
-        <Modal control={isShowWallet} setControl={setIsShowWallet} isShowClose={false}>
-          <div className='airdrop-wrapper'>
-            <div className='close-mobile' onClick={() => setIsShowWallet(false)}>
-              <div dangerouslySetInnerHTML={{ __html: CloseIconSVG }}></div>
-            </div>
-            <WalletEarn setControl={setIsShowWallet} />
-            <img
-              src={close}
-              className='close-received'
-              alt=''
-              onClick={() => {
-                setIsShowWallet(false);
-              }}
-            />
-          </div>
-        </Modal>
-      )}
-      {isShowBuyModal && (
+      )} */}
+      {isBuy && <BuyPopup pack={pack} onClose={() => setIsBuy(false)} />}
+      {isShowWallet && <UserWallet onClose={() => setIsShowWallet(false)} />}
+      {true && (
         <Modal control={isShowBuyModal} setControl={setIsShowBuyModal} isShowClose={false}>
           <BuyModal
             onClose={() => {
@@ -152,6 +150,8 @@ export const GamePlay = () => {
               sendMessage(COMMUNICATIONFUNCTION.BUY_PACK, COMMUNICATIONFUNCTION.SUCCESS_PARAM);
               setIsShowBuyModal(false);
             }}
+            setPack={(pack: any) => setPack(pack)}
+            setIsBuy={(isB: boolean) => setIsBuy(isB)}
           />
         </Modal>
       )}
