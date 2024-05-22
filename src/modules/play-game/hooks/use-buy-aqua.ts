@@ -5,17 +5,17 @@ import { usePlayGame } from '@/hooks/use-play-game';
 import { useTonConnectUI } from '@tonconnect/ui-react';
 import { useCallback, useState } from 'react';
 
-interface IPropsUseBuyPack {
+interface IPropsUseBuyAqua {
   transaction: any;
   onBuySuccess: () => void;
 }
-export const useBuyPack = (props: IPropsUseBuyPack) => {
+export const useBuyAqua = (props: IPropsUseBuyAqua) => {
   const { addNotification } = useNotification();
   const { sendMessage } = usePlayGame();
   const [tonConnectUI, setOptions] = useTonConnectUI();
   const [isLoading, setIsLoading] = useState(false);
   const { transaction, onBuySuccess } = props;
-  const handleBuyPack = useCallback(async () => {
+  const handleBuyAqua = useCallback(async () => {
     console.log(transaction);
     try {
       setIsLoading(true);
@@ -23,7 +23,7 @@ export const useBuyPack = (props: IPropsUseBuyPack) => {
       const res = await tonConnectUI.sendTransaction(transaction);
       if (res) {
         addNotification({
-          message: 'Bought Packages successfully!',
+          message: 'Bought $AQUA token successfully!',
           type: NOTIFICATION_TYPE.SUCCESS,
           id: new Date().getTime()
         });
@@ -40,6 +40,6 @@ export const useBuyPack = (props: IPropsUseBuyPack) => {
 
   return {
     isLoading,
-    handleBuyPack
+    handleBuyAqua
   };
 };
