@@ -34,6 +34,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
   const referral_code = useSelector(selectReferralCode);
   const isJoinedTelegram = userProfile?.telegramOnboard?.aquachilling;
   const isFollowed = userProfile?.twitterOnboard?.follows?.length > 0;
+  const isRetweeded = userProfile?.twitterOnboard?.retweets?.length > 0;
   const [tonConnectUI, setOptions] = useTonConnectUI();
   const wallet = useTonWallet();
   const { addNotification } = useNotification();
@@ -264,7 +265,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             </div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                true && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
+                isRetweeded && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
               }`}
             >
               {/* {userProfile?.telegram ? (
@@ -323,7 +324,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 <div className='connect-telegram' id='connect-telegram'></div>
               )} */}
               {userProfile?.twitter ? (
-                isFollowed ? (
+                isRetweeded ? (
                   <div className='flex items-center gap-1'>Completed</div>
                 ) : (
                   <div
