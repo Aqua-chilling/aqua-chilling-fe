@@ -27,13 +27,11 @@ export const useBuyPack = (props: IPropsUseBuyPack) => {
           type: NOTIFICATION_TYPE.SUCCESS,
           id: new Date().getTime()
         });
-        console.log('ressss', res);
         onBuySuccess();
       }
       console.log('res', res);
       setIsLoading(false);
-    } catch (err) {
-      console.log(err, 'errrrrrrrrrrrr');
+    } catch {
       setIsLoading(false);
     }
   }, [transaction]);

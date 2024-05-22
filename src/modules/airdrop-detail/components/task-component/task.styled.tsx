@@ -101,9 +101,6 @@ export const Wrapper = styled.div`
         align-items: center;
         gap: 8px;
         cursor: pointer;
-        img {
-          width: 24px;
-        }
         &:hover {
           transform: scale(1.01);
         }
@@ -151,7 +148,6 @@ export const Wrapper = styled.div`
       line-height: 150%; /* 21px */
       @media screen and (max-width: 600px) {
         flex-wrap: wrap;
-        min-height: unset;
       }
     }
   }
