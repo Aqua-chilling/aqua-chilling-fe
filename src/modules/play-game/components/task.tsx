@@ -447,7 +447,8 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 false && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
               }`}
             >
-              {true ? 'Start' : 'Completed'}
+              <div className='connect-telegram' id='connect-telegram'></div>
+              <div className='connect-telegram-text-tg'>Start</div>
             </div>
           </div>
         </div>
