@@ -8,7 +8,7 @@ import Gem from '@/assets/wallet/gem.png';
 import HeaderBg from '@/assets/wallet/header-bg.png';
 import CloseIcon from '@/assets/wallet/close.png';
 import Copy from '@/assets/wallet/copy.png';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BuyAqua } from './buy-aqua';
 import { useStateCallback } from '@/hooks/use-on-off';
 import { useTonAddress } from '@tonconnect/ui-react';
@@ -22,12 +22,25 @@ import { Leaderboard } from './leaderboard';
 import { Referral } from './referral';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
 const titleList = ['Airdrop quest', 'Quest list', 'Referrals'];
-export const AirdropQuests = ({ onClose, purchaseAqua }: { onClose: () => void; purchaseAqua: () => void }) => {
-  const [step, setStep] = useState(0);
+export const AirdropQuests = ({
+  onClose,
+  purchaseAqua,
+  typeId
+}: {
+  onClose: () => void;
+  purchaseAqua: () => void;
+  typeId: number;
+}) => {
+  const [step, setStep] = useState(typeId === 1 ? 1 : 0);
   const { addNotification } = useNotification();
   const userAddress = useTonAddress();
   const { userProfile } = useAccountInfoContext();
   console.log('userAddress', userAddress);
+  useEffect(() => {
+    if (typeId === 1) {
+      setStep(1);
+    }
+  }, [typeId]);
   return (
     <Wrapper>
       <div

@@ -119,6 +119,7 @@ export const GamePlay = () => {
           purchaseAqua={() => {
             setIsShowBuyModal(true);
           }}
+          typeId={Number(typeId || 0)}
         />
       )}
       {/* {isShowAirdropQuestLogin && (
