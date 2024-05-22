@@ -20,32 +20,12 @@ import { storeBuyPack } from '@/constants/app-constaints';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
 import { useTonWalletContext } from '@/contexts/ton-wallet.context';
 import ModalBg from '@/assets/packages/buy-modal-bg.png';
-import Token from '@/assets/airdrop/token.png';
-import { useAccountInfoContext } from '@/contexts/account-info.context';
-import Shell from '@/assets/shell.png';
-import { createTransaction } from '../utils/create-transaction.util';
-import { useStateCallback } from '@/hooks/use-on-off';
-import { BuyPopup } from './buy-popup';
 
-export const BuyModal = ({
-  onClose,
-  onBuySuccess,
-  setPack,
-  setIsBuy
-}: {
-  onClose: () => void;
-  onBuySuccess: () => void;
-  setPack: any;
-  setIsBuy: (isBuy: boolean) => void;
-}) => {
-  const [activeTab, setActiveTab] = useState(1);
+export const BuyModal = ({ onClose, onBuySuccess }: { onClose: () => void; onBuySuccess: () => void }) => {
   const [amount, setAmount] = useState<any>({});
-
-  const { userProfile } = useAccountInfoContext();
   const token = useSelector(selectToken);
   const { tonConnectUI } = useTonWalletContext();
   const [packList, setPackList] = React.useState<any[]>();
-
   const total = useMemo(() => {
     let _total = 0;
     if (!packList) return 0;
@@ -57,50 +37,48 @@ export const BuyModal = ({
   const wallet = useTonWallet();
   console.log('wallet', wallet);
   console.log('ENV', ENVS.VITE_BASE_PACKAGE_TON_CONTRACT);
-
-  // const transaction = useMemo(() => {
-  //   if (!wallet?.account) {
-  //     return {
-  //       validUntil: Date.now() / 1000 + 10000,
-  //       network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
-  //       from: wallet?.account?.address || '',
-  //       messages: {
-  //         address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
-  //         amount: 0.1
-  //       }
-  //     };
-  //   }
-  //   if (!packList) return undefined;
-  //   let messages = [];
-  //   for (let i = 0; i < (packList?.length || 0); i++) {
-  //     if (amount?.[`${i}`] && amount?.[`${i}`] !== 0) {
-  //       console.log(packList[i]?.set, amount?.[`${i}`]);
-  //       let transactionPayload = beginCell()
-  //         .storeUint(3850333806, 32)
-  //         .storeUint(1, 64)
-  //         .storeInt(packList[i]?.set, 257)
-  //         .storeAddress(Address.parse(wallet.account.address))
-  //         .storeInt(amount?.[`${i}`], 257)
-  //         .endCell();
-  //       console.log('transactionPayload', transactionPayload);
-  //       messages.push({
-  //         address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
-  //         amount: '100000000',
-  //         payload: transactionPayload.toBoc().toString('base64')
-  //       });
-  //     }
-  //   }
-  //   return {
-  //     validUntil: Math.floor(Date.now() / 1000) + 60,
-  //     // network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
-  //     // from: wallet?.account?.address || '',
-  //     messages: messages
-  //   };
-  // }, [wallet, packList, amount]);
-  // const { isLoading, handleBuyPack } = useBuyPack({
-  //   transaction,
-  //   onBuySuccess
-  // });
+  const transaction = useMemo(() => {
+    if (!wallet?.account) {
+      return {
+        validUntil: Date.now() / 1000 + 10000,
+        network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
+        from: wallet?.account?.address || '',
+        messages: {
+          address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
+          amount: 0.1
+        }
+      };
+    }
+    if (!packList) return undefined;
+    let messages = [];
+    for (let i = 0; i < (packList?.length || 0); i++) {
+      if (amount?.[`${i}`] && amount?.[`${i}`] !== 0) {
+        console.log(packList[i]?.set, amount?.[`${i}`]);
+        let transactionPayload = beginCell()
+          .storeUint(3850333806, 32)
+          .storeUint(1, 64)
+          .storeInt(packList[i]?.set, 257)
+          .storeAddress(Address.parse(wallet.account.address))
+          .storeInt(amount?.[`${i}`], 257)
+          .endCell();
+        messages.push({
+          address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
+          amount: '100000000',
+          payload: transactionPayload.toBoc().toString('base64')
+        });
+      }
+    }
+    return {
+      // validUntil: Date.now()/1000 + 10000,
+      // network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
+      // from: wallet?.account?.address || '',
+      messages: messages
+    };
+  }, [wallet, packList, amount]);
+  const { isLoading, handleBuyPack } = useBuyPack({
+    transaction,
+    onBuySuccess
+  });
 
   React.useEffect(() => {
     console.log('eefec');
@@ -115,80 +93,39 @@ export const BuyModal = ({
   }, [token]);
 
   return (
-    <>
-      <div className='buy-modal'>
-        <img src={BuyModalBg} alt='' className='buy-background' />
+    <div className='buy-modal'>
+      <div className='buy-modal-bg'>
+        <img src={ModalBg} alt='' />
+      </div>
+      <div className='close' onClick={onClose}>
+        <div dangerouslySetInnerHTML={{ __html: CloseIconSVG }}></div>
+      </div>
+      <img src={BuyModalBg} alt='' className='buy-background' />
+      <div className='buy-content'>
         <img src={BuyBgs} alt='' className='buy-background-mb' />
-        <div className='px-4 relative z-[1]'>
-          <div className='buy-content'>
-            {/* <div className='buy-tabs w-full flex items-center gap-[6px] mt-8'>
-            <div
-              className={`bg-[#285CC4] border-[2px] border-[#143464] flex-1 flex items-center justify-center h-8 rounded-[8px] font-secondary font-medium text-sm text-[#FFFFFF] cursor-pointer ${
-                activeTab !== 0 && '!bg-transparent  !text-[#061225]'
-              }`}
-              onClick={() => {
-                setActiveTab(0);
-              }}
-            >
-              Fish Packages
-            </div>
-            <div
-              className={`bg-[#285CC4] border-[2px] border-[#143464] flex-1 flex items-center justify-center h-8 rounded-[8px] font-secondary font-medium text-sm text-[#FFFFFF] cursor-pointer ${
-                activeTab !== 1 && '!bg-transparent  !text-[#061225]'
-              }`}
-              onClick={() => {
-                setActiveTab(1);
-              }}
-            >
-              $AQUA package
-            </div>
-          </div> */}
-            <div className='font-secondary text-[#061225] font-medium text-2xl mt-8 -mb-3'>Buy $AQUA</div>
-            {activeTab === 0 && (
-              <>
-                <div className='buy-package'>
-                  <div className='package-balance flex items-center w-full gap-2 justify-center -mt-2'>
-                    <div className='flex items-center gap-3 balance-card '>
-                      <img src={Token} className='w-5' alt='' />
-                      <div className='flex flex-col items-center '>
-                        <div className='font-medium text-[8px] text-[#FFFFFF] font-secondary'>Your $AQUA</div>
-                        <div className='font-semibold text-[10px] text-[#FFFFFF] font-secondary'>
-                          {userProfile?.point?.toLocaleString(undefined, {
-                            minimumFractionDigits: 0,
-                            maximumFractionDigits: 2
-                          })}
-                        </div>
-                      </div>
-                    </div>
-                    <div className='flex items-center gap-3 balance-card'>
-                      <img src={Shell} className='w-5' alt='' />
-                      <div className='flex flex-col items-center '>
-                        <div className='font-medium text-[8px] text-[#FFFFFF] font-secondary'>Your Shell</div>
-                        <div className='font-semibold text-[10px] text-[#FFFFFF] font-secondary'>9,000</div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className='package-cards px-2'>
-                    {packList?.map((card, key) => {
-                      return (
-                        <PackageCard
-                          thumnail={cards[key] ? cards[key] : CardDefault}
-                          title={card.name}
-                          price={card.pack_cost}
-                          amount={amount?.[`${key}`] ?? 0}
-                          setAmount={(amoun) => {
-                            const _amount = { ...amount };
-                            _amount[`${key}`] = amoun;
-                            setAmount(_amount);
-                          }}
-                          key={key}
-                        />
-                      );
-                    })}
-                  </div>
-                </div>
-                <div className='buy-summary'>
-                  {/* <div className='buy-title'>Total</div>
+        <div className='buy-package'>
+          <div className='buy-title'>Fish packages</div>
+          <div className='package-cards'>
+            {packList?.map((card, key) => {
+              return (
+                <PackageCard
+                  thumnail={cards[key] ? cards[key] : CardDefault}
+                  title={card.name}
+                  price={card.pack_cost}
+                  amount={amount?.[`${key}`] ?? 0}
+                  setAmount={(amoun) => {
+                    const _amount = { ...amount };
+                    _amount[`${key}`] = amoun;
+                    setAmount(_amount);
+                  }}
+                  key={key}
+                />
+              );
+            })}
+          </div>
+        </div>
+        <div className='buy-summary'>
+          {/* <div className='buy-title'>Total</div>
           <div className='summary-info'>
             {packList?.map((card, key) => {
               return (
@@ -201,233 +138,35 @@ export const BuyModal = ({
               );
             })}
           </div> */}
-                  <div className='info w-full flex items-center justify-between'>
-                    <div className='info-label'>Total:</div>
-                    <div className='info-value'>${total}</div>
-                  </div>
-                  {/* <div
-                  className={`summary-button w-full ${isLoading && 'summary-loading'}`}
-                  onClick={() => {
-                    !token ? tonConnectUI.openModal() : handleBuyPack();
-                  }}
-                >
-                  {!token ? 'Connect TON' : isLoading ? <span>Buying</span> : 'Buy now'}
-                  {isLoading && (
-                    <div className='button-spin'>
-                      <Spin />
+          <div className='summary-info-3'>
+            <div className='summary-info-2'>
+              <div className='summary-info-1'>
+                <div className='summary-info-0'>
+                  <div className='summary-info'>
+                    <div className='info'>
+                      <div className='info-label'>Total:</div>
+                      <div className='info-value'>${total}</div>
                     </div>
-                  )}
-                </div> */}
-                </div>
-              </>
-            )}
-            {activeTab === 1 && (
-              <>
-                <div className='special-package flex items-center flex-col w-full p-4 '>
-                  <div className='font-secondary font-medium text-2xl text-[#FFFFFF] mb-2'>Starting package</div>
-                  <div className='special-card flex items-center gap-1 px-2 py-[10px]'>
-                    <div className='font-secondary font-medium text-sm text-[#FFFFFF]'>300 $AQUA</div>
-                    <img src={Token} className='w-4' alt='' />
-                    <div className='font-secondary font-medium text-sm text-[#FFFFFF]'>+</div>
-                    <div className='font-secondary font-medium text-sm text-[#FFFFFF]'>2000 SHELL</div>
-                    <img src={Shell} className='w-4' alt='' />
-                  </div>
-                  <div className='font-secondary font-normal text-xs mt-1 text-[#FFFFFF] opacity-70'>
-                    Each user can only buy once
-                  </div>
-                  <div className='w-full flex items-center justify-between mt-[10px]'>
-                    <div className='font-secondary font-medium text-base text-[#FFFFFF]'>Price: $8</div>
                     <div
-                      className='buy-btn'
+                      className={`summary-button ${isLoading && 'summary-loading'}`}
                       onClick={() => {
-                        setPack(
-                          {
-                            packId: 1,
-                            amount: 1
-                          },
-                          setIsBuy(true)
-                        );
+                        !token ? tonConnectUI.openModal() : handleBuyPack();
                       }}
                     >
-                      Buy
+                      {!token ? 'Connect TON' : isLoading ? <span>Buying</span> : 'Buy now'}
+                      {isLoading && (
+                        <div className='button-spin'>
+                          <Spin />
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
-                <div className='aqua-packages w-full px-2'>
-                  <div className='aqua-package w-full px-2 py-[10px] flex flex-col items-center gap-4'>
-                    <div className='aqua-info w-full flex items-center justify-center gap-1'>
-                      <div className='font-medium text-sm text-[#FFFFFF] font-secondary'>300</div>
-                      <img className='w-6' src={Token} alt='' />
-                    </div>
-                    <div className='font-secondary font-medium text-base text-[#FFFFFF]'>Price: $12</div>
-                    <div
-                      className='buy-btn'
-                      onClick={() => {
-                        setPack(
-                          {
-                            packId: 1,
-                            amount: 1
-                          },
-                          setIsBuy(true)
-                        );
-                      }}
-                    >
-                      Buy
-                    </div>
-                  </div>
-                  <div className='aqua-package w-full px-2 py-[10px] flex flex-col items-center gap-4'>
-                    <div className='aqua-info w-full flex items-center justify-center gap-1'>
-                      <div className='font-medium text-sm text-[#FFFFFF] font-secondary'>300</div>
-                      <img className='w-6' src={Token} alt='' />
-                    </div>
-                    <div className='font-secondary font-medium text-base text-[#FFFFFF]'>Price: $12</div>
-                    <div
-                      className='buy-btn'
-                      onClick={() => {
-                        setPack(
-                          {
-                            packId: 1,
-                            amount: 1
-                          },
-                          setIsBuy(true)
-                        );
-                      }}
-                    >
-                      Buy
-                    </div>
-                  </div>
-                  <div className='aqua-package w-full px-2 py-[10px] flex flex-col items-center gap-4'>
-                    <div className='aqua-info w-full flex items-center justify-center gap-1'>
-                      <div className='font-medium text-sm text-[#FFFFFF] font-secondary'>300</div>
-                      <img className='w-6' src={Token} alt='' />
-                    </div>
-                    <div className='font-secondary font-medium text-base text-[#FFFFFF]'>Price: $12</div>
-                    <div
-                      className='buy-btn'
-                      onClick={() => {
-                        setPack(
-                          {
-                            packId: 1,
-                            amount: 1
-                          },
-                          setIsBuy(true)
-                        );
-                      }}
-                    >
-                      Buy
-                    </div>
-                  </div>
-                  <div className='aqua-package w-full px-2 py-[10px] flex flex-col items-center gap-4'>
-                    <div className='aqua-info w-full flex items-center justify-center gap-1'>
-                      <div className='font-medium text-sm text-[#FFFFFF] font-secondary'>300</div>
-                      <img className='w-6' src={Token} alt='' />
-                    </div>
-                    <div className='font-secondary font-medium text-base text-[#FFFFFF]'>Price: $12</div>
-                    <div
-                      className='buy-btn'
-                      onClick={() => {
-                        setPack(
-                          {
-                            packId: 1,
-                            amount: 1
-                          },
-                          setIsBuy(true)
-                        );
-                      }}
-                    >
-                      Buy
-                    </div>
-                  </div>
-                  <div className='aqua-package w-full px-2 py-[10px] flex flex-col items-center gap-4'>
-                    <div className='aqua-info w-full flex items-center justify-center gap-1'>
-                      <div className='font-medium text-sm text-[#FFFFFF] font-secondary'>300</div>
-                      <img className='w-6' src={Token} alt='' />
-                    </div>
-                    <div className='font-secondary font-medium text-base text-[#FFFFFF]'>Price: $12</div>
-                    <div
-                      className='buy-btn'
-                      onClick={() => {
-                        setPack(
-                          {
-                            packId: 1,
-                            amount: 1
-                          },
-                          setIsBuy(true)
-                        );
-                      }}
-                    >
-                      Buy
-                    </div>
-                  </div>
-                  <div className='aqua-package w-full px-2 py-[10px] flex flex-col items-center gap-4'>
-                    <div className='aqua-info w-full flex items-center justify-center gap-1'>
-                      <div className='font-medium text-sm text-[#FFFFFF] font-secondary'>300</div>
-                      <img className='w-6' src={Token} alt='' />
-                    </div>
-                    <div className='font-secondary font-medium text-base text-[#FFFFFF]'>Price: $12</div>
-                    <div
-                      className='buy-btn'
-                      onClick={() => {
-                        setPack(
-                          {
-                            packId: 1,
-                            amount: 1
-                          },
-                          setIsBuy(true)
-                        );
-                      }}
-                    >
-                      Buy
-                    </div>
-                  </div>
-                  <div className='aqua-package w-full px-2 py-[10px] flex flex-col items-center gap-4'>
-                    <div className='aqua-info w-full flex items-center justify-center gap-1'>
-                      <div className='font-medium text-sm text-[#FFFFFF] font-secondary'>300</div>
-                      <img className='w-6' src={Token} alt='' />
-                    </div>
-                    <div className='font-secondary font-medium text-base text-[#FFFFFF]'>Price: $12</div>
-                    <div
-                      className='buy-btn'
-                      onClick={() => {
-                        setPack(
-                          {
-                            packId: 1,
-                            amount: 1
-                          },
-                          setIsBuy(true)
-                        );
-                      }}
-                    >
-                      Buy
-                    </div>
-                  </div>
-                  <div className='aqua-package w-full px-2 py-[10px] flex flex-col items-center gap-4'>
-                    <div className='aqua-info w-full flex items-center justify-center gap-1'>
-                      <div className='font-medium text-sm text-[#FFFFFF] font-secondary'>300</div>
-                      <img className='w-6' src={Token} alt='' />
-                    </div>
-                    <div className='font-secondary font-medium text-base text-[#FFFFFF]'>Price: $12</div>
-                    <div
-                      className='buy-btn'
-                      onClick={() => {
-                        setPack(
-                          {
-                            packId: 1,
-                            amount: 1
-                          },
-                          setIsBuy(true)
-                        );
-                      }}
-                    >
-                      Buy
-                    </div>
-                  </div>
-                </div>
-              </>
-            )}
+              </div>
+            </div>
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
