@@ -22,7 +22,7 @@ import { Leaderboard } from './leaderboard';
 import { Referral } from './referral';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
 const titleList = ['Airdrop quest', 'Quest list', 'Referrals'];
-export const AirdropQuests = ({ onClose }: { onClose: () => void }) => {
+export const AirdropQuests = ({ onClose, purchaseAqua }: { onClose: () => void; purchaseAqua: () => void }) => {
   const [step, setStep] = useState(0);
   const { addNotification } = useNotification();
   const userAddress = useTonAddress();
@@ -95,7 +95,7 @@ export const AirdropQuests = ({ onClose }: { onClose: () => void }) => {
         )}
         {step === 1 && (
           <div className='airdrop-quest'>
-            <Task setStep={(step) => setStep(step)} />
+            <Task setStep={(step) => setStep(step)} purchaseAqua={purchaseAqua} />
           </div>
         )}
         {step === 2 && (

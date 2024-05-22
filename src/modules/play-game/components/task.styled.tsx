@@ -133,6 +133,26 @@ export const Wrapper = styled.div`
         width: 170%;
       }
     }
+    .task-button {
+      position: relative;
+      .connect-telegram-text-tg {
+        position: relative;
+        z-index: 1;
+      }
+      .connect-telegram {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        z-index: 2;
+        > iframe {
+          width: 100% !important ;
+          height: 100% !important;
+        }
+      }
+    }
     .table-row {
       border-radius: 16px;
       background: #143464;
