@@ -46,6 +46,9 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
     });
     navigator.clipboard.writeText(referral_code || '');
   };
+  const onTelegramAuth = (user: any) => {
+    console.log('user', user);
+  };
   React.useEffect(() => {
     const ele = document.querySelector('#connect-telegram');
     const script = document.createElement('script');
@@ -57,6 +60,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
     script.setAttribute('data-userpic', 'false');
     script.setAttribute('data-auth-url', 'https://api-game-test.aquachilling.com/v1/auth/telegram');
     script.setAttribute('data-request-access', 'write');
+    script.setAttribute('data-onauth', 'onTelegramAuth(user)');
 
     ele?.appendChild(script);
   }, []);
