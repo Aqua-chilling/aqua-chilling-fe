@@ -20,7 +20,7 @@ import { storeBuyPack } from '@/constants/app-constaints';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
 import { useTonWalletContext } from '@/contexts/ton-wallet.context';
 import ModalBg from '@/assets/packages/buy-modal-bg.png';
-import Token from '@/assets/airdrop/token.png';
+import Token from '@/assets/aqua.png';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
 import Shell from '@/assets/shell.png';
 import { createTransaction } from '../utils/create-transaction.util';

@@ -11,7 +11,17 @@ import Gem from '@/assets/wallet/gem.png';
 import HeaderBg from '@/assets/wallet/header-bg.png';
 import CloseIcon from '@/assets/wallet/close.png';
 import Copy from '@/assets/wallet/copy.png';
-export const BuyAqua = ({ onClose, step, type }: { onClose: () => void; step: number; type: number }) => {
+export const BuyAqua = ({
+  onClose,
+  step,
+  type,
+  purchaseAqua
+}: {
+  onClose: () => void;
+  step: number;
+  type: number;
+  purchaseAqua: () => void;
+}) => {
   return (
     <Wrapper>
       <div
@@ -32,13 +42,15 @@ export const BuyAqua = ({ onClose, step, type }: { onClose: () => void; step: nu
 
         {type === 0 && (
           <>
-            <div className='buy-title'>About GEM</div>
+            <div className='buy-title'>About SHELL</div>
             <div className='buy-subtitle'>
-              GEM is an in-game currency that users can easily earn by playing. During Open Beta, GEM will be used for
-              Leaderboard rankings. The more GEM, the higher rank, the bigger Airdrop rewards. GEM is not a crypto
-              currency. It will be reset after Open Beta.
+              SHELL is an in-game currency that users can easily earn by playing. During Open Beta, SHELL will be used
+              for Leaderboard rankings. The more SHELL, the higher rank, the bigger Airdrop rewards. SHELL is not a
+              crypto currency. It will be reset after Open Beta.
             </div>
-            <div className='buy-button'>Earn more GEM</div>
+            <div className='buy-button' onClick={purchaseAqua}>
+              Earn more SHELL
+            </div>
           </>
         )}
         {type === 1 && step === 0 && (
@@ -48,7 +60,9 @@ export const BuyAqua = ({ onClose, step, type }: { onClose: () => void; step: nu
               AQUA is the main token of Aquachilling. In Open Beta, users can get AQUA by completing Quests or buy
               directly in the game's Shop with $TON. In Open Beta, AQUA will only be used to buy game’s items.
             </div>
-            <div className='buy-button'>Earn more GEM</div>
+            <div className='buy-button' onClick={purchaseAqua}>
+              Buy AQUA
+            </div>
           </>
         )}
 

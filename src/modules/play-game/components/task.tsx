@@ -21,7 +21,7 @@ import WebApp from '@twa-dev/sdk';
 import { useNavigate } from 'react-router';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import { copyICONSVG } from '@/modules/airdrop-detail/components/referral-component/referral';
-import Token from '@/assets/airdrop/token.png';
+import Token from '@/assets/aqua.png';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
 import { useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { ENVS } from '@/config';
@@ -55,7 +55,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
     script.src = '';
     script.async = true;
     script.setAttribute('src', 'https://telegram.org/js/telegram-widget.js?22');
-    script.setAttribute('data-telegram-login', 'aquachilling_bot');
+    script.setAttribute('data-telegram-login', 'aquachilling_verification_bot');
     script.setAttribute('data-size', 'large');
     script.setAttribute('data-userpic', 'false');
     script.setAttribute('data-auth-url', 'https://api-game-test.aquachilling.com/v1/auth/telegram');

@@ -4,7 +4,7 @@ import Withdraw from '@/assets/withdraw.png';
 import Swap from '@/assets/swap.png';
 import ETH from '@/assets/eth.png';
 import Aqua from '@/assets/wallet/aqua.png';
-import Gem from '@/assets/wallet/gem.png';
+import Gem from '@/assets/shell.png';
 import HeaderBg from '@/assets/wallet/header-bg.png';
 import CloseIcon from '@/assets/wallet/close.png';
 import Copy from '@/assets/wallet/copy.png';
@@ -14,13 +14,15 @@ import { useStateCallback } from '@/hooks/use-on-off';
 import { useTonAddress } from '@tonconnect/ui-react';
 import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
-export const UserWallet = ({ onClose }: { onClose: () => void }) => {
+import { useAccountInfoContext } from '@/contexts/account-info.context';
+export const UserWallet = ({ onClose, purchaseAqua }: { onClose: () => void; purchaseAqua: () => void }) => {
   const [isBuy, setIsBuy] = React.useState(false);
   const [buyInfo, setBuyInfo] = useStateCallback({
     type: 0,
     step: 0
   });
   const { addNotification } = useNotification();
+  const { userProfile } = useAccountInfoContext();
   const userAddress = useTonAddress();
   console.log('userAddress', userAddress);
   return (
@@ -36,6 +38,7 @@ export const UserWallet = ({ onClose }: { onClose: () => void }) => {
           }}
           type={buyInfo.type}
           step={buyInfo.step}
+          purchaseAqua={purchaseAqua}
         />
       )}
       <div
@@ -86,12 +89,19 @@ export const UserWallet = ({ onClose }: { onClose: () => void }) => {
           <div className='wallet-cards'>
             <div className='wallet-card'>
               <img src={Gem} alt='' />
-              <div className='wallet-subtitle'>GEM balance</div>
+              <div className='wallet-subtitle'>SHELL balance</div>
               <div className='wallet-value'>
-                <div>25,000</div>
-                <span>GEM</span>
+                <div>
+                  {userProfile?.game_data?.globals?.money?.toLocaleString(undefined, {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 2
+                  })}
+                </div>
+                <span>SHELL</span>
               </div>
-              <div className='wallet-button'>Earn more gem</div>
+              <div className='wallet-button' onClick={purchaseAqua}>
+                Earn more SHELL
+              </div>
               <div className='wallet-border'></div>
               <div
                 className='wallet-subbutton'
@@ -105,28 +115,23 @@ export const UserWallet = ({ onClose }: { onClose: () => void }) => {
                   );
                 }}
               >
-                What is GEM?
+                What is SHELL?
               </div>
             </div>
             <div className='wallet-card'>
               <img src={Aqua} alt='' />
               <div className='wallet-subtitle'>AQUA balance</div>
               <div className='wallet-value'>
-                <div>25,000</div>
-                <span>GEM</span>
+                <div>
+                  {' '}
+                  {userProfile?.point?.toLocaleString(undefined, {
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 2
+                  })}
+                </div>
+                <span>AQUA</span>
               </div>
-              <div
-                className='wallet-button'
-                onClick={() => {
-                  setBuyInfo(
-                    {
-                      type: 1,
-                      step: 1
-                    },
-                    () => setIsBuy(true)
-                  );
-                }}
-              >
+              <div className='wallet-button' onClick={purchaseAqua}>
                 Buy AQUA token
               </div>
               <div className='wallet-border'></div>

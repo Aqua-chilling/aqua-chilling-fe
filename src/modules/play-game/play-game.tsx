@@ -141,7 +141,14 @@ export const GamePlay = () => {
         </Modal>
       )} */}
       {isBuy && <BuyPopup pack={pack} onClose={() => setIsBuy(false)} />}
-      {isShowWallet && <UserWallet onClose={() => setIsShowWallet(false)} />}
+      {isShowWallet && (
+        <UserWallet
+          onClose={() => setIsShowWallet(false)}
+          purchaseAqua={() => {
+            setIsShowBuyModal(true);
+          }}
+        />
+      )}
       {isShowBuyModal && (
         <Modal control={isShowBuyModal} setControl={setIsShowBuyModal} isShowClose={false}>
           <BuyModal

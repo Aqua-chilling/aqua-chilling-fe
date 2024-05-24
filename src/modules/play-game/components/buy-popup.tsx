@@ -22,7 +22,7 @@ import { Leaderboard } from './leaderboard';
 import { Referral } from './referral';
 import { createTransaction } from '../utils/create-transaction.util';
 import { useBuyAqua } from '../hooks/use-buy-aqua';
-import Token from '@/assets/airdrop/token.png';
+import Token from '@/assets/aqua.png';
 import Shell from '@/assets/shell.png';
 import { Spin } from 'antd';
 export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) => {
@@ -35,6 +35,7 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
     transaction,
     onBuySuccess: () => {
       setStep(1);
+      onClose();
     }
   });
 
