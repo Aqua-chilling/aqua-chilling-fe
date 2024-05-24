@@ -7,6 +7,7 @@ export enum COMMUNICATIONTYPE {
 
 export const gasFee = 0.01;
 export const validUntil = 120;
+const s = 0;
 
 export enum COMMUNICATIONFUNCTION {
   LOGIN_REQUEST = 'CallLoginWallet',
