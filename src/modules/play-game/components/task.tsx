@@ -26,6 +26,7 @@ import { useAccountInfoContext } from '@/contexts/account-info.context';
 import { useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { ENVS } from '@/config';
 import { beginCell, toNano, Address } from '@ton/ton';
+import { validUntil } from '@/constants/app-constaints';
 export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => void; purchaseAqua: () => void }) => {
   const { userProfile } = useAccountInfoContext();
   const navigate = useNavigate();
@@ -60,7 +61,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
     script.setAttribute('data-userpic', 'false');
     script.setAttribute('data-auth-url', 'https://api-game-test.aquachilling.com/v1/auth/telegram');
     script.setAttribute('data-request-access', 'write');
-    script.setAttribute('data-onauth', 'onTelegramAuth(user)');
+    script.setAttribute('data-onauth', '(user)=>{console.log(user)}');
 
     ele?.appendChild(script);
   }, []);
@@ -97,12 +98,12 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 const messages = [
                   {
                     address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
-                    amount: '0',
+                    amount: '10000000',
                     payload: transactionPayload.toBoc().toString('base64')
                   }
                 ];
                 const transaction = {
-                  validUntil: Math.floor(Date.now() / 1000) + 60,
+                  validUntil: Math.floor(Date.now() / 1000) + validUntil,
                   // network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
                   // from: wallet?.account?.address || '',
                   messages: messages
@@ -111,7 +112,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 console.log('res', res);
                 if (res) {
                   addNotification({
-                    message: 'Bought Packages successfully!',
+                    message: 'Checked in wallet successfully!',
                     type: NOTIFICATION_TYPE.SUCCESS,
                     id: new Date().getTime()
                   });
