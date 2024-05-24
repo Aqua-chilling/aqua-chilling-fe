@@ -23,7 +23,7 @@ export const useBuyAqua = (props: IPropsUseBuyAqua) => {
       const res = await tonConnectUI.sendTransaction(transaction);
       if (res) {
         addNotification({
-          message: 'Bought $AQUA token successfully!',
+          message: 'Transaction Confirmed! Wait for server listening!',
           type: NOTIFICATION_TYPE.SUCCESS,
           id: new Date().getTime()
         });

@@ -43,6 +43,33 @@ export const Wrapper = styled.div`
     height: 100%;
     z-index: -1;
   }
+  .popup-amount {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    .amount-btn {
+      cursor: pointer;
+      width: 20px;
+      height: 20px;
+      background: #588d99;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      padding-bottom: 4px;
+      text-align: center;
+    }
+    .amount {
+      font-family: 'Quicksand';
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 17.5px;
+      letter-spacing: -0.02em;
+      text-align: left;
+      color: white;
+    }
+  }
   .buy-popup-content {
     width: 90%;
     max-width: 344px;

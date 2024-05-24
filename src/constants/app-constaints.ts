@@ -5,6 +5,9 @@ export enum COMMUNICATIONTYPE {
   TOGAME = 'jsbridgeAPP2GAME'
 }
 
+export const gasFee = 0.01;
+export const validUntil = 120;
+
 export enum COMMUNICATIONFUNCTION {
   LOGIN_REQUEST = 'CallLoginWallet',
   LOGIN_SUCCESS = 'LoginSuccessCallback',

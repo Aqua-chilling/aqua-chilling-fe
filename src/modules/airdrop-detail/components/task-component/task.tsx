@@ -46,7 +46,7 @@ export const Task = ({ data, profile }: any) => {
     script.src = '';
     script.async = true;
     script.setAttribute('src', 'https://telegram.org/js/telegram-widget.js?22');
-    script.setAttribute('data-telegram-login', 'aquachilling_bot');
+    script.setAttribute('data-telegram-login', 'aquachilling_verification_bot');
     script.setAttribute('data-size', 'large');
     script.setAttribute('data-userpic', 'false');
     script.setAttribute('data-auth-url', 'https://api-game-test.aquachilling.com/v1/auth/telegram');
