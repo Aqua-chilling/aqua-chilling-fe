@@ -9,7 +9,7 @@ import { Wrapper } from './task.styled';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectDiscord, selectReferralCode, selectTwitter } from '@/redux';
+import { selectDiscord, selectReferralCode, selectToken, selectTwitter } from '@/redux';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { useNotification } from '@/contexts/notification.context';
 import { Modal } from '@/components/modal/modal';
@@ -27,11 +27,26 @@ import { useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { ENVS } from '@/config';
 import { beginCell, toNano, Address } from '@ton/ton';
 import { validUntil } from '@/constants/app-constaints';
+import { useQuery } from 'react-query';
 export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => void; purchaseAqua: () => void }) => {
   const { userProfile } = useAccountInfoContext();
+  const token = useSelector(selectToken);
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState(-1);
   console.log('user', userProfile);
+  const { data: userQuest, refetch: refetchQuest } = useQuery({
+    queryKey: ['retrieveUserQuest', token],
+    queryFn: () => OnboardingRepository.RetrieveUserQuests(),
+    retry: false,
+    refetchInterval: 5000,
+    enabled: !!token
+  });
+  console.log('userQuest', userQuest);
+  const is_checkin_wallet = userQuest?.[0]?.status !== 0;
+  const is_logged_in = userQuest?.[1]?.status !== 0;
+  const is_buy_aqua = userQuest?.[2]?.status !== 0;
+  const is_daily_invite = userQuest?.[3]?.status !== 0;
+  const is_visit_aqua_web = userQuest?.[4]?.status !== 0;
   const referral_code = useSelector(selectReferralCode);
   const isJoinedTelegram = userProfile?.telegramOnboard?.aquachilling;
   const isFollowed = userProfile?.twitterOnboard?.follows?.length > 0;
@@ -83,7 +98,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             </div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                false && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
+                is_checkin_wallet && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
               }`}
               onClick={async () => {
                 if (!wallet) return;
@@ -116,10 +131,27 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                     type: NOTIFICATION_TYPE.SUCCESS,
                     id: new Date().getTime()
                   });
+                  const resOnboard = await OnboardingRepository.UpdateUserQuests({
+                    id: 5
+                  });
+                  if (resOnboard) {
+                    addNotification({
+                      message: 'Quest done!',
+                      type: NOTIFICATION_TYPE.SUCCESS,
+                      id: new Date().getTime()
+                    });
+                  } else {
+                    addNotification({
+                      message: 'Something went wrong! Try again later',
+                      type: NOTIFICATION_TYPE.ERROR,
+                      id: new Date().getTime()
+                    });
+                  }
+                  refetchQuest();
                 }
               }}
             >
-              {true ? 'Start' : 'Completed'}
+              {is_checkin_wallet ? 'Completed' : 'Start'}
             </div>
           </div>
         </div>
@@ -138,10 +170,10 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             </div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                false && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
+                is_logged_in && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
               }`}
             >
-              {true ? 'Start' : 'Completed'}
+              {!is_logged_in ? 'Start' : 'Completed'}
             </div>
           </div>
         </div>
@@ -160,11 +192,11 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             </div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                true && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
+                is_buy_aqua && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
               }`}
               onClick={purchaseAqua}
             >
-              {false ? 'Start' : 'Completed'}
+              {!is_buy_aqua ? 'Start' : 'Completed'}
             </div>
           </div>
         </div>
@@ -183,13 +215,13 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             </div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                false && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
+                is_daily_invite && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
               }`}
               onClick={() => {
                 setStep(2);
               }}
             >
-              {true ? 'Start' : 'Completed'}
+              {!is_daily_invite ? 'Start' : 'Completed'}
             </div>
           </div>
         </div>
@@ -205,10 +237,30 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             <div className='font-secondary font-medium text-xs text-[#FFFFFF]'>Visit Aquachilling website</div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                false && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
+                is_visit_aqua_web && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
               }`}
+              onClick={async () => {
+                window.open(window.location.origin, '_blank');
+                const res = await OnboardingRepository.UpdateUserQuests({
+                  id: 5
+                });
+                if (res) {
+                  addNotification({
+                    message: 'Quest done!',
+                    type: NOTIFICATION_TYPE.SUCCESS,
+                    id: new Date().getTime()
+                  });
+                } else {
+                  addNotification({
+                    message: 'Something went wrong! Try again later',
+                    type: NOTIFICATION_TYPE.ERROR,
+                    id: new Date().getTime()
+                  });
+                }
+                refetchQuest();
+              }}
             >
-              {true ? 'Start' : 'Completed'}
+              {!is_visit_aqua_web ? 'Start' : 'Completed'}
             </div>
           </div>
         </div>
