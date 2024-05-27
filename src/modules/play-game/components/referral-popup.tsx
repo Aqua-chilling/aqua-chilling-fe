@@ -20,10 +20,12 @@ import Back from '@/assets/airdrop/back.png';
 import { Task } from './task';
 import { Leaderboard } from './leaderboard';
 import { Referral } from './referral';
+import { useAccountInfoContext } from '@/contexts/account-info.context';
 const titleList = ['Airdrop quest', 'Quest list', 'Leaderboard', 'Referrals'];
 export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
   const [step, setStep] = useState(0);
   const { addNotification } = useNotification();
+  const { userProfile } = useAccountInfoContext();
   return (
     <Wrapper>
       <div
@@ -48,14 +50,44 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
             <div className='ref-link'>
               <div className='link-left'>
                 <div className='link-label'>Your referral link</div>
-                <div className='link-value'>https://aquachilling.io/en/activity/referral/ref=aqc1234</div>
+                <div className='link-value'>
+                  {!!userProfile?.referral_code
+                    ? `${window.location.origin}/game?ref=${userProfile?.referral_code}`
+                    : '...'}
+                </div>
               </div>
-              <div className='ref-btn'>Copy</div>
+              <div
+                className='ref-btn'
+                onClick={async () => {
+                  await navigator?.clipboard?.writeText(
+                    `${window.location.origin}/game?ref=${userProfile?.referral_code}` || ''
+                  );
+                  addNotification({
+                    message: 'Copied!',
+                    type: NOTIFICATION_TYPE.SUCCESS,
+                    id: new Date().getTime()
+                  });
+                }}
+              >
+                Copy
+              </div>
             </div>
-            <div className='link-label'>Your referral link</div>
+            <div className='link-label'>Your referral code</div>
             <div className='code-value'>
-              <span>XA12345</span>
-              <div className='ref-btn'>Copy</div>
+              <span>{userProfile?.referral_code || ''}</span>
+              <div
+                className='ref-btn'
+                onClick={async () => {
+                  await navigator?.clipboard?.writeText(userProfile?.referral_code || '');
+                  addNotification({
+                    message: 'Copied!',
+                    type: NOTIFICATION_TYPE.SUCCESS,
+                    id: new Date().getTime()
+                  });
+                }}
+              >
+                Copy
+              </div>
             </div>
           </div>
         </div>

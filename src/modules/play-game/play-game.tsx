@@ -28,6 +28,8 @@ import { UserWallet } from './components/user-wallet';
 import { AirdropQuests } from './components/airdrop-quest';
 import { BuyPopup } from './components/buy-popup';
 import { useStateCallback } from '@/hooks/use-on-off';
+import { OauthRepository } from '@/repositories/oauth/oauth.repository';
+import { useAccountInfoContext } from '@/contexts/account-info.context';
 
 function iframe() {
   return {
@@ -40,11 +42,13 @@ export const GamePlay = () => {
   const [isShowWallet, setIsShowWallet] = React.useState(false);
   const [searchParams] = useSearchParams();
   const typeId = searchParams.get('id');
+  const ref = searchParams.get('ref');
   console.log('typeId', typeId);
   const [isShowBuyModal, setIsShowBuyModal] = React.useState(false);
   const token = useSelector(selectToken);
   const { gameMessage, sendMessage, setGameMessage } = usePlayGame();
   const { signTokenOut, tonConnectUI } = useTonWalletContext();
+  const { userProfile } = useAccountInfoContext();
   const { data: userPack } = useQuery({
     queryKey: ['retrieveuserPack', token, gameMessage],
     queryFn: () => OnboardingRepository.RetrieveUserPackages(),
@@ -52,6 +56,19 @@ export const GamePlay = () => {
     refetchInterval: 5000,
     enabled: !!token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_BUY_PACK
   });
+  console.log('user', userProfile);
+  React.useEffect(() => {
+    if (ref && !userProfile?.referral_code) {
+      OauthRepository.enterReferralCode(ref).then((rs) => {
+        dispatch(
+          updateReferral({
+            referral_code: ref,
+            refreferral_code_status: rs.referral_code_status ?? 1
+          })
+        );
+      });
+    }
+  }, [ref, userProfile]);
   console.log('userPack', userPack);
   console.log('gameMessage', gameMessage);
   useEffect(() => {
