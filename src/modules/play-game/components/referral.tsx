@@ -5,9 +5,28 @@ import Invite2 from '@/assets/airdrop/invite-2.png';
 import Graphic from '@/assets/airdrop/graphic.png';
 import { useState } from 'react';
 import { ReferralPopup } from './referral-popup';
+import { useQuery } from 'react-query';
+import { useSelector } from 'react-redux';
+import { selectToken } from '@/redux';
+import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
 export const Referral = ({ data }: any) => {
   const [isShowRef, setIsShowRef] = useState(false);
-  console.log('fdfss', data);
+  const token = useSelector(selectToken);
+  const { data: userReferral, refetch: refetchQuest } = useQuery({
+    queryKey: ['retrieveReferralHistory', token],
+    queryFn: () => OnboardingRepository.RetrieveReferralsHistory(),
+    retry: false,
+    refetchInterval: 5000,
+    enabled: !!token
+  });
+  const { data: leaderboard, refetch } = useQuery({
+    queryKey: ['retrieveLeaderboard', token],
+    queryFn: () => OnboardingRepository.RetrieveLeaderboardList(),
+    retry: false,
+    refetchInterval: 5000,
+    enabled: !!token
+  });
+  console.log('leaderboard', leaderboard);
   return (
     <Wrapper>
       {isShowRef && <ReferralPopup onClose={() => setIsShowRef(false)} />}
@@ -51,15 +70,15 @@ export const Referral = ({ data }: any) => {
         </div>
       </div>
       <div className='table'>
-        {data ? (
-          data?.map((item: any, key: number) => {
+        {leaderboard?.length > 0 ? (
+          leaderboard?.map((item: any, key: number) => {
             return (
               <div className='table-row' key={key}>
                 <div className='rank'>{item?.rank}</div>
                 <div className='table-info'>
                   <div className='address'>{item?.address}</div>
-                  <div className='info-point'>
-                    <div className='point'>{item?.referral_point}</div>
+                  <div className='info-point flex items-center gap-1'>
+                    <div className=''>{item?.referral_point}</div>
                     <div className='total-point'>{item?.point}</div>
                   </div>
                 </div>
