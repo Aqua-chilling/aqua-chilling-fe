@@ -301,7 +301,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 <div
                   className='flex items-center gap-1'
                   onClick={() => {
-                    window.open(getTwitterOauthUrl(), '_blank', '');
+                    window.open(getTwitterOauthUrl(), '_self');
                   }}
                 >
                   Link X Account
