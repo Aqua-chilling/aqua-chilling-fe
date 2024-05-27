@@ -76,7 +76,6 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
     script.setAttribute('data-userpic', 'false');
     script.setAttribute('data-auth-url', 'https://api-game-test.aquachilling.com/v1/auth/telegram');
     script.setAttribute('data-request-access', 'write');
-    script.setAttribute('data-onauth', '(user)=>{console.log(user)}');
 
     ele?.appendChild(script);
   }, []);
