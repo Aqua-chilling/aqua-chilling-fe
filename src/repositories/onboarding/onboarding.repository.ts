@@ -16,7 +16,7 @@ export class OnboardingRepository {
   static RetrieveLeaderboardList(): Promise<any> {
     return httpGame.post(`/bc/leaderboard`, {
       page: 0,
-      limit: 10
+      limit: 30
     });
   }
   static RetrieveReferralsHistory(): Promise<any> {
