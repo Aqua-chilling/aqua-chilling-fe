@@ -58,8 +58,9 @@ export const GamePlay = () => {
   });
   console.log('user', userProfile);
   React.useEffect(() => {
-    if (ref && !userProfile?.referral_code) {
+    if (ref && !!token && userProfile?.referral_code_status !== 1) {
       OauthRepository.enterReferralCode(ref).then((rs) => {
+        console.log('GIANG', rs);
         dispatch(
           updateReferral({
             referral_code: ref,
@@ -68,7 +69,7 @@ export const GamePlay = () => {
         );
       });
     }
-  }, [ref, userProfile]);
+  }, [ref, token, userProfile]);
   console.log('userPack', userPack);
   console.log('gameMessage', gameMessage);
   useEffect(() => {
