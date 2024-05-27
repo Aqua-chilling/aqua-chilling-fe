@@ -47,7 +47,7 @@ export const OauthSuccess = () => {
         })
         .catch((err) => {
           addNotification({
-            message: err,
+            message: err?.message || 'Something went wrong!',
             type: NOTIFICATION_TYPE.ERROR,
             id: new Date().getTime()
           });
@@ -72,7 +72,7 @@ export const OauthSuccess = () => {
           })
           .catch((err) => {
             addNotification({
-              message: err,
+              message: err?.message || 'Something went wrong!',
               type: NOTIFICATION_TYPE.ERROR,
               id: new Date().getTime()
             });
@@ -97,7 +97,7 @@ export const OauthSuccess = () => {
           })
           .catch((err) => {
             addNotification({
-              message: err,
+              message: err?.message || 'Something went wrong!',
               type: NOTIFICATION_TYPE.ERROR,
               id: new Date().getTime()
             });
@@ -122,7 +122,7 @@ export const OauthSuccess = () => {
           })
           .catch((err) => {
             addNotification({
-              message: err,
+              message: err?.message || 'Something went wrong!',
               type: NOTIFICATION_TYPE.ERROR,
               id: new Date().getTime()
             });
@@ -147,7 +147,7 @@ export const OauthSuccess = () => {
           })
           .catch((err) => {
             addNotification({
-              message: err,
+              message: err?.message || 'Something went wrong!',
               type: NOTIFICATION_TYPE.ERROR,
               id: new Date().getTime()
             });
@@ -183,7 +183,7 @@ export const OauthSuccess = () => {
         })
         .catch((err) => {
           addNotification({
-            message: err,
+            message: err?.message || 'Something went wrong!',
             type: NOTIFICATION_TYPE.ERROR,
             id: new Date().getTime()
           });
