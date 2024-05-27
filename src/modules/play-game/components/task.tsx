@@ -101,53 +101,56 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 is_checkin_wallet && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
               }`}
               onClick={async () => {
-                if (!wallet) return;
-                setIsLoading(1);
-                const transactionPayload = beginCell()
-                  .storeUint(3850333806, 32)
-                  .storeUint(1, 64)
-                  .storeInt(0, 257)
-                  .storeAddress(Address.parse(wallet.account.address))
-                  .storeInt(1, 257)
-                  .endCell();
-                const messages = [
-                  {
-                    address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
-                    amount: '10000000',
-                    payload: transactionPayload.toBoc().toString('base64')
+                try {
+                  if (!wallet) return;
+                  setIsLoading(1);
+                  const transactionPayload = beginCell()
+                    .storeUint(3850333806, 32)
+                    .storeUint(1, 64)
+                    .storeInt(0, 257)
+                    .storeAddress(Address.parse(wallet.account.address))
+                    .storeInt(1, 257)
+                    .endCell();
+                  const messages = [
+                    {
+                      address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
+                      amount: '10000000',
+                      payload: transactionPayload.toBoc().toString('base64')
+                    }
+                  ];
+                  const transaction = {
+                    validUntil: Math.floor(Date.now() / 1000) + validUntil,
+                    // network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
+                    // from: wallet?.account?.address || '',
+                    messages: messages
+                  };
+                  const res = await tonConnectUI.sendTransaction(transaction);
+                  console.log('res', res);
+                  if (res) {
+                    const resOnboard = await OnboardingRepository.UpdateUserQuests({
+                      id: 1
+                    });
+                    if (resOnboard) {
+                      addNotification({
+                        message: 'Quest done!',
+                        type: NOTIFICATION_TYPE.SUCCESS,
+                        id: new Date().getTime()
+                      });
+                    } else {
+                      addNotification({
+                        message: 'Something went wrong! Try again later',
+                        type: NOTIFICATION_TYPE.ERROR,
+                        id: new Date().getTime()
+                      });
+                    }
+                    refetchQuest();
                   }
-                ];
-                const transaction = {
-                  validUntil: Math.floor(Date.now() / 1000) + validUntil,
-                  // network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
-                  // from: wallet?.account?.address || '',
-                  messages: messages
-                };
-                const res = await tonConnectUI.sendTransaction(transaction);
-                console.log('res', res);
-                if (res) {
+                } catch (err: any) {
                   addNotification({
-                    message: 'Checked in wallet successfully!',
+                    message: err?.message || 'Something went wrong',
                     type: NOTIFICATION_TYPE.SUCCESS,
                     id: new Date().getTime()
                   });
-                  const resOnboard = await OnboardingRepository.UpdateUserQuests({
-                    id: 5
-                  });
-                  if (resOnboard) {
-                    addNotification({
-                      message: 'Quest done!',
-                      type: NOTIFICATION_TYPE.SUCCESS,
-                      id: new Date().getTime()
-                    });
-                  } else {
-                    addNotification({
-                      message: 'Something went wrong! Try again later',
-                      type: NOTIFICATION_TYPE.ERROR,
-                      id: new Date().getTime()
-                    });
-                  }
-                  refetchQuest();
                 }
               }}
             >
