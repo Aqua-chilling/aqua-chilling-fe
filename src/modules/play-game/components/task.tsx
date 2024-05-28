@@ -1,39 +1,26 @@
-import { PrimaryButton } from '@/components/button/button.styled';
 import X from '@/assets/X.png';
-import telegram_icon from '@/assets/telegram-icon.svg';
-import nft1 from '@/assets/airdrop-detail/nft1.png';
-import nft2 from '@/assets/airdrop-detail/nft2.png';
-import nft3 from '@/assets/airdrop-detail/nft3.png';
-import nft4 from '@/assets/airdrop-detail/nft4.png';
 import { Wrapper } from './task.styled';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectDiscord, selectReferralCode, selectToken, selectTwitter } from '@/redux';
+import { selectToken } from '@/redux';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { useNotification } from '@/contexts/notification.context';
-import { Modal } from '@/components/modal/modal';
-import { selectTelegram } from '@/redux/telegram-id';
-import { CompletedIconSVG, getTwitterOauthUrl } from '@/modules/airdrop/hard';
 import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import WebApp from '@twa-dev/sdk';
-import { useNavigate } from 'react-router';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
-import { copyICONSVG } from '@/modules/airdrop-detail/components/referral-component/referral';
 import Token from '@/assets/aqua.png';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
 import { useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { ENVS } from '@/config';
-import { beginCell, toNano, Address } from '@ton/ton';
-import { validUntil } from '@/constants/app-constaints';
+import { beginCell, Address, toNano } from '@ton/ton';
+import { gasFee, getTwitterOauthUrl, validUntil } from '@/constants/app-constaints';
 import { useQuery } from 'react-query';
 export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => void; purchaseAqua: () => void }) => {
   const { userProfile } = useAccountInfoContext();
   const token = useSelector(selectToken);
-  const navigate = useNavigate();
   const [isLoading, setIsLoading] = React.useState(-1);
-  console.log('user', userProfile);
   const { data: userQuest, refetch: refetchQuest } = useQuery({
     queryKey: ['retrieveUserQuest', token],
     queryFn: () => OnboardingRepository.RetrieveUserQuests(),
@@ -41,30 +28,18 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
     refetchInterval: 5000,
     enabled: !!token
   });
-  console.log('userQuest', userQuest);
   const is_checkin_wallet = userQuest?.[0]?.status !== 0;
   const is_logged_in = userQuest?.[1]?.status !== 0;
   const is_buy_aqua = userQuest?.[2]?.status !== 0;
   const is_daily_invite = userQuest?.[3]?.status !== 0;
   const is_visit_aqua_web = userQuest?.[4]?.status !== 0;
-  const referral_code = useSelector(selectReferralCode);
+  const is_telegram_premium = userQuest?.[8]?.status !== 0;
   const isJoinedTelegram = userProfile?.telegramOnboard?.aquachilling;
   const isFollowed = userProfile?.twitterOnboard?.follows?.length > 0;
   const isRetweeded = userProfile?.twitterOnboard?.retweets?.length > 0;
-  const [tonConnectUI, setOptions] = useTonConnectUI();
+  const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
   const { addNotification } = useNotification();
-  const copy = () => {
-    addNotification({
-      message: 'Copied',
-      type: NOTIFICATION_TYPE.SUCCESS,
-      id: new Date().getTime()
-    });
-    navigator.clipboard.writeText(referral_code || '');
-  };
-  const onTelegramAuth = (user: any) => {
-    console.log('user', user);
-  };
   React.useEffect(() => {
     const ele = document.querySelector('#connect-telegram');
     const script = document.createElement('script');
@@ -74,7 +49,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
     script.setAttribute('data-telegram-login', 'aquachilling_verification_bot');
     script.setAttribute('data-size', 'large');
     script.setAttribute('data-userpic', 'false');
-    script.setAttribute('data-auth-url', 'https://api-game-test.aquachilling.com/v1/auth/telegram');
+    script.setAttribute('data-auth-url', `${ENVS.VITE_BASE_GAME_API}v1/auth/telegram`);
     script.setAttribute('data-request-access', 'write');
 
     ele?.appendChild(script);
@@ -97,7 +72,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             </div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                is_checkin_wallet && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
+                is_checkin_wallet && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
               }`}
               onClick={async () => {
                 try {
@@ -113,7 +88,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                   const messages = [
                     {
                       address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
-                      amount: '10000000',
+                      amount: toNano(gasFee)?.toString(),
                       payload: transactionPayload.toBoc().toString('base64')
                     }
                   ];
@@ -172,7 +147,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             </div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                is_logged_in && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
+                is_logged_in && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
               }`}
             >
               {!is_logged_in ? 'Start' : 'Completed'}
@@ -194,7 +169,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             </div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                is_buy_aqua && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
+                is_buy_aqua && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
               }`}
               onClick={purchaseAqua}
             >
@@ -217,7 +192,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             </div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                is_daily_invite && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
+                is_daily_invite && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
               }`}
               onClick={() => {
                 setStep(2);
@@ -239,7 +214,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             <div className='font-secondary font-medium text-xs text-[#FFFFFF]'>Visit Aquachilling website</div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                is_visit_aqua_web && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
+                is_visit_aqua_web && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
               }`}
               onClick={async () => {
                 window.open(window.location.origin, '_blank');
@@ -278,7 +253,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             <div className='font-secondary font-medium text-xs text-[#FFFFFF]'>Follow us on X</div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                isFollowed && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
+                isFollowed && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
               }`}
             >
               {userProfile?.twitter ? (
@@ -324,64 +299,9 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             </div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                isRetweeded && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
+                isRetweeded && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
               }`}
             >
-              {/* {userProfile?.telegram ? (
-                isJoinedTelegram ? (
-                  <div className='status-1'>Success</div>
-                ) : (
-                  <div
-                    className='status-0'
-                    onClick={() => {
-                      console.log('webApp', WebApp?.version);
-                      if (!WebApp?.initDataUnsafe?.user) window.open('https://t.me/aquachilling');
-                      else {
-                        WebApp.openTelegramLink('https://t.me/aquachilling');
-                      }
-                    }}
-                  >
-                    Join Telegram Channel
-                  </div>
-                )
-              ) : WebApp?.initDataUnsafe?.user?.id ? (
-                <div
-                  className='status-1'
-                  onClick={() => {
-                    const user = WebApp.initDataUnsafe;
-                    setIsLoading(10);
-                    OauthRepository.linkTelegramAccount({
-                      telegram_code: undefined,
-                      id: user.user?.id,
-                      first_name: user.user?.first_name,
-                      last_name: user.user?.last_name,
-                      auth_date: user.auth_date,
-                      hash: user.hash
-                    })
-                      .then((rs) => {
-                        addNotification({
-                          message: 'Link telegram successfull',
-                          type: NOTIFICATION_TYPE.SUCCESS,
-                          id: new Date().getTime()
-                        });
-                      })
-                      .catch((err) => {
-                        addNotification({
-                          message: err,
-                          type: NOTIFICATION_TYPE.ERROR,
-                          id: new Date().getTime()
-                        });
-                      })
-                      .finally(() => {
-                        setIsLoading(-1);
-                      });
-                  }}
-                >
-                  Link Telegram {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />}
-                </div>
-              ) : (
-                <div className='connect-telegram' id='connect-telegram'></div>
-              )} */}
               {userProfile?.twitter ? (
                 isRetweeded ? (
                   <div className='flex items-center gap-1'>Completed</div>
@@ -425,7 +345,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             </div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                isJoinedTelegram && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
+                isJoinedTelegram && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]   cursor-default             '
               }`}
             >
               {userProfile?.telegram ? (
@@ -503,12 +423,10 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
               Use Telegram Premium
             </div>
             <div
-              className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                false && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33]                '
-              }`}
+              className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${'!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default'}`}
             >
-              <div className='connect-telegram' id='connect-telegram'></div>
-              <div className='connect-telegram-text-tg'>Start</div>
+              {' '}
+              {is_telegram_premium ? <div className=''>Completed</div> : 'Incompleted'}
             </div>
           </div>
         </div>

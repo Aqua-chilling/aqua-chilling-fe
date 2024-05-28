@@ -8,6 +8,7 @@ import { TonConnectButton, useTonWallet } from '@tonconnect/ui-react';
 
 export const PopUpLogin = () => {
   const { tonConnectUI, isLoading } = useTonWalletContext();
+  
   return (
     <Wrapper>
       <div className='login-content'>

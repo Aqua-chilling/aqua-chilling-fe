@@ -66,7 +66,7 @@ export const BuyAqua = ({
           </>
         )}
 
-        {type === 1 && step === 1 && (
+        {/* {type === 1 && step === 1 && (
           <>
             <div className='buy-title'>Buy AQUA Token</div>
             <div className='buy-input'>
@@ -105,7 +105,7 @@ export const BuyAqua = ({
               OK
             </div>
           </>
-        )}
+        )} */}
       </div>
     </Wrapper>
   );

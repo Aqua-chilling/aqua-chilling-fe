@@ -74,12 +74,14 @@ export const Referral = ({ data }: any) => {
           leaderboard?.map((item: any, key: number) => {
             return (
               <div className='table-row' key={key}>
-                <div className='rank'>{item?.rank}</div>
+                <div className={`rank rank-${item.rank}`}>
+                  <div>{item?.rank}</div>
+                </div>
                 <div className='table-info'>
-                  <div className='address'>{item?.address}</div>
+                  <div className='address'>{item?.email || item?.address || '...'}</div>
                   <div className='info-point flex items-center gap-1'>
                     <div className=''>{item?.referral_point}</div>
-                    <div className='total-point'>{item?.point}</div>
+                    <div className=''>{item?.point}</div>
                   </div>
                 </div>
               </div>

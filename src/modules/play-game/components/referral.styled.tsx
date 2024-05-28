@@ -1,6 +1,9 @@
 import styled from 'styled-components';
 import infoBg from '@/assets/airdrop/info-bg.png';
 import buttonBg from '@/assets/airdrop/button-bg.png';
+import rank1 from '@/assets/game/rank-1.png';
+import rank2 from '@/assets/game/rank-2.png';
+import rank3 from '@/assets/game/rank-3.png';
 export const Wrapper = styled.div`
   width: 100%;
   height: 100%;
@@ -182,12 +185,39 @@ export const Wrapper = styled.div`
       display: flex;
       align-items: start;
       flex-direction: column;
-      span {
-        color: rgba(255, 255, 255, 0.7);
+      justify-content: center;
+      > div {
+        color: #ffffff;
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
+        height: 40px;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      &.rank-1 {
+        > div {
+          background: url(${rank1});
+          background-size: cover;
+          background-position: center center;
+        }
+      }
+      &.rank-2 {
+        > div {
+          background: url(${rank2});
+          background-size: cover;
+          background-position: center center;
+        }
+      }
+      &.rank-3 {
+        > div {
+          background: url(${rank3});
+          background-size: cover;
+          background-position: center center;
+        }
       }
     }
     .table-info {

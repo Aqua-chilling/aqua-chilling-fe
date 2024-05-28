@@ -11,7 +11,6 @@ interface IPropsUseBuyAqua {
 }
 export const useBuyAqua = (props: IPropsUseBuyAqua) => {
   const { addNotification } = useNotification();
-  const { sendMessage } = usePlayGame();
   const [tonConnectUI, setOptions] = useTonConnectUI();
   const [isLoading, setIsLoading] = useState(false);
   const { transaction, onBuySuccess } = props;
@@ -27,13 +26,15 @@ export const useBuyAqua = (props: IPropsUseBuyAqua) => {
           type: NOTIFICATION_TYPE.SUCCESS,
           id: new Date().getTime()
         });
-        console.log('ressss', res);
         onBuySuccess();
       }
-      console.log('res', res);
       setIsLoading(false);
-    } catch (err) {
-      console.log(err, 'errrrrrrrrrrrr');
+    } catch (err: any) {
+      addNotification({
+        message: err?.message || 'Something went wrong!',
+        type: NOTIFICATION_TYPE.ERROR,
+        id: new Date().getTime()
+      });
       setIsLoading(false);
     }
   }, [transaction]);
