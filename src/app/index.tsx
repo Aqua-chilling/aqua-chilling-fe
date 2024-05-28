@@ -28,7 +28,7 @@ export const App = () => {
         <CredentialProvider>
           <QueryClientProvider client={queryClient}>
             <TonConnectUIProvider
-              manifestUrl='https://test.aquachilling.com/tonconnect-manifest.json'
+              manifestUrl={`${window.location.origin}/tonconnect${!ENVS.VITE_ISTESTNET && '-mainnet'}-manifest.json`}
               uiPreferences={{ theme: THEME.DARK }}
               walletsListConfiguration={{
                 includeWallets: [
