@@ -1,24 +1,10 @@
 import { Wrapper } from './airdrop-quest.styled';
-import Deposit from '@/assets/deposit.png';
-import Withdraw from '@/assets/withdraw.png';
-import Swap from '@/assets/swap.png';
-import ETH from '@/assets/eth.png';
-import Aqua from '@/assets/wallet/aqua.png';
-import Gem from '@/assets/wallet/gem.png';
-import HeaderBg from '@/assets/wallet/header-bg.png';
 import CloseIcon from '@/assets/wallet/close.png';
-import Copy from '@/assets/wallet/copy.png';
 import React, { useEffect, useState } from 'react';
-import { BuyAqua } from './buy-aqua';
-import { useStateCallback } from '@/hooks/use-on-off';
-import { useTonAddress } from '@tonconnect/ui-react';
-import { useNotification } from '@/contexts/notification.context';
 import Logo from '@/assets/airdrop/logo.png';
 import TabIcon from '@/assets/airdrop/tab-icon.png';
-import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import Back from '@/assets/airdrop/back.png';
 import { Task } from './task';
-import { Leaderboard } from './leaderboard';
 import { Referral } from './referral';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
 const titleList = ['Airdrop quest', 'Quest list', 'Referrals'];
@@ -32,10 +18,7 @@ export const AirdropQuests = ({
   typeId: number;
 }) => {
   const [step, setStep] = useState(typeId === 1 ? 1 : 0);
-  const { addNotification } = useNotification();
-  const userAddress = useTonAddress();
   const { userProfile } = useAccountInfoContext();
-  console.log('userAddress', userAddress);
   useEffect(() => {
     if (typeId === 1) {
       setStep(1);

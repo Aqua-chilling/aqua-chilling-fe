@@ -20,7 +20,7 @@ export const createTransaction = (wallet: any, packID: number, amount: number, p
   console.log(_amount);
   const messages = [
     {
-      address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
+      address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT,
       amount: _amount,
       payload: transactionPayload.toBoc().toString('base64')
     }
