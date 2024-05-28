@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectToken } from '@/redux';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
-import Token from '@/assets/aqua.png';
+import Token from '@/assets/wallet/aqua.png';
 import Shell from '@/assets/shell.png';
 import { useQuery } from 'react-query';
 
