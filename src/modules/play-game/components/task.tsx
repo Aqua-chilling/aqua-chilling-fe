@@ -10,7 +10,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
 import WebApp from '@twa-dev/sdk';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
-import Token from '@/assets/aqua.png';
+import Token from '@/assets/wallet/aqua.png';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
 import { useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { ENVS } from '@/config';

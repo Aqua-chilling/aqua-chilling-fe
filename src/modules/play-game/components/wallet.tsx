@@ -4,7 +4,7 @@ import Deposit from '@/assets/deposit.png';
 import Withdraw from '@/assets/withdraw.png';
 import Swap from '@/assets/swap.png';
 import ETH from '@/assets/eth.png';
-import Aqua from '@/assets/aqua.png';
+import Aqua from '@/assets/wallet/aqua.png';
 
 export const Wallet = () => {
   return (

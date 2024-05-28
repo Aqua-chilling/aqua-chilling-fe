@@ -1,5 +1,5 @@
 import { Wrapper } from './earn.styled';
-import Aqua from '@/assets/aqua.png';
+import Aqua from '@/assets/wallet/aqua.png';
 import ArrowDown from '@/assets/arrow-down.png';
 export const Earn = () => {
   return (
