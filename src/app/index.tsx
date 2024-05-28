@@ -22,14 +22,16 @@ const queryClient = new QueryClient();
 let persistor = persistStore(store);
 
 export const App = () => {
-  console.log(`${window.location.origin}tonconnect${!ENVS.VITE_ISTESTNET && '-mainnet'}-manifest.json`);
+  console.log(`${window.location.origin}/tonconnect${!ENVS.VITE_ISTESTNET ? '-mainnet' : ''}-manifest.json`);
   return (
     <ProviderRedux store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <CredentialProvider>
           <QueryClientProvider client={queryClient}>
             <TonConnectUIProvider
-              manifestUrl={`${window.location.origin}tonconnect${!ENVS.VITE_ISTESTNET && '-mainnet'}-manifest.json`}
+              manifestUrl={`${window.location.origin}/tonconnect${
+                !ENVS.VITE_ISTESTNET ? '-mainnet' : ''
+              }-manifest.json`}
               uiPreferences={{ theme: THEME.DARK }}
               walletsListConfiguration={{
                 includeWallets: [
