@@ -47,7 +47,7 @@ export const OauthSuccess = () => {
         })
         .catch((err) => {
           addNotification({
-            message: err,
+            message: err?.message || 'Something went wrong!',
             type: NOTIFICATION_TYPE.ERROR,
             id: new Date().getTime()
           });
@@ -72,7 +72,7 @@ export const OauthSuccess = () => {
           })
           .catch((err) => {
             addNotification({
-              message: err,
+              message: err?.message || 'Something went wrong!',
               type: NOTIFICATION_TYPE.ERROR,
               id: new Date().getTime()
             });
@@ -97,7 +97,7 @@ export const OauthSuccess = () => {
           })
           .catch((err) => {
             addNotification({
-              message: err,
+              message: err?.message || 'Something went wrong!',
               type: NOTIFICATION_TYPE.ERROR,
               id: new Date().getTime()
             });
@@ -122,7 +122,7 @@ export const OauthSuccess = () => {
           })
           .catch((err) => {
             addNotification({
-              message: err,
+              message: err?.message || 'Something went wrong!',
               type: NOTIFICATION_TYPE.ERROR,
               id: new Date().getTime()
             });
@@ -147,7 +147,7 @@ export const OauthSuccess = () => {
           })
           .catch((err) => {
             addNotification({
-              message: err,
+              message: err?.message || 'Something went wrong!',
               type: NOTIFICATION_TYPE.ERROR,
               id: new Date().getTime()
             });
@@ -156,6 +156,13 @@ export const OauthSuccess = () => {
       }
     }
     if (id) {
+      addNotification({
+        message: 'TELEGRAM CHECK',
+        type: NOTIFICATION_TYPE.SUCCESS,
+        id: new Date().getTime()
+      });
+      dispatch(updateTelegramId({ telegram: id }));
+      navigate('/game?id=1');
       OauthRepository.linkTelegramAccount({
         telegram_code: telegram_code,
         id: id,
@@ -176,7 +183,7 @@ export const OauthSuccess = () => {
         })
         .catch((err) => {
           addNotification({
-            message: err,
+            message: err?.message || 'Something went wrong!',
             type: NOTIFICATION_TYPE.ERROR,
             id: new Date().getTime()
           });

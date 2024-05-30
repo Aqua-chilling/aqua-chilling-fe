@@ -6,7 +6,6 @@ import { QueryClientProvider } from 'react-query';
 import { ThirdwebProvider } from '@thirdweb-dev/react';
 import { QueryClient } from 'react-query';
 
-
 import { RouterProvider } from '@/providers/router.provider';
 import { ENVS } from '@/config';
 // import { LoadingProvider } from '@/providers/loading.provider';
@@ -18,17 +17,21 @@ import { NotificationProvider } from '@/contexts/notification.context';
 import { THEME, TonConnectUIProvider } from '@tonconnect/ui-react';
 import { CredentialProvider } from '@/providers/credential.provider';
 import { TonWalletContextProvider } from '@/contexts/ton-wallet.context';
+import { AccountInfoContextProvider } from '@/contexts/account-info.context';
 const queryClient = new QueryClient();
 let persistor = persistStore(store);
 
 export const App = () => {
+  console.log(`${window.location.origin}/tonconnect${!ENVS.VITE_ISTESTNET ? '-mainnet' : ''}-manifest.json`);
   return (
     <ProviderRedux store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <CredentialProvider>
           <QueryClientProvider client={queryClient}>
             <TonConnectUIProvider
-              manifestUrl='https://test.aquachilling.com/tonconnect-manifest.json'
+              manifestUrl={`${window.location.origin}/tonconnect${
+                !ENVS.VITE_ISTESTNET ? '-mainnet' : ''
+              }-manifest.json`}
               uiPreferences={{ theme: THEME.DARK }}
               walletsListConfiguration={{
                 includeWallets: [
@@ -53,6 +56,7 @@ export const App = () => {
                 ]
               }}
               actionsConfiguration={{
+                returnStrategy: 'back',
                 twaReturnUrl: 'https://t.me/aquachillingbot'
               }}
             >
@@ -60,7 +64,9 @@ export const App = () => {
               {/* {window.innerWidth > 780 && <CustomCurSor />} */}
               <NotificationProvider>
                 <TonWalletContextProvider>
-                  <RouterProvider>{<LoadingProvider />}</RouterProvider>
+                  <AccountInfoContextProvider>
+                    <RouterProvider>{<LoadingProvider />}</RouterProvider>
+                  </AccountInfoContextProvider>
                 </TonWalletContextProvider>
               </NotificationProvider>
             </TonConnectUIProvider>
