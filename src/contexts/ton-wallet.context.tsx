@@ -63,16 +63,16 @@ export const TonWalletContextProvider = ({ children }: { children: any }) => {
           dispatch(deleteAccount());
           return;
         }
-        // if (w.account?.chain !== activeChain) {
-        //   dispatch(deleteAccount());
-        //   tonConnectUI.disconnect();
-        //   addNotification({
-        //     message: `Invalid chain. Please switch to TON ${activeChainName}`,
-        //     type: NOTIFICATION_TYPE.ERROR,
-        //     id: new Date().getTime()
-        //   });
-        //   return;
-        // }
+        if (w.account?.chain !== activeChain) {
+          dispatch(deleteAccount());
+          tonConnectUI.disconnect();
+          addNotification({
+            message: `Invalid chain. Please switch to TON ${activeChainName}`,
+            type: NOTIFICATION_TYPE.ERROR,
+            id: new Date().getTime()
+          });
+          return;
+        }
 
         if (w.connectItems?.tonProof && 'proof' in w.connectItems.tonProof) {
           setIsLoading(true);
