@@ -71,7 +71,6 @@ export const TonWalletContextProvider = ({ children }: { children: any }) => {
           return;
         }
         // if (w.account?.chain !== activeChain) {
-        //   console.log('invalid chain', activeChain, w.account?.chain);
         //   dispatch(deleteAccount());
         //   tonConnectUI.disconnect();
         //   addNotification({
