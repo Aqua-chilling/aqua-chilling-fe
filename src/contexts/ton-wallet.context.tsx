@@ -33,9 +33,12 @@ export const TonWalletContextProvider = ({ children }: { children: any }) => {
       tonConnectUI.setConnectRequestParameters({ state: 'loading' });
       firstProofLoading.current = false;
     }
+    console.log('debug1');
 
     const payload = await OauthRepository.generateTonPayload();
+    console.log('payload', payload);
     if (payload) {
+      console.log('update ton');
       tonConnectUI.setConnectRequestParameters({
         state: 'ready',
         value: {
@@ -54,12 +57,16 @@ export const TonWalletContextProvider = ({ children }: { children: any }) => {
   useEffect(
     () =>
       tonConnectUI.onStatusChange(async (w) => {
+        console.log('hi', w);
         const activeChain = ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
         const activeChainName = ENVS.VITE_ISTESTNET ? 'Testnet' : 'Mainnet';
+        console.log('activeChian', activeChainName, activeChain);
         if (!isConnectionRestored) {
+          console.log('!isConnectionRestored');
           return;
         }
         if (!w) {
+          console.log('!w');
           dispatch(deleteAccount());
           return;
         }
@@ -86,6 +93,8 @@ export const TonWalletContextProvider = ({ children }: { children: any }) => {
               state_init: account.walletStateInit
             }
           };
+
+          console.log('tonProof', tonProof);
           OauthRepository.oauthTon(tonProof)
             .then((tonOauthResponse) => {
               if (tonOauthResponse?.token) {
@@ -147,6 +156,7 @@ export const TonWalletContextProvider = ({ children }: { children: any }) => {
               setIsLoading(false);
             });
         } else {
+          console.log('invalid proof');
           addNotification({
             message: 'Sign with TON failed',
             type: NOTIFICATION_TYPE.ERROR,
@@ -182,6 +192,7 @@ export const TonWalletContextProvider = ({ children }: { children: any }) => {
 
   const signIn = useCallback(async () => {
     if (!wallet) {
+      console.log('!w');
       dispatch(deleteAccount());
       return;
     }
@@ -196,6 +207,8 @@ export const TonWalletContextProvider = ({ children }: { children: any }) => {
           state_init: account.walletStateInit
         }
       };
+
+      console.log('tonProof', tonProof);
       OauthRepository.oauthTon(tonProof)
         .then((tonOauthResponse) => {
           if (tonOauthResponse?.token) {
@@ -254,6 +267,7 @@ export const TonWalletContextProvider = ({ children }: { children: any }) => {
           tonConnectUI.disconnect();
         });
     } else {
+      console.log('invalid proof');
       addNotification({
         message: 'Sign with TON failed',
         type: NOTIFICATION_TYPE.ERROR,
@@ -286,6 +300,7 @@ export const TonWalletContextProvider = ({ children }: { children: any }) => {
   }, [wallet]);
 
   const signOut = useCallback(async () => {
+    console.log('ton', tonConnectUI.connected);
     if (tonConnectUI.connected) {
       await tonConnectUI.disconnect();
     }

@@ -12,8 +12,6 @@ interface IENVS {
   VITE_DISTRIBUTER_CONTRACT: string;
   VITE_ISTESTNET: boolean;
   VITE_BASE_PACKAGE_TON_CONTRACT: string;
-  VITE_BASE_BRIDGE_CONTRACT: string;
-  VITE_BASE_GAME_DOMAIN: string;
 }
 
 const defaultEnvs: IENVS = {
@@ -25,10 +23,8 @@ const defaultEnvs: IENVS = {
   VITE_DISTRIBUTER_CONTRACT: '',
   VITE_NFT_CONTRACT: '',
   VITE_SELLER_CONTRACT: '',
-  VITE_BASE_PACKAGE_TON_CONTRACT: '',
-  VITE_BASE_BRIDGE_CONTRACT: '',
+  VITE_BASE_PACKAGE_TON_CONTRACT :  '',
   VITE_ISTESTNET: true,
-  VITE_BASE_GAME_DOMAIN: ''
 };
 
 export const getEnvs = () => {
