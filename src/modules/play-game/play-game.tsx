@@ -117,7 +117,13 @@ export const GamePlay = () => {
       )}
       {isShowBuyModal && (
         <Modal control={isShowBuyModal} setControl={setIsShowBuyModal} isShowClose={false}>
-          <BuyModal setPack={(pack: any) => setPack(pack)} setIsBuy={(isB: boolean) => setIsBuy(isB)} />
+          <BuyModal
+            setPack={(pack: any) => setPack(pack)}
+            setIsBuy={(isB: boolean) => setIsBuy(isB)}
+            onClose={() => {
+              setIsShowBuyModal(false);
+            }}
+          />
         </Modal>
       )}
 

@@ -99,23 +99,25 @@ export const UserWallet = ({ onClose, purchaseAqua }: { onClose: () => void; pur
                 </div>
                 <span>SHELL</span>
               </div>
-              <div className='wallet-button' onClick={purchaseAqua}>
-                Earn more SHELL
-              </div>
-              <div className='wallet-border'></div>
-              <div
-                className='wallet-subbutton'
-                onClick={() => {
-                  setBuyInfo(
-                    {
-                      type: 0,
-                      step: 0
-                    },
-                    () => setIsBuy(true)
-                  );
-                }}
-              >
-                What is SHELL?
+              <div className='w-full flex items-center justify-between gap-4'>
+                {' '}
+                <div className='wallet-button' onClick={purchaseAqua}>
+                  Earn more SHELL
+                </div>
+                <div
+                  className='wallet-subbutton'
+                  onClick={() => {
+                    setBuyInfo(
+                      {
+                        type: 0,
+                        step: 0
+                      },
+                      () => setIsBuy(true)
+                    );
+                  }}
+                >
+                  What is SHELL?
+                </div>
               </div>
             </div>
             <div className='wallet-card'>
@@ -131,23 +133,24 @@ export const UserWallet = ({ onClose, purchaseAqua }: { onClose: () => void; pur
                 </div>
                 <span>AQUA</span>
               </div>
-              <div className='wallet-button' onClick={purchaseAqua}>
-                Buy AQUA token
-              </div>
-              <div className='wallet-border'></div>
-              <div
-                className='wallet-subbutton'
-                onClick={() => {
-                  setBuyInfo(
-                    {
-                      type: 1,
-                      step: 0
-                    },
-                    () => setIsBuy(true)
-                  );
-                }}
-              >
-                What is AQUA Token?
+              <div className='w-full flex items-center justify-between gap-4'>
+                <div className='wallet-button' onClick={purchaseAqua}>
+                  Buy AQUA token
+                </div>
+                <div
+                  className='wallet-subbutton'
+                  onClick={() => {
+                    setBuyInfo(
+                      {
+                        type: 1,
+                        step: 0
+                      },
+                      () => setIsBuy(true)
+                    );
+                  }}
+                >
+                  What is AQUA Token?
+                </div>
               </div>
             </div>
           </div>
