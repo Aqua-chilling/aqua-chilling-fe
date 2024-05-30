@@ -38,9 +38,15 @@ export const BuyModal = ({ setPack, setIsBuy }: { setPack: any; setIsBuy: (isBuy
   }, [packAquas]);
 
   return (
-    <>
-      <div className='buy-modal'>
-        <img src={BuyModalBg} alt='' className='buy-background' />
+    <div className='buy-modal'>
+      <div className='buy-modal-bg'>
+        <img src={ModalBg} alt='' />
+      </div>
+      <div className='close' onClick={onClose}>
+        <div dangerouslySetInnerHTML={{ __html: CloseIconSVG }}></div>
+      </div>
+      <img src={BuyModalBg} alt='' className='buy-background' />
+      <div className='buy-content'>
         <img src={BuyBgs} alt='' className='buy-background-mb' />
         <div className='px-4 relative z-[1]'>
           <div className='buy-content'>
@@ -124,6 +130,6 @@ export const BuyModal = ({ setPack, setIsBuy }: { setPack: any; setIsBuy: (isBuy
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };

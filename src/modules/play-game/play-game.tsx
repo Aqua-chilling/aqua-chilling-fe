@@ -28,7 +28,6 @@ function iframe() {
 export const GamePlay = () => {
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
   const [isShowAirdropQuestLogin, setIsShowAirdropQuestLogin] = React.useState(false);
-  const [isShowWallet, setIsShowWallet] = React.useState(false);
   const [searchParams] = useSearchParams();
   const typeId = searchParams.get('id');
   const ref = searchParams.get('ref');
@@ -52,9 +51,6 @@ export const GamePlay = () => {
   useEffect(() => {
     WebApp.expand();
     WebApp.enableClosingConfirmation();
-    if (WebApp.initDataUnsafe?.user?.id) {
-      dispatch(updateTelegramId({ telegram: WebApp.initDataUnsafe?.user?.id.toString() }));
-    }
     if (Number(typeId) !== 1) {
       signTokenOut();
     }

@@ -53,7 +53,4 @@ export const FixedGlobalStyle = createGlobalStyle`
         gap: 12px;
         
     }
-    .font-secondary{
-        font-family: 'Fredoka';
-    }
 `;
