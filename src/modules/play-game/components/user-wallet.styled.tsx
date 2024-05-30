@@ -61,7 +61,7 @@ export const Wrapper = styled.div`
     .wallet-info {
       width: 100%;
       background: #0c2449;
-      padding: 16px 27px;
+      padding: 16px 12px;
       border-radius: 0px 0px 24px 24px;
       margin-top: -7px;
       .wallet-title {
@@ -100,6 +100,7 @@ export const Wrapper = styled.div`
         width: 100%;
         display: flex;
         gap: 16px;
+        flex-direction: column;
         .wallet-card {
           padding: 16px;
           background: #143464;
@@ -109,7 +110,7 @@ export const Wrapper = styled.div`
           align-items: flex-start;
           flex: 1;
           img {
-            height: 80px;
+            height: 40px;
             width: auto;
           }
           .wallet-subtitle {
@@ -120,7 +121,7 @@ export const Wrapper = styled.div`
             letter-spacing: -0.02em;
             text-align: left;
             color: #ffffff;
-            margin-top: 48px;
+            margin-top: 10px;
           }
           .wallet-value {
             font-family: 'Fredoka';

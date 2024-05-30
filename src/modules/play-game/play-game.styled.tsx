@@ -240,6 +240,22 @@ export const Wrapper = styled.div`
     max-width: 1200px;
     position: relative;
     overflow: visible;
+    .close-buy-aqua {
+      position: absolute;
+      z-index: 2;
+      top: -32px;
+      right: -15px;
+      width: 72px;
+      img {
+        width: 100%;
+      }
+      cursor: pointer;
+      transition: all 0.3s;
+      &:hover {
+        transform: scale(1.01);
+        opacity: 0.8;
+      }
+    }
     .buy-background-mb {
       position: absolute;
       width: calc(100% + 90px);
