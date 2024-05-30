@@ -1,55 +1,60 @@
-import { useDispatch, useSelector } from 'react-redux';
-import close from '@/assets/airdrop-detail/close.png';
-import nft1 from '@/assets/airdrop/triden 1.jpg';
+import { useSelector } from 'react-redux';
 import { Wrapper } from './play-game.styled';
-import React, { useEffect, useMemo } from 'react';
-import { deleteAccount, selectToken, updateDiscordId, updateReferral, updateTwitterId } from '@/redux';
+import React, { useEffect, useState } from 'react';
+import { selectToken, updateReferral } from '@/redux';
 import { PopUpLogin } from './components/popup-login';
 import { Modal } from '@/components/modal/modal';
 import { usePlayGame } from '@/hooks/use-play-game';
 import { COMMUNICATIONFUNCTION } from '@/constants/app-constaints';
-import { useNotification } from '@/contexts/notification.context';
-import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import WebApp from '@twa-dev/sdk';
-import { AirdropDetail } from '../airdrop-detail/airdrop-detail';
-import { useTonConnectUI } from '@tonconnect/ui-react';
 import { BuyModal } from './components/buy-modal';
-import { useQuery } from 'react-query';
-import useLocalStorage from 'use-local-storage';
-import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
-import { PurchaseCard } from './components/purchase-card';
-import { CloseIconSVG } from '../airdrop/hard';
 import { useTonWalletContext } from '@/contexts/ton-wallet.context';
 import { useSearchParams } from 'react-router-dom';
+import { updateTelegramId } from '@/redux/telegram-id';
+import { dispatch } from '@/app/store';
+import { UserWallet } from './components/user-wallet';
+import { AirdropQuests } from './components/airdrop-quest';
+import { BuyPopup } from './components/buy-popup';
+import { useStateCallback } from '@/hooks/use-on-off';
+import { OauthRepository } from '@/repositories/oauth/oauth.repository';
+import { useAccountInfoContext } from '@/contexts/account-info.context';
+import { ENVS } from '@/config';
 
 function iframe() {
   return {
-    __html: '<iframe src="https://game-test.aquachilling.com/" id="game-iframeID"></iframe>'
+    __html: `<iframe src=${ENVS.VITE_BASE_GAME_DOMAIN} frameborder="0" id="game-iframeID" frame ></iframe>`
   };
 }
 export const GamePlay = () => {
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
   const [isShowAirdropQuestLogin, setIsShowAirdropQuestLogin] = React.useState(false);
+  const [isShowWallet, setIsShowWallet] = React.useState(false);
   const [searchParams] = useSearchParams();
   const typeId = searchParams.get('id');
-  console.log('typeId', typeId);
+  const ref = searchParams.get('ref');
   const [isShowBuyModal, setIsShowBuyModal] = React.useState(false);
   const token = useSelector(selectToken);
   const { gameMessage, sendMessage, setGameMessage } = usePlayGame();
   const { signTokenOut, tonConnectUI } = useTonWalletContext();
-  const { data: userPack } = useQuery({
-    queryKey: ['retrieveuserPack', token, gameMessage],
-    queryFn: () => OnboardingRepository.RetrieveUserPackages(),
-    retry: false,
-    refetchInterval: 5000,
-    enabled: !!token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_BUY_PACK
-  });
-  console.log('userPack', userPack);
-  console.log('gameMessage', gameMessage);
+  const { userProfile } = useAccountInfoContext();
+  React.useEffect(() => {
+    if (ref && !!token && userProfile?.referral_code_status !== 1) {
+      OauthRepository.enterReferralCode(ref).then((rs) => {
+        dispatch(
+          updateReferral({
+            referral_code: ref,
+            refreferral_code_status: rs.referral_code_status ?? 1
+          })
+        );
+      });
+    }
+  }, [ref, token, userProfile]);
   useEffect(() => {
-    console.log('disconnect');
     WebApp.expand();
     WebApp.enableClosingConfirmation();
+    if (WebApp.initDataUnsafe?.user?.id) {
+      dispatch(updateTelegramId({ telegram: WebApp.initDataUnsafe?.user?.id.toString() }));
+    }
     if (Number(typeId) !== 1) {
       signTokenOut();
     }
@@ -57,30 +62,27 @@ export const GamePlay = () => {
       setIsShowAirdropQuestLogin(true);
     }
   }, [typeId]);
-
-  console.log('tonConnectUI', tonConnectUI);
   useEffect(() => {
     if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST) {
       if (!token) {
         setIsShowPopupLogin(true);
       } else {
         setIsShowPopupLogin(false);
-        console.log('send thsi message', token);
         sendMessage(COMMUNICATIONFUNCTION.LOGIN_SUCCESS, token);
       }
     }
-    console.log('pack', userPack?.packs?.length);
-
     if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_QUEST) {
-      console.log('show', isShowAirdropQuestLogin);
       setIsShowAirdropQuestLogin(true);
     }
     if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_BUY_PACK) {
       setIsShowBuyModal(true);
     }
-    console.log('chan ');
-  }, [gameMessage, token, userPack?.packs?.length]);
-  console.log('isShow', isShowBuyModal);
+    if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_WALLET) {
+      setIsShowWallet(true);
+    }
+  }, [gameMessage, token]);
+  const [pack, setPack] = useStateCallback<any>(undefined);
+  const [isBuy, setIsBuy] = useState(false);
   return (
     <Wrapper>
       {isShowPopupLogin && (
@@ -94,36 +96,28 @@ export const GamePlay = () => {
         </Modal>
       )}
       {isShowAirdropQuestLogin && (
-        <Modal control={isShowAirdropQuestLogin} setControl={setIsShowAirdropQuestLogin} isShowClose={false}>
-          <div className='airdrop-wrapper'>
-            <div className='close-mobile' onClick={() => setIsShowAirdropQuestLogin(false)}>
-              <div dangerouslySetInnerHTML={{ __html: CloseIconSVG }}></div>
-            </div>
-            <AirdropDetail setControl={setIsShowAirdropQuestLogin} />
-            <img
-              src={close}
-              className='close-received'
-              alt=''
-              onClick={() => {
-                setIsShowAirdropQuestLogin(false);
-              }}
-            />
-          </div>
-        </Modal>
+        <AirdropQuests
+          onClose={() => {
+            setIsShowAirdropQuestLogin(false);
+          }}
+          purchaseAqua={() => {
+            setIsShowBuyModal(true);
+          }}
+          typeId={Number(typeId || 0)}
+        />
+      )}
+      {isBuy && <BuyPopup pack={pack} onClose={() => setIsBuy(false)} />}
+      {isShowWallet && (
+        <UserWallet
+          onClose={() => setIsShowWallet(false)}
+          purchaseAqua={() => {
+            setIsShowBuyModal(true);
+          }}
+        />
       )}
       {isShowBuyModal && (
         <Modal control={isShowBuyModal} setControl={setIsShowBuyModal} isShowClose={false}>
-          <BuyModal
-            onClose={() => {
-              console.log('click');
-              sendMessage(COMMUNICATIONFUNCTION.BUY_PACK, COMMUNICATIONFUNCTION.FAIL_PARAM);
-              setIsShowBuyModal(false);
-            }}
-            onBuySuccess={() => {
-              sendMessage(COMMUNICATIONFUNCTION.BUY_PACK, COMMUNICATIONFUNCTION.SUCCESS_PARAM);
-              setIsShowBuyModal(false);
-            }}
-          />
+          <BuyModal setPack={(pack: any) => setPack(pack)} setIsBuy={(isB: boolean) => setIsBuy(isB)} />
         </Modal>
       )}
 

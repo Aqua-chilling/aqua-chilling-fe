@@ -244,11 +244,20 @@ export const Section1 = () => {
               fontSize: '22px'
             }}
           >
-            Redefine P2E gaming experience on Ton Blockchain.
+            Claim up to $100 for every quest conquerer
           </Description>
           <div className='btns'>
             {/* <Magnifier /> */}
-            <PrimaryButton w={220}>Join Airdrop</PrimaryButton>
+            <div onClick={() => navigate('/airdrop')}>
+              <PrimaryButton w={220}>Join Quest</PrimaryButton>
+            </div>
+            <div
+              onClick={() => {
+                // navigate('/game');
+              }}
+            >
+              <SecondaryButton w={220}>Play game</SecondaryButton>
+            </div>
           </div>
         </div>
       </WrapperContent>
