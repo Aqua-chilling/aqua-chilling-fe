@@ -7,8 +7,17 @@ import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repos
 import Token from '@/assets/wallet/aqua.png';
 import Shell from '@/assets/shell.png';
 import { useQuery } from 'react-query';
+import CloseIcon from '@/assets/wallet/close.png';
 
-export const BuyModal = ({ setPack, setIsBuy }: { setPack: any; setIsBuy: (isBuy: boolean) => void }) => {
+export const BuyModal = ({
+  setPack,
+  setIsBuy,
+  onClose
+}: {
+  setPack: any;
+  setIsBuy: (isBuy: boolean) => void;
+  onClose: () => void;
+}) => {
   const activeTab = 1;
   const token = useSelector(selectToken);
   const [packAquasMaps, setPackAquasMaps] = useState<any>(undefined);
@@ -42,6 +51,14 @@ export const BuyModal = ({ setPack, setIsBuy }: { setPack: any; setIsBuy: (isBuy
       <div className='buy-modal'>
         <img src={BuyModalBg} alt='' className='buy-background' />
         <img src={BuyBgs} alt='' className='buy-background-mb' />
+        <div
+          className='close-buy-aqua'
+          onClick={() => {
+            onClose();
+          }}
+        >
+          <img src={CloseIcon} alt='' />
+        </div>
         <div className='px-4 relative z-[1]'>
           <div className='buy-content'>
             <div className='font-secondary text-[#061225] font-medium text-2xl mt-8 -mb-3'>Buy $AQUA</div>
@@ -50,7 +67,7 @@ export const BuyModal = ({ setPack, setIsBuy }: { setPack: any; setIsBuy: (isBuy
               <>
                 {packAquasMaps?.special?.map((packaqua: any, key: number) => {
                   return (
-                    <div className='special-package flex items-center flex-col w-full p-4 ' key={key}>
+                    <div className='special-package flex items-center flex-col w-full p-4 relative z-[2] ' key={key}>
                       <div className='font-secondary font-medium text-2xl text-[#FFFFFF] mb-2'>Starting package</div>
                       <div className='special-card flex items-center gap-1 px-2 py-[10px]'>
                         {packaqua?.reward?.map((reward: any, key1: number) => {
@@ -90,7 +107,7 @@ export const BuyModal = ({ setPack, setIsBuy }: { setPack: any; setIsBuy: (isBuy
                     </div>
                   );
                 })}
-                <div className='aqua-packages w-full px-2'>
+                <div className='aqua-packages w-full px-2 relative z-[2]'>
                   {packAquasMaps?.normal?.map((packAqua: any, key: number) => {
                     return (
                       <div className='aqua-package w-full px-2 py-[10px] flex flex-col items-center gap-4' key={key}>

@@ -28,7 +28,7 @@ function iframe() {
 export const GamePlay = () => {
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
   const [isShowAirdropQuestLogin, setIsShowAirdropQuestLogin] = React.useState(false);
-  const [isShowWallet, setIsShowWallet] = React.useState(false);
+  const [isShowWallet, setIsShowWallet] = React.useState(true);
   const [searchParams] = useSearchParams();
   const typeId = searchParams.get('id');
   const ref = searchParams.get('ref');
@@ -117,7 +117,13 @@ export const GamePlay = () => {
       )}
       {isShowBuyModal && (
         <Modal control={isShowBuyModal} setControl={setIsShowBuyModal} isShowClose={false}>
-          <BuyModal setPack={(pack: any) => setPack(pack)} setIsBuy={(isB: boolean) => setIsBuy(isB)} />
+          <BuyModal
+            setPack={(pack: any) => setPack(pack)}
+            setIsBuy={(isB: boolean) => setIsBuy(isB)}
+            onClose={() => {
+              setIsShowBuyModal(false);
+            }}
+          />
         </Modal>
       )}
 
