@@ -28,7 +28,7 @@ function iframe() {
 export const GamePlay = () => {
   const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
   const [isShowAirdropQuestLogin, setIsShowAirdropQuestLogin] = React.useState(false);
-  const [isShowWallet, setIsShowWallet] = React.useState(true);
+  const [isShowWallet, setIsShowWallet] = React.useState(false);
   const [searchParams] = useSearchParams();
   const typeId = searchParams.get('id');
   const ref = searchParams.get('ref');
