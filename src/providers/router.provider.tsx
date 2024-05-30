@@ -1,7 +1,5 @@
 import { Footer, Header, Loading } from '@/components';
 import { OauthSuccess } from '@/components/oauth-success/oauth-sucess';
-import { AirdropDetail } from '@/modules/airdrop-detail/airdrop-detail';
-import { AirDrop } from '@/modules/airdrop/airdrop';
 import { Earning } from '@/modules/earning/earning';
 import Home from '@/modules/home';
 import { MarketPlace } from '@/modules/marketplace/marketplace';
@@ -17,18 +15,10 @@ const elements = [
     Component: Home,
     path: '/'
   },
-  // {
-  //   Component: AirDrop,
-  //   path: '/airdrop'
-  // },
-  // {
-  //   Component: AirdropDetail,
-  //   path: '/airdrop/detail'
-  // },
-  // {
-  //   Component: MarketPlace,
-  //   path: '/marketplace'
-  // },
+  {
+    Component: MarketPlace,
+    path: '/marketplace'
+  },
   {
     Component: TermsOfService,
     path: '/terms-of-service'
@@ -44,6 +34,14 @@ const elements = [
   {
     Component: OauthSuccess,
     path: '/airdrop/oauth/success'
+  },
+  {
+    Component: Earning,
+    path: '/earning'
+  },
+  {
+    Component: GamePlay,
+    path: '/game'
   }
 ];
 

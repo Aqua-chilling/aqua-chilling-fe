@@ -122,7 +122,7 @@ export const Section2 = ({ setCurrentImg, setIsShowDetailImage }: any) => {
             />
           </div>
           <div className='section2-txt' ref={refTxt}>
-            <Title>Play for fun & dive deep in the ocean of TON rewards</Title>
+            <Title>Play for fun & dive deep in the ocean of ZKSYNC rewards</Title>
             <Description>
               {/* Unveil the Magic Underwater in SOLANA's GameFi Universe. Immerse yourself in a soothing idle adventure
               where you curate and nurture a vibrant array of fish, each thriving in real-time within your bespoke
