@@ -1,9 +1,14 @@
+import { ENVS } from '@/config';
 import { Address, Builder } from '@ton/core';
 
 export enum COMMUNICATIONTYPE {
   TOAPP = 'jsbridgeGAME2APP',
   TOGAME = 'jsbridgeAPP2GAME'
 }
+
+export const gasFee = 0.01;
+export const validUntil = 120;
+const s = 0;
 
 export enum COMMUNICATIONFUNCTION {
   LOGIN_REQUEST = 'CallLoginWallet',
@@ -33,3 +38,22 @@ export function storeBuyPack(src: BuyPack) {
     b_0.storeInt(src.amount, 257);
   };
 }
+export const TWITTER_CLIENT_ID = 'RWItdVY4cFFrOGxqTjJzdXk3ajM6MTpjaQ';
+export const getDiscordOauthUrl = () => {
+  return 'https://discord.com/api/oauth2/authorize?client_id=1217116791646584852&redirect_uri=https%3A%2F%2Fapi-game-test.aquachilling.com%2Fv1%2Fauth%2Fdiscord&response_type=code&scope=identify%20email';
+};
+
+export const getTwitterOauthUrl = () => {
+  const rootUrl = 'https://twitter.com/i/oauth2/authorize';
+  const options = {
+    redirect_uri: `${ENVS.VITE_BASE_GAME_API}v1/auth/twitter`,
+    client_id: TWITTER_CLIENT_ID,
+    state: 'state',
+    response_type: 'code',
+    code_challenge: 'nIEo9xKfSvb49Refywo6XT_DGZDATVw2SZzX8cX0iYQ',
+    code_challenge_method: 'S256',
+    scope: ['users.read', 'tweet.read', 'follows.read', 'follows.write'].join(' ')
+  };
+  const qs = new URLSearchParams(options).toString();
+  return `${rootUrl}?${qs}`;
+};

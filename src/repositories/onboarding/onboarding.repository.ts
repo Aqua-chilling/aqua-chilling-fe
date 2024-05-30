@@ -16,7 +16,7 @@ export class OnboardingRepository {
   static RetrieveLeaderboardList(): Promise<any> {
     return httpGame.post(`/bc/leaderboard`, {
       page: 0,
-      limit: 10
+      limit: 30
     });
   }
   static RetrieveReferralsHistory(): Promise<any> {
@@ -27,5 +27,14 @@ export class OnboardingRepository {
   }
   static RetrieveUserPackages(): Promise<any> {
     return httpGame.post(`/game/get_owned_pack`);
+  }
+  static RetrieveAquaPackages(): Promise<any> {
+    return httpGame.get(`/bc/shop-currency`);
+  }
+  static RetrieveUserQuests(): Promise<any> {
+    return httpGame.get(`/bc/bc-quest`);
+  }
+  static UpdateUserQuests(updateForm: any): Promise<any> {
+    return httpGame.post(`/bc/bc-update-quest`, updateForm);
   }
 }
