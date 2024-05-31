@@ -15,7 +15,7 @@ export const createTransaction = (wallet: any, packID: number, amount: number, p
     .storeInt(amount, 257)
     .endCell();
   console.log('packId', packID, price, amount);
-  const _amount = toNano((amount * price) / 10 + gasFee)?.toString();
+  const _amount = toNano(amount * price + gasFee)?.toString();
   console.log('_amount', _amount);
   console.log(_amount);
   const messages = [
