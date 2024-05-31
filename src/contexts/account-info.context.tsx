@@ -15,7 +15,8 @@ export const AccountInfoContextProvider = ({ children }: React.PropsWithChildren
     queryKey: ['retrieveProfile', token],
     queryFn: () => OauthRepository.getProfile(),
     retry: false,
-    enabled: !!token
+    enabled: !!token,
+    refetchInterval: 5000
   });
 
   const value = {
