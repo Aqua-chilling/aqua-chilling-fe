@@ -6,7 +6,7 @@ export enum COMMUNICATIONTYPE {
   TOGAME = 'jsbridgeAPP2GAME'
 }
 
-export const gasFee = 0.01;
+export const gasFee = 0.2;
 export const validUntil = 120;
 const s = 0;
 
