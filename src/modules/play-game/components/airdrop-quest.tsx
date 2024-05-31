@@ -18,7 +18,7 @@ export const AirdropQuests = ({
   typeId: number;
 }) => {
   const [step, setStep] = useState(typeId === 1 ? 1 : 0);
-  const { userProfile } = useAccountInfoContext();
+  const { userProfileLite } = useAccountInfoContext();
   useEffect(() => {
     if (typeId === 1) {
       setStep(1);
@@ -60,7 +60,7 @@ export const AirdropQuests = ({
               <img src={Logo} alt='' />
               <div className='left-label'>You have</div>
               <div className='left-value'>
-                {userProfile?.point?.toLocaleString(undefined, {
+                {userProfileLite?.point?.toLocaleString(undefined, {
                   minimumFractionDigits: 0,
                   maximumFractionDigits: 2
                 })}{' '}
