@@ -7,7 +7,7 @@ export enum COMMUNICATIONTYPE {
 }
 
 export const gasFee = 0.2;
-export const validUntil = 120;
+export const validUntil = 120 * 1000;
 const s = 0;
 
 export enum COMMUNICATIONFUNCTION {
