@@ -1,5 +1,6 @@
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { COMMUNICATIONFUNCTION } from '@/constants/app-constaints';
+import { useAccountInfoContext } from '@/contexts/account-info.context';
 import { useNotification } from '@/contexts/notification.context';
 import { usePlayGame } from '@/hooks/use-play-game';
 import { useTonConnectUI } from '@tonconnect/ui-react';
@@ -14,8 +15,8 @@ export const useBuyAqua = (props: IPropsUseBuyAqua) => {
   const [tonConnectUI, setOptions] = useTonConnectUI();
   const [isLoading, setIsLoading] = useState(false);
   const { transaction, onBuySuccess } = props;
+  const { setInterval } = useAccountInfoContext();
   const handleBuyAqua = useCallback(async () => {
-    console.log(transaction);
     try {
       setIsLoading(true);
       console.log('transaction', transaction);
@@ -27,6 +28,10 @@ export const useBuyAqua = (props: IPropsUseBuyAqua) => {
           id: new Date().getTime()
         });
         onBuySuccess();
+        setInterval(5000);
+        setTimeout(() => {
+          setInterval(20000);
+        }, 120000);
       }
       setIsLoading(false);
     } catch (err: any) {
@@ -37,7 +42,7 @@ export const useBuyAqua = (props: IPropsUseBuyAqua) => {
       });
       setIsLoading(false);
     }
-  }, [transaction]);
+  }, [transaction, setInterval]);
 
   return {
     isLoading,

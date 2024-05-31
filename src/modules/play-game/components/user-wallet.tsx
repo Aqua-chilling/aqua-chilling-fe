@@ -22,9 +22,8 @@ export const UserWallet = ({ onClose, purchaseAqua }: { onClose: () => void; pur
     step: 0
   });
   const { addNotification } = useNotification();
-  const { userProfile } = useAccountInfoContext();
+  const { userProfileLite } = useAccountInfoContext();
   const userAddress = useTonAddress();
-  console.log('userAddress', userAddress);
   return (
     <Wrapper>
       {isBuy && (
@@ -92,7 +91,7 @@ export const UserWallet = ({ onClose, purchaseAqua }: { onClose: () => void; pur
               <div className='wallet-subtitle'>SHELL balance</div>
               <div className='wallet-value'>
                 <div>
-                  {userProfile?.game_data?.globals?.money?.toLocaleString(undefined, {
+                  {userProfileLite?.money?.toLocaleString(undefined, {
                     minimumFractionDigits: 0,
                     maximumFractionDigits: 2
                   })}
@@ -126,7 +125,7 @@ export const UserWallet = ({ onClose, purchaseAqua }: { onClose: () => void; pur
               <div className='wallet-value'>
                 <div>
                   {' '}
-                  {userProfile?.point?.toLocaleString(undefined, {
+                  {userProfileLite?.point?.toLocaleString(undefined, {
                     minimumFractionDigits: 0,
                     maximumFractionDigits: 2
                   })}

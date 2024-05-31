@@ -20,6 +20,9 @@ export class OauthRepository {
   static getProfile(): Promise<ILoginResponse> {
     return httpGame.get(`/auth/profile`);
   }
+  static getProfileLite(): Promise<ILoginResponse> {
+    return httpGame.get(`/auth/profile-lite`);
+  }
   static linkXAccount(code: string): Promise<any> {
     return httpGame.post(`/bc/link-twitter`, { code: code });
   }

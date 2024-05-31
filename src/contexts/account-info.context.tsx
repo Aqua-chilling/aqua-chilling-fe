@@ -6,21 +6,38 @@ import { ENVS } from '@/config';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 export interface IAccountInfoContext {
   userProfile: any;
+  refetchProfile: () => void;
+  userProfileLite: any;
+  refetchProfileLite: () => void;
+  setInterval: (time: number) => void;
 }
 
 const AccountInfoContext = React.createContext<IAccountInfoContext | null>(null);
 export const AccountInfoContextProvider = ({ children }: React.PropsWithChildren) => {
+  const [interval, setInterval] = React.useState(15000);
   const token = useSelector(selectToken);
-  const { data: userProfile } = useQuery({
+  const { data: userProfile, refetch: refetchProfile } = useQuery({
     queryKey: ['retrieveProfile', token],
     queryFn: () => OauthRepository.getProfile(),
     retry: false,
     enabled: !!token,
-    refetchInterval: 5000
+    refetchInterval: 50000
+  });
+
+  const { data: userProfileLite, refetch: refetchProfileLite } = useQuery({
+    queryKey: ['retrieveProfileLite', token],
+    queryFn: () => OauthRepository.getProfileLite(),
+    retry: false,
+    enabled: !!token,
+    refetchInterval: interval
   });
 
   const value = {
-    userProfile
+    userProfile,
+    refetchProfile,
+    userProfileLite,
+    refetchProfileLite,
+    setInterval
   };
 
   return <AccountInfoContext.Provider value={value}>{children}</AccountInfoContext.Provider>;
