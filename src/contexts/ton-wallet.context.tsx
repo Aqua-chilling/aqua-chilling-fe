@@ -57,6 +57,11 @@ export const TonWalletContextProvider = ({ children }: { children: any }) => {
         const activeChain = ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
         const activeChainName = ENVS.VITE_ISTESTNET ? 'Testnet' : 'Mainnet';
         if (!isConnectionRestored) {
+          addNotification({
+            message: `Connection restored`,
+            type: NOTIFICATION_TYPE.ERROR,
+            id: new Date().getTime()
+          });
           return;
         }
         if (!w) {
