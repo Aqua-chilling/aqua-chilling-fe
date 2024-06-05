@@ -253,7 +253,7 @@ export const Section1 = () => {
             </div>
             <div
               onClick={() => {
-                // navigate('/game');
+                navigate('/game');
               }}
             >
               <SecondaryButton w={220}>Play game</SecondaryButton>
