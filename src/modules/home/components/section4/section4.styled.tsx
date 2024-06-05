@@ -53,6 +53,7 @@ export const Wrapper = styled.div`
       white-space: nowrap;
       position: relative;
       z-index: 2;
+      display: flex;
       img {
         width: 144px;
         height: 66px;

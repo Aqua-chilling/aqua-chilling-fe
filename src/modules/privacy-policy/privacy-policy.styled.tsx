@@ -9,6 +9,27 @@ export const Wrapper = styled.div`
   width: 100vw;
   background-color: #422433;
   flex-direction: column;
+  .header-text {
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+  }
+  .highlight-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    opacity: 0.9;
+  }
+  ul {
+    list-style-type: circle;
+    list-style-position: inside;
+  }
+  .new-line {
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+  }
 
   .bubble {
     position: absolute;

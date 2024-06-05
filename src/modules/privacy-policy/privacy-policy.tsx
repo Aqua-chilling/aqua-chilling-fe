@@ -18,12 +18,16 @@ export const PrivacyPolicy = () => {
       </div>
       <div className='terms-of-service'>
         <Title>Privacy Policy</Title>
+        <br />
+
         <p>
           This Privacy Policy describes how Aquachilling collects, uses and shares personal information in connection
           with its websites and services (collectively, the “Services”).
         </p>
-        <h3>Personal Information We Collect</h3>
-        <h4>Information you provide to us:</h4>
+        <br />
+        <h3 className='header-text'>Personal Information We Collect</h3>
+        <br />
+        <h4 className='highlight-text'>Information you provide to us:</h4>
         <ul>
           <li>
             Contact details and registration information, such as email address, username, and public contact
@@ -52,6 +56,7 @@ export const PrivacyPolicy = () => {
             otherwise disclosed at the time of collection.
           </li>
         </ul>
+        <br />
         <p>
           Third party sources. We may combine personal information we receive from you with personal information we
           obtain from other sources, such as:
@@ -79,6 +84,7 @@ export const PrivacyPolicy = () => {
             </li>
           </ul>
         </p>
+        <br />
         <p>
           Automatic data collection. We and our service providers may automatically log information about you, your
           computer or mobile device, and your interaction over time with the Services, our communications and other
@@ -99,7 +105,8 @@ export const PrivacyPolicy = () => {
             </li>
           </ul>
         </p>
-        <h3>We use the following tools for automatic data collection:</h3>
+        <br />
+        <h3 className='highlight-text'>We use the following tools for automatic data collection:</h3>
         <ul>
           <li>
             Cookies, which are text files that websites store on a visitor’s device to uniquely identify the visitor’s
@@ -116,7 +123,8 @@ export const PrivacyPolicy = () => {
             was accessed or opened, or that certain content was viewed or clicked.
           </li>
         </ul>
-        <h3>How We Use Personal Information</h3>
+        <br />
+        <h3 className='highlight-text'>How We Use Personal Information</h3>
         <p>
           We use your personal information for the following purposes:
           <ul>
@@ -139,6 +147,7 @@ export const PrivacyPolicy = () => {
             </li>
           </ul>
         </p>
+        <br />
         <p>
           <strong> Marketing and advertising. </strong>We may collect and use your personal information for marketing
           purposes, including:
@@ -150,6 +159,7 @@ export const PrivacyPolicy = () => {
             </li>
           </ul>
         </p>
+        <br />
         <p>
           <strong>Compliance and protection </strong>. We may use your personal information to:
           <ul>
@@ -171,7 +181,8 @@ export const PrivacyPolicy = () => {
             </li>
           </ul>
         </p>
-        <h3>How We Share Your Personal Information</h3>
+        <br />
+        <h3 className='highlight-text'>How We Share Your Personal Information</h3>
         <p>
           We may share your personal information with:
           <ul>
@@ -202,19 +213,23 @@ export const PrivacyPolicy = () => {
             </li>
           </ul>
         </p>
-        <h3>How You Share Information on the Services</h3>
+        <br />
+        <h3 className='highlight-text'>How You Share Information on the Services</h3>
+        <br />
         <p>
           Third-party platforms. By enabling features or functionality that connect your account to a third-party
           platform (such as by logging in to the Services with your Twitter or Discord account), you chose to disclose
           certain of your personal information to those services. We do not control those third parties’ use of your
           personal information.
         </p>
+        <br />
         <p>
           Other Aquachilling users. When you use the Services, you may share certain information with the Aquachilling
           community. This information may include your profile information and other content you choose to submit on the
           Services.
         </p>
-        <h3>Your Choices</h3>
+        <br />
+        <h3 className='highlight-text'>Your Choices</h3>
         <ul>
           <li>
             Access or update your information. If you have created a profile with us, you may review and update certain
@@ -225,6 +240,7 @@ export const PrivacyPolicy = () => {
             the opt out or unsubscribe instructions contained in the marketing communications we send you.
           </li>
         </ul>
+        <br />
         <p>
           Online tracking opt-out. There are a number of ways to limit online tracking on our Services, which we have
           summarized below:
@@ -242,16 +258,27 @@ export const PrivacyPolicy = () => {
             </li>
           </ul>
         </p>
+        <br />
         <p>
           Note that because these opt out mechanisms are specific to the device or browser on which they are exercised,
           you will need to opt out on every browser and device that you use.
         </p>
+        <br />
         <p>
           Do Not Track. Some Internet browsers may be configured to send "Do Not Track" signals to the online services
           that you visit. We currently do not respond to "Do Not Track" or similar signals. To find out more about "Do
-          Not Track", please visit http://www.allaboutdnt.com
+          Not Track", please visit{' '}
+          <span
+            className='cursor-pointer text-blue-500 underline'
+            onClick={() => {
+              window.open('http://www.allaboutdnt.com', '_blank');
+            }}
+          >
+            http://www.allaboutdnt.com
+          </span>
         </p>
-        <h3>Other Sites and Services</h3>
+        <br />
+        <h3 className='highlight-text'>Other Sites and Services</h3>
         <p>
           Our Services may contain links to websites and other online services operated by third parties. In addition,
           our content may be integrated into web pages or other online services that are not associated with us. These
@@ -259,32 +286,42 @@ export const PrivacyPolicy = () => {
           party. We do not control websites or online services operated by third parties, and we are not responsible for
           their actions.
         </p>
-        <h3>Processing of Personal Information in the U.S.</h3>
+        <br />
+        <h3 className='highlight-text'>Processing of Personal Information in the U.S.</h3>
         <p>
           By using our Services, you understand and acknowledge that your personal information will be transferred from
           your location to our facilities and servers in the United States.
         </p>
-        <h3>Security</h3>
+        <br />
+        <h3 className='highlight-text'>Security</h3>
         <p>
           We employ a number of technical, organizational and physical safeguards designed to protect the personal
           information we collect. However, no security measures are failsafe and we cannot guarantee the security of
           your personal information.
         </p>
-        <h3>Children</h3>
+        <br />
+        <h3 className='highlight-text'>Children</h3>
         <p>
           The Services are not intended for use by children under 13 years of age. If we learn that we have collected
           personal information through our Services from a child under 13 without the consent of the child’s parent or
           guardian as required by law, we will delete it.
         </p>
-        <h3>Changes to this Privacy Policy</h3>
+        <br />
+        <h3 className='highlight-text'>Changes to this Privacy Policy</h3>
         <p>
           We reserve the right to modify this Privacy Policy at any time. If we make material changes to this Privacy
           Policy, we will notify you by email or updating the date of this Privacy Policy and posting it on the
           Services.
         </p>
-        <h3>How to Contact Us</h3>
-        <p>Please direct any questions or comments about this Policy or privacy practices to admin@aquachilling.com </p>
+        <br />
+        <h3 className='highlight-text'>How to Contact Us</h3>
+        <p>
+          Please direct any questions or comments about this Policy or privacy practices to{' '}
+          <span className='text-blue-500'>admin@aquachilling.com</span>{' '}
+        </p>
       </div>
+      <br />
+      <br />
     </Wrapper>
   );
 };

@@ -18,7 +18,9 @@ export const TermsOfService = () => {
       </div>
       <div className='terms-of-service'>
         <Title>Terms Of Service</Title>
+        <br />
         <p>Welcome to Aquachilling!</p>
+        <br />
         <p>
           Aquachilling (“Aquachilling,” “we,” “us,” or “our”) provides our game (described below) and related content to
           you through our website(s) located at Aquachilling.com (the “Site”) and through our related technologies (the
@@ -29,6 +31,7 @@ export const TermsOfService = () => {
           to be bound by these Terms of Service. If you do not accept the terms and conditions of these Terms of
           Service, you will not access, browse, or otherwise use the Service.
         </p>
+        <br />
         <p>
           We reserve the right, at our sole discretion, to change or modify portions of these Terms of Service at any
           time. If we do this, we will post the changes on this page and will indicate at the top of this page the date
@@ -40,19 +43,23 @@ export const TermsOfService = () => {
           Service so you are aware of any revisions. If you do not agree to abide by these or any future Terms of
           Service, you will not access, browse, or use (or continue to access, browse, or use) the Service
         </p>
+        <br />
         <p>
           At Aquachilling, we respect the privacy of our users. For more information please see our Privacy Policy,
           located at Aquachilling.com (the “Privacy Policy”). By using the Service, you consent to our collection, use
           and disclosure of personal data and other data as outlined therein.
         </p>
-        <h3>What is Aquachilling?</h3>
+        <br />
+        <h3 className='highlight-text'>What is Aquachilling?</h3>
         <p>
           Aquachilling is a role playing game built on the Optimism Network. In order to play our game, you need to own
           a Aquachilling NFT. The Aquachilling NFTs are governed by the Aquachilling NFT terms located at
           Aquachilling.com (“Aquachilling NFT Terms”).
         </p>
-        <h3>How do I use Aquachilling?</h3>
-        <h4>Your Registration Obligations: </h4>
+        <br />
+        <h3 className='header-text'>How do I use Aquachilling?</h3>
+        <br />
+        <h4 className='highlight-text'>Your Registration Obligations: </h4>
         <p>
           You may be required to register with Aquachilling or provide and verify information about yourself (e.g., name
           and email address) in order to access and use certain features of the Service. If you choose to register for
@@ -71,7 +78,8 @@ export const TermsOfService = () => {
           and warrant that you are at least 18 years of age (or the age of majority in your state) and are authorized to
           use the payment method you present for the requested transaction.
         </p>
-        <h4>Member Account, Password and Security: </h4>
+        <br />
+        <h4 className='highlight-text'>Member Account, Password and Security: </h4>
         <p>
           You are solely responsible for maintaining the confidentiality of your password and account details, if any,
           and are fully responsible for any and all activities that occur under your password or account. You agree to
@@ -80,13 +88,15 @@ export const TermsOfService = () => {
           Service. Aquachilling will not be liable for any loss or damage arising from your failure to comply with this
           paragraph.
         </p>
-        <h4>Modifications to Service: </h4>
+        <br />
+        <h4 className='highlight-text'>Modifications to Service: </h4>
         <p>
           Aquachilling reserves the right to modify or discontinue, temporarily or permanently, the Service (or any part
           thereof) with or without notice. You agree that Aquachilling will not be liable to you or to any third party
           for any modification, suspension or discontinuance of the Service.
         </p>
-        <h4>General Practices Regarding Use and Storage: </h4>
+        <br />
+        <h4 className='highlight-text'>General Practices Regarding Use and Storage: </h4>
         <p>
           You acknowledge that Aquachilling may establish general practices and limits concerning use of the Service,
           including the maximum period of time that data or other content will be retained by the Service and the
@@ -97,7 +107,8 @@ export const TermsOfService = () => {
           acknowledge that Aquachilling reserves the right to change these general practices and limits at any time, in
           its sole discretion, with or without notice.
         </p>
-        <h4>Service Content: </h4>
+        <br />
+        <h4 className='highlight-text'>Service Content: </h4>
         <p>
           You acknowledge and agree that the Service may contain content or features (“Service Content”) that are
           protected by copyright, patent, trademark, trade secret, or other proprietary rights and laws. Except as
@@ -107,9 +118,10 @@ export const TermsOfService = () => {
           make available through the Service in accordance with these Terms of Service. Any use of the Service or the
           Service Content other than as specifically authorized herein is strictly prohibited.
         </p>
-
-        <h3>Aquachilling and In-Game Digital Assets</h3>
-        <h4>Aquachilling and In-Game Digital Assets: </h4>
+        <br />
+        <h3 className='header-text'>Aquachilling and In-Game Digital Assets</h3>
+        <br />
+        <h4 className='highlight-text'>Aquachilling and In-Game Digital Assets: </h4>
         <p>
           As part of your use of the Service, you may earn or obtain $AQUA, a digital token that may be used only on the
           Service, including by completing certain tasks (e.g.,
@@ -117,7 +129,8 @@ export const TermsOfService = () => {
           in-game abilities, items or other non-fungible digital assets (collectively, “In-Game Digital Assets”) that
           may be used and traded, subject to these Terms of Service or additional applicable terms
         </p>
-        <h4>In-Game Digital Assets </h4>
+        <br />
+        <h4 className='highlight-text'>In-Game Digital Assets </h4>
         <p>
           In-Game Digital Assets may also be purchased directly through the Service via fiat or crypto payments.
           MetaMask and other electronic wallets may allow you to purchase (either directly via Coinbase or via third
@@ -135,6 +148,7 @@ export const TermsOfService = () => {
           cash value. In-Game Digital Assets that you earn for in-game participation and that you do not purchase are
           provided for loyalty, award, and promotional purposes only.
         </p>
+        <br />
         <p>
           Aquachilling cannot ensure that any transaction details a user submits via the Services will be confirmed or
           processed on the blockchain. You acknowledge and agree that the transaction details submitted by you via the
@@ -144,11 +158,13 @@ export const TermsOfService = () => {
           to the blockchain, Aquachilling cannot assist you with canceling or otherwise modify such transaction or
           details.
         </p>
+        <br />
         <p>
           Ownership of In-Game Digital Assets is mediated by smart contracts and the blockchain. While you own In-Game
           Digital Assets, your rights to the artwork or content associated with the In-Game Digital Assets (“In-Game
           Content”) are licensed to you as set forth below.
         </p>
+        <br />
         <p>
           Subject to your continued compliance with these Terms of Service, Aquachilling grants you a worldwide,
           royalty-free license to use, copy, and display the In-Game Content associated with your In-Game Digital Assets
@@ -169,10 +185,12 @@ export const TermsOfService = () => {
             </li>
           </ol>
         </p>
+        <br />
         <p>
           If you make your In-Game Digital Assets available to other users hereunder, you acknowledge and accept that
           such In-Game Digital Assets shall be governed by these Terms of Service.
         </p>
+        <br />
         <p>
           We may limit, modify, revalue, or make $AQUA more or less common, valuable, effective, or functional and may
           also change, at any time, potential In-Game Digital Assets on the Service or the requirements to earn such
@@ -188,7 +206,8 @@ export const TermsOfService = () => {
           taxes related to $AQUA or In-Game Digital Assets that you acquire. No credit or reversal of any $AQUA or
           In-Game Digital Assets will be provided once the $AQUA or In-Game Digital Assets are redeemed.
         </p>
-        <h4>Virtual Items: </h4>
+        <br />
+        <h4 className='highlight-text'>Virtual Items: </h4>
         <p>
           Virtual Items: In using our Service you may purchase, through our supported payment method(s), a limited,
           non-sublicensable, revocable right to use (a) $AQUA or Digital assets (or other forms of in-game credits
@@ -201,30 +220,36 @@ export const TermsOfService = () => {
           purchase but may be awarded to you for in-game participation or otherwise, are provided for loyalty, award, or
           promotional purposes only.
         </p>
+        <br />
         <p>
           Aquachilling may manage, regulate, control, modify or eliminate Virtual Items at any time, with or without
           notice; however, your <span className='important'> Virtual Items </span>may not expire within 5 years from the
           date of purchase or such longer period as required by applicable law. Aquachilling shall have no liability to
           you or any third party in the event that Aquachilling exercises any such rights.
         </p>
+        <br />
         <p>
           Aquachilling may limit, in its sole discretion, the amount of Virtual Items you may purchase in any
           transaction or in the aggregate.
         </p>
+        <br />
         <p>
           The use or transfer of Virtual Items is prohibited except where expressly authorized in the Service. Other
           than as expressly authorized in the Service, you shall not sell, purchase, redeem or otherwise transfer
           Virtual Items to any person or entity or attempt any of the aforesaid, including but not limited to
           Aquachilling, another user or any third party.
         </p>
+        <br />
         <p className='upper'>
           ALL PURCHASES AND REDEMPTIONS OF VIRTUAL ITEMS MADE THROUGH THE SERVICE ARE FINAL AND NON-REFUNDABLE.
         </p>
+        <br />
         <p>
           The provision of Virtual Items is strictly for your personal, non-commercial use in Aquachillinggames. This is
           a service provided by Aquachilling that commences immediately upon acceptance by Aquachilling of your
           purchase.
         </p>
+        <br />
         <p>
           You agree to pay all fees and applicable taxes incurred by you or anyone using an Account registered by you.
           Aquachilling may revise the pricing for the Virtual Items offered through the Service at any time. YOU
@@ -232,14 +257,16 @@ export const TermsOfService = () => {
           REASON, AND THAT YOU WILL NOT RECEIVE MONEY OR OTHER COMPENSATION FOR UNUSED VIRTUAL ITEMS WHEN AN ACCOUNT IS
           CLOSED, WHETHER SUCH CLOSURE WAS VOLUNTARY OR INVOLUNTARY.
         </p>
-        <h4>Blockchain Transaction Fees: </h4>
+        <br />
+        <h4 className='highlight-text'>Blockchain Transaction Fees: </h4>
         <p>
           The delivery and receipt of any In-Game Asset through the Services may be subject to network or transaction
           fees charged by the blockchain (“Blockchain Transaction Fees”), which are non-refundable. Blockchain
           Transaction Fees are paid to emit, record, verify, and process a transaction on the blockchain. Any withdrawal
           or transfer of an In-Game Asset is subject to Blockchain Transaction Fees.
         </p>
-        <h4>Risk Assumption: </h4>
+        <br />
+        <h4 className='highlight-text'>Risk Assumption: </h4>
         <p>
           You accept and acknowledge each of the following:
           <ol>
@@ -268,7 +295,8 @@ export const TermsOfService = () => {
             </li>
           </ol>
         </p>
-        <h4>Conditions of Access and Use</h4>
+        <br />
+        <h4 className='highlight-text'>Conditions of Access and Use</h4>
         <p>
           User Conduct: You are solely responsible for all code, video, images, information, data, text, software,
           music, sound, photographs, graphics, messages, and other materials (“content”) that you make available to
@@ -280,6 +308,7 @@ export const TermsOfService = () => {
           the Service, suspending or terminating the account of such violators, and reporting the violator to law
           enforcement authorities. You agree to not use the Service to: transmit or otherwise upload any content that
         </p>
+        <br />
         <ol>
           <li> infringes any intellectual property or other proprietary rights of any party; </li>
           <li>you do not have a right to upload under any law or under contractual or fiduciary relationships;</li>
@@ -322,7 +351,8 @@ export const TermsOfService = () => {
             address or virtual private network).
           </li>
         </ol>
-        <h4>Intellectual Property Rights</h4>
+        <br />
+        <h4 className='highlight-text'>Intellectual Property Rights</h4>
         <p>
           Trademarks: Aquachilling name and logos are trademarks and service marks of Aquachilling (collectively the
           “Aquachilling Trademarks”). Other Aquachilling, product, and service names and logos used and displayed via
@@ -332,7 +362,8 @@ export const TermsOfService = () => {
           Trademarks displayed on the Service, without our prior written permission in each instance. All goodwill
           generated from the use of Aquachilling Trademarks will inure to our exclusive benefit.
         </p>
-        <h4>Third-Party Material: </h4>
+        <br />
+        <h4 className='highlight-text'>Third-Party Material: </h4>
         <p>
           Under no circumstances will Aquachilling be liable in any way for any content or materials of any third
           parties (including users), including for any errors or omissions in any content, or for any loss or damage of
@@ -344,7 +375,8 @@ export const TermsOfService = () => {
           you must evaluate, and bear all risks associated with, the use of any content, including any reliance on the
           accuracy, completeness, or usefulness of such content.
         </p>
-        <h4>User Content: </h4>
+        <br />
+        <h4 className='highlight-text'>User Content: </h4>
         <p>
           You represent and warrant that you own all right, title and interest in and to such User Content, including
           all copyrights and rights of publicity contained therein. You hereby grant Aquachilling and its affiliated
@@ -356,17 +388,20 @@ export const TermsOfService = () => {
           transmission of your User Content, and you have sole responsibility for the accuracy, quality, legality and
           appropriateness of your User Content.
         </p>
+        <br />
         <p>
           You hereby authorize Aquachilling and its third-party service providers to derive statistical and usage data
           relating to your use of the Service (“Usage Data”). We may use Usage Data for any purpose in accordance with
           applicable law and our Privacy Policy.
         </p>
+        <br />
         <p>
           Any questions, comments, suggestions, ideas, feedback, reviews, or other information about the Service
           (“Submissions”), provided by you to Aquachilling are non-confidential and Aquachilling will be entitled to the
           unrestricted use and dissemination of these Submissions for any purpose, commercial or otherwise, without
           acknowledgment, attribution, or compensation to you.
         </p>
+        <br />
         <p>
           You acknowledge and agree that Aquachilling may preserve User Content and may also disclose User Content if
           required to do so by law or in the good faith belief that such preservation or disclosure is reasonably
@@ -386,7 +421,8 @@ export const TermsOfService = () => {
             </li>
           </ol>
         </p>
-        <h4>Third-Party Services and Websites</h4>
+        <br />
+        <h4 className='highlight-text'>Third-Party Services and Websites</h4>
         <p>
           The Service may provide links or other access to services, sites, technology, and resources that are provided
           or otherwise made available by third parties (the “Third-Party Services”). Additionally, you may enable or log
@@ -410,7 +446,8 @@ export const TermsOfService = () => {
           liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with
           use of or reliance on any Third-Party Services.
         </p>
-        <h4>Indemnification</h4>
+        <br />
+        <h4 className='highlight-text'>Indemnification</h4>
         <p>
           To the extent permitted under applicable law, you agree to defend, indemnify, and hold harmless Aquachilling,
           its affiliates, and its and their respective officers, employees, directors, service providers, licensors, and
@@ -423,7 +460,8 @@ export const TermsOfService = () => {
           any reasonable requests assisting Aquachilling’s defense of such matter. You may not settle or compromise any
           claim against the Aquachilling Parties without Aquachilling’s written consent.
         </p>
-        <h4>Disclaimer of Warranties</h4>
+        <br />
+        <h4 className='highlight-text'>Disclaimer of Warranties</h4>
         <p>
           YOUR USE OF THE SERVICE IS AT YOUR SOLE RISK. THE SERVICE IS PROVIDED ON AN “AS IS” AND “AS AVAILABLE” BASIS.
           THE Aquachilling PARTIES EXPRESSLY DISCLAIM ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS, IMPLIED OR STATUTORY,
@@ -433,7 +471,8 @@ export const TermsOfService = () => {
           FROM THE USE OF THE SERVICE WILL BE ACCURATE OR RELIABLE; OR (D) THE QUALITY OF ANY PRODUCTS, SERVICES,
           INFORMATION, OR OTHER MATERIAL PURCHASED OR OBTAINED BY YOU THROUGH THE SERVICE WILL MEET YOUR EXPECTATIONS.
         </p>
-        <h4>Limitation of Liability</h4>
+        <br />
+        <h4 className='highlight-text'>Limitation of Liability</h4>
         <p>
           YOU EXPRESSLY UNDERSTAND AND AGREE THAT THE Aquachilling PARTIES WILL NOT BE LIABLE FOR ANY INDIRECT,
           INCIDENTAL, SPECIAL, CONSEQUENTIAL, EXEMPLARY DAMAGES, OR DAMAGES FOR LOSS OF PROFITS INCLUDING DAMAGES FOR
@@ -457,6 +496,7 @@ export const TermsOfService = () => {
             <li>MONTHS, OR, IF GREATER, ONE HUNDRED DOLLARS ($100).</li>
           </ol>
         </p>
+        <br />
         <p>
           SOME JURISDICTIONS DO NOT ALLOW THE DISCLAIMER OR EXCLUSION OF CERTAIN WARRANTIES OR THE LIMITATION OR
           EXCLUSION OF LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES. ACCORDINGLY, SOME OF THE ABOVE LIMITATIONS SET
@@ -464,6 +504,7 @@ export const TermsOfService = () => {
           PORTION OF THE SERVICE OR WITH THESE TERMS OF SERVICE, YOUR SOLE AND EXCLUSIVE REMEDY IS TO DISCONTINUE USE OF
           THE SERVICE.
         </p>
+        <br />
         <p>
           IF YOU ARE A USER FROM NEW JERSEY, THE FOREGOING SECTIONS TITLED “INDEMNIFICATION”, “DISCLAIMER OF WARRANTIES”
           AND “LIMITATION OF LIABILITY” ARE INTENDED TO BE ONLY AS BROAD AS IS PERMITTED UNDER THE LAWS OF THE STATE OF
@@ -471,7 +512,8 @@ export const TermsOfService = () => {
           THE INVALIDITY OF SUCH PORTION WILL NOT AFFECT THE VALIDITY OF THE REMAINING PORTIONS OF THE APPLICABLE
           SECTIONS.
         </p>
-        <h4>Termination</h4>
+        <br />
+        <h4 className='highlight-text'>Termination</h4>
         <p>
           You agree that Aquachilling, in its sole discretion, may suspend or terminate your account (or any part
           thereof) or use of the Service and remove and discard any content within the Service, for any reason,
@@ -486,14 +528,16 @@ export const TermsOfService = () => {
           will not be liable to you or any third party for any termination of your access to the Service, or revoking
           any benefits, privileges, earned Virtual Items and/or purchases associated with your Account.
         </p>
-        <h4>User Disputes</h4>
+        <br />
+        <h4 className='highlight-text'>User Disputes</h4>
         <p>
           You agree that you are solely responsible for your interactions with any other user in connection with the
           Service, and Aquachilling will have no liability or responsibility with respect thereto. Aquachilling reserves
           the right, but has no obligation, to become involved in any way with disputes between you and any other user
           of the Service.
         </p>
-        <h4>General</h4>
+        <br />
+        <h4 className='highlight-text'>General</h4>
         <p>
           These Terms of Service (together with the terms incorporated by reference herein) constitute the entire
           agreement between you and Aquachilling governing your access and use of the Service, and supersede any prior
@@ -527,6 +571,8 @@ export const TermsOfService = () => {
           unavailability of electrical power, network access or equipment, or any other circumstances or causes beyond
           Aquachilling’s reasonable control.
         </p>
+        <br />
+        <br />
       </div>
     </Wrapper>
   );
