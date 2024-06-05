@@ -39,7 +39,7 @@ export function storeBuyPack(src: BuyPack) {
     b_0.storeInt(src.amount, 257);
   };
 }
-export const TWITTER_CLIENT_ID = ENVS.VITE_ISTESTNET
+export const TWITTER_CLIENT_ID = !ENVS.VITE_ISTESTNET
   ? 'RWItdVY4cFFrOGxqTjJzdXk3ajM6MTpjaQ'
   : 'bE5QRkpOY3IwM3A1dlowcXBlQmY6MTpjaQ';
 export const getDiscordOauthUrl = () => {
