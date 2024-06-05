@@ -10,6 +10,7 @@ import { selectToken, updateAccount, updateDiscordId, updateTwitterId } from '@/
 import { Wrapper } from './oauth-success.styled';
 import { useSelector } from 'react-redux';
 import { updateTelegramId } from '@/redux/telegram-id';
+import { useAccountInfoContext } from '@/contexts/account-info.context';
 
 export const OauthSuccess = () => {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ export const OauthSuccess = () => {
   const hash = searchParams.get('hash');
   const { addNotification } = useNotification();
   const token = useSelector(selectToken);
+  const { refetchProfile } = useAccountInfoContext();
 
   React.useEffect(() => {
     if (google_code) {
@@ -43,6 +45,7 @@ export const OauthSuccess = () => {
               id: rs.id
             })
           );
+          refetchProfile();
           navigate('/airdrop');
         })
         .catch((err) => {
@@ -68,6 +71,7 @@ export const OauthSuccess = () => {
                 twitter: rs.id
               })
             );
+            refetchProfile();
             navigate('/game?id=1');
           })
           .catch((err) => {
@@ -93,6 +97,7 @@ export const OauthSuccess = () => {
                 id: rs.id
               })
             );
+            refetchProfile();
             navigate('/airdrop');
           })
           .catch((err) => {
@@ -118,6 +123,7 @@ export const OauthSuccess = () => {
                 discord: rs.id
               })
             );
+            refetchProfile();
             navigate('/airdrop');
           })
           .catch((err) => {
@@ -126,6 +132,7 @@ export const OauthSuccess = () => {
               type: NOTIFICATION_TYPE.ERROR,
               id: new Date().getTime()
             });
+            refetchProfile();
             navigate('/airdrop');
           });
       } else {
@@ -143,6 +150,7 @@ export const OauthSuccess = () => {
                 id: rs.id
               })
             );
+            refetchProfile();
             navigate('/airdrop');
           })
           .catch((err) => {
@@ -151,6 +159,7 @@ export const OauthSuccess = () => {
               type: NOTIFICATION_TYPE.ERROR,
               id: new Date().getTime()
             });
+            refetchProfile();
             navigate('/airdrop');
           });
       }
@@ -162,6 +171,7 @@ export const OauthSuccess = () => {
         id: new Date().getTime()
       });
       dispatch(updateTelegramId({ telegram: id }));
+      refetchProfile();
       navigate('/game?id=1');
       OauthRepository.linkTelegramAccount({
         telegram_code: telegram_code,
@@ -179,6 +189,7 @@ export const OauthSuccess = () => {
             id: new Date().getTime()
           });
           dispatch(updateTelegramId({ telegram: id }));
+          refetchProfile();
           navigate('/game?id=1');
         })
         .catch((err) => {
@@ -187,6 +198,7 @@ export const OauthSuccess = () => {
             type: NOTIFICATION_TYPE.ERROR,
             id: new Date().getTime()
           });
+          refetchProfile();
           navigate('/game?id=1');
         });
     }
