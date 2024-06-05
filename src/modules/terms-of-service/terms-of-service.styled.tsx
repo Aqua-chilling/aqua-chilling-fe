@@ -26,6 +26,21 @@ export const Wrapper = styled.div`
       width: 100%;
     }
   }
+  .header-text {
+    font-size: 22px;
+    font-weight: 600;
+    color: white;
+  }
+  .highlight-text {
+    font-size: 18px;
+    font-weight: 700;
+    color: white;
+    opacity: 0.9;
+  }
+  ul {
+    list-style-type: circle;
+    list-style-position: inside;
+  }
   .terms-of-service {
     width: 80%;
     color: #f1c8dd;
