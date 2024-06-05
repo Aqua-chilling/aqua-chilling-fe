@@ -97,7 +97,14 @@ export const Section5 = () => {
         <div className='section5'>
           <div className='section5-txt'>
             <Title>Encyclopedia of Aquachilling</Title>
-            <PrimaryButton w={220}>Explore our Wikipedia</PrimaryButton>
+            <div
+              onClick={() => {
+                window.open('https://aquachilling.gitbook.io/aquachilling/fish', '_blank');
+              }}
+              className='cursor-pointer'
+            >
+              <PrimaryButton w={220}>Explore our Wikipedia</PrimaryButton>
+            </div>
           </div>
           <div className='cards'>
             {randomImages?.map((item, key) => {
