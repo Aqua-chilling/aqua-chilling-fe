@@ -12,7 +12,6 @@ export const Footer = () => {
       <div className='footer'>
         <div className='logos'>
           <img src={x} alt='' onClick={() => window.open('https://twitter.com/aquachilling')} />
-          <img src={discord} alt='' onClick={() => window.open('https://discord.gg/S2JY3JQz')} />
           <img src={tele} alt='' onClick={() => window.open('https://t.me/aquachilling')} />
           <img src={tele} alt='' onClick={() => window.open('https://t.me/aquachillingnews')} />
           <img src={gitbook} alt='' onClick={() => window.open('https://aquachilling.gitbook.io/aquachilling')} />
