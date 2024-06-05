@@ -248,12 +248,12 @@ export const Section1 = () => {
           </Description>
           <div className='btns'>
             {/* <Magnifier /> */}
-            <div onClick={() => navigate('/airdrop')}>
+            {/* <div onClick={() => navigate('/airdrop')}>
               <PrimaryButton w={220}>Join Quest</PrimaryButton>
-            </div>
+            </div> */}
             <div
               onClick={() => {
-                navigate('/game');
+                window.open('https://t.me/aquachillingbot/aquachillingapp', '_blank');
               }}
             >
               <SecondaryButton w={220}>Play game</SecondaryButton>
