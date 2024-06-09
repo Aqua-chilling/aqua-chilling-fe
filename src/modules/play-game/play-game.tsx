@@ -19,6 +19,8 @@ import { useStateCallback } from '@/hooks/use-on-off';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
 import { ENVS } from '@/config';
+import { useNotification } from '@/contexts/notification.context';
+import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 
 function iframe() {
   return {
@@ -37,6 +39,7 @@ export const GamePlay = () => {
   const { gameMessage, sendMessage, setGameMessage } = usePlayGame();
   const { signTokenOut, tonConnectUI } = useTonWalletContext();
   const { userProfile } = useAccountInfoContext();
+  const { addNotification } = useNotification();
   React.useEffect(() => {
     if (ref && !!token && userProfile?.referral_code_status !== 1) {
       OauthRepository.enterReferralCode(ref).then((rs) => {
@@ -46,6 +49,11 @@ export const GamePlay = () => {
             refreferral_code_status: rs.referral_code_status ?? 1
           })
         );
+        addNotification({
+          message: 'Submitted referral!',
+          type: NOTIFICATION_TYPE.SUCCESS,
+          id: new Date().getTime()
+        });
       });
     }
   }, [ref, token, userProfile]);
