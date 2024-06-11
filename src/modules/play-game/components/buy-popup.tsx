@@ -114,13 +114,13 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
           className={`purchase-btn !w-full mt-[43px] flex items-center justify-center ${
             isLoading && '!opacity-70 !cursor-default'
           }`}
-          onClick={() => {
+          onClick={async () => {
             if (isLoading) return;
-            if (!tonConnectUI?.connected) {
-              tonConnectUI.openModal();
-              return;
+            if (tonConnectUI.connected) {
+              await tonConnectUI.disconnect();
             }
-            handleBuyAqua();
+            tonConnectUI.openModal();
+            // handleBuyAqua();
           }}
         >
           {tonConnectUI?.connected ? 'Purchase' : 'Login with TON'}
@@ -132,7 +132,7 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
           )}
         </div>
 
-        <div
+        {/* <div
           className={`purchase-btn !w-full mt-[43px] flex items-center justify-center ${
             isLoading && '!opacity-70 !cursor-default'
           }`}
@@ -147,7 +147,7 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
               <Spin />
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     </Wrapper>
   );
