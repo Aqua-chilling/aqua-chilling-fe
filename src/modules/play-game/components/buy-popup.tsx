@@ -116,11 +116,12 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
           }`}
           onClick={async () => {
             if (isLoading) return;
-            if (tonConnectUI.connected) {
-              await tonConnectUI.disconnect();
+            if (!tonConnectUI.connected) {
+              tonConnectUI.openModal();
+              return;
             }
-            tonConnectUI.openModal();
-            // handleBuyAqua();
+
+            handleBuyAqua();
           }}
         >
           {tonConnectUI?.connected ? 'Purchase' : 'Login with TON'}
