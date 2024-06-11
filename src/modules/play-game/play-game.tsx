@@ -1,14 +1,13 @@
 import { useSelector } from 'react-redux';
 import { Wrapper } from './play-game.styled';
-import React, { useEffect, useState } from 'react';
-import { selectToken, updateReferral } from '@/redux';
+import React, { useCallback, useEffect, useState } from 'react';
+import { deleteAccount, selectToken, updateDiscordId, updateReferral, updateTwitterId } from '@/redux';
 import { PopUpLogin } from './components/popup-login';
 import { Modal } from '@/components/modal/modal';
 import { usePlayGame } from '@/hooks/use-play-game';
 import { COMMUNICATIONFUNCTION } from '@/constants/app-constaints';
 import WebApp from '@twa-dev/sdk';
 import { BuyModal } from './components/buy-modal';
-import { useTonWalletContext } from '@/contexts/ton-wallet.context';
 import { useSearchParams } from 'react-router-dom';
 import { updateTelegramId } from '@/redux/telegram-id';
 import { dispatch } from '@/app/store';
@@ -21,6 +20,7 @@ import { useAccountInfoContext } from '@/contexts/account-info.context';
 import { ENVS } from '@/config';
 import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
+import { useLoginWithTelegram } from '@/hooks/uselogin-telegram';
 
 function iframe() {
   return {
@@ -28,7 +28,6 @@ function iframe() {
   };
 }
 export const GamePlay = () => {
-  const [isShowPopupLogin, setIsShowPopupLogin] = React.useState(false);
   const [isShowAirdropQuestLogin, setIsShowAirdropQuestLogin] = React.useState(false);
   const [isShowWallet, setIsShowWallet] = React.useState(false);
   const [searchParams] = useSearchParams();
@@ -37,9 +36,33 @@ export const GamePlay = () => {
   const [isShowBuyModal, setIsShowBuyModal] = React.useState(false);
   const token = useSelector(selectToken);
   const { gameMessage, sendMessage, setGameMessage } = usePlayGame();
-  const { signTokenOut, tonConnectUI } = useTonWalletContext();
+  const signTokenOut = useCallback(() => {
+    dispatch(deleteAccount());
+    dispatch(
+      updateDiscordId({
+        discord: undefined
+      })
+    );
+    dispatch(
+      updateTwitterId({
+        twitter: undefined
+      })
+    );
+    dispatch(
+      updateTelegramId({
+        telegram: undefined
+      })
+    );
+    dispatch(
+      updateReferral({
+        referral_code: '',
+        refreferral_code_status: 0
+      })
+    );
+  }, [dispatch]);
   const { userProfile } = useAccountInfoContext();
   const { addNotification } = useNotification();
+  const { handleLogin } = useLoginWithTelegram();
   React.useEffect(() => {
     if (ref && !!token && userProfile?.referral_code_status !== 1) {
       OauthRepository.enterReferralCode(ref).then((rs) => {
@@ -58,6 +81,7 @@ export const GamePlay = () => {
     }
   }, [ref, token, userProfile]);
   useEffect(() => {
+    console.log('WebApp', WebApp);
     WebApp.expand();
     WebApp.enableClosingConfirmation();
     if (WebApp.initDataUnsafe?.user?.id) {
@@ -71,11 +95,10 @@ export const GamePlay = () => {
     }
   }, [typeId]);
   useEffect(() => {
-    if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST) {
+    if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST || true) {
       if (!token) {
-        setIsShowPopupLogin(true);
+        handleLogin();
       } else {
-        setIsShowPopupLogin(false);
         sendMessage(COMMUNICATIONFUNCTION.LOGIN_SUCCESS, token);
       }
     }
@@ -93,16 +116,6 @@ export const GamePlay = () => {
   const [isBuy, setIsBuy] = useState(false);
   return (
     <Wrapper>
-      {isShowPopupLogin && (
-        <Modal
-          control={isShowPopupLogin}
-          setControl={() => {
-            setIsShowPopupLogin;
-          }}
-        >
-          <PopUpLogin />
-        </Modal>
-      )}
       {isShowAirdropQuestLogin && (
         <AirdropQuests
           onClose={() => {

@@ -3,7 +3,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 import { store } from './store';
 import { QueryClientProvider } from 'react-query';
-import { ThirdwebProvider } from '@thirdweb-dev/react';
 import { QueryClient } from 'react-query';
 
 import { RouterProvider } from '@/providers/router.provider';
@@ -16,7 +15,6 @@ import { LoadingProvider } from '@/providers/loading.provider';
 import { NotificationProvider } from '@/contexts/notification.context';
 import { THEME, TonConnectUIProvider } from '@tonconnect/ui-react';
 import { CredentialProvider } from '@/providers/credential.provider';
-import { TonWalletContextProvider } from '@/contexts/ton-wallet.context';
 import { AccountInfoContextProvider } from '@/contexts/account-info.context';
 const queryClient = new QueryClient();
 let persistor = persistStore(store);
@@ -63,11 +61,9 @@ export const App = () => {
               <FixedGlobalStyle />
               {/* {window.innerWidth > 780 && <CustomCurSor />} */}
               <NotificationProvider>
-                <TonWalletContextProvider>
-                  <AccountInfoContextProvider>
-                    <RouterProvider>{<LoadingProvider />}</RouterProvider>
-                  </AccountInfoContextProvider>
-                </TonWalletContextProvider>
+                <AccountInfoContextProvider>
+                  <RouterProvider>{<LoadingProvider />}</RouterProvider>
+                </AccountInfoContextProvider>
               </NotificationProvider>
             </TonConnectUIProvider>
           </QueryClientProvider>
