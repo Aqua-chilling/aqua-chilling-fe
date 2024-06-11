@@ -58,6 +58,7 @@ export const GamePlay = () => {
     }
   }, [ref, token, userProfile]);
   useEffect(() => {
+    console.log('WebApp', WebApp);
     WebApp.expand();
     WebApp.enableClosingConfirmation();
     if (WebApp.initDataUnsafe?.user?.id) {
