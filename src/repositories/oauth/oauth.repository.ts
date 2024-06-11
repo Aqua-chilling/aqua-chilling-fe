@@ -41,4 +41,9 @@ export class OauthRepository {
   static generateTonPayload(): Promise<any> {
     return httpGame.post(`/auth/ton-generate-payload`);
   }
+  static loginWithTelegram(initData: string): Promise<any> {
+    return httpGame.post(`/auth/login-telegram`, {
+      initData
+    });
+  }
 }
