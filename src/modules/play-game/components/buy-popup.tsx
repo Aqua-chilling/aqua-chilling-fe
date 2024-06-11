@@ -2,18 +2,28 @@ import { Wrapper } from './buy-popup-styled';
 import CloseIcon from '@/assets/wallet/close.png';
 import React, { useMemo, useState } from 'react';
 import { createTransaction } from '../utils/create-transaction.util';
-import { useBuyAqua } from '../hooks/use-buy-aqua';
+import { useBuyAqua, useBuyAquaTelegram } from '../hooks/use-buy-aqua';
 import Token from '@/assets/wallet/aqua.png';
 import Shell from '@/assets/shell.png';
 import { Spin } from 'antd';
-import { useTonWallet } from '@tonconnect/ui-react';
+import { useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
+import { useAccountInfoContext } from '@/contexts/account-info.context';
 export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) => {
+  const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
   const [amount, setAmount] = useState(1);
+  const { userProfile } = useAccountInfoContext();
   const transaction = useMemo(() => {
-    return createTransaction(wallet, pack?.id, amount, pack?.pack_cost_ton || 0);
+    return createTransaction(wallet, pack?.id, amount, pack?.pack_cost_ton || 0, userProfile?.id || '');
   }, [wallet, pack, amount, pack]);
   const { isLoading, handleBuyAqua } = useBuyAqua({
+    transaction,
+    onBuySuccess: () => {
+      onClose();
+    }
+  });
+
+  const { isLoadingTelegram, handleBuyAquaTelegram } = useBuyAquaTelegram({
     transaction,
     onBuySuccess: () => {
       onClose();
@@ -106,10 +116,32 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
           }`}
           onClick={() => {
             if (isLoading) return;
+            if (!tonConnectUI?.connected) {
+              tonConnectUI.openModal();
+              return;
+            }
             handleBuyAqua();
           }}
         >
-          Purchase{' '}
+          {tonConnectUI?.connected ? 'Purchase' : 'Login with TON'}
+
+          {isLoading && (
+            <div className='button-spin'>
+              <Spin />
+            </div>
+          )}
+        </div>
+
+        <div
+          className={`purchase-btn !w-full mt-[43px] flex items-center justify-center ${
+            isLoading && '!opacity-70 !cursor-default'
+          }`}
+          onClick={() => {
+            if (isLoadingTelegram) return;
+            handleBuyAquaTelegram();
+          }}
+        >
+          Purchase with Telegram Wallet
           {isLoading && (
             <div className='button-spin'>
               <Spin />
