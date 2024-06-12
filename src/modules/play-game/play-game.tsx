@@ -83,14 +83,6 @@ export const GamePlay = () => {
       });
     }
   }, [ref, token, userProfile]);
-  const disconnectTon = async () => {
-    console.log('DISCONENCT', tonConnectUI.connected);
-    try {
-      await tonConnectUI.disconnect();
-    } catch (err) {
-      console.log('err', err);
-    }
-  };
   useEffect(() => {
     console.log('WebApp', WebApp);
     WebApp.expand();
@@ -104,7 +96,6 @@ export const GamePlay = () => {
     if (Number(typeId) === 1) {
       setIsShowAirdropQuestLogin(true);
     }
-    disconnectTon();
   }, [typeId]);
   useEffect(() => {
     if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST || true) {
