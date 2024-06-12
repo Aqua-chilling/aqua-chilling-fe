@@ -84,6 +84,7 @@ export const GamePlay = () => {
     }
   }, [ref, token, userProfile]);
   const disconnectTon = async () => {
+    console.log('DISCONENCT', tonConnectUI.connected);
     if (tonConnectUI.connected) {
       await tonConnectUI.disconnect();
     }
