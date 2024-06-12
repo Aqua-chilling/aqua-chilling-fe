@@ -345,7 +345,10 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 <div
                   className='flex items-center gap-1'
                   onClick={async () => {
-                    window.open(`https://twitter.com/Aquachilling`, '_blank');
+                    WebApp.openLink(`https://twitter.com/Aquachilling`, {
+                      try_instant_view: true
+                    });
+                    // window.open(`https://twitter.com/Aquachilling`, '_blank');
                     setTimeout(async () => {
                       const resOnboard = await OnboardingRepository.UpdateUserQuests({
                         id: 6
@@ -399,7 +402,10 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 <div
                   className='flex items-center gap-1'
                   onClick={() => {
-                    window.open(`https://twitter.com/Aquachilling/status/1772973413365141606`, '_blank');
+                    WebApp.openLink(`https://twitter.com/Aquachilling/status/1772973413365141606`, {
+                      try_instant_view: true
+                    });
+                    // window.open(`https://twitter.com/Aquachilling/status/1772973413365141606`, '_blank');
                     setTimeout(async () => {
                       const resOnboard = await OnboardingRepository.UpdateUserQuests({
                         id: 7
