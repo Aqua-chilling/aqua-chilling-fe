@@ -1,17 +1,18 @@
 import { Wrapper } from './buy-popup-styled';
 import CloseIcon from '@/assets/wallet/close.png';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { createTransaction } from '../utils/create-transaction.util';
 import { useBuyAqua, useBuyAquaTelegram } from '../hooks/use-buy-aqua';
 import Token from '@/assets/wallet/aqua.png';
 import Shell from '@/assets/shell.png';
 import { Spin } from 'antd';
-import { useTonAddress, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
+import { CHAIN, useTonAddress, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
 import { CopyOutlined, DisconnectOutlined } from '@ant-design/icons';
 import { TonConnectButton } from '@tonconnect/ui-react';
 import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
+import { ENVS } from '@/config';
 export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) => {
   const [tonConnectUI] = useTonConnectUI();
   const { addNotification } = useNotification();
@@ -35,6 +36,24 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
       onClose();
     }
   });
+
+  useEffect(
+    () =>
+      tonConnectUI.onStatusChange(async (w) => {
+        const activeChain = ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
+        const activeChainName = ENVS.VITE_ISTESTNET ? 'Testnet' : 'Mainnet';
+        if (!!w && w.account?.chain !== activeChain) {
+          tonConnectUI.disconnect();
+          addNotification({
+            message: `Invalid chain. Please switch to TON ${activeChainName}`,
+            type: NOTIFICATION_TYPE.ERROR,
+            id: new Date().getTime()
+          });
+          return;
+        }
+      }),
+    [tonConnectUI]
+  );
 
   return (
     <Wrapper>

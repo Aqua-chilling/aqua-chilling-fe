@@ -57,6 +57,23 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
 
     ele?.appendChild(script);
   }, []);
+  React.useEffect(
+    () =>
+      tonConnectUI.onStatusChange(async (w) => {
+        const activeChain = ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
+        const activeChainName = ENVS.VITE_ISTESTNET ? 'Testnet' : 'Mainnet';
+        if (!!w && w.account?.chain !== activeChain) {
+          tonConnectUI.disconnect();
+          addNotification({
+            message: `Invalid chain. Please switch to TON ${activeChainName}`,
+            type: NOTIFICATION_TYPE.ERROR,
+            id: new Date().getTime()
+          });
+          return;
+        }
+      }),
+    [tonConnectUI]
+  );
   return (
     <Wrapper>
       <div className='table'>
@@ -82,6 +99,17 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                   try {
                     if (!tonConnectUI.connected || !wallet) {
                       tonConnectUI.openModal();
+                      return;
+                    }
+                    const activeChain = ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
+                    const activeChainName = ENVS.VITE_ISTESTNET ? 'Testnet' : 'Mainnet';
+                    if (tonConnectUI.account?.chain !== activeChain) {
+                      tonConnectUI.disconnect();
+                      addNotification({
+                        message: `Invalid chain. Please switch to TON ${activeChainName}`,
+                        type: NOTIFICATION_TYPE.ERROR,
+                        id: new Date().getTime()
+                      });
                       return;
                     }
                     setIsLoading(1);
