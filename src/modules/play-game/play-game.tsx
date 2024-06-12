@@ -85,8 +85,10 @@ export const GamePlay = () => {
   }, [ref, token, userProfile]);
   const disconnectTon = async () => {
     console.log('DISCONENCT', tonConnectUI.connected);
-    if (tonConnectUI.connected) {
+    try {
       await tonConnectUI.disconnect();
+    } catch (err) {
+      console.log('err', err);
     }
   };
   useEffect(() => {
