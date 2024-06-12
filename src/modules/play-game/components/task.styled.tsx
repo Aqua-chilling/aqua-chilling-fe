@@ -133,6 +133,20 @@ export const Wrapper = styled.div`
         width: 170%;
       }
     }
+    .task-button-wrapper {
+      .connected-account {
+        background-color: #121214;
+        padding: 8px;
+        bottom: -4px;
+        transform: translateY(100%);
+      }
+      &:hover {
+        .connected-account {
+          opacity: 1;
+          z-index: 4;
+        }
+      }
+    }
     .task-button {
       position: relative;
       .connect-telegram-text-tg {

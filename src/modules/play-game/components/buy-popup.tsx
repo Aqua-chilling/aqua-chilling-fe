@@ -6,11 +6,17 @@ import { useBuyAqua, useBuyAquaTelegram } from '../hooks/use-buy-aqua';
 import Token from '@/assets/wallet/aqua.png';
 import Shell from '@/assets/shell.png';
 import { Spin } from 'antd';
-import { useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
+import { useTonAddress, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
+import { CopyOutlined, DisconnectOutlined } from '@ant-design/icons';
+import { TonConnectButton } from '@tonconnect/ui-react';
+import { useNotification } from '@/contexts/notification.context';
+import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) => {
   const [tonConnectUI] = useTonConnectUI();
+  const { addNotification } = useNotification();
   const wallet = useTonWallet();
+  const address = useTonAddress();
   const [amount, setAmount] = useState(1);
   const { userProfile } = useAccountInfoContext();
   const transaction = useMemo(() => {
@@ -110,28 +116,81 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
             {pack?.reward?.[0]?.type === 'point' ? 'AQUA' : 'SHELL'}
           </div>
         )}
-        <div
-          className={`purchase-btn !w-full mt-[43px] flex items-center justify-center ${
-            isLoading && '!opacity-70 !cursor-default'
-          }`}
-          onClick={async () => {
-            if (isLoading) return;
-            if (!tonConnectUI.connected) {
-              tonConnectUI.openModal();
-              return;
-            }
+        {
+          <div className='w-fit relative purchase-btn-wrapper'>
+            <div
+              className={`purchase-btn !w-full mt-[43px] flex items-center justify-center relative z-[2] ${
+                isLoading && '!opacity-70 !cursor-default'
+              }`}
+              onClick={async () => {
+                if (isLoading) return;
+                if (!wallet) {
+                  tonConnectUI.openModal();
+                  return;
+                }
+                handleBuyAqua();
+              }}
+            >
+              {!!wallet ? 'Purchase' : 'Connect TON Wallet'}
 
-            handleBuyAqua();
-          }}
-        >
-          {tonConnectUI?.connected ? 'Purchase' : 'Login with TON'}
-
-          {isLoading && (
-            <div className='button-spin'>
-              <Spin />
+              {isLoading && (
+                <div className='button-spin'>
+                  <Spin />
+                </div>
+              )}
             </div>
-          )}
-        </div>
+            {!!wallet && (
+              <div className='absolute connected-account opacity-0 min-w-[200px] rounded-xl'>
+                <div
+                  className='w-full flex items-center justify-start gap-2 cursor-pointer p-2'
+                  onClick={() => {
+                    navigator.clipboard.writeText(address);
+                    addNotification({
+                      message: 'Copied!',
+                      type: NOTIFICATION_TYPE.SUCCESS,
+                      id: new Date().getTime()
+                    });
+                  }}
+                >
+                  <CopyOutlined
+                    style={{
+                      fontSize: '16px',
+                      color: 'white',
+                      strokeWidth: '30', // --> higher value === more thickness the filled area
+                      stroke: 'white'
+                    }}
+                  />
+                  <span className='text-[white] font-semibold'>Copy Address</span>
+                </div>
+                <div
+                  className='w-full flex items-center justify-start gap-2 cursor-pointer p-2'
+                  onClick={async () => {
+                    try {
+                      await tonConnectUI.disconnect();
+                    } catch (err) {
+                      console.log('err', err);
+                      addNotification({
+                        message: 'Something went wrong!',
+                        type: NOTIFICATION_TYPE.ERROR,
+                        id: new Date().getTime()
+                      });
+                    }
+                  }}
+                >
+                  <DisconnectOutlined
+                    style={{
+                      fontSize: '16px',
+                      color: 'white',
+                      strokeWidth: '30', // --> higher value === more thickness the filled area
+                      stroke: 'white'
+                    }}
+                  />
+                  <span className='text-[white] font-semibold'>Disconnect</span>
+                </div>
+              </div>
+            )}
+          </div>
+        }
 
         {/* <div
           className={`purchase-btn !w-full mt-[43px] flex items-center justify-center ${

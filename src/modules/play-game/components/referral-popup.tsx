@@ -52,7 +52,7 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
                 <div className='link-label'>Your referral link</div>
                 <div className='link-value'>
                   {!!userProfile?.referral_code
-                    ? `https://t.me/aquachillingbot/aquachillingapp/game?ref=${userProfile?.referral_code}`
+                    ? `https://t.me/aquachillingbot/aquachillingapp?startapp=${userProfile?.referral_code}`
                     : '...'}
                 </div>
               </div>
@@ -60,7 +60,7 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
                 className='ref-btn'
                 onClick={async () => {
                   await navigator?.clipboard?.writeText(
-                    `https://t.me/aquachillingbot/aquachillingapp/game?ref=${userProfile?.referral_code}` || ''
+                    `https://t.me/aquachillingbot/aquachillingapp?startapp=${userProfile?.referral_code}` || ''
                   );
                   addNotification({
                     message: 'Copied!',
