@@ -12,7 +12,7 @@ import WebApp from '@twa-dev/sdk';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import Token from '@/assets/wallet/aqua.png';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
-import { useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
+import { CHAIN, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { ENVS } from '@/config';
 import { beginCell, Address, toNano } from '@ton/ton';
 import { gasFee, getTwitterOauthUrl, validUntil } from '@/constants/app-constaints';
@@ -76,14 +76,14 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
               }`}
               onClick={async () => {
                 try {
-                  if (!wallet) return;
+                  if (!tonConnectUI.connected || !wallet) {
+                    tonConnectUI.openModal();
+                    return;
+                  }
                   setIsLoading(1);
                   const transactionPayload = beginCell()
-                    .storeUint(3850333806, 32)
-                    .storeUint(1, 64)
-                    .storeInt(0, 257)
-                    .storeAddress(Address.parse(wallet.account.address))
-                    .storeInt(1, 257)
+                    .storeUint(0, 32)
+                    .storeStringTail(`${userProfile?.id}-${0}-${0}`)
                     .endCell();
                   const messages = [
                     {
@@ -94,8 +94,8 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                   ];
                   const transaction = {
                     validUntil: Math.floor(Date.now() / 1000) + validUntil,
-                    // network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
-                    // from: wallet?.account?.address || '',
+                    network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
+                    from: wallet?.account?.address || '',
                     messages: messages
                   };
                   const res = await tonConnectUI.sendTransaction(transaction);
@@ -128,7 +128,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 }
               }}
             >
-              {is_checkin_wallet ? 'Completed' : 'Start'}
+              {is_checkin_wallet ? 'Completed' : tonConnectUI?.connected ? 'Start' : 'Connect TON'}
             </div>
           </div>
         </div>

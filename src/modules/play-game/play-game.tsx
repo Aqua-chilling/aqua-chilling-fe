@@ -21,6 +21,7 @@ import { ENVS } from '@/config';
 import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { useLoginWithTelegram } from '@/hooks/uselogin-telegram';
+import { useTonConnectUI } from '@tonconnect/ui-react';
 
 function iframe() {
   return {
@@ -30,6 +31,7 @@ function iframe() {
 export const GamePlay = () => {
   const [isShowAirdropQuestLogin, setIsShowAirdropQuestLogin] = React.useState(false);
   const [isShowWallet, setIsShowWallet] = React.useState(false);
+  const [tonConnectUI] = useTonConnectUI();
   const [searchParams] = useSearchParams();
   const typeId = searchParams.get('id');
   const ref = searchParams.get('ref');
@@ -80,6 +82,11 @@ export const GamePlay = () => {
       });
     }
   }, [ref, token, userProfile]);
+  const disconnectTon = async () => {
+    if (tonConnectUI.connected) {
+      await tonConnectUI.disconnect();
+    }
+  };
   useEffect(() => {
     console.log('WebApp', WebApp);
     WebApp.expand();
@@ -93,6 +100,7 @@ export const GamePlay = () => {
     if (Number(typeId) === 1) {
       setIsShowAirdropQuestLogin(true);
     }
+    disconnectTon();
   }, [typeId]);
   useEffect(() => {
     if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST || true) {
