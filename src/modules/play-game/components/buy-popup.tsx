@@ -8,6 +8,7 @@ import Shell from '@/assets/shell.png';
 import { Spin } from 'antd';
 import { useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
+import { TonConnectButton } from '@tonconnect/ui-react';
 export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) => {
   const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
@@ -110,27 +111,30 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
             {pack?.reward?.[0]?.type === 'point' ? 'AQUA' : 'SHELL'}
           </div>
         )}
-        <div
-          className={`purchase-btn !w-full mt-[43px] flex items-center justify-center ${
-            isLoading && '!opacity-70 !cursor-default'
-          }`}
-          onClick={async () => {
-            if (isLoading) return;
-            if (!tonConnectUI.connected) {
-              tonConnectUI.openModal();
-              return;
-            }
+        <TonConnectButton />
+        <div className='w-fit relative'>
+          <div
+            className={`purchase-btn !w-full mt-[43px] flex items-center justify-center relative z-[2] ${
+              isLoading && '!opacity-70 !cursor-default'
+            }`}
+            onClick={async () => {
+              if (isLoading) return;
+              if (!tonConnectUI.connected) {
+                tonConnectUI.openModal();
+                return;
+              }
 
-            handleBuyAqua();
-          }}
-        >
-          {tonConnectUI?.connected ? 'Purchase' : 'Login with TON'}
+              handleBuyAqua();
+            }}
+          >
+            {tonConnectUI?.connected ? 'Purchase' : 'Login with TON'}
 
-          {isLoading && (
-            <div className='button-spin'>
-              <Spin />
-            </div>
-          )}
+            {isLoading && (
+              <div className='button-spin'>
+                <Spin />
+              </div>
+            )}
+          </div>
         </div>
 
         {/* <div
