@@ -107,6 +107,19 @@ export const Wrapper = styled.div`
       margin-top: 53px;
       margin-bottom: 8px;
     }
+    .purchase-btn-wrapper {
+      .connected-account {
+        background-color: #121214;
+        padding: 8px;
+        bottom: -4px;
+        transform: translateY(100%);
+      }
+      &:hover {
+        .connected-account {
+          opacity: 1;
+        }
+      }
+    }
     .purchase-btn {
       padding: 8px 11px;
       gap: 4px;
