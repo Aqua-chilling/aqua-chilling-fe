@@ -15,7 +15,7 @@ import { useAccountInfoContext } from '@/contexts/account-info.context';
 import { CHAIN, useTonAddress, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { ENVS } from '@/config';
 import { beginCell, Address, toNano } from '@ton/ton';
-import { gasFee, getTwitterOauthUrl, validUntil } from '@/constants/app-constaints';
+import { validUntil } from '@/constants/app-constaints';
 import { useQuery } from 'react-query';
 import { CopyOutlined, DisconnectOutlined } from '@ant-design/icons';
 export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => void; purchaseAqua: () => void }) => {
@@ -120,7 +120,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                     const messages = [
                       {
                         address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
-                        amount: toNano(gasFee)?.toString(),
+                        amount: '0',
                         payload: transactionPayload.toBoc().toString('base64')
                       }
                     ];
