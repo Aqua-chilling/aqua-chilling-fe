@@ -34,7 +34,8 @@ export const GamePlay = () => {
   const [tonConnectUI] = useTonConnectUI();
   const [searchParams] = useSearchParams();
   const typeId = searchParams.get('id');
-  const ref = searchParams.get('ref');
+  const ref = WebApp.initDataUnsafe.start_param;
+  console.log('rèf', ref);
   const [isShowBuyModal, setIsShowBuyModal] = React.useState(false);
   const token = useSelector(selectToken);
   const { gameMessage, sendMessage, setGameMessage } = usePlayGame();
