@@ -12,12 +12,14 @@ import WebApp from '@twa-dev/sdk';
 import { OauthRepository } from '@/repositories/oauth/oauth.repository';
 import Token from '@/assets/wallet/aqua.png';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
-import { CHAIN, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
+import { CHAIN, useTonAddress, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { ENVS } from '@/config';
 import { beginCell, Address, toNano } from '@ton/ton';
 import { gasFee, getTwitterOauthUrl, validUntil } from '@/constants/app-constaints';
 import { useQuery } from 'react-query';
+import { CopyOutlined, DisconnectOutlined } from '@ant-design/icons';
 export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => void; purchaseAqua: () => void }) => {
+  const address = useTonAddress();
   const { userProfile } = useAccountInfoContext();
   const token = useSelector(selectToken);
   const [isLoading, setIsLoading] = React.useState(-1);
@@ -35,8 +37,9 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
   const is_visit_aqua_web = userQuest?.[4]?.status !== 0;
   const is_telegram_premium = userQuest?.[8]?.status !== 0;
   const isJoinedTelegram = userProfile?.telegramOnboard?.aquachilling;
-  const isFollowed = userProfile?.twitterOnboard?.follows?.length > 0;
-  const isRetweeded = userProfile?.twitterOnboard?.retweets?.length > 0;
+  const isFollowed = userQuest?.[5]?.status !== 0;
+  const isRetweeded = userQuest?.[6]?.status !== 0;
+  console.log('quesst', userQuest);
   const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
   const { addNotification } = useNotification();
@@ -70,65 +73,117 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             <div className='font-secondary font-normal text-xs text-[#FFFFFF] opacity-70 mt-1'>
               Check-in with Telegram Wallet (minimum transaction)
             </div>
-            <div
-              className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                is_checkin_wallet && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
-              }`}
-              onClick={async () => {
-                try {
-                  if (!tonConnectUI.connected || !wallet) {
-                    tonConnectUI.openModal();
-                    return;
-                  }
-                  setIsLoading(1);
-                  const transactionPayload = beginCell()
-                    .storeUint(0, 32)
-                    .storeStringTail(`${userProfile?.id}-${0}-${0}`)
-                    .endCell();
-                  const messages = [
-                    {
-                      address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
-                      amount: toNano(gasFee)?.toString(),
-                      payload: transactionPayload.toBoc().toString('base64')
+            <div className='w-fit relative task-button-wrapper'>
+              <div
+                className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
+                  is_checkin_wallet && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
+                }`}
+                onClick={async () => {
+                  try {
+                    if (!tonConnectUI.connected || !wallet) {
+                      tonConnectUI.openModal();
+                      return;
                     }
-                  ];
-                  const transaction = {
-                    validUntil: Math.floor(Date.now() / 1000) + validUntil,
-                    network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
-                    from: wallet?.account?.address || '',
-                    messages: messages
-                  };
-                  const res = await tonConnectUI.sendTransaction(transaction);
-                  console.log('res', res);
-                  if (res) {
-                    const resOnboard = await OnboardingRepository.UpdateUserQuests({
-                      id: 1
+                    setIsLoading(1);
+                    const transactionPayload = beginCell()
+                      .storeUint(0, 32)
+                      .storeStringTail(`${userProfile?.id}-${0}-${0}`)
+                      .endCell();
+                    const messages = [
+                      {
+                        address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
+                        amount: toNano(gasFee)?.toString(),
+                        payload: transactionPayload.toBoc().toString('base64')
+                      }
+                    ];
+                    const transaction = {
+                      validUntil: Math.floor(Date.now() / 1000) + validUntil,
+                      network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
+                      from: wallet?.account?.address || '',
+                      messages: messages
+                    };
+                    const res = await tonConnectUI.sendTransaction(transaction);
+                    console.log('res', res);
+                    if (res) {
+                      const resOnboard = await OnboardingRepository.UpdateUserQuests({
+                        id: 1
+                      });
+                      if (resOnboard) {
+                        addNotification({
+                          message: 'Quest done!',
+                          type: NOTIFICATION_TYPE.SUCCESS,
+                          id: new Date().getTime()
+                        });
+                      } else {
+                        addNotification({
+                          message: 'Something went wrong! Try again later',
+                          type: NOTIFICATION_TYPE.ERROR,
+                          id: new Date().getTime()
+                        });
+                      }
+                      refetchQuest();
+                    }
+                  } catch (err: any) {
+                    addNotification({
+                      message: err?.message || 'Something went wrong',
+                      type: NOTIFICATION_TYPE.SUCCESS,
+                      id: new Date().getTime()
                     });
-                    if (resOnboard) {
+                  }
+                }}
+              >
+                {is_checkin_wallet ? 'Completed' : !!wallet ? 'Start' : 'Connect TON Wallet'}
+              </div>
+              {!!wallet && (
+                <div className='absolute connected-account opacity-0 min-w-[200px] rounded-xl'>
+                  <div
+                    className='w-full flex items-center justify-start gap-2 cursor-pointer p-2'
+                    onClick={() => {
+                      navigator.clipboard.writeText(address);
                       addNotification({
-                        message: 'Quest done!',
+                        message: 'Copied!',
                         type: NOTIFICATION_TYPE.SUCCESS,
                         id: new Date().getTime()
                       });
-                    } else {
-                      addNotification({
-                        message: 'Something went wrong! Try again later',
-                        type: NOTIFICATION_TYPE.ERROR,
-                        id: new Date().getTime()
-                      });
-                    }
-                    refetchQuest();
-                  }
-                } catch (err: any) {
-                  addNotification({
-                    message: err?.message || 'Something went wrong',
-                    type: NOTIFICATION_TYPE.SUCCESS,
-                    id: new Date().getTime()
-                  });
-                }
-              }}
-            >
-              {is_checkin_wallet ? 'Completed' : tonConnectUI?.connected ? 'Start' : 'Connect TON'}
+                    }}
+                  >
+                    <CopyOutlined
+                      style={{
+                        fontSize: '16px',
+                        color: 'white',
+                        strokeWidth: '30', // --> higher value === more thickness the filled area
+                        stroke: 'white'
+                      }}
+                    />
+                    <span className='text-[white] font-semibold'>Copy Address</span>
+                  </div>
+                  <div
+                    className='w-full flex items-center justify-start gap-2 cursor-pointer p-2'
+                    onClick={async () => {
+                      try {
+                        await tonConnectUI.disconnect();
+                      } catch (err) {
+                        console.log('err', err);
+                        addNotification({
+                          message: 'Something went wrong!',
+                          type: NOTIFICATION_TYPE.ERROR,
+                          id: new Date().getTime()
+                        });
+                      }
+                    }}
+                  >
+                    <DisconnectOutlined
+                      style={{
+                        fontSize: '16px',
+                        color: 'white',
+                        strokeWidth: '30', // --> higher value === more thickness the filled area
+                        stroke: 'white'
+                      }}
+                    />
+                    <span className='text-[white] font-semibold'>Disconnect</span>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -256,29 +311,37 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 isFollowed && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
               }`}
             >
-              {userProfile?.twitter ? (
-                isFollowed ? (
-                  <div className='flex items-center gap-1'>Completed</div>
-                ) : (
-                  <div
-                    className='flex items-center gap-1'
-                    onClick={() => {
-                      window.open(`https://twitter.com/Aquachilling`, '_blank');
-                    }}
-                  >
-                    <img className='w-5' src={X} alt='' />
-                    Follow us on X
-                    {/* {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />} */}
-                  </div>
-                )
+              {isFollowed ? (
+                <div className='flex items-center gap-1'>Completed</div>
               ) : (
                 <div
                   className='flex items-center gap-1'
-                  onClick={() => {
-                    window.open(getTwitterOauthUrl(), '_self');
+                  onClick={async () => {
+                    window.open(`https://twitter.com/Aquachilling`, '_blank');
+                    setTimeout(async () => {
+                      const resOnboard = await OnboardingRepository.UpdateUserQuests({
+                        id: 6
+                      });
+                      if (resOnboard) {
+                        addNotification({
+                          message: 'Quest done!',
+                          type: NOTIFICATION_TYPE.SUCCESS,
+                          id: new Date().getTime()
+                        });
+                      } else {
+                        addNotification({
+                          message: 'Something went wrong! Try again later',
+                          type: NOTIFICATION_TYPE.ERROR,
+                          id: new Date().getTime()
+                        });
+                      }
+                      refetchQuest();
+                    }, 10000);
                   }}
                 >
-                  Link X Account
+                  <img className='w-5' src={X} alt='' />
+                  Follow us on X
+                  {/* {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />} */}
                 </div>
               )}
             </div>
@@ -302,29 +365,37 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 isRetweeded && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
               }`}
             >
-              {userProfile?.twitter ? (
-                isRetweeded ? (
-                  <div className='flex items-center gap-1'>Completed</div>
-                ) : (
-                  <div
-                    className='flex items-center gap-1'
-                    onClick={() => {
-                      window.open(`https://twitter.com/Aquachilling/status/1772973413365141606`, '_blank');
-                    }}
-                  >
-                    <img className='w-5' src={X} alt='' />
-                    Retweet
-                    {/* {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />} */}
-                  </div>
-                )
+              {isRetweeded ? (
+                <div className='flex items-center gap-1'>Completed</div>
               ) : (
                 <div
                   className='flex items-center gap-1'
                   onClick={() => {
-                    window.open(getTwitterOauthUrl(), '_blank', '');
+                    window.open(`https://twitter.com/Aquachilling/status/1772973413365141606`, '_blank');
+                    setTimeout(async () => {
+                      const resOnboard = await OnboardingRepository.UpdateUserQuests({
+                        id: 7
+                      });
+                      if (resOnboard) {
+                        addNotification({
+                          message: 'Quest done!',
+                          type: NOTIFICATION_TYPE.SUCCESS,
+                          id: new Date().getTime()
+                        });
+                      } else {
+                        addNotification({
+                          message: 'Something went wrong! Try again later',
+                          type: NOTIFICATION_TYPE.ERROR,
+                          id: new Date().getTime()
+                        });
+                      }
+                      refetchQuest();
+                    }, 10000);
                   }}
                 >
-                  Link X Account
+                  <img className='w-5' src={X} alt='' />
+                  Retweet
+                  {/* {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />} */}
                 </div>
               )}
             </div>

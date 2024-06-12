@@ -12,6 +12,7 @@ import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repos
 export const Referral = ({ data }: any) => {
   const [isShowRef, setIsShowRef] = useState(false);
   const token = useSelector(selectToken);
+
   const { data: userReferral, refetch: refetchQuest } = useQuery({
     queryKey: ['retrieveReferralHistory', token],
     queryFn: () => OnboardingRepository.RetrieveReferralsHistory(),

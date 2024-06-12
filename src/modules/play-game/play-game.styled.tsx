@@ -98,9 +98,6 @@ export const Wrapper = styled.div`
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 8px;
-
-    max-height: calc(100vh - 420px);
-    overflow: auto;
     .aqua-package {
       background: url(${aquaPackage});
       background-size: 100% 100%;
@@ -330,6 +327,13 @@ export const Wrapper = styled.div`
       border-radius: 16px;
       background: white;
       padding: 8px;
+      .buy-package-two {
+        max-height: calc(100vh - 264px);
+        overflow: auto;
+        width: 100%;
+        height: 100%;
+        min-height: 400px;
+      }
       .balance-card {
         background: url(${balanceBg});
         background-size: 100% 100%;
@@ -479,7 +483,6 @@ export const Wrapper = styled.div`
         flex-direction: column;
         align-items: center;
         gap: 20px;
-
         @media screen and (max-width: 3000px) {
           width: 100%;
         }

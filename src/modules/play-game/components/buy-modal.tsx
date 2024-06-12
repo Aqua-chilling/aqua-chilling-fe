@@ -64,7 +64,7 @@ export const BuyModal = ({
             <div className='font-secondary text-[#061225] font-medium text-2xl mt-8 -mb-3'>Buy $AQUA</div>
 
             {activeTab === 1 && (
-              <>
+              <div className='buy-package-two'>
                 {packAquasMaps?.special?.map((packaqua: any, key: number) => {
                   return (
                     <div className='special-package flex items-center flex-col w-full p-4 relative z-[2] ' key={key}>
@@ -136,7 +136,7 @@ export const BuyModal = ({
                     );
                   })}
                 </div>
-              </>
+              </div>
             )}
           </div>
         </div>
