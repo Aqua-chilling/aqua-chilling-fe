@@ -14,7 +14,7 @@ import Token from '@/assets/wallet/aqua.png';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
 import { CHAIN, useTonAddress, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { ENVS } from '@/config';
-import { beginCell, Address, toNano } from '@ton/ton';
+import { beginCell, Address } from '@ton/ton';
 import { validUntil } from '@/constants/app-constaints';
 import { useQuery } from 'react-query';
 import { CopyOutlined, DisconnectOutlined } from '@ant-design/icons';
