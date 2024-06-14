@@ -1,8 +1,9 @@
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
+import { ENVS } from '@/config';
 import { COMMUNICATIONFUNCTION } from '@/constants/app-constaints';
 import { useNotification } from '@/contexts/notification.context';
 import { usePlayGame } from '@/hooks/use-play-game';
-import { useTonConnectUI } from '@tonconnect/ui-react';
+import { CHAIN, useTonConnectUI } from '@tonconnect/ui-react';
 import { useCallback, useState } from 'react';
 
 interface IPropsUseBuyPack {
@@ -18,6 +19,17 @@ export const useBuyPack = (props: IPropsUseBuyPack) => {
   const handleBuyPack = useCallback(async () => {
     console.log(transaction);
     try {
+      const activeChain = ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
+      const activeChainName = ENVS.VITE_ISTESTNET ? 'Testnet' : 'Mainnet';
+      if (tonConnectUI.account?.chain !== activeChain) {
+        tonConnectUI.disconnect();
+        addNotification({
+          message: `Invalid chain. Please switch to TON ${activeChainName}`,
+          type: NOTIFICATION_TYPE.ERROR,
+          id: new Date().getTime()
+        });
+        return;
+      }
       setIsLoading(true);
       console.log('transaction', transaction);
       const res = await tonConnectUI.sendTransaction(transaction);

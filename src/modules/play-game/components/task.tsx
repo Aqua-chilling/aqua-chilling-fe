@@ -15,7 +15,7 @@ import { useAccountInfoContext } from '@/contexts/account-info.context';
 import { CHAIN, useTonAddress, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { ENVS } from '@/config';
 import { beginCell, Address, toNano } from '@ton/ton';
-import { gasFee, getTwitterOauthUrl, validUntil } from '@/constants/app-constaints';
+import { validUntil } from '@/constants/app-constaints';
 import { useQuery } from 'react-query';
 import { CopyOutlined, DisconnectOutlined } from '@ant-design/icons';
 export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => void; purchaseAqua: () => void }) => {
@@ -57,6 +57,23 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
 
     ele?.appendChild(script);
   }, []);
+  React.useEffect(
+    () =>
+      tonConnectUI.onStatusChange(async (w) => {
+        const activeChain = ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
+        const activeChainName = ENVS.VITE_ISTESTNET ? 'Testnet' : 'Mainnet';
+        if (!!w && w.account?.chain !== activeChain) {
+          tonConnectUI.disconnect();
+          addNotification({
+            message: `Invalid chain. Please switch to TON ${activeChainName}`,
+            type: NOTIFICATION_TYPE.ERROR,
+            id: new Date().getTime()
+          });
+          return;
+        }
+      }),
+    [tonConnectUI]
+  );
   return (
     <Wrapper>
       <div className='table'>
@@ -84,15 +101,29 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                       tonConnectUI.openModal();
                       return;
                     }
+                    const activeChain = ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
+                    const activeChainName = ENVS.VITE_ISTESTNET ? 'Testnet' : 'Mainnet';
+                    if (tonConnectUI.account?.chain !== activeChain) {
+                      tonConnectUI.disconnect();
+                      addNotification({
+                        message: `Invalid chain. Please switch to TON ${activeChainName}`,
+                        type: NOTIFICATION_TYPE.ERROR,
+                        id: new Date().getTime()
+                      });
+                      return;
+                    }
                     setIsLoading(1);
                     const transactionPayload = beginCell()
                       .storeUint(0, 32)
                       .storeStringTail(`${userProfile?.id}-${0}-${0}`)
                       .endCell();
+                    const buyAquaAddress = Address.parse(ENVS.VITE_BASE_PACKAGE_TON_CONTRACT).toString({
+                      bounceable: false
+                    });
                     const messages = [
                       {
-                        address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
-                        amount: toNano(gasFee)?.toString(),
+                        address: buyAquaAddress, //CONTRACT
+                        amount: '0',
                         payload: transactionPayload.toBoc().toString('base64')
                       }
                     ];
@@ -317,7 +348,10 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 <div
                   className='flex items-center gap-1'
                   onClick={async () => {
-                    window.open(`https://twitter.com/Aquachilling`, '_blank');
+                    WebApp.openLink(`https://twitter.com/Aquachilling`, {
+                      try_instant_view: true
+                    });
+                    // window.open(`https://twitter.com/Aquachilling`, '_blank');
                     setTimeout(async () => {
                       const resOnboard = await OnboardingRepository.UpdateUserQuests({
                         id: 6
@@ -371,7 +405,10 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 <div
                   className='flex items-center gap-1'
                   onClick={() => {
-                    window.open(`https://twitter.com/Aquachilling/status/1772973413365141606`, '_blank');
+                    WebApp.openLink(`https://twitter.com/Aquachilling/status/1772973413365141606`, {
+                      try_instant_view: true
+                    });
+                    // window.open(`https://twitter.com/Aquachilling/status/1772973413365141606`, '_blank');
                     setTimeout(async () => {
                       const resOnboard = await OnboardingRepository.UpdateUserQuests({
                         id: 7
