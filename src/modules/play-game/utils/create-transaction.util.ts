@@ -9,7 +9,6 @@ export const createTransaction = (wallet: any, packID: number, amount: number, p
   }
   const transactionPayload = beginCell().storeUint(0, 32).storeStringTail(`${userId}-${packID}-${amount}`).endCell();
   const aquaAddress = Address.parse(ENVS.VITE_BASE_PACKAGE_TON_CONTRACT).toString({ bounceable: false });
-  // beginCell().storeUint(0, 32).storeStringTail(`${userId}-${packID}-${amount}`).endCell();
   console.log('packId', packID, price, amount);
   const _amount = toNano(amount * price)?.toString();
   const messages = [
