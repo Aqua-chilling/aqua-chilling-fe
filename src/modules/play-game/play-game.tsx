@@ -2,7 +2,6 @@ import { useSelector } from 'react-redux';
 import { Wrapper } from './play-game.styled';
 import React, { useCallback, useEffect, useState } from 'react';
 import { deleteAccount, selectToken, updateDiscordId, updateReferral, updateTwitterId } from '@/redux';
-import { PopUpLogin } from './components/popup-login';
 import { Modal } from '@/components/modal/modal';
 import { usePlayGame } from '@/hooks/use-play-game';
 import { COMMUNICATIONFUNCTION } from '@/constants/app-constaints';
