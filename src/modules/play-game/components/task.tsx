@@ -117,9 +117,12 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                       .storeUint(0, 32)
                       .storeStringTail(`${userProfile?.id}-${0}-${0}`)
                       .endCell();
+                    const buyAquaAddress = Address.parse(ENVS.VITE_BASE_PACKAGE_TON_CONTRACT).toString({
+                      bounceable: false
+                    });
                     const messages = [
                       {
-                        address: ENVS.VITE_BASE_PACKAGE_TON_CONTRACT, //CONTRACT
+                        address: buyAquaAddress, //CONTRACT
                         amount: '0',
                         payload: transactionPayload.toBoc().toString('base64')
                       }
