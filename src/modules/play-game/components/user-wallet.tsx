@@ -11,10 +11,11 @@ import Copy from '@/assets/wallet/copy.png';
 import React, { useState } from 'react';
 import { BuyAqua } from './buy-aqua';
 import { useStateCallback } from '@/hooks/use-on-off';
-import { useTonAddress } from '@tonconnect/ui-react';
+import { TonConnectUI, useTonAddress, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
+import { CopyOutlined, DisconnectOutlined } from '@ant-design/icons';
 export const UserWallet = ({ onClose, purchaseAqua }: { onClose: () => void; purchaseAqua: () => void }) => {
   const [isBuy, setIsBuy] = React.useState(false);
   const [buyInfo, setBuyInfo] = useStateCallback({
@@ -23,7 +24,8 @@ export const UserWallet = ({ onClose, purchaseAqua }: { onClose: () => void; pur
   });
   const { addNotification } = useNotification();
   const { userProfileLite } = useAccountInfoContext();
-  const userAddress = useTonAddress();
+  const [tonConnectUI] = useTonConnectUI();
+  const wallet = useTonWallet();
   return (
     <Wrapper>
       {isBuy && (
@@ -58,33 +60,71 @@ export const UserWallet = ({ onClose, purchaseAqua }: { onClose: () => void; pur
         >
           <img src={CloseIcon} alt='' />
         </div>
-        <div className='wallet-info'>
-          <div className='wallet-title'>Wallet address</div>
-          <div className='wallet-address'>
-            <div>{userAddress}</div>
-            <img
-              src={Copy}
-              alt=''
-              onClick={async () => {
-                try {
-                  await navigator.clipboard.writeText(userAddress);
-                  addNotification({
-                    message: 'Copied',
-                    type: NOTIFICATION_TYPE.SUCCESS,
-                    id: new Date().getTime()
-                  });
-                } catch {
-                  (err: any) => {
+        <div className='wallet-info flex flex-col'>
+          {!!wallet ? (
+            <>
+              <div className='wallet-title'>Wallet address</div>
+              <div className='wallet-address !mb-2'>
+                <div>{wallet?.account?.address}</div>
+                <img
+                  src={Copy}
+                  alt=''
+                  onClick={async () => {
+                    try {
+                      await navigator.clipboard.writeText(wallet?.account?.address);
+                      addNotification({
+                        message: 'Copied',
+                        type: NOTIFICATION_TYPE.SUCCESS,
+                        id: new Date().getTime()
+                      });
+                    } catch {
+                      (err: any) => {
+                        addNotification({
+                          message: 'Something went wrong!',
+                          type: NOTIFICATION_TYPE.ERROR,
+                          id: new Date().getTime()
+                        });
+                      };
+                    }
+                  }}
+                />
+              </div>
+              <div
+                className='wallet-button flex items-center justify-start gap-2 cursor-pointer p-2 !mt-0 self-end mb-4'
+                onClick={async () => {
+                  try {
+                    await tonConnectUI.disconnect();
+                  } catch (err) {
+                    console.log('err', err);
                     addNotification({
                       message: 'Something went wrong!',
                       type: NOTIFICATION_TYPE.ERROR,
                       id: new Date().getTime()
                     });
-                  };
-                }
+                  }
+                }}
+              >
+                <DisconnectOutlined
+                  style={{
+                    fontSize: '16px',
+                    color: 'white',
+                    strokeWidth: '30', // --> higher value === more thickness the filled area
+                    stroke: 'white'
+                  }}
+                />
+                <span className='text-[white] font-semibold'>Disconnect</span>
+              </div>
+            </>
+          ) : (
+            <div
+              className='wallet-button !mt-0 self-center mb-4'
+              onClick={async () => {
+                tonConnectUI.openModal();
               }}
-            />
-          </div>
+            >
+              Connect TON Wallet
+            </div>
+          )}
           <div className='wallet-cards'>
             <div className='wallet-card'>
               <img src={Gem} alt='' />
