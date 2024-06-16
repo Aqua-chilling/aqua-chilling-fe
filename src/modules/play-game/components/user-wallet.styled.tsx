@@ -96,6 +96,22 @@ export const Wrapper = styled.div`
           cursor: pointer;
         }
       }
+      .wallet-button {
+        background: #7aefff;
+        padding: 8px 16px;
+        border-radius: 8px;
+        margin-top: 16px;
+        width: fit-content;
+        font-family: 'Fredoka';
+        font-size: 12px;
+        font-weight: 600;
+        line-height: 16px;
+        letter-spacing: -0.02em;
+        text-align: center;
+        color: #ffffff;
+        border: 1px solid #1d1d22;
+        cursor: pointer;
+      }
       .wallet-cards {
         width: 100%;
         display: flex;
@@ -138,22 +154,7 @@ export const Wrapper = styled.div`
               opacity: 0.5;
             }
           }
-          .wallet-button {
-            background: #7aefff;
-            padding: 8px 16px;
-            border-radius: 8px;
-            margin-top: 16px;
-            width: fit-content;
-            font-family: 'Fredoka';
-            font-size: 12px;
-            font-weight: 600;
-            line-height: 16px;
-            letter-spacing: -0.02em;
-            text-align: center;
-            color: #ffffff;
-            border: 1px solid #1d1d22;
-            cursor: pointer;
-          }
+
           .wallet-border {
             width: 100%;
             height: 1px;
