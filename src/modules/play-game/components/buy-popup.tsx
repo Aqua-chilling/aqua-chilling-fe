@@ -158,56 +158,6 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
                 </div>
               )}
             </div>
-            {!!wallet && (
-              <div className='absolute connected-account opacity-0 min-w-[200px] rounded-xl'>
-                <div
-                  className='w-full flex items-center justify-start gap-2 cursor-pointer p-2'
-                  onClick={() => {
-                    navigator.clipboard.writeText(address);
-                    addNotification({
-                      message: 'Copied!',
-                      type: NOTIFICATION_TYPE.SUCCESS,
-                      id: new Date().getTime()
-                    });
-                  }}
-                >
-                  <CopyOutlined
-                    style={{
-                      fontSize: '16px',
-                      color: 'white',
-                      strokeWidth: '30', // --> higher value === more thickness the filled area
-                      stroke: 'white'
-                    }}
-                  />
-                  <span className='text-[white] font-semibold'>Copy Address</span>
-                </div>
-                <div
-                  className='w-full flex items-center justify-start gap-2 cursor-pointer p-2'
-                  onClick={async () => {
-                    try {
-                      await tonConnectUI.disconnect();
-                    } catch (err) {
-                      console.log('err', err);
-                      addNotification({
-                        message: 'Something went wrong!',
-                        type: NOTIFICATION_TYPE.ERROR,
-                        id: new Date().getTime()
-                      });
-                    }
-                  }}
-                >
-                  <DisconnectOutlined
-                    style={{
-                      fontSize: '16px',
-                      color: 'white',
-                      strokeWidth: '30', // --> higher value === more thickness the filled area
-                      stroke: 'white'
-                    }}
-                  />
-                  <span className='text-[white] font-semibold'>Disconnect</span>
-                </div>
-              </div>
-            )}
           </div>
         }
 
