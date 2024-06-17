@@ -355,7 +355,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 <div
                   className='flex items-center gap-1'
                   onClick={() => {
-                    WebApp.openLink(`https://twitter.com/Aquachilling/status/1772973413365141606`, {
+                    WebApp.openLink(`https://x.com/Aquachilling/status/1802696100257948012`, {
                       try_instant_view: true
                     });
                     // window.open(`https://twitter.com/Aquachilling/status/1772973413365141606`, '_blank');

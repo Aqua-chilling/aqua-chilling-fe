@@ -216,7 +216,7 @@ export const PopUpQuest = ({ setVisibility }: { setVisibility: (arg0: boolean) =
                   <div
                     className={twitter ? 'btn' : 'btn disabled'}
                     onClick={() => {
-                      window.open(`https://twitter.com/Aquachilling/status/1772973413365141606`, '_blank');
+                      window.open(`https://x.com/Aquachilling/status/1802696100257948012`, '_blank');
                     }}
                   >
                     Share a tweet {isLoading && <Spin indicator={<LoadingOutlined style={{ fontSize: 16 }} spin />} />}
