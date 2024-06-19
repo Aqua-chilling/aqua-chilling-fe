@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { deleteAccount, selectToken, updateDiscordId, updateReferral, updateTwitterId } from '@/redux';
 import { Modal } from '@/components/modal/modal';
 import { usePlayGame } from '@/hooks/use-play-game';
-import { COMMUNICATIONFUNCTION } from '@/constants/app-constaints';
+import { COMMUNICATIONFUNCTION, twaRedirects } from '@/constants/app-constaints';
 import WebApp from '@twa-dev/sdk';
 import { BuyModal } from './components/buy-modal';
 import { useSearchParams } from 'react-router-dom';
@@ -65,7 +65,7 @@ export const GamePlay = () => {
   const { addNotification } = useNotification();
   const { handleLogin } = useLoginWithTelegram();
   React.useEffect(() => {
-    if (ref && ref !== 'telegram_wallet' && !!token && userProfile?.referral_code_status !== 1) {
+    if (ref && !twaRedirects.includes(ref || '') && !!token && userProfile?.referral_code_status !== 1) {
       OauthRepository.enterReferralCode(ref).then((rs) => {
         dispatch(
           updateReferral({
@@ -87,11 +87,20 @@ export const GamePlay = () => {
     if (WebApp.initDataUnsafe?.user?.id) {
       dispatch(updateTelegramId({ telegram: WebApp.initDataUnsafe?.user?.id.toString() }));
     }
-    if (ref !== 'telegram_wallet') {
+    if (!twaRedirects.includes(ref || '')) {
       signTokenOut();
     }
     if (Number(typeId) === 1) {
       setIsShowAirdropQuestLogin(true);
+    }
+    if (ref === 'telegram_wallet_task') {
+      setIsShowAirdropQuestLogin(true);
+    }
+    if (ref === 'telegram_wallet_buy') {
+      setIsShowBuyModal(true);
+    }
+    if (ref === 'telegram_wallet_connect') {
+      setIsShowWallet(true);
     }
   }, [ref]);
   useEffect(() => {

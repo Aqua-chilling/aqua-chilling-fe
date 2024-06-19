@@ -14,6 +14,7 @@ import { TonConnectButton } from '@tonconnect/ui-react';
 import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { ENVS } from '@/config';
+import { twaRedirects } from '@/constants/app-constaints';
 export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) => {
   const [tonConnectUI] = useTonConnectUI();
   const { addNotification } = useNotification();
@@ -145,7 +146,15 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
               }`}
               onClick={async () => {
                 if (isLoading) return;
-                if (firstLogin && ref !== 'telegram_wallet') {
+                if (tonConnectUI)
+                  tonConnectUI.uiOptions = {
+                    actionsConfiguration: {
+                      returnStrategy: 'back',
+                      twaReturnUrl: 'https://t.me/aquachillingbot/aquachillingapp?startapp=telegram_wallet_buy'
+                    }
+                  };
+
+                if (firstLogin && !twaRedirects.includes(ref || '')) {
                   try {
                     setFirstLogin(false);
                     await tonConnectUI.disconnect();

@@ -119,6 +119,12 @@ export const UserWallet = ({ onClose, purchaseAqua }: { onClose: () => void; pur
             <div
               className='wallet-button !mt-0 self-center mb-4'
               onClick={async () => {
+                tonConnectUI.uiOptions = {
+                  actionsConfiguration: {
+                    returnStrategy: 'back',
+                    twaReturnUrl: 'https://t.me/aquachillingbot/aquachillingapp?startapp=telegram_wallet_connect'
+                  }
+                };
                 tonConnectUI.openModal();
               }}
             >
