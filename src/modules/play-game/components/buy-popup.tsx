@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useState } from 'react';
 import { createTransaction } from '../utils/create-transaction.util';
 import { useBuyAqua, useBuyAquaTelegram } from '../hooks/use-buy-aqua';
 import Token from '@/assets/wallet/aqua.png';
+import WebApp from '@twa-dev/sdk';
 import Shell from '@/assets/shell.png';
 import { Spin } from 'antd';
 import { CHAIN, useTonAddress, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
@@ -17,6 +18,7 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
   const [tonConnectUI] = useTonConnectUI();
   const { addNotification } = useNotification();
   const wallet = useTonWallet();
+  const ref = WebApp.initDataUnsafe.start_param;
   const address = useTonAddress();
   const [amount, setAmount] = useState(1);
   const { userProfile, firstLogin, setFirstLogin } = useAccountInfoContext();
@@ -143,7 +145,7 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
               }`}
               onClick={async () => {
                 if (isLoading) return;
-                if (firstLogin) {
+                if (firstLogin && ref !== 'telegram_wallet') {
                   try {
                     setFirstLogin(false);
                     await tonConnectUI.disconnect();
@@ -156,7 +158,7 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
                 handleBuyAqua();
               }}
             >
-              {!!wallet ? 'Purchase' : 'Connect TON Wallet'}
+              {!!wallet && !firstLogin ? 'Purchase' : 'Connect TON Wallet'}
 
               {isLoading && (
                 <div className='button-spin'>

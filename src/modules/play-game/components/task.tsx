@@ -42,6 +42,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
   const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
   const { addNotification } = useNotification();
+  const ref = WebApp.initDataUnsafe.start_param;
   React.useEffect(() => {
     const ele = document.querySelector('#connect-telegram');
     const script = document.createElement('script');
@@ -96,7 +97,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 }`}
                 onClick={async () => {
                   try {
-                    if (firstLogin) {
+                    if (firstLogin && ref !== 'telegram_wallet') {
                       try {
                         setFirstLogin(false);
                         await tonConnectUI.disconnect();
