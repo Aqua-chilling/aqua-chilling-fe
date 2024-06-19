@@ -34,7 +34,6 @@ export const GamePlay = () => {
   const [searchParams] = useSearchParams();
   const typeId = searchParams.get('id');
   const ref = WebApp.initDataUnsafe.start_param;
-  console.log('rèf', ref);
   const [isShowBuyModal, setIsShowBuyModal] = React.useState(false);
   const token = useSelector(selectToken);
   const { gameMessage, sendMessage, setGameMessage } = usePlayGame();
@@ -83,7 +82,6 @@ export const GamePlay = () => {
     }
   }, [ref, token, userProfile]);
   useEffect(() => {
-    console.log('WebApp', WebApp);
     WebApp.expand();
     WebApp.enableClosingConfirmation();
     if (WebApp.initDataUnsafe?.user?.id) {
@@ -91,9 +89,6 @@ export const GamePlay = () => {
     }
     if (Number(typeId) !== 1) {
       signTokenOut();
-      try {
-        tonConnectUI?.disconnect();
-      } catch {}
     }
     if (Number(typeId) === 1) {
       setIsShowAirdropQuestLogin(true);

@@ -19,7 +19,7 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
   const wallet = useTonWallet();
   const address = useTonAddress();
   const [amount, setAmount] = useState(1);
-  const { userProfile } = useAccountInfoContext();
+  const { userProfile, firstLogin, setFirstLogin } = useAccountInfoContext();
   const transaction = useMemo(() => {
     return createTransaction(wallet, pack?.id, amount, pack?.pack_cost_ton || 0, userProfile?.id || '');
   }, [wallet, pack, amount, pack]);
@@ -143,6 +143,12 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
               }`}
               onClick={async () => {
                 if (isLoading) return;
+                if (firstLogin) {
+                  try {
+                    setFirstLogin(false);
+                    await tonConnectUI.disconnect();
+                  } catch {}
+                }
                 if (!wallet) {
                   tonConnectUI.openModal();
                   return;

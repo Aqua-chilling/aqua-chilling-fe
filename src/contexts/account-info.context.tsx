@@ -10,10 +10,13 @@ export interface IAccountInfoContext {
   userProfileLite: any;
   refetchProfileLite: () => void;
   setInterval: (time: number) => void;
+  firstLogin: boolean;
+  setFirstLogin: (isFirst: boolean) => void;
 }
 
 const AccountInfoContext = React.createContext<IAccountInfoContext | null>(null);
 export const AccountInfoContextProvider = ({ children }: React.PropsWithChildren) => {
+  const [firstLogin, setFirstLogin] = React.useState(true);
   const [interval, setInterval] = React.useState(15000);
   const token = useSelector(selectToken);
   const { data: userProfile, refetch: refetchProfile } = useQuery({
@@ -37,7 +40,9 @@ export const AccountInfoContextProvider = ({ children }: React.PropsWithChildren
     refetchProfile,
     userProfileLite,
     refetchProfileLite,
-    setInterval
+    setInterval,
+    firstLogin,
+    setFirstLogin
   };
 
   return <AccountInfoContext.Provider value={value}>{children}</AccountInfoContext.Provider>;

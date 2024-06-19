@@ -7,10 +7,11 @@ export const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 12px;
-  @media screen and (max-width: 768px) {
+  /* gap: 12px; */
+  gap: 32px;
+  /* @media screen and (max-width: 768px) {
     gap: 32px;
-  }
+  } */
   .titles {
     width: 100%;
     display: flex;
@@ -23,9 +24,10 @@ export const Wrapper = styled.div`
       font-weight: 700;
       line-height: normal;
       letter-spacing: -0.48px;
-      @media screen and (max-width: 768px) {
+      display: none;
+      /* @media screen and (max-width: 768px) {
         display: none;
-      }
+      } */
     }
     p {
       color: rgba(255, 255, 255, 0.7);
@@ -55,7 +57,7 @@ export const Wrapper = styled.div`
       display: none;
     }
     .quest-name {
-      width: 40%;
+      /* width: 40%; */
       display: flex;
       align-items: start;
       flex-direction: column;
@@ -66,27 +68,30 @@ export const Wrapper = styled.div`
         font-weight: 500;
         line-height: normal;
       }
-      @media screen and (max-width: 600px) {
+      width: 100%;
+      /* @media screen and (max-width: 600px) {
         width: 100%;
-      }
+      } */
     }
     .quest-point {
-      width: 15%;
+      /* width: 15%; */
       font-weight: 500;
       white-space: nowrap;
-
-      @media screen and (max-width: 600px) {
+      width: 20%;
+      text-align: start;
+      /* @media screen and (max-width: 600px) {
         width: 20%;
         text-align: start;
-      }
+      } */
     }
     .quest-status {
       flex: 1;
       display: flex;
       justify-content: end;
-      @media screen and (max-width: 600px) {
+      width: 50%;
+      /* @media screen and (max-width: 600px) {
         width: 50%;
-      }
+      } */
       .status-0 {
         color: #fff;
         font-weight: 700;
@@ -122,16 +127,16 @@ export const Wrapper = styled.div`
     }
     .table-head {
       display: flex;
-      width: 100%;
+      width: 170%;
       color: rgba(255, 255, 255, 0.7);
       text-align: right;
       font-size: 14px;
       font-weight: 500;
       gap: 12px;
-
+      /* 
       @media screen and (max-width: 600px) {
-        width: 170%;
-      }
+       
+      } */
     }
     .task-button-wrapper {
       .connected-account {
