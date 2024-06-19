@@ -93,6 +93,12 @@ export const GamePlay = () => {
     if (Number(typeId) === 1) {
       setIsShowAirdropQuestLogin(true);
     }
+    if (ref === 'telegram_wallet_task') {
+      setIsShowAirdropQuestLogin(true);
+    }
+    if (ref === 'telegram_wallet_buy') {
+      setIsShowBuyModal(true);
+    }
   }, [ref]);
   useEffect(() => {
     if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST || true) {
