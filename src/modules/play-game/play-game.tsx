@@ -87,10 +87,9 @@ export const GamePlay = () => {
     if (WebApp.initDataUnsafe?.user?.id) {
       dispatch(updateTelegramId({ telegram: WebApp.initDataUnsafe?.user?.id.toString() }));
     }
-    // if (ref !== 'telegram_wallet') {
-    //   console.log('signTokenOut');
-    //   signTokenOut();
-    // }
+    if (ref !== 'telegram_wallet') {
+      signTokenOut();
+    }
     if (Number(typeId) === 1) {
       setIsShowAirdropQuestLogin(true);
     }
