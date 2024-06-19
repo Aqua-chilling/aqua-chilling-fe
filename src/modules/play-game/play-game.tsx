@@ -65,7 +65,7 @@ export const GamePlay = () => {
   const { addNotification } = useNotification();
   const { handleLogin } = useLoginWithTelegram();
   React.useEffect(() => {
-    if (ref && !!token && userProfile?.referral_code_status !== 1) {
+    if (ref && ref !== 'telegram_wallet' && !!token && userProfile?.referral_code_status !== 1) {
       OauthRepository.enterReferralCode(ref).then((rs) => {
         dispatch(
           updateReferral({
