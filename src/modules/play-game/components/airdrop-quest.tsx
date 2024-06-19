@@ -7,6 +7,7 @@ import Back from '@/assets/airdrop/back.png';
 import { Task } from './task';
 import { Referral } from './referral';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
+import WebApp from '@twa-dev/sdk';
 const titleList = ['Airdrop quest', 'Quest list', 'Referrals'];
 export const AirdropQuests = ({
   onClose,
@@ -17,6 +18,7 @@ export const AirdropQuests = ({
   purchaseAqua: () => void;
   typeId: number;
 }) => {
+  const ref = WebApp.initDataUnsafe.start_param;
   const [step, setStep] = useState(typeId === 1 ? 1 : 0);
   const { userProfileLite } = useAccountInfoContext();
   useEffect(() => {
@@ -24,6 +26,10 @@ export const AirdropQuests = ({
       setStep(1);
     }
   }, [typeId]);
+
+  useEffect(() => {
+    if (ref === 'telegram_wallet_task') setStep(1);
+  }, [ref]);
   return (
     <Wrapper>
       <div

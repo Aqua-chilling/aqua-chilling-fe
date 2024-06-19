@@ -177,7 +177,11 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                   }
                 }}
               >
-                {is_checkin_wallet ? 'Completed' : !!wallet || !firstLogin ? 'Start' : 'Connect TON Wallet'}
+                {is_checkin_wallet
+                  ? 'Completed'
+                  : !!wallet || (!firstLogin && !twaRedirects.includes(ref || ''))
+                  ? 'Start'
+                  : 'Connect TON Wallet'}
               </div>
             </div>
           </div>
