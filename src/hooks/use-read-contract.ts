@@ -14,14 +14,10 @@ export const useReadContract = () => {
       const jsonRpcProviderInherits = new ethers.providers.JsonRpcProvider(
         SUPPORTED_NETWORKS[parseInt(ENVS.VITE_BASE_CHAIN_ID?.[0] || '56')]?.rpc?.[0] || ''
       );
-      console.log(SUPPORTED_NETWORKS[parseInt(ENVS.VITE_BASE_CHAIN_ID?.[0] || '56')]?.rpc?.[0]);
       const contract = new ethers.Contract(contractAddress, abi, jsonRpcProviderInherits);
       const response = await contract[funcName](...args);
       return response;
-    } catch (err: any) {
-      console.log('error contract');
-      console.log(err);
-    }
+    } catch (err: any) {}
   };
   return { readContract };
 };
