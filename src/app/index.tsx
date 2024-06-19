@@ -13,7 +13,7 @@ import { FixedGlobalStyle } from '@/providers/theme.provider';
 import '@/constants/style/locomotive-scroll.css';
 import { LoadingProvider } from '@/providers/loading.provider';
 import { NotificationProvider } from '@/contexts/notification.context';
-import { THEME, TonConnectUIProvider } from '@tonconnect/ui-react';
+import { THEME, TonConnectUIProvider, TonConnectUIContext } from '@tonconnect/ui-react';
 import { CredentialProvider } from '@/providers/credential.provider';
 import { AccountInfoContextProvider } from '@/contexts/account-info.context';
 const queryClient = new QueryClient();
@@ -54,7 +54,7 @@ export const App = () => {
               }}
               actionsConfiguration={{
                 returnStrategy: 'back',
-                twaReturnUrl: 'https://t.me/aquachillingbot/aquachillingapp?startapp=telegram_wallet'
+                twaReturnUrl: 'https://t.me/aquachillingbot/aquachillingapp'
               }}
             >
               <FixedGlobalStyle />
