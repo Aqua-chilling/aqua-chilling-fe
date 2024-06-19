@@ -167,7 +167,7 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
                 handleBuyAqua();
               }}
             >
-              {!!wallet && !firstLogin ? 'Purchase' : 'Connect TON Wallet'}
+              {!!wallet || (!firstLogin && !twaRedirects.includes(ref || '')) ? 'Purchase' : 'Connect TON Wallet'}
 
               {isLoading && (
                 <div className='button-spin'>
