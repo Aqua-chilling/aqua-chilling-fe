@@ -91,6 +91,9 @@ export const GamePlay = () => {
     }
     if (Number(typeId) !== 1) {
       signTokenOut();
+      try {
+        tonConnectUI?.disconnect();
+      } catch {}
     }
     if (Number(typeId) === 1) {
       setIsShowAirdropQuestLogin(true);
