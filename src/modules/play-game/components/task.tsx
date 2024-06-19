@@ -20,7 +20,7 @@ import { useQuery } from 'react-query';
 import { CopyOutlined, DisconnectOutlined } from '@ant-design/icons';
 export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => void; purchaseAqua: () => void }) => {
   const address = useTonAddress();
-  const { userProfile } = useAccountInfoContext();
+  const { userProfile, firstLogin, setFirstLogin } = useAccountInfoContext();
   const token = useSelector(selectToken);
   const [isLoading, setIsLoading] = React.useState(-1);
   const { data: userQuest, refetch: refetchQuest } = useQuery({
@@ -39,7 +39,6 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
   const isJoinedTelegram = userProfile?.telegramOnboard?.aquachilling;
   const isFollowed = userQuest?.[5]?.status !== 0;
   const isRetweeded = userQuest?.[6]?.status !== 0;
-  console.log('quesst', userQuest);
   const [tonConnectUI] = useTonConnectUI();
   const wallet = useTonWallet();
   const { addNotification } = useNotification();
@@ -97,6 +96,12 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 }`}
                 onClick={async () => {
                   try {
+                    if (firstLogin) {
+                      try {
+                        setFirstLogin(false);
+                        await tonConnectUI.disconnect();
+                      } catch {}
+                    }
                     if (!tonConnectUI.connected || !wallet) {
                       tonConnectUI.openModal();
                       return;
@@ -134,7 +139,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                       messages: messages
                     };
                     const res = await tonConnectUI.sendTransaction(transaction);
-                    console.log('res', res);
+
                     if (res) {
                       const resOnboard = await OnboardingRepository.UpdateUserQuests({
                         id: 1
@@ -163,7 +168,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                   }
                 }}
               >
-                {is_checkin_wallet ? 'Completed' : !!wallet ? 'Start' : 'Connect TON Wallet'}
+                {is_checkin_wallet ? 'Completed' : !!wallet || !firstLogin ? 'Start' : 'Connect TON Wallet'}
               </div>
             </div>
           </div>
@@ -413,7 +418,6 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                   <div
                     className=''
                     onClick={() => {
-                      console.log('webApp', WebApp?.version);
                       if (!WebApp?.initDataUnsafe?.user) window.open('https://t.me/aquachilling');
                       else {
                         WebApp.openTelegramLink('https://t.me/aquachilling');

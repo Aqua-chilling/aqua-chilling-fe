@@ -34,7 +34,6 @@ export const GamePlay = () => {
   const [searchParams] = useSearchParams();
   const typeId = searchParams.get('id');
   const ref = WebApp.initDataUnsafe.start_param;
-  console.log('rèf', ref);
   const [isShowBuyModal, setIsShowBuyModal] = React.useState(false);
   const token = useSelector(selectToken);
   const { gameMessage, sendMessage, setGameMessage } = usePlayGame();
@@ -83,22 +82,18 @@ export const GamePlay = () => {
     }
   }, [ref, token, userProfile]);
   useEffect(() => {
-    console.log('WebApp', WebApp);
     WebApp.expand();
     WebApp.enableClosingConfirmation();
     if (WebApp.initDataUnsafe?.user?.id) {
       dispatch(updateTelegramId({ telegram: WebApp.initDataUnsafe?.user?.id.toString() }));
     }
-    if (Number(typeId) !== 1) {
+    if (ref !== 'telegram_wallet') {
       signTokenOut();
-      try {
-        tonConnectUI?.disconnect();
-      } catch {}
     }
     if (Number(typeId) === 1) {
       setIsShowAirdropQuestLogin(true);
     }
-  }, [typeId]);
+  }, [ref]);
   useEffect(() => {
     if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST || true) {
       if (!token) {

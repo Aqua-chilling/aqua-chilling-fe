@@ -12,14 +12,6 @@ import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repos
 export const Referral = ({ data }: any) => {
   const [isShowRef, setIsShowRef] = useState(false);
   const token = useSelector(selectToken);
-
-  const { data: userReferral, refetch: refetchQuest } = useQuery({
-    queryKey: ['retrieveReferralHistory', token],
-    queryFn: () => OnboardingRepository.RetrieveReferralsHistory(),
-    retry: false,
-    refetchInterval: 5000,
-    enabled: !!token
-  });
   const { data: leaderboard, refetch } = useQuery({
     queryKey: ['retrieveLeaderboard', token],
     queryFn: () => OnboardingRepository.RetrieveLeaderboardList(),
@@ -27,7 +19,6 @@ export const Referral = ({ data }: any) => {
     refetchInterval: 5000,
     enabled: !!token
   });
-  console.log('leaderboard', leaderboard);
   return (
     <Wrapper>
       {isShowRef && <ReferralPopup onClose={() => setIsShowRef(false)} />}

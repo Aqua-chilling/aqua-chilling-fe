@@ -20,7 +20,6 @@ const queryClient = new QueryClient();
 let persistor = persistStore(store);
 
 export const App = () => {
-  console.log(`${window.location.origin}/tonconnect${!ENVS.VITE_ISTESTNET ? '-mainnet' : ''}-manifest.json`);
   return (
     <ProviderRedux store={store}>
       <PersistGate loading={null} persistor={persistor}>
@@ -55,7 +54,7 @@ export const App = () => {
               }}
               actionsConfiguration={{
                 returnStrategy: 'back',
-                twaReturnUrl: 'https://t.me/aquachillingbot/aquachillingapp'
+                twaReturnUrl: 'https://t.me/aquachillingbot/aquachillingapp?startapp=telegram_wallet'
               }}
             >
               <FixedGlobalStyle />
