@@ -88,6 +88,7 @@ export const GamePlay = () => {
       dispatch(updateTelegramId({ telegram: WebApp.initDataUnsafe?.user?.id.toString() }));
     }
     if (ref !== 'telegram_wallet') {
+      console.log('signTokenOut');
       signTokenOut();
     }
     if (Number(typeId) === 1) {
