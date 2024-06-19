@@ -15,7 +15,7 @@ import { useAccountInfoContext } from '@/contexts/account-info.context';
 import { CHAIN, useTonAddress, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { ENVS } from '@/config';
 import { beginCell, Address } from '@ton/ton';
-import { validUntil } from '@/constants/app-constaints';
+import { twaRedirects, validUntil } from '@/constants/app-constaints';
 import { useQuery } from 'react-query';
 import { CopyOutlined, DisconnectOutlined } from '@ant-design/icons';
 export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => void; purchaseAqua: () => void }) => {
@@ -97,7 +97,15 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 }`}
                 onClick={async () => {
                   try {
-                    if (firstLogin && ref !== 'telegram_wallet') {
+                    if (tonConnectUI)
+                      tonConnectUI.uiOptions = {
+                        actionsConfiguration: {
+                          returnStrategy: 'back',
+                          twaReturnUrl: 'https://t.me/aquachillingbot/aquachillingapp?startapp=telegram_wallet_task'
+                        }
+                      };
+
+                    if (firstLogin && !twaRedirects.includes(ref || '')) {
                       try {
                         setFirstLogin(false);
                         await tonConnectUI.disconnect();
