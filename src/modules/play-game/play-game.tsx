@@ -87,13 +87,13 @@ export const GamePlay = () => {
     if (WebApp.initDataUnsafe?.user?.id) {
       dispatch(updateTelegramId({ telegram: WebApp.initDataUnsafe?.user?.id.toString() }));
     }
-    if (Number(typeId) !== 1) {
+    if (ref !== 'telegram_wallet') {
       signTokenOut();
     }
     if (Number(typeId) === 1) {
       setIsShowAirdropQuestLogin(true);
     }
-  }, [typeId]);
+  }, [ref]);
   useEffect(() => {
     if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST || true) {
       if (!token) {
