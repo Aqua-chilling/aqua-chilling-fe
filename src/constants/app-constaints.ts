@@ -61,4 +61,4 @@ export const getTwitterOauthUrl = () => {
   return `${rootUrl}?${qs}`;
 };
 
-export const twaRedirects = ['telegram_wallet_task', 'telegram_wallet_buy'];
+export const twaRedirects = ['telegram_wallet_task', 'telegram_wallet_buy', 'telegram_wallet_connect'];

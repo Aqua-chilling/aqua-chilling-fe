@@ -99,6 +99,9 @@ export const GamePlay = () => {
     if (ref === 'telegram_wallet_buy') {
       setIsShowBuyModal(true);
     }
+    if (ref === 'telegram_wallet_connect') {
+      setIsShowWallet(true);
+    }
   }, [ref]);
   useEffect(() => {
     if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST || true) {
