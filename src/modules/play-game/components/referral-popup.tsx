@@ -59,7 +59,7 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
               <div
                 className='ref-btn'
                 onClick={async () => {
-                  await navigator?.clipboard?.writeText(
+                  await window?.navigator?.clipboard?.writeText(
                     `https://t.me/aquachillingbot/aquachillingapp?startapp=${userProfile?.referral_code}` || ''
                   );
                   addNotification({
@@ -78,7 +78,7 @@ export const ReferralPopup = ({ onClose }: { onClose: () => void }) => {
               <div
                 className='ref-btn'
                 onClick={async () => {
-                  await navigator?.clipboard?.writeText(userProfile?.referral_code || '');
+                  await window?.navigator?.clipboard?.writeText(userProfile?.referral_code || '');
                   addNotification({
                     message: 'Copied!',
                     type: NOTIFICATION_TYPE.SUCCESS,
