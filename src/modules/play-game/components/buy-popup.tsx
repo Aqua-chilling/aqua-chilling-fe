@@ -57,6 +57,15 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
       }),
     [tonConnectUI]
   );
+  useEffect(() => {
+    if (ref === 'telegram_wallet_buy_success') {
+      addNotification({
+        message: 'Transaction Confirmed! Wait for server listening!',
+        type: NOTIFICATION_TYPE.SUCCESS,
+        id: new Date().getTime()
+      });
+    }
+  }, [ref]);
 
   return (
     <Wrapper>
@@ -164,6 +173,13 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
                   tonConnectUI.openModal();
                   return;
                 }
+                if (tonConnectUI)
+                  tonConnectUI.uiOptions = {
+                    actionsConfiguration: {
+                      returnStrategy: 'back',
+                      twaReturnUrl: 'https://t.me/aquachillingbot/aquachillingapp?startapp=telegram_wallet_buy_success'
+                    }
+                  };
                 handleBuyAqua();
               }}
             >
