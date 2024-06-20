@@ -71,7 +71,7 @@ export const UserWallet = ({ onClose, purchaseAqua }: { onClose: () => void; pur
                   alt=''
                   onClick={async () => {
                     try {
-                      await navigator.clipboard.writeText(wallet?.account?.address);
+                      await window.navigator.clipboard.writeText(wallet?.account?.address);
                       addNotification({
                         message: 'Copied',
                         type: NOTIFICATION_TYPE.SUCCESS,

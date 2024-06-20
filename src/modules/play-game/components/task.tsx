@@ -1,7 +1,7 @@
 import X from '@/assets/X.png';
 import { Wrapper } from './task.styled';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { selectToken } from '@/redux';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
@@ -74,6 +74,30 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
       }),
     [tonConnectUI]
   );
+  const walletCheckin = useCallback(async () => {
+    const resOnboard = await OnboardingRepository.UpdateUserQuests({
+      id: 1
+    });
+    if (resOnboard) {
+      addNotification({
+        message: 'Quest done!',
+        type: NOTIFICATION_TYPE.SUCCESS,
+        id: new Date().getTime()
+      });
+    } else {
+      addNotification({
+        message: 'Something went wrong! Try again later',
+        type: NOTIFICATION_TYPE.ERROR,
+        id: new Date().getTime()
+      });
+    }
+    refetchQuest();
+  }, []);
+  useEffect(() => {
+    if (ref === 'telegram_wallet_checkin') {
+      walletCheckin();
+    }
+  }, [ref]);
   return (
     <Wrapper>
       <div className='table'>
@@ -127,6 +151,13 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                       return;
                     }
                     setIsLoading(1);
+                    if (tonConnectUI)
+                      tonConnectUI.uiOptions = {
+                        actionsConfiguration: {
+                          returnStrategy: 'back',
+                          twaReturnUrl: 'https://t.me/aquachillingbot/aquachillingapp?startapp=telegram_wallet_checkin'
+                        }
+                      };
                     const transactionPayload = beginCell()
                       .storeUint(0, 32)
                       .storeStringTail(`${userProfile?.id}-${0}-${0}`)
