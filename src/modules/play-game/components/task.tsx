@@ -30,11 +30,11 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
     refetchInterval: 5000,
     enabled: !!token
   });
-  const is_checkin_wallet = userQuest?.[0]?.status !== 0;
-  const is_logged_in = userQuest?.[1]?.status !== 0;
-  const is_buy_aqua = userQuest?.[2]?.status !== 0;
-  const is_daily_invite = userQuest?.[3]?.status !== 0;
-  const is_visit_aqua_web = userQuest?.[4]?.status !== 0;
+  const is_checkin_wallet = userQuest?.[0]?.status;
+  const is_logged_in = userQuest?.[1]?.status;
+  const is_buy_aqua = userQuest?.[2]?.status;
+  const is_daily_invite = userQuest?.[3]?.status;
+  const is_visit_aqua_web = userQuest?.[4]?.status;
   const is_telegram_premium = userQuest?.[8]?.status !== 0;
   const isJoinedTelegram = userProfile?.telegramOnboard?.aquachilling;
   const isFollowed = userQuest?.[5]?.status !== 0;
@@ -117,76 +117,96 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             <div className='w-fit relative task-button-wrapper'>
               <div
                 className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                  is_checkin_wallet && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
+                  is_checkin_wallet === 2 &&
+                  '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
                 }`}
                 onClick={async () => {
                   try {
-                    if (tonConnectUI)
-                      tonConnectUI.uiOptions = {
-                        actionsConfiguration: {
-                          returnStrategy: 'back',
-                          twaReturnUrl: 'https://t.me/aquachillingbot/aquachillingapp?startapp=telegram_wallet_task'
-                        }
-                      };
+                    if (is_checkin_wallet === 0) {
+                      if (tonConnectUI)
+                        tonConnectUI.uiOptions = {
+                          actionsConfiguration: {
+                            returnStrategy: 'back',
+                            twaReturnUrl: 'https://t.me/aquachillingbot/aquachillingapp?startapp=telegram_wallet_task'
+                          }
+                        };
 
-                    if (firstLogin && !twaRedirects.includes(ref || '')) {
-                      try {
-                        setFirstLogin(false);
-                        await tonConnectUI.disconnect();
-                      } catch {}
-                    }
-                    if (!tonConnectUI.connected || !wallet) {
-                      tonConnectUI.openModal();
-                      return;
-                    }
-                    const activeChain = ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
-                    const activeChainName = ENVS.VITE_ISTESTNET ? 'Testnet' : 'Mainnet';
-                    if (tonConnectUI.account?.chain !== activeChain) {
-                      tonConnectUI.disconnect();
-                      addNotification({
-                        message: `Invalid chain. Please switch to TON ${activeChainName}`,
-                        type: NOTIFICATION_TYPE.ERROR,
-                        id: new Date().getTime()
-                      });
-                      return;
-                    }
-                    setIsLoading(1);
-                    if (tonConnectUI)
-                      tonConnectUI.uiOptions = {
-                        actionsConfiguration: {
-                          returnStrategy: 'back',
-                          twaReturnUrl: 'https://t.me/aquachillingbot/aquachillingapp?startapp=telegram_wallet_checkin'
-                        }
-                      };
-                    const transactionPayload = beginCell()
-                      .storeUint(0, 32)
-                      .storeStringTail(`${userProfile?.id}-${0}-${0}`)
-                      .endCell();
-                    const buyAquaAddress = Address.parse(ENVS.VITE_BASE_PACKAGE_TON_CONTRACT).toString({
-                      bounceable: false
-                    });
-                    const messages = [
-                      {
-                        address: buyAquaAddress, //CONTRACT
-                        amount: '0',
-                        payload: transactionPayload.toBoc().toString('base64')
+                      if (firstLogin && !twaRedirects.includes(ref || '')) {
+                        try {
+                          setFirstLogin(false);
+                          await tonConnectUI.disconnect();
+                        } catch {}
                       }
-                    ];
-                    const transaction = {
-                      validUntil: Math.floor(Date.now() / 1000) + validUntil,
-                      network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
-                      from: wallet?.account?.address || '',
-                      messages: messages
-                    };
-                    const res = await tonConnectUI.sendTransaction(transaction);
-
-                    if (res) {
-                      const resOnboard = await OnboardingRepository.UpdateUserQuests({
-                        id: 1
-                      });
-                      if (resOnboard) {
+                      if (!tonConnectUI.connected || !wallet) {
+                        tonConnectUI.openModal();
+                        return;
+                      }
+                      const activeChain = ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
+                      const activeChainName = ENVS.VITE_ISTESTNET ? 'Testnet' : 'Mainnet';
+                      if (tonConnectUI.account?.chain !== activeChain) {
+                        tonConnectUI.disconnect();
                         addNotification({
-                          message: 'Quest done!',
+                          message: `Invalid chain. Please switch to TON ${activeChainName}`,
+                          type: NOTIFICATION_TYPE.ERROR,
+                          id: new Date().getTime()
+                        });
+                        return;
+                      }
+                      setIsLoading(1);
+                      if (tonConnectUI)
+                        tonConnectUI.uiOptions = {
+                          actionsConfiguration: {
+                            returnStrategy: 'back',
+                            twaReturnUrl:
+                              'https://t.me/aquachillingbot/aquachillingapp?startapp=telegram_wallet_checkin'
+                          }
+                        };
+                      const transactionPayload = beginCell()
+                        .storeUint(0, 32)
+                        .storeStringTail(`${userProfile?.id}-${0}-${0}`)
+                        .endCell();
+                      const buyAquaAddress = Address.parse(ENVS.VITE_BASE_PACKAGE_TON_CONTRACT).toString({
+                        bounceable: false
+                      });
+                      const messages = [
+                        {
+                          address: buyAquaAddress, //CONTRACT
+                          amount: '0',
+                          payload: transactionPayload.toBoc().toString('base64')
+                        }
+                      ];
+                      const transaction = {
+                        validUntil: Math.floor(Date.now() / 1000) + validUntil,
+                        network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
+                        from: wallet?.account?.address || '',
+                        messages: messages
+                      };
+                      const res = await tonConnectUI.sendTransaction(transaction);
+
+                      if (res) {
+                        const resOnboard = await OnboardingRepository.UpdateUserQuests({
+                          id: 1
+                        });
+                        if (resOnboard) {
+                          addNotification({
+                            message: 'Quest done!',
+                            type: NOTIFICATION_TYPE.SUCCESS,
+                            id: new Date().getTime()
+                          });
+                        } else {
+                          addNotification({
+                            message: 'Something went wrong! Try again later',
+                            type: NOTIFICATION_TYPE.ERROR,
+                            id: new Date().getTime()
+                          });
+                        }
+                        refetchQuest();
+                      }
+                    } else if (is_checkin_wallet === 1) {
+                      const res = await OnboardingRepository.ClaimQuest(1);
+                      if (res) {
+                        addNotification({
+                          message: 'Claimed!',
                           type: NOTIFICATION_TYPE.SUCCESS,
                           id: new Date().getTime()
                         });
@@ -208,8 +228,10 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                   }
                 }}
               >
-                {is_checkin_wallet
+                {is_checkin_wallet === 2
                   ? 'Completed'
+                  : is_checkin_wallet === 1
+                  ? 'Claim'
                   : !!wallet || (!firstLogin && !twaRedirects.includes(ref || ''))
                   ? 'Start'
                   : 'Connect TON Wallet'}
@@ -232,10 +254,29 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             </div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                is_logged_in && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
+                is_logged_in !== 2 && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
               }`}
+              onClick={async () => {
+                if (is_logged_in === 1) {
+                  const res = await OnboardingRepository.ClaimQuest(2);
+                  if (res) {
+                    addNotification({
+                      message: 'Claimed!',
+                      type: NOTIFICATION_TYPE.SUCCESS,
+                      id: new Date().getTime()
+                    });
+                  } else {
+                    addNotification({
+                      message: 'Something went wrong! Try again later',
+                      type: NOTIFICATION_TYPE.ERROR,
+                      id: new Date().getTime()
+                    });
+                  }
+                  refetchQuest();
+                }
+              }}
             >
-              {!is_logged_in ? 'Start' : 'Completed'}
+              {is_logged_in === 0 ? 'Start' : is_logged_in === 1 ? 'Claim' : 'Completed'}
             </div>
           </div>
         </div>
@@ -254,11 +295,30 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             </div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                is_buy_aqua && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
+                is_buy_aqua === 2 && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
               }`}
-              onClick={purchaseAqua}
+              onClick={async () => {
+                if (is_buy_aqua === 0) await purchaseAqua();
+                else if (is_buy_aqua === 1) {
+                  const res = await OnboardingRepository.ClaimQuest(3);
+                  if (res) {
+                    addNotification({
+                      message: 'Claimed!',
+                      type: NOTIFICATION_TYPE.SUCCESS,
+                      id: new Date().getTime()
+                    });
+                  } else {
+                    addNotification({
+                      message: 'Something went wrong! Try again later',
+                      type: NOTIFICATION_TYPE.ERROR,
+                      id: new Date().getTime()
+                    });
+                  }
+                  refetchQuest();
+                }
+              }}
             >
-              {!is_buy_aqua ? 'Start' : 'Completed'}
+              {is_buy_aqua === 0 ? 'Start' : is_buy_aqua === 1 ? 'Claim' : 'Completed'}
             </div>
           </div>
         </div>
@@ -277,13 +337,31 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             </div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                is_daily_invite && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
+                is_daily_invite === 2 &&
+                '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
               }`}
-              onClick={() => {
-                setStep(2);
+              onClick={async () => {
+                if (is_daily_invite === 0) setStep(2);
+                else if (is_daily_invite === 1) {
+                  const res = await OnboardingRepository.ClaimQuest(4);
+                  if (res) {
+                    addNotification({
+                      message: 'Claimed!',
+                      type: NOTIFICATION_TYPE.SUCCESS,
+                      id: new Date().getTime()
+                    });
+                  } else {
+                    addNotification({
+                      message: 'Something went wrong! Try again later',
+                      type: NOTIFICATION_TYPE.ERROR,
+                      id: new Date().getTime()
+                    });
+                  }
+                  refetchQuest();
+                }
               }}
             >
-              {!is_daily_invite ? 'Start' : 'Completed'}
+              {is_daily_invite === 0 ? 'Start' : is_daily_invite === 1 ? 'Claim' : 'Completed'}
             </div>
           </div>
         </div>
@@ -299,30 +377,49 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             <div className='font-secondary font-medium text-xs text-[#FFFFFF]'>Visit Aquachilling website</div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                is_visit_aqua_web && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
+                is_visit_aqua_web === 2 &&
+                '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
               }`}
               onClick={async () => {
-                window.open(window.location.origin, '_blank');
-                const res = await OnboardingRepository.UpdateUserQuests({
-                  id: 5
-                });
-                if (res) {
-                  addNotification({
-                    message: 'Quest done!',
-                    type: NOTIFICATION_TYPE.SUCCESS,
-                    id: new Date().getTime()
+                if (is_visit_aqua_web === 0) {
+                  window.open(window.location.origin, '_blank');
+                  const res = await OnboardingRepository.UpdateUserQuests({
+                    id: 5
                   });
-                } else {
-                  addNotification({
-                    message: 'Something went wrong! Try again later',
-                    type: NOTIFICATION_TYPE.ERROR,
-                    id: new Date().getTime()
-                  });
+                  if (res) {
+                    addNotification({
+                      message: 'Quest done!',
+                      type: NOTIFICATION_TYPE.SUCCESS,
+                      id: new Date().getTime()
+                    });
+                  } else {
+                    addNotification({
+                      message: 'Something went wrong! Try again later',
+                      type: NOTIFICATION_TYPE.ERROR,
+                      id: new Date().getTime()
+                    });
+                  }
+                  refetchQuest();
+                } else if (is_visit_aqua_web === 1) {
+                  const res = await OnboardingRepository.ClaimQuest(5);
+                  if (res) {
+                    addNotification({
+                      message: 'Claimed!',
+                      type: NOTIFICATION_TYPE.SUCCESS,
+                      id: new Date().getTime()
+                    });
+                  } else {
+                    addNotification({
+                      message: 'Something went wrong! Try again later',
+                      type: NOTIFICATION_TYPE.ERROR,
+                      id: new Date().getTime()
+                    });
+                  }
+                  refetchQuest();
                 }
-                refetchQuest();
               }}
             >
-              {!is_visit_aqua_web ? 'Start' : 'Completed'}
+              {is_visit_aqua_web === 0 ? 'Start' : is_visit_aqua_web === 1 ? 'Claim' : 'Completed'}
             </div>
           </div>
         </div>
