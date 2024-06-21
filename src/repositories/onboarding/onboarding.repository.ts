@@ -37,4 +37,9 @@ export class OnboardingRepository {
   static UpdateUserQuests(updateForm: any): Promise<any> {
     return httpGame.post(`/bc/bc-update-quest`, updateForm);
   }
+  static ClaimQuest(id: number): Promise<any> {
+    return httpGame.post(`/bc/bc-claim-quest`, {
+      id
+    });
+  }
 }
