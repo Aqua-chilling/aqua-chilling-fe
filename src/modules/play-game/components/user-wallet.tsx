@@ -66,9 +66,8 @@ export const UserWallet = ({ onClose, purchaseAqua }: { onClose: () => void; pur
               <div className='wallet-title'>Wallet address</div>
               <div className='wallet-address !mb-2'>
                 <div>{wallet?.account?.address}</div>
-                <img
-                  src={Copy}
-                  alt=''
+                <div
+                  className='p-2 cursor-pointer'
                   onClick={async () => {
                     try {
                       await window.navigator.clipboard.writeText(wallet?.account?.address);
@@ -87,7 +86,10 @@ export const UserWallet = ({ onClose, purchaseAqua }: { onClose: () => void; pur
                       };
                     }
                   }}
-                />
+                >
+                  {' '}
+                  <img src={Copy} alt='' className='!w-5' />
+                </div>
               </div>
               <div
                 className='wallet-button flex items-center justify-start gap-2 cursor-pointer p-2 !mt-0 self-end mb-4'
