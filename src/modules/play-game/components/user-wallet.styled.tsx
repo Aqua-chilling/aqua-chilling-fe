@@ -39,7 +39,7 @@ export const Wrapper = styled.div`
     z-index: -1;
   }
   .wallet-content {
-    width: 100%;
+    width: 87%;
     max-width: 522px;
     position: relative;
     background: url(${roundedBg});
@@ -180,7 +180,7 @@ export const Wrapper = styled.div`
       z-index: 1;
       top: -24px;
       right: -25px;
-      width: 72px;
+      width: 56px;
       img {
         width: 100%;
       }

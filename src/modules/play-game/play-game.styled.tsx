@@ -242,7 +242,7 @@ export const Wrapper = styled.div`
       z-index: 2;
       top: -32px;
       right: -15px;
-      width: 72px;
+      width: 56px;
       img {
         width: 100%;
       }

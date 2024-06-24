@@ -84,7 +84,7 @@ export const Wrapper = styled.div`
       z-index: 1;
       top: -24px;
       right: -25px;
-      width: 72px;
+      width: 56px;
       img {
         width: 100%;
       }
