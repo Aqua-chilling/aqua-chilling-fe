@@ -254,7 +254,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
             </div>
             <div
               className={`task-button mt-3 bg-[#7AEFFF] px-4 py-[2px] border-[2px] rounded-[8px] border-[#4C99D1] font-secondary text-xs font-semibold text-[#FFFFFF] cursor-pointer ${
-                is_logged_in !== 2 && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
+                is_logged_in === 2 && '!bg-[#3F4958] !border-[#0C2449] !text-[#FFFFFF33] cursor-default               '
               }`}
               onClick={async () => {
                 if (is_logged_in === 1) {
