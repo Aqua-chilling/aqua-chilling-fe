@@ -46,7 +46,7 @@ export const Wrapper = styled.div`
     width: 90%;
     max-width: 344px;
     height: 90%;
-    max-height: 350px;
+    max-height: 280px;
     position: relative;
     background-image: url(${backgroundBg3});
     background-size: 100% 100%;
@@ -91,7 +91,7 @@ export const Wrapper = styled.div`
     .ref-info {
       width: 100%;
       padding: 20px;
-      padding-top: 85px;
+      padding-top: 70px;
       .info-title {
         font-family: 'Fredoka';
         font-size: 16px;

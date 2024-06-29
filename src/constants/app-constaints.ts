@@ -18,7 +18,8 @@ export enum COMMUNICATIONFUNCTION {
   BUY_PACK = 'BuyPackCallback',
   SUCCESS_PARAM = 'success',
   FAIL_PARAM = 'fail',
-  SHOW_WALLET = 'CallShowWallet'
+  SHOW_WALLET = 'CallShowWallet',
+  LOADED_ALL = ''
 }
 
 export type BuyPack = {
