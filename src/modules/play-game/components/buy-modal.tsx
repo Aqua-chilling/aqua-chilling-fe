@@ -1,6 +1,6 @@
 import BuyBgs from '@/assets/packages/buy-bgs.png';
 import BuyModalBg from '@/assets/packages/buy-modal.png';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectToken } from '@/redux';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
@@ -8,6 +8,10 @@ import Token from '@/assets/wallet/aqua.png';
 import Shell from '@/assets/shell.png';
 import { useQuery } from 'react-query';
 import CloseIcon from '@/assets/wallet/close.png';
+import SpecialMark from '@/assets/airdrop/special-mark.png';
+import useLocalStorage from 'use-local-storage';
+import { useNotification } from '@/contexts/notification.context';
+import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 
 export const BuyModal = ({
   setPack,
@@ -18,6 +22,7 @@ export const BuyModal = ({
   setIsBuy: (isBuy: boolean) => void;
   onClose: () => void;
 }) => {
+  const { addNotification } = useNotification();
   const activeTab = 1;
   const token = useSelector(selectToken);
   const [packAquasMaps, setPackAquasMaps] = useState<any>(undefined);
@@ -45,6 +50,20 @@ export const BuyModal = ({
     };
     setPackAquasMaps(_packAquaMap);
   }, [packAquas]);
+  const { data: now } = useQuery({
+    queryKey: ['getNow'],
+    queryFn: () => {
+      const _now = new Date()?.getTime();
+      return _now;
+    },
+    retry: false,
+    refetchInterval: 10000
+  });
+
+  const [isBuySpecial] = useLocalStorage('is-buy-special', 0);
+  const checkBuySpecial = useMemo(() => {
+    return (now || 0) - isBuySpecial < 1000 * 60 * 5;
+  }, [now, isBuySpecial]);
 
   return (
     <>
@@ -68,6 +87,25 @@ export const BuyModal = ({
                 {packAquasMaps?.special?.map((packaqua: any, key: number) => {
                   return (
                     <div className='special-package flex items-center flex-col w-full p-4 relative z-[2] ' key={key}>
+                      {checkBuySpecial && (
+                        <div
+                          className='absolute w-full z-[5] h-full bg-[#bebebebe] cursor-pointer top-0 left-0 rounded-2xl'
+                          onClick={() => {
+                            addNotification({
+                              message: `You've purchased this package... Please wait server minting!`,
+                              type: NOTIFICATION_TYPE.INFO,
+                              id: new Date().getTime()
+                            });
+                          }}
+                        ></div>
+                      )}
+                      <img
+                        src={SpecialMark}
+                        className={`w-[15%] min-w-[80px] absolute right-0 top-0 -translate-y-1/2 ${
+                          checkBuySpecial && 'opacity-50'
+                        }`}
+                        alt=''
+                      />
                       <div className='font-secondary font-medium text-2xl text-[#FFFFFF] mb-2'>Starting package</div>
                       <div className='special-card flex items-center gap-1 px-2 py-[10px]'>
                         {packaqua?.reward?.map((reward: any, key1: number) => {
@@ -107,7 +145,7 @@ export const BuyModal = ({
                     </div>
                   );
                 })}
-                <div className='aqua-packages w-full px-2 relative z-[2]'>
+                <div className='aqua-packages w-full px-2 relative z-[2] mt-6'>
                   {packAquasMaps?.normal?.map((packAqua: any, key: number) => {
                     return (
                       <div className='aqua-package w-full px-2 py-[10px] flex flex-col items-center gap-4' key={key}>

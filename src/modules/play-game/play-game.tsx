@@ -21,6 +21,7 @@ import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { useLoginWithTelegram } from '@/hooks/uselogin-telegram';
 import { useTonConnectUI } from '@tonconnect/ui-react';
+import { Loading } from './components/game-loading';
 
 function iframe() {
   return {
@@ -30,7 +31,7 @@ function iframe() {
 export const GamePlay = () => {
   const [isShowAirdropQuestLogin, setIsShowAirdropQuestLogin] = React.useState(false);
   const [isShowWallet, setIsShowWallet] = React.useState(false);
-  const [tonConnectUI] = useTonConnectUI();
+  const [isLoading, setIsLoading] = useState(true);
   const [searchParams] = useSearchParams();
   const typeId = searchParams.get('id');
   const ref = WebApp.initDataUnsafe.start_param;
@@ -104,13 +105,15 @@ export const GamePlay = () => {
     }
   }, [ref]);
   useEffect(() => {
-    if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST || true) {
-      if (!token) {
-        handleLogin();
-      } else {
+    if (!token) {
+      handleLogin();
+    } else {
+      if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST) {
         sendMessage(COMMUNICATIONFUNCTION.LOGIN_SUCCESS, token);
+        setIsLoading(false);
       }
     }
+
     if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_QUEST) {
       setIsShowAirdropQuestLogin(true);
     }
@@ -123,8 +126,11 @@ export const GamePlay = () => {
   }, [gameMessage, token]);
   const [pack, setPack] = useStateCallback<any>(undefined);
   const [isBuy, setIsBuy] = useState(false);
+
+  console.log('isLoading', isLoading, gameMessage?.functionName);
   return (
     <Wrapper>
+      {isLoading && <Loading />}
       {isShowAirdropQuestLogin && (
         <AirdropQuests
           onClose={() => {
