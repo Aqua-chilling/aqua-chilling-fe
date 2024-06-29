@@ -110,8 +110,11 @@ export const GamePlay = () => {
     } else {
       if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST) {
         sendMessage(COMMUNICATIONFUNCTION.LOGIN_SUCCESS, token);
-        setIsLoading(false);
       }
+    }
+
+    if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.LOADED_ALL) {
+      setIsLoading(false);
     }
 
     if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_QUEST) {
@@ -127,7 +130,6 @@ export const GamePlay = () => {
   const [pack, setPack] = useStateCallback<any>(undefined);
   const [isBuy, setIsBuy] = useState(false);
 
-  console.log('isLoading', isLoading, gameMessage?.functionName);
   return (
     <Wrapper>
       {isLoading && <Loading />}
