@@ -31,7 +31,7 @@ function iframe() {
 export const GamePlay = () => {
   const [isShowAirdropQuestLogin, setIsShowAirdropQuestLogin] = React.useState(false);
   const [isShowWallet, setIsShowWallet] = React.useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [searchParams] = useSearchParams();
   const typeId = searchParams.get('id');
   const ref = WebApp.initDataUnsafe.start_param;
@@ -105,13 +105,15 @@ export const GamePlay = () => {
     }
   }, [ref]);
   useEffect(() => {
-    if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST || true) {
-      if (!token) {
-        handleLogin();
-      } else {
+    if (!token) {
+      handleLogin();
+    } else {
+      if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOGIN_REQUEST) {
         sendMessage(COMMUNICATIONFUNCTION.LOGIN_SUCCESS, token);
+        setIsLoading(false);
       }
     }
+
     if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_QUEST) {
       setIsShowAirdropQuestLogin(true);
     }
@@ -121,12 +123,11 @@ export const GamePlay = () => {
     if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_WALLET) {
       setIsShowWallet(true);
     }
-    if (gameMessage?.functionName === COMMUNICATIONFUNCTION.LOADED_ALL) {
-      setIsLoading(false);
-    }
   }, [gameMessage, token]);
   const [pack, setPack] = useStateCallback<any>(undefined);
   const [isBuy, setIsBuy] = useState(false);
+
+  console.log('isLoading', isLoading, gameMessage?.functionName);
   return (
     <Wrapper>
       {isLoading && <Loading />}
