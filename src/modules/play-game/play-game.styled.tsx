@@ -320,7 +320,6 @@ export const Wrapper = styled.div`
       transform: translate(-50%, -50%);
       display: flex;
       justify-content: center;
-      gap: 35px;
       align-items: center;
       flex-direction: column;
       border: 8px solid #090910;
@@ -341,6 +340,8 @@ export const Wrapper = styled.div`
         padding-right: 22px;
       }
       .special-package {
+        margin-top: 40px;
+        overflow: visible;
         background: url(${specialPackage});
         background-size: 100% 100%;
         .special-card {
@@ -356,7 +357,7 @@ export const Wrapper = styled.div`
         transform: unset;
         flex-direction: column;
         align-items: center;
-        gap: 24px;
+        gap: 0px;
       }
 
       .buy-title {

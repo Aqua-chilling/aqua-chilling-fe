@@ -15,6 +15,7 @@ import { useNotification } from '@/contexts/notification.context';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { ENVS } from '@/config';
 import { twaRedirects } from '@/constants/app-constaints';
+import useLocalStorage from 'use-local-storage';
 export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) => {
   const [tonConnectUI] = useTonConnectUI();
   const { addNotification } = useNotification();
@@ -23,12 +24,15 @@ export const BuyPopup = ({ onClose, pack }: { onClose: () => void; pack: any }) 
   const address = useTonAddress();
   const [amount, setAmount] = useState(1);
   const { userProfile, firstLogin, setFirstLogin } = useAccountInfoContext();
+  const [isBuySpecial, setIsBuySpecial] = useLocalStorage('is-buy-special', 0);
   const transaction = useMemo(() => {
     return createTransaction(wallet, pack?.id, amount, pack?.pack_cost_ton || 0, userProfile?.id || '');
   }, [wallet, pack, amount, pack]);
+
   const { isLoading, handleBuyAqua } = useBuyAqua({
     transaction,
     onBuySuccess: () => {
+      setIsBuySpecial(new Date().getTime());
       onClose();
     }
   });
