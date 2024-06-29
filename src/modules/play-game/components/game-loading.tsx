@@ -29,9 +29,9 @@ const LoadingComponent = () => {
             </div>
           </div>
           <div className='font-secondary font-black text-[64px] leading-[64px] mt-1 text-white with-shadow'>on TON</div>
-          <div className='font-secondary font-semibold text-xs border-[1px] border-[#1D1D22] text-[#FFFFFF] px-3 py-1 bg-[#2EDBF3] rounded-lg cursor-pointer mt-4'>
+          {/* <div className='font-secondary font-semibold text-xs border-[1px] border-[#1D1D22] text-[#FFFFFF] px-3 py-1 bg-[#2EDBF3] rounded-lg cursor-pointer mt-4'>
             Play to Airdrop now
-          </div>
+          </div> */}
         </div>
         <div className='content-wrapper flex w-full flex-col items-center px-4 relative z-[2] mb-6 mt-2'>
           <span className='font-secondary font-normal text-sm text-white'>More info in official channels</span>
