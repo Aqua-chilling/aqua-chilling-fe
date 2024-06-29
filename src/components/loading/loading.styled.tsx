@@ -22,30 +22,38 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
-    justify-content: center;
     width: 100%;
     height: 100%;
-    .lf-player-container {
-      position: relative;
-      @media screen and (max-width: 768px) {
-        width: 328px;
-        height: 262.4px;
-      }
-      #lottie {
-        @media screen and (max-width: 768px) {
-          width: 120px !important;
-          height: 120px !important;
-        }
-      }
-      .bubbles-token {
-        width: 100%;
-        height: 100%;
-        .bubbles {
-          width: 100%;
-          height: 100%;
-        }
-        position: absolute;
-        bottom: -10%;
+    max-width: 600px;
+    .with-shadow {
+      shadow: 0px 2px 16px 0px #000000cc;
+    }
+    /* HTML: <div class="loader"></div> */
+    .loading-spine {
+      width: 30px;
+      aspect-ratio: 1;
+      display: grid;
+      border-radius: 50%;
+      background: linear-gradient(0deg, rgb(0 0 0/50%) 30%, #0000 0 70%, rgb(0 0 0/100%) 0) 50%/8% 100%,
+        linear-gradient(90deg, white 30%, #0000 0 70%, rgb(0 0 0/75%) 0) 50%/100% 8%;
+      background-repeat: no-repeat;
+      animation: l23 1s infinite steps(12);
+    }
+    .loading-spine::before,
+    .loading-spine::after {
+      content: '';
+      grid-area: 1/1;
+      border-radius: 50%;
+      background: inherit;
+      transform: rotate(30deg);
+    }
+    .loading-spine::after {
+      opacity: 0.83;
+      transform: rotate(60deg);
+    }
+    @keyframes l23 {
+      100% {
+        transform: rotate(1turn);
       }
     }
   }
