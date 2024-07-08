@@ -19,7 +19,8 @@ export enum COMMUNICATIONFUNCTION {
   SUCCESS_PARAM = 'success',
   FAIL_PARAM = 'fail',
   SHOW_WALLET = 'CallShowWallet',
-  LOADED_ALL = 'CallFinishOnLoaded'
+  LOADED_ALL = 'CallFinishOnLoaded',
+  SHOW_SHELL = 'CallShowBuyShell'
 }
 
 export type BuyPack = {
