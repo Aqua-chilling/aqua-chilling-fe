@@ -9,6 +9,7 @@ import { useQuery } from 'react-query';
 import { useSelector } from 'react-redux';
 import { selectToken } from '@/redux';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
+import AquaToken from '@/assets/wallet/aqua.png';
 export const Referral = ({ data }: any) => {
   const [isShowRef, setIsShowRef] = useState(false);
   const token = useSelector(selectToken);
@@ -34,19 +35,19 @@ export const Referral = ({ data }: any) => {
               <div className='info-invite'>
                 <span>Invite friens</span>
                 <div>
-                  <img src={Gem} alt='' />
-                  <span>+3 for you and fren</span>
+                  <img src={AquaToken} alt='' />
+                  <span>+3 $AQUA for you and fren</span>
                 </div>
               </div>
             </div>
             <div className='info-border'></div>
             <div className='info-card'>
-              <img src={Invite2} alt='' />
+              <img src={AquaToken} alt='' />
               <div className='info-invite'>
                 <span>Frens with Telegram Premium</span>
                 <div>
-                  <img src={Gem} alt='' />
-                  <span>+30 for you and fren</span>
+                  <img src={AquaToken} alt='' />
+                  <span>+30 $AQUA for you and fren</span>
                 </div>
               </div>
             </div>
