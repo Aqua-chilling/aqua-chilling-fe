@@ -14,7 +14,7 @@ import LeaderboardIcon from '@/assets/airdrop/lb.png';
 import ReferralIcon from '@/assets/airdrop/ref.png';
 import { usePlayGame } from '@/hooks/use-play-game';
 import { COMMUNICATIONFUNCTION } from '@/constants/app-constaints';
-const titleList = ['Airdrop quest', 'Quest list', 'Referrals'];
+const titleList = ['Quest', 'Airdrop Quests', 'Referrals'];
 export const AirdropQuests = ({
   onClose,
   purchaseAqua,
@@ -89,7 +89,7 @@ export const AirdropQuests = ({
                 className='tabs-tab'
                 onClick={() => {
                   // onClose();
-                  purchaseAqua();
+                  setStep(1);
                 }}
               >
                 <img src={Aqua} className='' alt='' />
@@ -101,7 +101,7 @@ export const AirdropQuests = ({
                 className='tabs-tab'
                 onClick={() => {
                   onClose();
-                  sendMessage(COMMUNICATIONFUNCTION.SHOW_SHELL, '');
+                  sendMessage(COMMUNICATIONFUNCTION.SHOW_SHELL, COMMUNICATIONFUNCTION.SUCCESS_PARAM);
                 }}
               >
                 <img src={Shell} className='' alt='' />
@@ -113,11 +113,12 @@ export const AirdropQuests = ({
               <div
                 className='tabs-tab'
                 onClick={() => {
-                  setStep(1);
+                  onClose();
+                  sendMessage(COMMUNICATIONFUNCTION.SHOW_LEADERBOARD, COMMUNICATIONFUNCTION.SUCCESS_PARAM);
                 }}
               >
                 <img src={LeaderboardIcon} alt='' />
-                <div>Quest list</div>
+                <div>Leaderboard</div>
               </div>
               <div
                 className='tabs-tab'

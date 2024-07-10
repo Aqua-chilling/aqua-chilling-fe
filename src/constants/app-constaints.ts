@@ -20,7 +20,8 @@ export enum COMMUNICATIONFUNCTION {
   FAIL_PARAM = 'fail',
   SHOW_WALLET = 'CallShowWallet',
   LOADED_ALL = 'CallFinishOnLoaded',
-  SHOW_SHELL = 'CallShowBuyShell'
+  SHOW_SHELL = 'ShowGameQuest',
+  SHOW_LEADERBOARD = 'ShowLeaderboard'
 }
 
 export type BuyPack = {

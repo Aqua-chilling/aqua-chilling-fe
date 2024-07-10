@@ -35,7 +35,7 @@ export const Referral = ({ data }: any) => {
               <div className='info-invite'>
                 <span>Invite friens</span>
                 <div>
-                  <img src={Gem} alt='' />
+                  <img src={AquaToken} alt='' />
                   <span>+3 $AQUA for you and fren</span>
                 </div>
               </div>
@@ -46,7 +46,7 @@ export const Referral = ({ data }: any) => {
               <div className='info-invite'>
                 <span>Frens with Telegram Premium</span>
                 <div>
-                  <img src={Gem} alt='' />
+                  <img src={AquaToken} alt='' />
                   <span>+30 $AQUA for you and fren</span>
                 </div>
               </div>
