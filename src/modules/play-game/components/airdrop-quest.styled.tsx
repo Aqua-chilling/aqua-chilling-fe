@@ -3,7 +3,8 @@ import backgroundBg from '@/assets/airdrop/new-bg.png';
 import backgroundBgMb from '@/assets/airdrop/new-bg-mb.png';
 import backgroundBg1 from '@/assets/airdrop/new-bg-1.png';
 import backgroundBg2 from '@/assets/airdrop/new-bg-2.png';
-import buttonBg from '@/assets/airdrop/button-bg.png';
+import background01 from '@/assets/airdrop/bg-01.png';
+import buttonBg from '@/assets/airdrop/quest-card.png';
 const anim = keyframes`
 0%{
     opacity: 0;
@@ -53,6 +54,10 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    &.bg-0 {
+      height: 432px;
+      background-image: url(${background01});
+    }
 
     &.bg-1 {
       background-image: url(${backgroundBg1});
@@ -176,20 +181,21 @@ export const Wrapper = styled.div`
       }
     }
     .tabs-right {
-      display: flex;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       flex-direction: column;
       align-items: stretch;
       gap: 8px;
       .tabs-tab {
         cursor: pointer;
-
+        flex-direction: column;
         display: flex;
         gap: 8px;
         align-items: center;
         background: url(${buttonBg});
         background-size: 100% 100%;
-        width: 180px;
-        height: 64px;
+        width: 146px;
+        height: 146px;
         justify-content: center;
         transition: all 0.3s;
         &:hover {
@@ -197,7 +203,7 @@ export const Wrapper = styled.div`
           opacity: 0.9;
         }
         img {
-          height: 32px;
+          height: 64px;
           width: auto;
         }
         div {

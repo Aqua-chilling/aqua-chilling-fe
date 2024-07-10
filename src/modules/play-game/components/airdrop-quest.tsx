@@ -7,8 +7,14 @@ import Back from '@/assets/airdrop/back.png';
 import { Task } from './task';
 import { Referral } from './referral';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
+import Aqua from '@/assets/wallet/aqua.png';
+import Shell from '@/assets/airdrop/shell.png';
 import WebApp from '@twa-dev/sdk';
-const titleList = ['Airdrop quest', 'Quest list', 'Referrals'];
+import LeaderboardIcon from '@/assets/airdrop/lb.png';
+import ReferralIcon from '@/assets/airdrop/ref.png';
+import { usePlayGame } from '@/hooks/use-play-game';
+import { COMMUNICATIONFUNCTION } from '@/constants/app-constaints';
+const titleList = ['Quest', 'Airdrop Quests', 'Referrals'];
 export const AirdropQuests = ({
   onClose,
   purchaseAqua,
@@ -18,6 +24,7 @@ export const AirdropQuests = ({
   purchaseAqua: () => void;
   typeId: number;
 }) => {
+  const { sendMessage } = usePlayGame();
   const ref = WebApp.initDataUnsafe.start_param;
   const [step, setStep] = useState(typeId === 1 ? 1 : 0);
   const { userProfileLite } = useAccountInfoContext();
@@ -39,7 +46,11 @@ export const AirdropQuests = ({
           setStep(0);
         }}
       ></div>
-      <div className={`airdrop-content ${step === 1 && 'bg-1'} ${(step === 2 || step === 3) && 'bg-2'}`}>
+      <div
+        className={`airdrop-content ${step === 0 && 'bg-0'} ${step === 1 && 'bg-1'} ${
+          (step === 2 || step === 3) && 'bg-2'
+        }`}
+      >
         {step !== 0 && (
           <div
             className='btn-back'
@@ -59,10 +70,10 @@ export const AirdropQuests = ({
         >
           <img src={CloseIcon} alt='' />
         </div>
-        <div className='airdrop-title'>{titleList[step]}</div>
+        <div className={`airdrop-title ${step === 0 && '!mt-4'}`}>{titleList[step]}</div>
         {step === 0 && (
-          <div className='airdrop-tabs'>
-            <div className='tabs-left'>
+          <div className='airdrop-tabs !mt-[50px]'>
+            {/* <div className='tabs-left'>
               <img src={Logo} alt='' />
               <div className='left-label'>You have</div>
               <div className='left-value'>
@@ -72,16 +83,42 @@ export const AirdropQuests = ({
                 })}{' '}
                 AQUA
               </div>
-            </div>
+            </div> */}
             <div className='tabs-right'>
               <div
                 className='tabs-tab'
                 onClick={() => {
+                  // onClose();
                   setStep(1);
                 }}
               >
-                <img src={TabIcon} alt='' />
-                <div>Quest list</div>
+                <img src={Aqua} className='' alt='' />
+                <div>
+                  Earn $AQUA <br /> quest
+                </div>
+              </div>
+              <div
+                className='tabs-tab'
+                onClick={() => {
+                  onClose();
+                  sendMessage(COMMUNICATIONFUNCTION.SHOW_SHELL, COMMUNICATIONFUNCTION.SUCCESS_PARAM);
+                }}
+              >
+                <img src={Shell} className='' alt='' />
+                <div>
+                  Earn $SHELL
+                  <br /> quest
+                </div>
+              </div>
+              <div
+                className='tabs-tab'
+                onClick={() => {
+                  onClose();
+                  sendMessage(COMMUNICATIONFUNCTION.SHOW_LEADERBOARD, COMMUNICATIONFUNCTION.SUCCESS_PARAM);
+                }}
+              >
+                <img src={LeaderboardIcon} alt='' />
+                <div>Leaderboard</div>
               </div>
               <div
                 className='tabs-tab'
@@ -89,7 +126,7 @@ export const AirdropQuests = ({
                   setStep(2);
                 }}
               >
-                <img src={TabIcon} alt='' />
+                <img src={ReferralIcon} alt='' />
                 <div>Referral</div>
               </div>
             </div>
