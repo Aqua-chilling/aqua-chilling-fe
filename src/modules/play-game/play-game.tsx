@@ -126,6 +126,9 @@ export const GamePlay = () => {
     if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_WALLET) {
       setIsShowWallet(true);
     }
+    if (token && gameMessage?.functionName === COMMUNICATIONFUNCTION.SHOW_INVITE) {
+      setIsShowAirdropQuestLogin(true);
+    }
   }, [gameMessage, token]);
   const [pack, setPack] = useStateCallback<any>(undefined);
   const [isBuy, setIsBuy] = useState(false);
@@ -142,6 +145,7 @@ export const GamePlay = () => {
             setIsShowBuyModal(true);
           }}
           typeId={Number(typeId || 0)}
+          functionName={gameMessage?.functionName}
         />
       )}
       {isBuy && <BuyPopup pack={pack} onClose={() => setIsBuy(false)} />}
