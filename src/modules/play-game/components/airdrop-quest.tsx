@@ -18,11 +18,13 @@ const titleList = ['Quest', 'Airdrop Quests', 'Referrals'];
 export const AirdropQuests = ({
   onClose,
   purchaseAqua,
-  typeId
+  typeId,
+  functionName
 }: {
   onClose: () => void;
   purchaseAqua: () => void;
   typeId: number;
+  functionName?: string;
 }) => {
   const { sendMessage } = usePlayGame();
   const ref = WebApp.initDataUnsafe.start_param;
@@ -37,6 +39,12 @@ export const AirdropQuests = ({
   useEffect(() => {
     if (ref === 'telegram_wallet_task') setStep(1);
   }, [ref]);
+
+  useEffect(() => {
+    if (functionName === COMMUNICATIONFUNCTION.SHOW_INVITE) {
+      setStep(2);
+    }
+  }, [functionName]);
   return (
     <Wrapper>
       <div
