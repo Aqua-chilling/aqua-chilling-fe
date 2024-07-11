@@ -21,7 +21,8 @@ export enum COMMUNICATIONFUNCTION {
   SHOW_WALLET = 'CallShowWallet',
   LOADED_ALL = 'CallFinishOnLoaded',
   SHOW_SHELL = 'ShowGameQuest',
-  SHOW_LEADERBOARD = 'ShowLeaderboard'
+  SHOW_LEADERBOARD = 'ShowLeaderboard',
+  SHOW_INVITE = 'CallShowInvite'
 }
 
 export type BuyPack = {
