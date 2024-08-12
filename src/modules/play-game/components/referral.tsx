@@ -73,8 +73,7 @@ export const Referral = ({ data }: any) => {
                 <div className='table-info'>
                   <div className='address'>{item?.email || item?.address || '...'}</div>
                   <div className='info-point flex items-center gap-1'>
-                    <div className=''>{item?.referral_point}</div>
-                    <div className=''>{item?.point}</div>
+                    <div className=''>+{item?.referral_point} pts</div>
                   </div>
                 </div>
               </div>
