@@ -93,6 +93,63 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
     }
     refetchQuest();
   }, []);
+
+  const callCheckIn = async () => {
+    const activeChain = ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
+    const activeChainName = ENVS.VITE_ISTESTNET ? 'Testnet' : 'Mainnet';
+    if (tonConnectUI.account?.chain !== activeChain) {
+      tonConnectUI.disconnect();
+      addNotification({
+        message: `Invalid chain. Please switch to TON ${activeChainName}`,
+        type: NOTIFICATION_TYPE.ERROR,
+        id: new Date().getTime()
+      });
+      return;
+    }
+    setIsLoading(1);
+    if (tonConnectUI)
+      tonConnectUI.uiOptions = {
+        actionsConfiguration: {
+          returnStrategy: 'back',
+          twaReturnUrl: 'https://t.me/aquachillingbot/aquachillingapp?startapp=telegram_wallet_checkin'
+        }
+      };
+    const transactionPayload = beginCell().storeUint(0, 32).storeStringTail(`${userProfile?.id}-${0}-${0}`).endCell();
+    const checkinAddress = Address.parse(ENVS.VITE_BASE_CHECKIN_CONTRACT).toString();
+    const messages = [
+      {
+        address: checkinAddress, //CONTRACT
+        amount: toNano('0.1')?.toString()
+      }
+    ];
+    const transaction = {
+      validUntil: Math.floor(Date.now() / 1000) + validUntil,
+      network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
+      from: wallet?.account?.address || '',
+      messages: messages
+    };
+    const res = await tonConnectUI.sendTransaction(transaction);
+
+    if (res) {
+      const resOnboard = await OnboardingRepository.UpdateUserQuests({
+        id: 1
+      });
+      if (resOnboard) {
+        addNotification({
+          message: 'Quest done!',
+          type: NOTIFICATION_TYPE.SUCCESS,
+          id: new Date().getTime()
+        });
+      } else {
+        addNotification({
+          message: 'Something went wrong! Try again later',
+          type: NOTIFICATION_TYPE.ERROR,
+          id: new Date().getTime()
+        });
+      }
+      refetchQuest();
+    }
+  };
   useEffect(() => {
     if (ref === 'telegram_wallet_checkin') {
       walletCheckin();
@@ -141,67 +198,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                         tonConnectUI.openModal();
                         return;
                       }
-                      const activeChain = ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
-                      const activeChainName = ENVS.VITE_ISTESTNET ? 'Testnet' : 'Mainnet';
-                      if (tonConnectUI.account?.chain !== activeChain) {
-                        tonConnectUI.disconnect();
-                        addNotification({
-                          message: `Invalid chain. Please switch to TON ${activeChainName}`,
-                          type: NOTIFICATION_TYPE.ERROR,
-                          id: new Date().getTime()
-                        });
-                        return;
-                      }
-                      setIsLoading(1);
-                      if (tonConnectUI)
-                        tonConnectUI.uiOptions = {
-                          actionsConfiguration: {
-                            returnStrategy: 'back',
-                            twaReturnUrl:
-                              'https://t.me/aquachillingbot/aquachillingapp?startapp=telegram_wallet_checkin'
-                          }
-                        };
-                      const transactionPayload = beginCell()
-                        .storeUint(0, 32)
-                        .storeStringTail(`${userProfile?.id}-${0}-${0}`)
-                        .endCell();
-                      const buyAquaAddress = Address.parse(ENVS.VITE_BASE_PACKAGE_TON_CONTRACT).toString({
-                        bounceable: false
-                      });
-                      const messages = [
-                        {
-                          address: buyAquaAddress, //CONTRACT
-                          amount: toNano('0.01')?.toString(),
-                          payload: transactionPayload.toBoc().toString('base64')
-                        }
-                      ];
-                      const transaction = {
-                        validUntil: Math.floor(Date.now() / 1000) + validUntil,
-                        network: ENVS?.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET,
-                        from: wallet?.account?.address || '',
-                        messages: messages
-                      };
-                      const res = await tonConnectUI.sendTransaction(transaction);
-
-                      if (res) {
-                        const resOnboard = await OnboardingRepository.UpdateUserQuests({
-                          id: 1
-                        });
-                        if (resOnboard) {
-                          addNotification({
-                            message: 'Quest done!',
-                            type: NOTIFICATION_TYPE.SUCCESS,
-                            id: new Date().getTime()
-                          });
-                        } else {
-                          addNotification({
-                            message: 'Something went wrong! Try again later',
-                            type: NOTIFICATION_TYPE.ERROR,
-                            id: new Date().getTime()
-                          });
-                        }
-                        refetchQuest();
-                      }
+                      callCheckIn();
                     } else if (is_checkin_wallet === 1) {
                       const res = await OnboardingRepository.ClaimQuest(1);
                       if (res) {
