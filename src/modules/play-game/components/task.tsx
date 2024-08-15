@@ -1,7 +1,7 @@
 import X from '@/assets/X.png';
 import { Wrapper } from './task.styled';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { selectToken } from '@/redux';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
@@ -15,7 +15,7 @@ import { useAccountInfoContext } from '@/contexts/account-info.context';
 import { CHAIN, useTonAddress, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { ENVS } from '@/config';
 import { beginCell, Address, toNano } from '@ton/ton';
-import { twaRedirects, validUntil } from '@/constants/app-constaints';
+import { storeCheckInDTO, twaRedirects, validUntil } from '@/constants/app-constaints';
 import { useQuery } from 'react-query';
 import { CopyOutlined, DisconnectOutlined } from '@ant-design/icons';
 export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => void; purchaseAqua: () => void }) => {
@@ -30,6 +30,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
     refetchInterval: 5000,
     enabled: !!token
   });
+
   const is_checkin_wallet = userQuest?.[0]?.status;
   const is_logged_in = userQuest?.[1]?.status;
   const is_buy_aqua = userQuest?.[2]?.status;
@@ -57,6 +58,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
 
     ele?.appendChild(script);
   }, []);
+
   React.useEffect(
     () =>
       tonConnectUI.onStatusChange(async (w) => {
@@ -74,25 +76,6 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
       }),
     [tonConnectUI]
   );
-  const walletCheckin = useCallback(async () => {
-    const resOnboard = await OnboardingRepository.UpdateUserQuests({
-      id: 1
-    });
-    if (resOnboard) {
-      addNotification({
-        message: 'Quest done!',
-        type: NOTIFICATION_TYPE.SUCCESS,
-        id: new Date().getTime()
-      });
-    } else {
-      addNotification({
-        message: 'Something went wrong! Try again later',
-        type: NOTIFICATION_TYPE.ERROR,
-        id: new Date().getTime()
-      });
-    }
-    refetchQuest();
-  }, []);
 
   const callCheckIn = async () => {
     const activeChain = ENVS.VITE_ISTESTNET ? CHAIN.TESTNET : CHAIN.MAINNET;
@@ -114,12 +97,20 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
           twaReturnUrl: 'https://t.me/aquachillingbot/aquachillingapp?startapp=telegram_wallet_checkin'
         }
       };
-    const transactionPayload = beginCell().storeUint(0, 32).storeStringTail(`${userProfile?.id}-${0}-${0}`).endCell();
+    const transactionPayload = beginCell()
+      .store(
+        storeCheckInDTO({
+          $$type: 'CheckInDTO',
+          user_id: userProfile?.seq_id
+        })
+      )
+      .endCell();
     const checkinAddress = Address.parse(ENVS.VITE_BASE_CHECKIN_CONTRACT).toString();
     const messages = [
       {
         address: checkinAddress, //CONTRACT
-        amount: toNano('0.1')?.toString()
+        amount: toNano('0.85')?.toString(),
+        payload: transactionPayload.toBoc().toString('base64')
       }
     ];
     const transaction = {
@@ -128,33 +119,41 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
       from: wallet?.account?.address || '',
       messages: messages
     };
-    const res = await tonConnectUI.sendTransaction(transaction);
-
-    if (res) {
-      const resOnboard = await OnboardingRepository.UpdateUserQuests({
-        id: 1
-      });
-      if (resOnboard) {
-        addNotification({
-          message: 'Quest done!',
-          type: NOTIFICATION_TYPE.SUCCESS,
-          id: new Date().getTime()
-        });
-      } else {
-        addNotification({
-          message: 'Something went wrong! Try again later',
-          type: NOTIFICATION_TYPE.ERROR,
-          id: new Date().getTime()
-        });
-      }
-      refetchQuest();
-    }
+    await tonConnectUI.sendTransaction(transaction);
   };
-  useEffect(() => {
-    if (ref === 'telegram_wallet_checkin') {
-      walletCheckin();
+  const checkConnect = useCallback(() => {
+    if (!tonConnectUI.connected || !tonConnectUI?.wallet) {
+      window.setTimeout(checkConnect, 500);
+    } else {
+      callCheckIn();
     }
-  }, [ref]);
+  }, [tonConnectUI]);
+  useEffect(() => {
+    if (ref === 'telegram_wallet_task' && tonConnectUI?.wallet) {
+      if (tonConnectUI)
+        tonConnectUI.uiOptions = {
+          actionsConfiguration: {
+            returnStrategy: 'back',
+            twaReturnUrl: 'https://t.me/aquachillingbot/aquachillingapp'
+          }
+        };
+      callCheckIn();
+    }
+    if (ref === 'telegram_wallet_checkin') {
+      if (tonConnectUI)
+        tonConnectUI.uiOptions = {
+          actionsConfiguration: {
+            returnStrategy: 'back',
+            twaReturnUrl: 'https://t.me/aquachillingbot/aquachillingapp'
+          }
+        };
+      addNotification({
+        message: `Transaction received. Please wait a few seconds for blockchain to proceed`,
+        type: NOTIFICATION_TYPE.SUCCESS,
+        id: new Date().getTime()
+      });
+    }
+  }, [ref, tonConnectUI]);
   return (
     <Wrapper>
       <div className='table'>
@@ -196,9 +195,8 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                       }
                       if (!tonConnectUI.connected || !wallet) {
                         tonConnectUI.openModal();
-                        return;
                       }
-                      callCheckIn();
+                      checkConnect();
                     } else if (is_checkin_wallet === 1) {
                       const res = await OnboardingRepository.ClaimQuest(1);
                       if (res) {
