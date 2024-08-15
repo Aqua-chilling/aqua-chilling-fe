@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 import { Wrapper } from './play-game.styled';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { deleteAccount, selectToken, updateDiscordId, updateReferral, updateTwitterId } from '@/redux';
 import { Modal } from '@/components/modal/modal';
 import { usePlayGame } from '@/hooks/use-play-game';
@@ -22,6 +22,8 @@ import { NOTIFICATION_TYPE } from '@/components/notification/notification';
 import { useLoginWithTelegram } from '@/hooks/uselogin-telegram';
 import { useTonConnectUI } from '@tonconnect/ui-react';
 import { Loading } from './components/game-loading';
+import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
+import { useQuery } from 'react-query';
 
 function iframe() {
   return {
@@ -38,6 +40,7 @@ export const GamePlay = () => {
   const [isShowBuyModal, setIsShowBuyModal] = React.useState(false);
   const token = useSelector(selectToken);
   const { gameMessage, sendMessage, setGameMessage } = usePlayGame();
+
   const signTokenOut = useCallback(() => {
     dispatch(deleteAccount());
     dispatch(
@@ -65,6 +68,20 @@ export const GamePlay = () => {
   const { userProfile } = useAccountInfoContext();
   const { addNotification } = useNotification();
   const { handleLogin } = useLoginWithTelegram();
+  const { data: latestCheckinDate } = useQuery({
+    queryKey: ['retrieveLatestCheckinDate', token],
+    queryFn: () => OauthRepository.checkIsCheckin(userProfile?.seq_id),
+    retry: false,
+    refetchInterval: 5000,
+    enabled: !!token && !!userProfile?.seq_id
+  });
+
+  const isCheckIn = useMemo(() => {
+    if (!latestCheckinDate) return false;
+    const now = new Date();
+    const _startOfDay = now.setUTCHours(0, 0, 0, 0) / 1000;
+    return latestCheckinDate >= _startOfDay;
+  }, [latestCheckinDate]);
   React.useEffect(() => {
     if (ref && !twaRedirects.includes(ref || '') && !!token && userProfile?.referral_code_status !== 1) {
       OauthRepository.enterReferralCode(ref).then((rs) => {
@@ -130,6 +147,25 @@ export const GamePlay = () => {
       setIsShowAirdropQuestLogin(true);
     }
   }, [gameMessage, token]);
+
+  const walletCheckin = useCallback(async () => {
+    const resOnboard = await OnboardingRepository.UpdateUserQuests({
+      id: 1
+    });
+    if (resOnboard) {
+      addNotification({
+        message: 'Checkin wallet done!',
+        type: NOTIFICATION_TYPE.SUCCESS,
+        id: new Date().getTime()
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (isCheckIn) {
+      walletCheckin();
+    }
+  }, [isCheckIn]);
   const [pack, setPack] = useStateCallback<any>(undefined);
   const [isBuy, setIsBuy] = useState(false);
 

@@ -1,6 +1,8 @@
 import http from '@/utilities/http.utils';
 import httpGame from '@/utilities/http-game.utils';
 import { ILoginPayload, ILoginResponse, IOauthLoginResponse } from './oauth.entity';
+import { Address, TonClient, TupleBuilder } from '@ton/ton';
+import { ENVS } from '@/config';
 export class OauthRepository {
   static oauthGoogle(): Promise<any> {
     return http.get(`/api/oauth/google`);
@@ -45,5 +47,24 @@ export class OauthRepository {
     return httpGame.post(`/auth/login-telegram`, {
       initData
     });
+  }
+
+  static checkIsCheckin(user_id: number): Promise<any> {
+    const client = new TonClient({
+      endpoint: ENVS.VITE_ISTESTNET
+        ? 'https://testnet.toncenter.com/api/v2/jsonRPC'
+        : 'https://toncenter.com/api/v2/jsonRPC'
+    });
+    const builder = new TupleBuilder();
+    builder.writeNumber(user_id);
+    return client
+      .runMethod(Address.parse(ENVS.VITE_BASE_CHECKIN_CONTRACT), 'getLastCheckedInDate', builder.build())
+      .then(function (response1) {
+        const res = response1.stack.readNumber();
+        return res;
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 }
