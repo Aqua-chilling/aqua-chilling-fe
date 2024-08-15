@@ -7,7 +7,7 @@ export enum COMMUNICATIONTYPE {
 }
 
 export const gasFee = 0.02;
-export const validUntil = 120 * 1000;
+export const validUntil = 1000 * 1000;
 const s = 0;
 
 export enum COMMUNICATIONFUNCTION {
@@ -33,6 +33,11 @@ export type BuyPack = {
   amount: bigint;
 };
 
+export type CheckIn = {
+  $$type: 'CheckInWallet';
+  userId: bigint;
+};
+
 export function storeBuyPack(src: BuyPack) {
   return (builder: Builder) => {
     let b_0 = builder;
@@ -43,6 +48,20 @@ export function storeBuyPack(src: BuyPack) {
     b_0.storeInt(src.amount, 257);
   };
 }
+
+export type CheckInDTO = {
+  $$type: 'CheckInDTO';
+  user_id: bigint;
+};
+
+export function storeCheckInDTO(src: CheckInDTO) {
+  return (builder: Builder) => {
+    let b_0 = builder;
+    b_0.storeUint(1110471571, 32);
+    b_0.storeInt(src.user_id, 257);
+  };
+}
+
 export const TWITTER_CLIENT_ID = !ENVS.VITE_ISTESTNET
   ? 'RWItdVY4cFFrOGxqTjJzdXk3ajM6MTpjaQ'
   : 'bE5QRkpOY3IwM3A1dlowcXBlQmY6MTpjaQ';
