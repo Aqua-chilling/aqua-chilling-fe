@@ -14,7 +14,7 @@ export const useLoginWithTelegram = () => {
   const handleLogin = async () => {
     const tonOauthResponse = await OauthRepository.loginWithTelegram(
       WebApp.initData ||
-        'query_id=AAEATshbAgAAAABOyFvC-Kx2&user=%7B%22id%22%3A5834821120%2C%22first_name%22%3A%22Giang%22%2C%22last_name%22%3A%22Nguyen%22%2C%22language_code%22%3A%22en%22%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1723684813&hash=a9549c841e400825b6b70c75231562e4fe805770d385e891247d074aeb1ee7c0'
+        'query_id=AAEATshbAgAAAABOyFsCWcDc&user=%7B%22id%22%3A5834821120%2C%22first_name%22%3A%22Giang%22%2C%22last_name%22%3A%22Nguyen%22%2C%22language_code%22%3A%22en%22%2C%22allows_write_to_pm%22%3Atrue%7D&auth_date=1724750387&hash=6dddd27ae059c3821bd2287fe3a3df8593fdc79f8501ef7fd3b9711aa6939f47'
     );
     if (tonOauthResponse?.token) {
       //   addNotification({

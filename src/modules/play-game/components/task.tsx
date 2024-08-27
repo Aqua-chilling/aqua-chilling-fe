@@ -1,7 +1,7 @@
 import X from '@/assets/X.png';
 import { Wrapper } from './task.styled';
 import { OnboardingRepository } from '@/repositories/onboarding/onboarding.repository';
-import React, { useCallback, useEffect, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectToken } from '@/redux';
 import { NOTIFICATION_TYPE } from '@/components/notification/notification';
@@ -14,10 +14,11 @@ import Token from '@/assets/wallet/aqua.png';
 import { useAccountInfoContext } from '@/contexts/account-info.context';
 import { CHAIN, useTonAddress, useTonConnectUI, useTonWallet } from '@tonconnect/ui-react';
 import { ENVS } from '@/config';
-import { beginCell, Address, toNano } from '@ton/ton';
+import { beginCell, Address, toNano, TonClient } from '@ton/ton';
 import { storeCheckInDTO, twaRedirects, validUntil } from '@/constants/app-constaints';
 import { useQuery } from 'react-query';
 import { CopyOutlined, DisconnectOutlined } from '@ant-design/icons';
+import { waitForTransaction } from '@/utilities/transaction.utils';
 export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => void; purchaseAqua: () => void }) => {
   const address = useTonAddress();
   const { userProfile, firstLogin, setFirstLogin } = useAccountInfoContext();
@@ -30,6 +31,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
     refetchInterval: 5000,
     enabled: !!token
   });
+  const [checkInState, setCheckInState] = useState(0);
 
   const is_checkin_wallet = userQuest?.[0]?.status;
   const is_logged_in = userQuest?.[1]?.status;
@@ -109,7 +111,7 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
     const messages = [
       {
         address: checkinAddress, //CONTRACT
-        amount: toNano('0.85')?.toString(),
+        amount: toNano('0.02')?.toString(),
         payload: transactionPayload.toBoc().toString('base64')
       }
     ];
@@ -119,7 +121,26 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
       from: wallet?.account?.address || '',
       messages: messages
     };
-    await tonConnectUI.sendTransaction(transaction);
+
+    const res = await tonConnectUI.sendTransaction(transaction);
+    if (res.boc) {
+      setCheckInState(1);
+      const waitOptions = {
+        boc: res?.boc,
+        address: tonConnectUI.account?.address ?? ''
+      };
+      const client = new TonClient({
+        endpoint: ENVS.VITE_ISTESTNET
+          ? 'https://testnet.toncenter.com/api/v2/jsonRPC'
+          : 'https://toncenter.com/api/v2/jsonRPC'
+      });
+      const checkTran = await waitForTransaction(waitOptions, client, () => {
+        setCheckInState(2);
+      });
+      if (!checkTran) {
+        setCheckInState(0);
+      }
+    }
   };
   const checkConnect = useCallback(() => {
     if (!tonConnectUI.connected || !tonConnectUI?.wallet) {
@@ -178,6 +199,13 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                 }`}
                 onClick={async () => {
                   try {
+                    if (checkInState !== 0) {
+                      addNotification({
+                        message: `Transaction received. Please wait a few minutes for blockchain to proceed`,
+                        type: NOTIFICATION_TYPE.SUCCESS,
+                        id: new Date().getTime()
+                      });
+                    }
                     if (is_checkin_wallet === 0) {
                       if (tonConnectUI)
                         tonConnectUI.uiOptions = {
@@ -227,9 +255,9 @@ export const Task = ({ setStep, purchaseAqua }: { setStep: (step: number) => voi
                   ? 'Completed'
                   : is_checkin_wallet === 1
                   ? 'Claim'
-                  : !!wallet || (!firstLogin && !twaRedirects.includes(ref || ''))
-                  ? 'Start'
-                  : 'Connect TON Wallet'}
+                  : checkInState !== 0
+                  ? 'In progress...'
+                  : 'Start'}
               </div>
             </div>
           </div>

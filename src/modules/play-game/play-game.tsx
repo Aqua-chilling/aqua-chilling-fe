@@ -152,13 +152,6 @@ export const GamePlay = () => {
     const resOnboard = await OnboardingRepository.UpdateUserQuests({
       id: 1
     });
-    if (resOnboard) {
-      addNotification({
-        message: 'Checkin wallet done!',
-        type: NOTIFICATION_TYPE.SUCCESS,
-        id: new Date().getTime()
-      });
-    }
   }, []);
 
   useEffect(() => {
@@ -171,7 +164,6 @@ export const GamePlay = () => {
 
   return (
     <Wrapper>
-      {isLoading && <Loading />}
       {isShowAirdropQuestLogin && (
         <AirdropQuests
           onClose={() => {
