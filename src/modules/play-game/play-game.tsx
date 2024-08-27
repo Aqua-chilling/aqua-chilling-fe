@@ -164,7 +164,6 @@ export const GamePlay = () => {
 
   return (
     <Wrapper>
-      {isLoading && <Loading />}
       {isShowAirdropQuestLogin && (
         <AirdropQuests
           onClose={() => {
